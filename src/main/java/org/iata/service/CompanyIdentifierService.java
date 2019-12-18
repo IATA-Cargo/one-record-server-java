@@ -1,9 +1,10 @@
 package org.iata.service;
 
 import org.iata.model.CompanyInformation;
-
-import java.util.List;
+import org.iata.model.Subscription;
 
 public interface CompanyIdentifierService {
   CompanyInformation getCompanyIdentifier();
+
+  Subscription getSubscriptionInformation(String topic);
 }

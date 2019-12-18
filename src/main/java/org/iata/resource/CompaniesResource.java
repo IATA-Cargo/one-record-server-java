@@ -28,9 +28,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.PATCH;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
-@RequestMapping(value = "/", produces = "application/json")
+@RequestMapping(value = "/companies", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
 @Validated
-@Api(value = "ONE Record Server")
+@Api(value = "Companies Resource REST Endpoint")
 public class CompaniesResource {
 
   private static final Logger LOG = LoggerFactory.getLogger(CompaniesResource.class);
@@ -42,7 +42,7 @@ public class CompaniesResource {
     this.companiesService = companiesService;
   }
 
-  @RequestMapping(method = POST, value = "/companies", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @RequestMapping(method = POST, value = "/", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ResponseStatus(HttpStatus.CREATED)
   public ResponseEntity<Void> addCompany(@Valid @RequestBody CompanyInformation companyInformation) {
     companiesService.addCompany(companyInformation);
@@ -50,24 +50,24 @@ public class CompaniesResource {
     return new ResponseEntity<>(headers, HttpStatus.CREATED);
   }
 
-  @RequestMapping(method = GET, value = "/companies", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @RequestMapping(method = GET, value = "/", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   public ResponseEntity<List<CompanyInformation>> getCompanies() {
     return new ResponseEntity<>(companiesService.getCompanies(), HttpStatus.OK);
   }
 
-  @RequestMapping(method = GET, value = "/companies/{companyId}", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @RequestMapping(method = GET, value = "/{companyId}", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   public ResponseEntity<CompanyInformation> getCompany(@PathVariable("companyId") String companyId) {
     return new ResponseEntity<CompanyInformation>(companiesService.findByCompanyId(companyId), HttpStatus.OK);
   }
 
-  @RequestMapping(method = PATCH, value = "/companies/{companyId}")
+  @RequestMapping(method = PATCH, value = "/{companyId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public ResponseEntity<Void> updateCompany(@PathVariable("companyId") String companyId, @RequestBody CompanyInformation companyInformation) {
     companiesService.updateCompany(companyInformation);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 
-  @RequestMapping(method = DELETE, value = "/companies/{companyId}")
+  @RequestMapping(method = DELETE, value = "/{companyId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public ResponseEntity<Void> deleteCompany(@PathVariable("companyId") String companyId) {
     companiesService.deleteByCompanyId(companyId);

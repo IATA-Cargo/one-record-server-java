@@ -2,6 +2,7 @@ package org.iata.resource;
 
 import cz.cvut.kbss.jsonld.JsonLd;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.iata.model.LogisticsObject;
 import org.iata.service.LogisticsObjectsService;
 import org.iata.util.RestUtils;
@@ -43,23 +44,27 @@ public class LogisticsObjectsResource {
 
   @RequestMapping(method = POST, value = "/companies/{companyId}/los", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ResponseStatus(HttpStatus.CREATED)
+  @ApiOperation(value = "Creates a logistics object")
   public ResponseEntity<Void> addLogisticsObject(@Valid @RequestBody LogisticsObject logisticsObject) {
     final HttpHeaders headers = RestUtils.createLocationHeaderFromCurrentUri("/{loId}", "TODO"); //TODO
     return new ResponseEntity<>(headers, HttpStatus.CREATED);
   }
 
   @RequestMapping(method = GET, value = "/companies/{companyId}/los", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @ApiOperation(value = "Retrieves all the logistics objects for a given company")
   public ResponseEntity<List<LogisticsObject>> getLogisticsObjects(@PathVariable("companyId") String companyId) {
     return new ResponseEntity<>(logisticsObjectsService.findByCompanyId(companyId), HttpStatus.OK);
   }
 
   @RequestMapping(method = GET, value = "/companies/{companyId}/los/{loId}", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @ApiOperation(value = "Retrieves a logistics object")
   public ResponseEntity<LogisticsObject> getLogisticsObject(@PathVariable("companyId") String companyId, @PathVariable("loId") String loiId) {
     return null;
   }
 
   @RequestMapping(method = PATCH, value = "/companies/{companyId}/los/{loId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
+  @ApiOperation(value = "Updates a logistics object")
   // TODO PATCH body must match the spec
   public ResponseEntity updateLogisticsObject(@PathVariable("companyId") String companyId, @PathVariable("loId") String loiId, @RequestBody LogisticsObject logisticsObject) {
     return null;

@@ -80,7 +80,7 @@ public class LogisticsObjectsResource {
   }
 
   @RequestMapping(method = GET, value = "/companies/{companyId}/los/{loId}/auditTrail", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
-  @ApiOperation(value = "Retrieves the audit trail of a given logistics object")
+  @ApiOperation(value = "Retrieves the audit trail (history) of a given logistics object")
   public ResponseEntity<List<AuditTrail>> getAuditTrail(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
     return new ResponseEntity<>(auditTrailsService.findByLogisticsObjectId(loId), HttpStatus.OK);
   }

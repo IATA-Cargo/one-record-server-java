@@ -21,7 +21,6 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
   @Override
   public void addLogisticsObject(LogisticsObject logisticsObject) {
     logisticsObjectsRepository.save(logisticsObject);
-
   }
 
   @Override

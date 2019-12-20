@@ -38,7 +38,7 @@ public class DelegationResource {
 
   @RequestMapping(method = POST, value = "/delegation", consumes={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ResponseStatus(HttpStatus.OK)
-  @ApiOperation(value = "Request delegation of access to third party")
+  @ApiOperation(value = "Request delegation of access to third party to a logistics object")
   public ResponseEntity<Void> delegate(@Valid @RequestBody DelegationRequest delegationRequest) {
     delegationService.delegateAccess(delegationRequest);
     return new ResponseEntity<>(HttpStatus.OK);

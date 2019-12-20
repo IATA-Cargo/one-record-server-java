@@ -42,7 +42,7 @@ public class CompanyIdentifierResource {
   }
 
   @RequestMapping(method = GET, value = "/subscription", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
-  @ApiOperation(value = "Retrieves the subscription information")
+  @ApiOperation(value = "Retrieves the subscription information (sent usually to publishers)")
   public ResponseEntity<Subscription> getSubscriptionInformation(@RequestParam("topic") String topic) {
     return new ResponseEntity<>(companyIdentifierService.getSubscriptionInformation(topic), HttpStatus.OK);
   }

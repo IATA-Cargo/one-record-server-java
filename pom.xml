@@ -111,6 +111,11 @@
             <artifactId>mongodb-driver-sync</artifactId>
             <version>${mongodb.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>${mongodb.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -161,6 +166,12 @@
             <version>${cz.cvut.kbss.jb4jsonld.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.flipkart.zjsonpatch</groupId>
+            <artifactId>zjsonpatch</artifactId>
+            <version>${zjsonpatch.version}</version>
+        </dependency>
+
         <!-- test dependencies -->
         <dependency>
             <groupId>junit</groupId>
@@ -178,11 +189,12 @@
         <jackson.version>2.10.0</jackson.version>
         <junit.version>4.12</junit.version>
         <guava.version>23.0</guava.version>
-        <mongodb.version>3.11.0</mongodb.version>
+        <mongodb.version>3.12.0</mongodb.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
         <cz.cvut.kbss.jopa.version>0.13.3</cz.cvut.kbss.jopa.version>
         <cz.cvut.kbss.jb4jsonld.version>0.4.0</cz.cvut.kbss.jb4jsonld.version>
+        <zjsonpatch.version>0.4.9</zjsonpatch.version>
     </properties>
 
     <build>
@@ -212,7 +224,7 @@
                     <ontology-iri>http://cargo.iata.org</ontology-iri>
                     <mapping-file>${project.basedir}/mapping</mapping-file>
                     <!--                    <whole-ontology-as-ics>true</whole-ontology-as-ics>-->
-<!--                    <vocabulary-only>false</vocabulary-only>-->
+                    <!--                    <vocabulary-only>false</vocabulary-only>-->
                     <with-owlapi>true</with-owlapi>
                 </configuration>
                 <executions>

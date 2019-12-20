@@ -46,6 +46,7 @@ public class LogisticsObjectsResource {
   @ResponseStatus(HttpStatus.CREATED)
   @ApiOperation(value = "Creates a logistics object")
   public ResponseEntity<Void> addLogisticsObject(@Valid @RequestBody LogisticsObject logisticsObject) {
+    logisticsObjectsService.addLogisticsObject(logisticsObject);
     final HttpHeaders headers = RestUtils.createLocationHeaderFromCurrentUri("/{loId}", "TODO"); //TODO
     return new ResponseEntity<>(headers, HttpStatus.CREATED);
   }
@@ -58,8 +59,8 @@ public class LogisticsObjectsResource {
 
   @RequestMapping(method = GET, value = "/companies/{companyId}/los/{loId}", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Retrieves a logistics object")
-  public ResponseEntity<LogisticsObject> getLogisticsObject(@PathVariable("companyId") String companyId, @PathVariable("loId") String loiId) {
-    return null;
+  public ResponseEntity<LogisticsObject> getLogisticsObject(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
+    return new ResponseEntity<LogisticsObject>(logisticsObjectsService.findById(loId), HttpStatus.OK);
   }
 
   @RequestMapping(method = PATCH, value = "/companies/{companyId}/los/{loId}")
@@ -67,7 +68,8 @@ public class LogisticsObjectsResource {
   @ApiOperation(value = "Updates a logistics object")
   // TODO PATCH body must match the spec
   public ResponseEntity updateLogisticsObject(@PathVariable("companyId") String companyId, @PathVariable("loId") String loiId, @RequestBody LogisticsObject logisticsObject) {
-    return null;
+    logisticsObjectsService.updateLogisticsObject(logisticsObject);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 
 }

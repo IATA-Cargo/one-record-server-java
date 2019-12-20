@@ -24,8 +24,19 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
   }
 
   @Override
+  public LogisticsObject findById(String id) {
+    return logisticsObjectsRepository.findById(id).orElse(null);
+  }
+
+  @Override
   public List<LogisticsObject> findByCompanyId(String companyId) {
     return logisticsObjectsRepository.findByCompanyId(companyId);
+  }
+
+  @Override
+  public void updateLogisticsObject(LogisticsObject logisticsObject) {
+    logisticsObjectsRepository.save(logisticsObject);
+    // TODO Use JSON-LD PATCH
   }
 
 }

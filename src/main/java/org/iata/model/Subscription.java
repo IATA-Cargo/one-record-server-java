@@ -13,14 +13,14 @@ public class Subscription implements Serializable {
   @Types
   protected String type;
 
-  protected String subscribedTo;
-  protected String topic;
-  protected String callbackUrl;
-  protected List<String> contentType;
-  protected String secret;
-  protected Boolean subscribeToStatusUpdates;
-  protected Boolean sendLogisticsObjectBody;
-  protected Long cacheFor;
+  private String subscribedTo;
+  private String topic;
+  private String callbackUrl;
+  private List<String> contentType;
+  private String secret;
+  private Boolean subscribeToStatusUpdates;
+  private Boolean sendLogisticsObjectBody;
+  private Long cacheFor;
 
   public String getId() {
     return id;

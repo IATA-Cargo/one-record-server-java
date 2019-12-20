@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,7 +37,7 @@ public class CompanyIdentifierResource {
 
   @RequestMapping(method = GET, value = "/", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Retrieves the company information in the Internet of Logistics")
-  public ResponseEntity<CompanyInformation> getCompanyInformation(@PathVariable("companyId") String companyId) {
+  public ResponseEntity<CompanyInformation> getCompanyInformation() {
     return new ResponseEntity<>(companyIdentifierService.getCompanyIdentifier(), HttpStatus.OK);
   }
 

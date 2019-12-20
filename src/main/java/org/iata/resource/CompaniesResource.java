@@ -57,7 +57,7 @@ public class CompaniesResource {
 
   @RequestMapping(method = GET, value = "/{companyId}", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   public ResponseEntity<CompanyInformation> getCompany(@PathVariable("companyId") String companyId) {
-    return new ResponseEntity<CompanyInformation>(companiesService.findByCompanyId(companyId), HttpStatus.OK);
+    return new ResponseEntity<>(companiesService.findByCompanyId(companyId), HttpStatus.OK);
   }
 
   @RequestMapping(method = PATCH, value = "/{companyId}")

@@ -3,19 +3,21 @@ package org.iata.model;
 import cz.cvut.kbss.jopa.model.annotations.Id;
 import cz.cvut.kbss.jopa.model.annotations.Types;
 import org.iata.model.enums.NotificationEnum;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 
+@Document(collection = "lofromsubscriptions")
 public class Notification implements Serializable {
 
-    @Id(generated = true)
-    protected String id;
-    @Types
-    protected String type;
+  @Id(generated = true)
+  protected String id;
+  @Types
+  protected String type;
 
-    protected NotificationEnum eventType;
-    protected String topic;
-    protected String logisticsObjectId;
+  private NotificationEnum eventType;
+  private String topic;
+  private String logisticsObjectId;
 
   public String getId() {
     return id;
@@ -56,4 +58,5 @@ public class Notification implements Serializable {
   public void setLogisticsObjectId(String logisticsObjectId) {
     this.logisticsObjectId = logisticsObjectId;
   }
+
 }

@@ -14,9 +14,9 @@ public class DelegationRequest implements Serializable {
   @Types
   protected String type;
 
-  protected String targetLogisticsObject;
-  protected String targetCompany;
-  protected DelegationActionEnum action;
+  private String targetLogisticsObject;
+  private String targetCompany;
+  private DelegationActionEnum action;
 
   public String getId() {
     return id;

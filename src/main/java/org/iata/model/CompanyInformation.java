@@ -5,6 +5,7 @@ import cz.cvut.kbss.jopa.model.annotations.Types;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Document(collection = "companies")
 public class CompanyInformation implements Serializable {
@@ -14,8 +15,11 @@ public class CompanyInformation implements Serializable {
   @Types
   protected String type;
 
-  protected String companyId;
-  protected Company company;
+  private String companyId;
+  private Company company;
+  private List<String> supportedLogisticsObjects;
+  private List<String> supportedContentTypes;
+  private String serverEndpoint;
 
   public String getId() {
     return id;
@@ -48,4 +52,29 @@ public class CompanyInformation implements Serializable {
   public void setCompany(Company company) {
     this.company = company;
   }
+
+  public List<String> getSupportedLogisticsObjects() {
+    return supportedLogisticsObjects;
+  }
+
+  public void setSupportedLogisticsObjects(List<String> supportedLogisticsObjects) {
+    this.supportedLogisticsObjects = supportedLogisticsObjects;
+  }
+
+  public List<String> getSupportedContentTypes() {
+    return supportedContentTypes;
+  }
+
+  public void setSupportedContentTypes(List<String> supportedContentTypes) {
+    this.supportedContentTypes = supportedContentTypes;
+  }
+
+  public String getServerEndpoint() {
+    return serverEndpoint;
+  }
+
+  public void setServerEndpoint(String serverEndpoint) {
+    this.serverEndpoint = serverEndpoint;
+  }
+
 }

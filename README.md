@@ -16,7 +16,9 @@ For testing the application locally, follow the next steps:
 1. Install `Java >= 8` and `Maven`. 
 2. Generate the Java beans from the ONE Record Turtle ontology by running `mvn exec:java`.
 3. Install the Maven dependencies by running `mvn clean install`
-4. Run the server from OneRecordApplication or from the command line via `mvn spring-boot:run`. Your application should be available at [http://localhost:8080](http://localhost:8080).
+4. Generate cargo related data model by running `mvn package -Dbuild=cargo`
+5. Generate API related models by running `mvn package -Dbuild=api`
+6. Run the server from OneRecordApplication or from the command line via `mvn spring-boot:run`. Your application should be available at [http://localhost:8080](http://localhost:8080).
 
 ## Swagger API Documentation
 Swagger API Documentation can be accessed and tested via [http://yourserverurl/swagger-ui.html](http://yourserverurl/swagger-ui.html). If you run the server locally, Swagger documentation can be accessed via [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html).

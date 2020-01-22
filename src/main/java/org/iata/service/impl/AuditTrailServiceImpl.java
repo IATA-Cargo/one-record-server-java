@@ -1,6 +1,6 @@
 package org.iata.service.impl;
 
-import org.iata.model.AuditTrail;
+import org.iata.api.model.AuditTrail;
 import org.iata.repository.AuditTrailRepository;
 import org.iata.service.AuditTrailsService;
 import org.springframework.stereotype.Service;
@@ -24,13 +24,13 @@ public class AuditTrailServiceImpl implements AuditTrailsService {
   }
 
   @Override
-  public List<AuditTrail> findByLogisticsObjectId(String logisticsObjectId) {
-    return auditTrailRepository.findByLogisticsObjectId(logisticsObjectId);
+  public List<AuditTrail> findByLogisticsObjectRef(String logisticsObjectRef) {
+    return auditTrailRepository.findByLogisticsObjectRef(logisticsObjectRef);
   }
 
   @Override
-  public void updateAuditTrail(String logisticsObjectId) {
-    AuditTrail auditTrail = auditTrailRepository.findByLogisticsObjectId(logisticsObjectId).get(0); // TODO
+  public void updateAuditTrail(String logisticsObjectRef) {
+    AuditTrail auditTrail = auditTrailRepository.findByLogisticsObjectRef(logisticsObjectRef).get(0); // TODO
     auditTrailRepository.save(auditTrail);
   }
 

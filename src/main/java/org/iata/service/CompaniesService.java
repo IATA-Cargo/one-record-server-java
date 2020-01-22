@@ -1,6 +1,6 @@
 package org.iata.service;
 
-import org.iata.model.CompanyInformation;
+import org.iata.api.model.CompanyInformation;
 
 import java.util.List;
 

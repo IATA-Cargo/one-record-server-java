@@ -1,6 +1,6 @@
 package org.iata.service;
 
-import org.iata.model.DelegationRequest;
+import org.iata.api.model.DelegationRequest;
 
 public interface DelegationService {
 

@@ -3,7 +3,7 @@ package org.iata.resource;
 import cz.cvut.kbss.jsonld.JsonLd;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.iata.model.DelegationRequest;
+import org.iata.api.model.DelegationRequest;
 import org.iata.service.DelegationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

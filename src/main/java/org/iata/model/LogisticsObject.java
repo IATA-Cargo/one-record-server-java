@@ -1,5 +1,6 @@
 package org.iata.model;
 
+import org.iata.cargo.model.Thing;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "los")

@@ -3,7 +3,7 @@ package org.iata.resource;
 import cz.cvut.kbss.jsonld.JsonLd;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.iata.model.AuditTrail;
+import org.iata.api.model.AuditTrail;
 import org.iata.model.LogisticsObject;
 import org.iata.service.AuditTrailsService;
 import org.iata.service.LogisticsObjectsService;
@@ -82,7 +82,7 @@ public class LogisticsObjectsResource {
   @RequestMapping(method = GET, value = "/companies/{companyId}/los/{loId}/auditTrail", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Retrieves the audit trail (history) of a given logistics object")
   public ResponseEntity<List<AuditTrail>> getAuditTrail(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
-    return new ResponseEntity<>(auditTrailsService.findByLogisticsObjectId(loId), HttpStatus.OK);
+    return new ResponseEntity<>(auditTrailsService.findByLogisticsObjectRef(loId), HttpStatus.OK);
   }
 
 }

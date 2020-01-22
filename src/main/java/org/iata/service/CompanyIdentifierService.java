@@ -1,7 +1,7 @@
 package org.iata.service;
 
-import org.iata.model.CompanyInformation;
-import org.iata.model.Subscription;
+import org.iata.api.model.CompanyInformation;
+import org.iata.api.model.Subscription;
 
 public interface CompanyIdentifierService {
   CompanyInformation getCompanyIdentifier();

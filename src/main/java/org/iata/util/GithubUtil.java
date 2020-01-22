@@ -17,18 +17,29 @@ import java.net.URL;
 public class GithubUtil {
   private static final Logger LOG = LoggerFactory.getLogger(GithubUtil.class);
 
-  private static final String ONE_RECORD_ONTOLOGY_URL = "https://raw.githubusercontent.com/IATA-Cargo/ONE-Record/master/working_draft/ontology/iata.ttl";
-  private static final String FILE = "iata.ttl";
+  private static final String ONE_RECORD_CARGO_ONTOLOGY_URL = "https://raw.githubusercontent.com/IATA-Cargo/ONE-Record/master/working_draft/ontology/iata.ttl";
+  private static final String ONE_RECORD_API_ONTOLOGY_URL = "https://raw.githubusercontent.com/IATA-Cargo/ONE-Record/master/working_draft/ontology/iata.ttl";
+  private static final String CARGO_FILE = "iata.ttl";
+  private static final String API_FILE = "api_models.ttl";
 
   public static void main(String[] args) throws Throwable {
-    URL githubUrl = new URL(ONE_RECORD_ONTOLOGY_URL);
-    HttpURLConnection githubHttp = (HttpURLConnection) githubUrl.openConnection();
-    InputStream githubStream = githubHttp.getInputStream();
-    String githubResponse = getStringFromStream(githubStream);
+    LOG.info("Writing cargo ontology from Github to iata.ttl...");
 
-    LOG.info("Writing ontology from Github to iata.ttl...");
+    try (PrintWriter out = new PrintWriter(CARGO_FILE)) {
+      URL githubUrl = new URL(ONE_RECORD_CARGO_ONTOLOGY_URL);
+      HttpURLConnection githubHttp = (HttpURLConnection) githubUrl.openConnection();
+      InputStream githubStream = githubHttp.getInputStream();
+      String githubResponse = getStringFromStream(githubStream);
+      out.println(githubResponse);
+    }
 
-    try (PrintWriter out = new PrintWriter(FILE)) {
+    LOG.info("Writing API ontology from Github to api_models.ttl...");
+
+    try (PrintWriter out = new PrintWriter(API_FILE)) {
+      URL githubUrl = new URL(ONE_RECORD_API_ONTOLOGY_URL);
+      HttpURLConnection githubHttp = (HttpURLConnection) githubUrl.openConnection();
+      InputStream githubStream = githubHttp.getInputStream();
+      String githubResponse = getStringFromStream(githubStream);
       out.println(githubResponse);
     }
   }

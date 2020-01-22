@@ -1,6 +1,6 @@
 package org.iata.service.impl;
 
-import org.iata.model.CompanyInformation;
+import org.iata.api.model.CompanyInformation;
 import org.iata.repository.CompaniesRepository;
 import org.iata.service.CompaniesService;
 import org.springframework.stereotype.Service;

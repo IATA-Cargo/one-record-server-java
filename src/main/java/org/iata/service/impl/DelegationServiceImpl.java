@@ -1,6 +1,6 @@
 package org.iata.service.impl;
 
-import org.iata.model.DelegationRequest;
+import org.iata.api.model.DelegationRequest;
 import org.iata.service.DelegationService;
 import org.springframework.stereotype.Service;
 

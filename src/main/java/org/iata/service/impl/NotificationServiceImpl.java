@@ -1,6 +1,6 @@
 package org.iata.service.impl;
 
-import org.iata.model.Notification;
+import org.iata.api.model.Notification;
 import org.iata.repository.NotificationsRepository;
 import org.iata.service.NotificationService;
 import org.slf4j.Logger;
@@ -41,7 +41,7 @@ public class NotificationServiceImpl implements NotificationService {
     URL url;
     HttpURLConnection connection = null;
     try {
-      url = new URL(notification.getLogisticsObjectId());
+      url = new URL(notification.getLogisticsObjectRef());
       connection = (HttpURLConnection) url.openConnection();
       connection.setRequestMethod("GET");
       connection.setRequestProperty("Content-Type", "application/ld+json");

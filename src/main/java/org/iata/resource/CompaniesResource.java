@@ -3,7 +3,7 @@ package org.iata.resource;
 import cz.cvut.kbss.jsonld.JsonLd;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.iata.model.CompanyInformation;
+import org.iata.api.model.CompanyInformation;
 import org.iata.service.CompaniesService;
 import org.iata.util.RestUtils;
 import org.slf4j.Logger;

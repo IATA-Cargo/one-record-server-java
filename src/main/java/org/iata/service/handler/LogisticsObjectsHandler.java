@@ -1,6 +1,6 @@
 package org.iata.service.handler;
 
-import org.iata.model.AuditTrail;
+import org.iata.api.model.AuditTrail;
 import org.iata.model.LogisticsObject;
 import org.iata.service.AuditTrailsService;
 import org.iata.service.LogisticsObjectsService;

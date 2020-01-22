@@ -1,6 +1,6 @@
 package org.iata.repository;
 
-import org.iata.model.CompanyInformation;
+import org.iata.api.model.CompanyInformation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface CompaniesRepository extends MongoRepository<CompanyInformation, String> {

@@ -60,13 +60,13 @@ public class Shipment
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_shipmentDetails)
-    protected Set<Piece> shipmentDetails;
+    protected Set<Uld> shipmentDetails;
     /**
      * Total piece count of pieces and ULD (at top level)
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_totalPieceAndULDCount_A)
-    protected Set<Piece> totalPieceAndULDCount;
+    protected Set<Uld> totalPieceAndULDCount;
     /**
      * Total SLAC of all piece groups
      * 
@@ -85,9 +85,9 @@ public class Shipment
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_waybillNumber)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_HouseWaybill, min = 1, max = -1),
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_AirWaybill, min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_AirWaybill, min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_HouseWaybill, min = 1, max = -1)
     })
     protected Set<Thing> waybillNumber;
 
@@ -160,19 +160,19 @@ public class Shipment
         return grossWeight;
     }
 
-    public void setShipmentDetails(Set<Piece> shipmentDetails) {
+    public void setShipmentDetails(Set<Uld> shipmentDetails) {
         this.shipmentDetails = shipmentDetails;
     }
 
-    public Set<Piece> getShipmentDetails() {
+    public Set<Uld> getShipmentDetails() {
         return shipmentDetails;
     }
 
-    public void setTotalPieceAndULDCount(Set<Piece> totalPieceAndULDCount) {
+    public void setTotalPieceAndULDCount(Set<Uld> totalPieceAndULDCount) {
         this.totalPieceAndULDCount = totalPieceAndULDCount;
     }
 
-    public Set<Piece> getTotalPieceAndULDCount() {
+    public Set<Uld> getTotalPieceAndULDCount() {
         return totalPieceAndULDCount;
     }
 

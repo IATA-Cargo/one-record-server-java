@@ -46,7 +46,7 @@ public class PatchRequest
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
-    protected Set<PatchRequest> operations;
+    protected Set<Operation> operations;
     /**
      * Reason for the change (optional)
      * 
@@ -112,11 +112,11 @@ public class PatchRequest
         return ((((("PatchRequest {"+ name)+"<")+ id)+">")+"}");
     }
 
-    public void setOperations(Set<PatchRequest> operations) {
+    public void setOperations(Set<Operation> operations) {
         this.operations = operations;
     }
 
-    public Set<PatchRequest> getOperations() {
+    public Set<Operation> getOperations() {
         return operations;
     }
 

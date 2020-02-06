@@ -1,6 +1,9 @@
 
 package org.iata.api.model;
 
+import java.io.Serializable;
+import java.util.Map;
+import java.util.Set;
 import cz.cvut.kbss.jopa.model.annotations.Id;
 import cz.cvut.kbss.jopa.model.annotations.OWLAnnotationProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
@@ -12,11 +15,6 @@ import cz.cvut.kbss.jopa.model.annotations.Properties;
 import cz.cvut.kbss.jopa.model.annotations.Types;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
 import org.iata.api.Vocabulary;
-import org.iata.cargo.model.Company;
-
-import java.io.Serializable;
-import java.util.Map;
-import java.util.Set;
 
 
 /**
@@ -61,8 +59,8 @@ public class CompanyInformation
      */
     @OWLDataProperty(iri = Vocabulary.s_p_serverEndpoint)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
     protected String serverEndpoint;
     /**

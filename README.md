@@ -11,6 +11,10 @@ Before deploying the server, you will need to update the `application.properties
     'spring.data.mongodb.password': '',
     'spring.data.mongodb.database': ''
 
+Config cache directory which is stored crl files.
+   
+    'opcs.cache': ''
+
 # Local testing
 For testing the application locally, follow the next steps:
 1. Install `Java >= 8` and `Maven`. 

@@ -18,9 +18,9 @@ Before deploying the server, you will need to update the `application.properties
     'ocsp.cache': ''
 
 2. Use your client/ca certificate files
-Add ca certificate into src/main/resources/truststore.jks file.
-Convert client certificate to jks.
-Convert ca certificate to jks.
+Add ca certificate into src/main/resources/truststore.jks file.\
+Convert client certificate to jks.\
+Convert ca certificate to jks.\
 Copy this jks files to one-record-client-java project which clone from [one-record-client-java](https://github.com/IATA-Cargo/one-record-client-java)
 
 # Local testing

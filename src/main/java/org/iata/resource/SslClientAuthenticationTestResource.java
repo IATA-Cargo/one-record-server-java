@@ -1,6 +1,7 @@
 package org.iata.resource;
 
 import io.swagger.annotations.ApiOperation;
+import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,13 +24,16 @@ public class SslClientAuthenticationTestResource {
   @Autowired
   private HttpServletRequest request;
 
+  @Autowired
+  private Environment env
+
   @RequestMapping(method = GET, value = "/", produces = { MediaType.TEXT_PLAIN_VALUE })
   @ApiOperation(value = "Returns the distinguished name for the received SSL client certificate")
   public ResponseEntity<String> doIt() {
     X509Certificate[] clientCertificateChain = (X509Certificate[]) request
         .getAttribute("javax.servlet.request.X509Certificate");
     X509Certificate clientCertificate = clientCertificateChain[0];
-    OcspUtils ocspUtils = new OcspUtils("/Volumes/BACKUP/Source Code/IATADemo/iataserver1");
+    OcspUtils ocspUtils = new OcspUtils(env.getProperty("ocsp.cache"));
     try {
       Principal subjectDN = clientCertificate.getSubjectDN();
       String certStatus = ocspUtils.validate(clientCertificate);

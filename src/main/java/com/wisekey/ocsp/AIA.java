@@ -1,16 +1,23 @@
 package com.wisekey.ocsp;
 
 class AIA {
-  public String Issuer;
-  public String Ocsp;
+  private String issuer;
+  private String ocsp;
 
-  public AIA(String issuer, String ocsp) {
-    Issuer = issuer;
-    Ocsp = ocsp;
+  public String getIssuer() {
+    return issuer;
   }
 
-  public AIA() {
-    Issuer = "";
-    Ocsp = "";
+  public void setIssuer(String issuer) {
+    this.issuer = issuer;
   }
+
+  public String getOcsp() {
+    return ocsp;
+  }
+
+  public void setOcsp(String ocsp) {
+    this.ocsp = ocsp;
+  }
+
 }

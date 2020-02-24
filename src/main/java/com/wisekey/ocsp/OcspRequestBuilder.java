@@ -28,22 +28,12 @@ class OcspRequestBuilder {
 
   private X509Certificate issuer;
 
-  public OcspRequestBuilder generator(SecureRandom generator) {
-    this.generator = generator;
-    return this;
-  }
-
-  public OcspRequestBuilder calculator(DigestCalculator calculator) {
-    this.calculator = calculator;
-    return this;
-  }
-
-  public OcspRequestBuilder certificate(X509Certificate certificate) {
+  OcspRequestBuilder certificate(X509Certificate certificate) {
     this.certificate = certificate;
     return this;
   }
 
-  public OcspRequestBuilder issuer(X509Certificate issuer) {
+  OcspRequestBuilder issuer(X509Certificate issuer) {
     this.issuer = issuer;
     return this;
   }
@@ -53,7 +43,7 @@ class OcspRequestBuilder {
    * contains a one-time nonce and CA's will (should) reject subsequent requests
    * that have the same nonce value.
    */
-  public OCSPReq build() throws OCSPException, IOException, CertificateEncodingException {
+  OCSPReq build() throws OCSPException, IOException, CertificateEncodingException {
     SecureRandom generator = this.generator;
     DigestCalculator calculator = this.calculator;
     X509Certificate certificate = this.certificate;
@@ -75,4 +65,5 @@ class OcspRequestBuilder {
 
     return builder.build();
   }
+
 }

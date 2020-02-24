@@ -56,8 +56,7 @@ public class SslClientAuthenticationTestResource {
           "Server side received (and validated) the following client certificate:\n\r\t{ Certificate-Info: %s; Certificate-Status: %s; Status-Description: %s}",
           subjectDN, certStatus, statsDesc), httpStats);
     } catch (Exception e) {
-      return new ResponseEntity<>(String.format("Internal Server Error: %s", e.getMessage()),
-          HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(String.format("Internal Server Error: %s", e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 

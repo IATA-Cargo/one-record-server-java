@@ -100,9 +100,9 @@ public class OcspUtils {
       return CERT_STATUS_EXPIRED;
     }
     AIA aia = parseAIACertificate(certificate);
-    if (aia == null || isNullOrEmpty(aia.getOcsp()) || isNullOrEmpty(aia.getIssuer())) {
+    if (isNullOrEmpty(aia.getOcsp()) || isNullOrEmpty(aia.getIssuer())) {
       String url = parseCDPUrls(certificate);
-      if (url == null || "".equals(url)) {
+      if (isNullOrEmpty(url)) {
         return CERT_STATUS_NO_CRL;
       }
       X509CRL crl = getCrl(url);
@@ -133,7 +133,7 @@ public class OcspUtils {
       descStatus = "Your signing certificate was revoked.";
       break;
     case CERT_STATUS_BAD_REVOCATION_REASON:
-      descStatus = "Your signing certificate was revoked.";
+      descStatus = "Your signing certificate was revoked for bad reason.";
       break;
     case CERT_STATUS_BAD_CRL:
       descStatus = "The live CRL expires.";
@@ -200,9 +200,7 @@ public class OcspUtils {
       }
     }
     URI uri = new URI(aia.getOcsp());
-    if (uri == null) {
-      throw new IllegalStateException("The CA/certificate doesn't have an OCSP responder");
-    }
+
     // Step 3: Construct the OCSP request
     X509Certificate issuer = getIssuerCert(certificate);
     OCSPReq request = new OcspRequestBuilder().certificate(certificate).issuer(issuer).build();
@@ -325,8 +323,7 @@ public class OcspUtils {
     return loadFromFile(fileName);
   }
 
-  private X509CRL loadFromFile(String file)
-      throws FileNotFoundException, FileNotFoundException, CRLException, CRLException, CertificateException {
+  private X509CRL loadFromFile(String file) throws FileNotFoundException, CRLException, CertificateException {
     CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
     FileInputStream fis = new FileInputStream(file);
     X509CRL crl = (X509CRL) certFactory.generateCRL(fis);
@@ -368,7 +365,6 @@ public class OcspUtils {
       return null;
     }
     ASN1Primitive authorityInfoAccess = JcaX509ExtensionUtils.parseExtensionValue(value);
-    /* X509ExtensionUtil.fromExtensionValue(value); */
     if (!(authorityInfoAccess instanceof DLSequence)) {
       return null;
     }

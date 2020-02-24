@@ -38,7 +38,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
@@ -55,7 +55,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class OcspUtils {
-  public static final String CERT_STATUS_NOTHING = "Nothing"; // Error or other case
+  private static final String CERT_STATUS_NOTHING = "Nothing"; // Error or other case
 
   public static final String CERT_STATUS_GOOD = "Good";
   public static final String CERT_STATUS_UNKNOWN = "Unknown";
@@ -67,15 +67,15 @@ public class OcspUtils {
   // No CDP URL found or there are more than one CDP CRL found.
   public static final String CERT_STATUS_NO_CRL = "NoCrl";
   // The CRL does not include revocation info.
-  public static final String CERT_STATUS_BAD_EXTENSION = "BadExtension";
+  private static final String CERT_STATUS_BAD_EXTENSION = "BadExtension";
   // The certificate is revoked without revocation reason info.
-  public static final String CERT_STATUS_BAD_REVOCATION_REASON = "BadRevocationReason";
+  private static final String CERT_STATUS_BAD_REVOCATION_REASON = "BadRevocationReason";
   // Unable to load the issuer certificate.
-  public static final String CERT_STATUS_BAD_ISSUER = "BadIssuer";
+  private static final String CERT_STATUS_BAD_ISSUER = "BadIssuer";
   // Issuer not match - There might be a problem with the OCSP Service
-  public static final String CERT_STATUS_ISSUER_NOT_MATCH = "IssuerNotMatch";
+  private static final String CERT_STATUS_ISSUER_NOT_MATCH = "IssuerNotMatch";
   // Serial value not match - There might be a problem with the OCSP Service.
-  public static final String CERT_STATUS_BAD_SERIAL = "BadSerial";
+  private static final String CERT_STATUS_BAD_SERIAL = "BadSerial";
 
   private static final ASN1ObjectIdentifier CRL_DISTRIBUTION_POINTS = new ASN1ObjectIdentifier("2.5.29.31").intern();
   private static final ASN1ObjectIdentifier ID_AD_CAISSUERS = new ASN1ObjectIdentifier("1.3.6.1.5.5.7.48.2").intern();
@@ -326,8 +326,7 @@ public class OcspUtils {
   private X509CRL loadFromFile(String file) throws FileNotFoundException, CRLException, CertificateException {
     CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
     FileInputStream fis = new FileInputStream(file);
-    X509CRL crl = (X509CRL) certFactory.generateCRL(fis);
-    return crl;
+    return (X509CRL) certFactory.generateCRL(fis);
   }
 
   private String parseCDPUrls(X509Certificate certificate) throws IOException {
@@ -345,13 +344,10 @@ public class OcspUtils {
   private static void download(String url, String filePath) throws IOException {
     URL website = new URL(url);
     ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-    FileOutputStream fos = new FileOutputStream(filePath);
-    try {
+    try (FileOutputStream fos = new FileOutputStream(filePath)) {
       fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
     } catch (IOException e) {
       throw e;
-    } finally {
-      fos.close();
     }
   }
 
@@ -378,8 +374,7 @@ public class OcspUtils {
     }
     byte[] encoded = taggedObject.getEncoded();
     int length = (int) encoded[1] & 0xFF;
-    String uri = new String(encoded, 2, length, "UTF-8");
-    return uri;
+    return new String(encoded, 2, length, "UTF-8");
   }
 
   private static <T> T findObject(DLSequence sequence, ASN1ObjectIdentifier oid, Class<T> type) {
@@ -425,7 +420,7 @@ public class OcspUtils {
   private static String getHash(String data) throws NoSuchAlgorithmException {
     MessageDigest md;
     md = MessageDigest.getInstance("SHA-1");
-    byte[] digest = md.digest(data.getBytes(Charset.forName("ASCII")));
+    byte[] digest = md.digest(data.getBytes(StandardCharsets.US_ASCII));
     String tmpHash = new String(Base64.getEncoder().encode(digest));
     tmpHash = tmpHash + "";
     tmpHash = tmpHash.replace("/", "_");

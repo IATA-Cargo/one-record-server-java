@@ -1,10 +1,5 @@
 package com.wisekey.ocsp;
 
-import java.io.IOException;
-import java.math.BigInteger;
-import java.security.SecureRandom;
-import java.security.cert.CertificateEncodingException;
-import java.security.cert.X509Certificate;
 import org.bouncycastle.asn1.DEROctetString;
 import org.bouncycastle.asn1.ocsp.OCSPObjectIdentifiers;
 import org.bouncycastle.asn1.x509.Extension;
@@ -15,6 +10,12 @@ import org.bouncycastle.cert.ocsp.OCSPException;
 import org.bouncycastle.cert.ocsp.OCSPReq;
 import org.bouncycastle.cert.ocsp.OCSPReqBuilder;
 import org.bouncycastle.operator.DigestCalculator;
+
+import java.io.IOException;
+import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.security.cert.CertificateEncodingException;
+import java.security.cert.X509Certificate;
 
 class OcspRequestBuilder {
   private static final SecureRandom GENERATOR = new SecureRandom();
@@ -53,13 +54,6 @@ class OcspRequestBuilder {
    * that have the same nonce value.
    */
   public OCSPReq build() throws OCSPException, IOException, CertificateEncodingException {
-    /*
-     * SecureRandom generator = checkNotNull(this.generator, "generator");
-     * DigestCalculator calculator = checkNotNull(this.calculator, "calculator");
-     * X509Certificate certificate = checkNotNull(this.certificate, "certificate");
-     * X509Certificate issuer = checkNotNull(this.issuer, "issuer");
-     */
-
     SecureRandom generator = this.generator;
     DigestCalculator calculator = this.calculator;
     X509Certificate certificate = this.certificate;
@@ -75,8 +69,7 @@ class OcspRequestBuilder {
     byte[] nonce = new byte[8];
     generator.nextBytes(nonce);
 
-    Extension[] extensions = new Extension[] {
-        new Extension(OCSPObjectIdentifiers.id_pkix_ocsp_nonce, false, new DEROctetString(nonce)) };
+    Extension[] extensions = new Extension[] {new Extension(OCSPObjectIdentifiers.id_pkix_ocsp_nonce, false, new DEROctetString(nonce)) };
 
     builder.setRequestExtensions(new Extensions(extensions));
 

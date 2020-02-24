@@ -9,6 +9,7 @@ Before deploying the server, you will need to update the `application.properties
 2. path to a directory in which temporary certificates will be stored.
 
     `    ocsp.cachedDir=C:\\`
+
 # Local testing
 For testing the application locally, follow the next steps:
 1. Install `Java >= 8` and `Maven`. 

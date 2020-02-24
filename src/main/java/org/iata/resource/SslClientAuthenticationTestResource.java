@@ -35,7 +35,6 @@ public class SslClientAuthenticationTestResource {
     X509Certificate[] clientCertificateChain = (X509Certificate[]) request.getAttribute("javax.servlet.request.X509Certificate");
     X509Certificate clientCertificate = clientCertificateChain[0];
     OcspUtils ocspUtils = new OcspUtils(env.getProperty("ocsp.cachedDir"));
-
     try {
       Principal subjectDN = clientCertificate.getSubjectDN();
       String certStatus = ocspUtils.validate(clientCertificate);

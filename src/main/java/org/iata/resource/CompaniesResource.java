@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.iata.api.model.CompanyInformation;
 import org.iata.service.CompaniesService;
+import org.iata.service.security.OcspService;
 import org.iata.util.RestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,16 +38,19 @@ public class CompaniesResource {
   private static final Logger LOG = LoggerFactory.getLogger(CompaniesResource.class);
 
   private final CompaniesService companiesService;
+  private final OcspService ocspService;
 
   @Inject
-  public CompaniesResource(CompaniesService companiesService) {
+  public CompaniesResource(CompaniesService companiesService, OcspService ocspService) {
     this.companiesService = companiesService;
+    this.ocspService = ocspService;
   }
 
   @RequestMapping(method = POST, value = "/", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ResponseStatus(HttpStatus.CREATED)
   @ApiOperation(value = "Creates a company")
   public ResponseEntity<Void> addCompany(@Valid @RequestBody CompanyInformation companyInformation) {
+    LOG.info(ocspService.verifyCertificate());
     companiesService.addCompany(companyInformation);
     final HttpHeaders headers = RestUtils.createLocationHeaderFromCurrentUri("/{companyId}", "TODO"); //TODO
     return new ResponseEntity<>(headers, HttpStatus.CREATED);
@@ -55,12 +59,14 @@ public class CompaniesResource {
   @RequestMapping(method = GET, value = "/", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Retrieves all the companies")
   public ResponseEntity<List<CompanyInformation>> getCompanies() {
+    LOG.info(ocspService.verifyCertificate());
     return new ResponseEntity<>(companiesService.getCompanies(), HttpStatus.OK);
   }
 
   @RequestMapping(method = GET, value = "/{companyId}", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Retrieves a company for a given companyId")
   public ResponseEntity<CompanyInformation> getCompany(@PathVariable("companyId") String companyId) {
+    LOG.info(ocspService.verifyCertificate());
     return new ResponseEntity<>(companiesService.findByCompanyId(companyId), HttpStatus.OK);
   }
 
@@ -68,6 +74,7 @@ public class CompaniesResource {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @ApiOperation(value = "Updates a company for a given companyId")
   public ResponseEntity<Void> updateCompany(@PathVariable("companyId") String companyId, @RequestBody CompanyInformation companyInformation) {
+    LOG.info(ocspService.verifyCertificate());
     companiesService.updateCompany(companyInformation);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
@@ -76,6 +83,7 @@ public class CompaniesResource {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @ApiOperation(value = "Deletes a company for a given companyId")
   public ResponseEntity<Void> deleteCompany(@PathVariable("companyId") String companyId) {
+    LOG.info(ocspService.verifyCertificate());
     companiesService.deleteByCompanyId(companyId);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }

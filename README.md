@@ -6,7 +6,10 @@ Before deploying the server, you will need to update the `application.properties
 1. the credentials for accessing your MongoDB database. You can find the instructions on how to setup a MongoDB database below.  
 `    spring.data.mongodb.uri:mongodb+srv://<username>:<password>@<databaseURI>/<databaseName>?retryWrites=true&w=majority
 `  
-2. path to a directory in which temporary certificates will be stored.
+2. the name of your database
+`spring.data.mongodb.database=onerecordcargo
+`
+3. path to a directory in which temporary certificates will be stored.
 
     `    ocsp.cachedDir=C:\\`
 

@@ -6,12 +6,15 @@ import org.iata.service.AuditTrailsService;
 import org.iata.service.LogisticsObjectsService;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
+
 @Service
 public class LogisticsObjectsHandler {
 
   private final LogisticsObjectsService logisticsObjectsService;
   private final AuditTrailsService auditTrailsService;
 
+  @Inject
   public LogisticsObjectsHandler(LogisticsObjectsService logisticsObjectsService, AuditTrailsService auditTrailsService) {
     this.logisticsObjectsService = logisticsObjectsService;
     this.auditTrailsService = auditTrailsService;

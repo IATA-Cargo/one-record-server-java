@@ -7,9 +7,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Objects;
+import java.util.Set;
 
 @Service
 public class CompanyIdentifierServiceImpl implements CompanyIdentifierService {
@@ -26,9 +25,9 @@ public class CompanyIdentifierServiceImpl implements CompanyIdentifierService {
     CompanyInformation companyInformation = new CompanyInformation();
     companyInformation.setId(env.getProperty("companyInformation.companyId"));
     companyInformation.setServerEndpoint(env.getProperty("companyInformation.serverEndpoint"));
-    companyInformation.getSupportedContentTypes().addAll(Arrays.asList(Objects.requireNonNull(env.getProperty("companyInformation.supportedContentTypes")).split(",")));
-    companyInformation.getSupportedLogisticsObjects().addAll(Arrays.asList((Objects.requireNonNull(env.getProperty("companyInformation.supportedLogisticsObjects")).split(","))));
-    companyInformation.getTypes().addAll(Collections.singletonList(CompanyInformation.class.toString()));
+    companyInformation.setSupportedContentTypes(Set.of(Objects.requireNonNull(env.getProperty("companyInformation.supportedContentTypes")).split(",")));
+    companyInformation.setSupportedLogisticsObjects(Set.of((Objects.requireNonNull(env.getProperty("companyInformation.supportedLogisticsObjects")).split(","))));
+    companyInformation.setTypes(Set.of(CompanyInformation.class.toString()));
     return companyInformation;
   }
 

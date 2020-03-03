@@ -8,6 +8,7 @@ import org.iata.model.LogisticsObject;
 import org.iata.service.AuditTrailsService;
 import org.iata.service.LogisticsObjectsService;
 import org.iata.service.handler.LogisticsObjectsHandler;
+import org.iata.service.security.OcspService;
 import org.iata.util.RestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,18 +42,21 @@ public class LogisticsObjectsResource {
   private final LogisticsObjectsHandler logisticsObjectsHandler;
   private final LogisticsObjectsService logisticsObjectsService;
   private final AuditTrailsService auditTrailsService;
+  private final OcspService ocspService;
 
   @Inject
-  public LogisticsObjectsResource(LogisticsObjectsHandler logisticsObjectsHandler, LogisticsObjectsService logisticsObjectsService, AuditTrailsService auditTrailsService) {
+  public LogisticsObjectsResource(LogisticsObjectsHandler logisticsObjectsHandler, LogisticsObjectsService logisticsObjectsService, AuditTrailsService auditTrailsService, OcspService ocspService) {
     this.logisticsObjectsHandler = logisticsObjectsHandler;
     this.logisticsObjectsService = logisticsObjectsService;
     this.auditTrailsService = auditTrailsService;
+    this.ocspService = ocspService;
   }
 
   @RequestMapping(method = POST, value = "/companies/{companyId}/los", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ResponseStatus(HttpStatus.CREATED)
   @ApiOperation(value = "Creates a logistics object")
   public ResponseEntity<Void> addLogisticsObject(@Valid @RequestBody LogisticsObject logisticsObject) {
+    LOG.info(ocspService.verifyCertificate());
     logisticsObjectsHandler.handleAddLogisticsObject(logisticsObject);
     final HttpHeaders headers = RestUtils.createLocationHeaderFromCurrentUri("/{loId}", "TODO"); //TODO
     return new ResponseEntity<>(headers, HttpStatus.CREATED);
@@ -61,12 +65,14 @@ public class LogisticsObjectsResource {
   @RequestMapping(method = GET, value = "/companies/{companyId}/los", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Retrieves all the logistics objects for a given company")
   public ResponseEntity<List<LogisticsObject>> getLogisticsObjects(@PathVariable("companyId") String companyId) {
+    LOG.info(ocspService.verifyCertificate());
     return new ResponseEntity<>(logisticsObjectsService.findByCompanyId(companyId), HttpStatus.OK);
   }
 
   @RequestMapping(method = GET, value = "/companies/{companyId}/los/{loId}", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Retrieves a logistics object")
   public ResponseEntity<LogisticsObject> getLogisticsObject(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
+    LOG.info(ocspService.verifyCertificate());
     return new ResponseEntity<LogisticsObject>(logisticsObjectsService.findById(loId), HttpStatus.OK);
   }
 
@@ -75,6 +81,7 @@ public class LogisticsObjectsResource {
   @ApiOperation(value = "Updates a logistics object")
   // TODO PATCH body must match the spec
   public ResponseEntity updateLogisticsObject(@PathVariable("companyId") String companyId, @PathVariable("loId") String loiId, @RequestBody LogisticsObject logisticsObject) {
+    LOG.info(ocspService.verifyCertificate());
     logisticsObjectsHandler.handleUpdateLogisticsObject(logisticsObject);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
@@ -82,6 +89,7 @@ public class LogisticsObjectsResource {
   @RequestMapping(method = GET, value = "/companies/{companyId}/los/{loId}/auditTrail", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Retrieves the audit trail (history) of a given logistics object")
   public ResponseEntity<List<AuditTrail>> getAuditTrail(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
+    LOG.info(ocspService.verifyCertificate());
     return new ResponseEntity<>(auditTrailsService.findByLogisticsObjectRef(loId), HttpStatus.OK);
   }
 

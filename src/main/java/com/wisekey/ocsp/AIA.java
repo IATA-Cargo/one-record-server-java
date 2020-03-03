@@ -5,6 +5,7 @@ package com.wisekey.ocsp;
  * @author
  */
 class AIA {
+<<<<<<< HEAD
 
     private String Issuer;
 
@@ -59,4 +60,25 @@ class AIA {
         Issuer = "";
         Ocsp = "";
     }
+=======
+  private String issuer;
+  private String ocsp;
+
+  public String getIssuer() {
+    return issuer;
+  }
+
+  public void setIssuer(String issuer) {
+    this.issuer = issuer;
+  }
+
+  public String getOcsp() {
+    return ocsp;
+  }
+
+  public void setOcsp(String ocsp) {
+    this.ocsp = ocsp;
+  }
+
+>>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
 }

@@ -24,7 +24,6 @@ hs_err_pid*
 
 .idea
 target
-
 .DS_Store
 .classpath
 .factorypath

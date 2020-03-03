@@ -1,5 +1,6 @@
 package com.wisekey.ocsp;
 
+<<<<<<< HEAD
 // import java.io.StringWriter;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
@@ -16,33 +17,72 @@ import java.security.cert.CertificateFactory;
 import java.util.concurrent.TimeUnit;
 import javax.net.ssl.HttpsURLConnection;
 import org.bouncycastle.asn1.ASN1Encodable;
+=======
+import org.bouncycastle.asn1.ASN1Encodable;
+import org.bouncycastle.asn1.ASN1ObjectIdentifier;
+>>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
 import org.bouncycastle.asn1.ASN1Primitive;
 import org.bouncycastle.asn1.BERTags;
 import org.bouncycastle.asn1.DERTaggedObject;
 import org.bouncycastle.asn1.DLSequence;
+<<<<<<< HEAD
 import org.bouncycastle.asn1.x509.GeneralName;
 import org.bouncycastle.cert.ocsp.OCSPResp;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.cert.X509Certificate;
+=======
+import org.bouncycastle.asn1.ocsp.OCSPResponseStatus;
+import org.bouncycastle.asn1.x509.AccessDescription;
+import org.bouncycastle.asn1.x509.AuthorityInformationAccess;
+>>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
 import org.bouncycastle.asn1.x509.Extension;
+import org.bouncycastle.asn1.x509.GeneralName;
+import org.bouncycastle.asn1.x509.X509ObjectIdentifiers;
+import org.bouncycastle.cert.jcajce.JcaX509ExtensionUtils;
+import org.bouncycastle.cert.ocsp.BasicOCSPResp;
+import org.bouncycastle.cert.ocsp.CertificateStatus;
 import org.bouncycastle.cert.ocsp.OCSPException;
 import org.bouncycastle.cert.ocsp.OCSPReq;
+import org.bouncycastle.cert.ocsp.OCSPResp;
+import org.bouncycastle.cert.ocsp.RevokedStatus;
+import org.bouncycastle.cert.ocsp.SingleResp;
+import org.bouncycastle.cert.ocsp.UnknownStatus;
+
+import javax.net.ssl.HttpsURLConnection;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+<<<<<<< HEAD
+=======
+import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.URI;
+>>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import org.bouncycastle.asn1.ASN1ObjectIdentifier;
+import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.security.cert.CRLException;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
 import java.security.cert.X509CRL;
 import java.security.cert.X509CRLEntry;
+import java.security.cert.X509Certificate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Base64;
 import java.util.Date;
+<<<<<<< HEAD
 import org.bouncycastle.asn1.ocsp.OCSPResponseStatus;
 import org.bouncycastle.asn1.x509.AccessDescription;
 import org.bouncycastle.asn1.x509.AuthorityInformationAccess;
@@ -58,6 +98,13 @@ public class OcspUtils {
   /**
    * The certificate is good
    */
+=======
+import java.util.concurrent.TimeUnit;
+
+public class OcspUtils {
+  private static final String CERT_STATUS_NOTHING = "Nothing"; // Error or other case
+
+>>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
   public static final String CERT_STATUS_GOOD = "Good";
 
   /**
@@ -84,6 +131,7 @@ public class OcspUtils {
    * No CDP URL found or there are more than one CDP CRL found.
    */
   public static final String CERT_STATUS_NO_CRL = "NoCrl";
+<<<<<<< HEAD
 
   /**
    * The CRL does not include revocation info.
@@ -109,6 +157,18 @@ public class OcspUtils {
    * Serial value not match - There might be a problem with the OCSP Service.
    */
   public static final String CERT_STATUS_BAD_SERIAL = "BadSerial";
+=======
+  // The CRL does not include revocation info.
+  private static final String CERT_STATUS_BAD_EXTENSION = "BadExtension";
+  // The certificate is revoked without revocation reason info.
+  private static final String CERT_STATUS_BAD_REVOCATION_REASON = "BadRevocationReason";
+  // Unable to load the issuer certificate.
+  private static final String CERT_STATUS_BAD_ISSUER = "BadIssuer";
+  // Issuer not match - There might be a problem with the OCSP Service
+  private static final String CERT_STATUS_ISSUER_NOT_MATCH = "IssuerNotMatch";
+  // Serial value not match - There might be a problem with the OCSP Service.
+  private static final String CERT_STATUS_BAD_SERIAL = "BadSerial";
+>>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
 
   /**
    * Error or other case
@@ -164,6 +224,7 @@ public class OcspUtils {
     return Date.from(utc.toInstant());
   }
 
+<<<<<<< HEAD
   /**
    * Load certificate form file
    *
@@ -195,13 +256,20 @@ public class OcspUtils {
    */
   public String validate(X509Certificate certificate) throws IOException, IllegalStateException, URISyntaxException,
       OCSPException, CertificateException, NoSuchAlgorithmException, Exception {
+=======
+  public String validate(X509Certificate certificate) throws Exception {
+>>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
     if (certificate.getNotAfter().compareTo(getCurrentUtcTime()) < 0) {
       return CERT_STATUS_EXPIRED;
     }
     AIA aia = parseAIACertificate(certificate);
+<<<<<<< HEAD
     if (aia == null || isNullOrEmpty(aia.getOcsp()) || isNullOrEmpty(aia.getIssuer())) {
+=======
+    if (isNullOrEmpty(aia.getOcsp()) || isNullOrEmpty(aia.getIssuer())) {
+>>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
       String url = parseCDPUrls(certificate);
-      if (url == null || "".equals(url)) {
+      if (isNullOrEmpty(url)) {
         return CERT_STATUS_NO_CRL;
       }
       X509CRL crl = getCrl(url);
@@ -238,7 +306,7 @@ public class OcspUtils {
       descStatus = "Your signing certificate was revoked.";
       break;
     case CERT_STATUS_BAD_REVOCATION_REASON:
-      descStatus = "Your signing certificate was revoked.";
+      descStatus = "Your signing certificate was revoked for bad reason.";
       break;
     case CERT_STATUS_BAD_CRL:
       descStatus = "The live CRL expires.";
@@ -275,8 +343,7 @@ public class OcspUtils {
    */
   private X509Certificate getIssuerCert(X509Certificate cert) throws IOException, CertificateException {
     X509Certificate issuer = null;
-    // get Authority Information Access extension (will be null if extension is not
-    // present)
+    // get Authority Information Access extension (will be null if extension is not present)
     byte[] extVal = cert.getExtensionValue(Extension.authorityInfoAccess.getId());
     AuthorityInformationAccess aia = AuthorityInformationAccess
         .getInstance(JcaX509ExtensionUtils.parseExtensionValue(extVal));
@@ -326,6 +393,10 @@ public class OcspUtils {
       }
     }
     URI uri = new URI(aia.getOcsp());
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
     // Step 3: Construct the OCSP request
     X509Certificate issuer = getIssuerCert(certificate);
     OCSPReq request = new OcspRequestBuilder().certificate(certificate).issuer(issuer).build();
@@ -434,8 +505,7 @@ public class OcspUtils {
    */
   private AIA parseAIACertificate(X509Certificate certificate) throws Exception {
     AIA aia = new AIA();
-    Principal principal = certificate.getSubjectDN();
-    principal = certificate.getIssuerDN();
+    Principal principal = certificate.getIssuerDN();
     if (principal != null) {
       aia.setIssuer(principal.getName());
     }
@@ -463,6 +533,7 @@ public class OcspUtils {
     return loadFromFile(fileName);
   }
 
+<<<<<<< HEAD
   /**
    * Load X509CRL from cache file
    *
@@ -489,6 +560,14 @@ public class OcspUtils {
    * @return the Url of CRL
    * @throws IOException
    */
+=======
+  private X509CRL loadFromFile(String file) throws FileNotFoundException, CRLException, CertificateException {
+    CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
+    FileInputStream fis = new FileInputStream(file);
+    return (X509CRL) certFactory.generateCRL(fis);
+  }
+
+>>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
   private String parseCDPUrls(X509Certificate certificate) throws IOException {
     return getExtension(certificate, CRL_DISTRIBUTION_POINTS);
   }
@@ -525,13 +604,10 @@ public class OcspUtils {
   private static void download(String url, String filePath) throws IOException {
     URL website = new URL(url);
     ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-    FileOutputStream fos = new FileOutputStream(filePath);
-    try {
+    try (FileOutputStream fos = new FileOutputStream(filePath)) {
       fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
     } catch (IOException e) {
       throw e;
-    } finally {
-      fos.close();
     }
   }
 
@@ -553,7 +629,6 @@ public class OcspUtils {
       return null;
     }
     ASN1Primitive authorityInfoAccess = JcaX509ExtensionUtils.parseExtensionValue(value);
-    /* X509ExtensionUtil.fromExtensionValue(value); */
     if (!(authorityInfoAccess instanceof DLSequence)) {
       return null;
     }
@@ -567,8 +642,7 @@ public class OcspUtils {
     }
     byte[] encoded = taggedObject.getEncoded();
     int length = (int) encoded[1] & 0xFF;
-    String uri = new String(encoded, 2, length, "UTF-8");
-    return uri;
+    return new String(encoded, 2, length, "UTF-8");
   }
 
   /**
@@ -642,7 +716,7 @@ public class OcspUtils {
   private static String getHash(String data) throws NoSuchAlgorithmException {
     MessageDigest md;
     md = MessageDigest.getInstance("SHA-1");
-    byte[] digest = md.digest(data.getBytes(Charset.forName("ASCII")));
+    byte[] digest = md.digest(data.getBytes(StandardCharsets.US_ASCII));
     String tmpHash = new String(Base64.getEncoder().encode(digest));
     tmpHash = tmpHash + "";
     tmpHash = tmpHash.replace("/", "_");

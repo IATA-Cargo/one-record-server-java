@@ -1,41 +1,14 @@
 package com.wisekey.ocsp;
 
-<<<<<<< HEAD
-// import java.io.StringWriter;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
-import java.security.cert.CertificateFactory;
-import java.util.concurrent.TimeUnit;
-import javax.net.ssl.HttpsURLConnection;
-import org.bouncycastle.asn1.ASN1Encodable;
-=======
 import org.bouncycastle.asn1.ASN1Encodable;
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
->>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
 import org.bouncycastle.asn1.ASN1Primitive;
 import org.bouncycastle.asn1.BERTags;
 import org.bouncycastle.asn1.DERTaggedObject;
 import org.bouncycastle.asn1.DLSequence;
-<<<<<<< HEAD
-import org.bouncycastle.asn1.x509.GeneralName;
-import org.bouncycastle.cert.ocsp.OCSPResp;
-import java.io.IOException;
-import java.math.BigInteger;
-import java.security.cert.X509Certificate;
-=======
 import org.bouncycastle.asn1.ocsp.OCSPResponseStatus;
 import org.bouncycastle.asn1.x509.AccessDescription;
 import org.bouncycastle.asn1.x509.AuthorityInformationAccess;
->>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
 import org.bouncycastle.asn1.x509.Extension;
 import org.bouncycastle.asn1.x509.GeneralName;
 import org.bouncycastle.asn1.x509.X509ObjectIdentifiers;
@@ -58,12 +31,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-<<<<<<< HEAD
-=======
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URI;
->>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.channels.Channels;
@@ -82,82 +52,20 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Base64;
 import java.util.Date;
-<<<<<<< HEAD
-import org.bouncycastle.asn1.ocsp.OCSPResponseStatus;
-import org.bouncycastle.asn1.x509.AccessDescription;
-import org.bouncycastle.asn1.x509.AuthorityInformationAccess;
-import org.bouncycastle.asn1.x509.X509ObjectIdentifiers;
-import org.bouncycastle.cert.ocsp.SingleResp;
-import org.bouncycastle.cert.ocsp.BasicOCSPResp;
-import org.bouncycastle.cert.ocsp.UnknownStatus;
-import org.bouncycastle.cert.ocsp.RevokedStatus;
-import org.bouncycastle.cert.ocsp.CertificateStatus;
-import org.bouncycastle.cert.jcajce.JcaX509ExtensionUtils;
-
-public class OcspUtils {
-  /**
-   * The certificate is good
-   */
-=======
 import java.util.concurrent.TimeUnit;
 
 public class OcspUtils {
   private static final String CERT_STATUS_NOTHING = "Nothing"; // Error or other case
 
->>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
   public static final String CERT_STATUS_GOOD = "Good";
-
-  /**
-   * The certificate is Unknown
-   */
   public static final String CERT_STATUS_UNKNOWN = "Unknown";
-
-  /**
-   * The certificate is Expired
-   */
   public static final String CERT_STATUS_EXPIRED = "Expired";
-
-  /**
-   * The certificate is revoked
-   */
+  // The certificate is revoked
   public static final String CERT_STATUS_REVOKED = "Revoked";
-
-  /**
-   * The live CRL expires.
-   */
+  // The live CRL expires.
   public static final String CERT_STATUS_BAD_CRL = "BadCrl";
-
-  /**
-   * No CDP URL found or there are more than one CDP CRL found.
-   */
+  // No CDP URL found or there are more than one CDP CRL found.
   public static final String CERT_STATUS_NO_CRL = "NoCrl";
-<<<<<<< HEAD
-
-  /**
-   * The CRL does not include revocation info.
-   */
-  public static final String CERT_STATUS_BAD_EXTENSION = "BadExtension";
-
-  /**
-   * The certificate is revoked without revocation reason info.
-   */
-  public static final String CERT_STATUS_BAD_REVOCATION_REASON = "BadRevocationReason";
-
-  /**
-   * Unable to load the issuer certificate.
-   */
-  public static final String CERT_STATUS_BAD_ISSUER = "BadIssuer";
-
-  /**
-   * Issuer not match - There might be a problem with the OCSP Service
-   */
-  public static final String CERT_STATUS_ISSUER_NOT_MATCH = "IssuerNotMatch";
-
-  /**
-   * Serial value not match - There might be a problem with the OCSP Service.
-   */
-  public static final String CERT_STATUS_BAD_SERIAL = "BadSerial";
-=======
   // The CRL does not include revocation info.
   private static final String CERT_STATUS_BAD_EXTENSION = "BadExtension";
   // The certificate is revoked without revocation reason info.
@@ -168,106 +76,31 @@ public class OcspUtils {
   private static final String CERT_STATUS_ISSUER_NOT_MATCH = "IssuerNotMatch";
   // Serial value not match - There might be a problem with the OCSP Service.
   private static final String CERT_STATUS_BAD_SERIAL = "BadSerial";
->>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
 
-  /**
-   * Error or other case
-   */
-  public static final String CERT_STATUS_NOTHING = "Nothing";
-
-  /**
-   * Certificate Revocation List distribution points - http://oidref.com/2.5.29.31
-   */
   private static final ASN1ObjectIdentifier CRL_DISTRIBUTION_POINTS = new ASN1ObjectIdentifier("2.5.29.31").intern();
-
-  /**
-   * Certificate Authority Issuers - http://oidref.com/1.3.6.1.5.5.7.48.2
-   */
   private static final ASN1ObjectIdentifier ID_AD_CAISSUERS = new ASN1ObjectIdentifier("1.3.6.1.5.5.7.48.2").intern();
-
-  /**
-   * Online Certificate Status Protocol - http://oidref.com/1.3.6.1.5.5.7.48.1
-   */
   private static final ASN1ObjectIdentifier OCSP_RESPONDER_OID = new ASN1ObjectIdentifier("1.3.6.1.5.5.7.48.1")
       .intern();
-
-  /**
-   * Online Certificate Status Protocol
-   */
   private static final String OCSP_REQUEST_TYPE = "application/ocsp-request";
-  /**
-   * Online Certificate Status Protocol
-   */
   private static final String OCSP_RESPONSE_TYPE = "application/ocsp-response";
 
-  /**
-   * Place where temporary certificates will be stored.
-   */
   private String cachedDir;
 
-  /**
-   * Constructor method
-   *
-   * @param dir temporary certificates will be stored
-   */
   public OcspUtils(String dir) {
     this.cachedDir = dir;
   }
 
-  /**
-   * Get current UTC time
-   *
-   * @return Date UTC
-   */
   private static Date getCurrentUtcTime() {
     OffsetDateTime utc = OffsetDateTime.now(ZoneOffset.UTC);
     return Date.from(utc.toInstant());
   }
 
-<<<<<<< HEAD
-  /**
-   * Load certificate form file
-   *
-   * @param filePath The path to certificate file
-   * @return X509Certificate object
-   * @throws FileNotFoundException File not found
-   * @throws CertificateException  Load certificate error
-   */
-  public X509Certificate loadCertificateFromFile(String filePath) throws FileNotFoundException, CertificateException {
-    X509Certificate certificate = null;
-    CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
-    File file = new File(filePath);
-    certificate = (X509Certificate) certificateFactory.generateCertificate(new FileInputStream(file));
-    return certificate;
-  }
-
-  /**
-   * Validate certificate
-   *
-   * @param certificate X509Certificate Certificate
-   * @return Certificate status
-   * @throws IOException
-   * @throws IllegalStateException
-   * @throws URISyntaxException
-   * @throws OCSPException
-   * @throws CertificateException
-   * @throws NoSuchAlgorithmException
-   * @throws Exception
-   */
-  public String validate(X509Certificate certificate) throws IOException, IllegalStateException, URISyntaxException,
-      OCSPException, CertificateException, NoSuchAlgorithmException, Exception {
-=======
   public String validate(X509Certificate certificate) throws Exception {
->>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
     if (certificate.getNotAfter().compareTo(getCurrentUtcTime()) < 0) {
       return CERT_STATUS_EXPIRED;
     }
     AIA aia = parseAIACertificate(certificate);
-<<<<<<< HEAD
-    if (aia == null || isNullOrEmpty(aia.getOcsp()) || isNullOrEmpty(aia.getIssuer())) {
-=======
     if (isNullOrEmpty(aia.getOcsp()) || isNullOrEmpty(aia.getIssuer())) {
->>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
       String url = parseCDPUrls(certificate);
       if (isNullOrEmpty(url)) {
         return CERT_STATUS_NO_CRL;
@@ -287,12 +120,6 @@ public class OcspUtils {
     }
   }
 
-  /**
-   * Get description of certificate status
-   *
-   * @param certStatus Certificate status
-   * @return description of status
-   */
   public String getDescStatus(String certStatus) {
     String descStatus;
     switch (certStatus) {
@@ -333,20 +160,13 @@ public class OcspUtils {
     return descStatus;
   }
 
-  /**
-   * Get certificate of issuer
-   *
-   * @param urlCert Url of issuer certificate
-   * @return The X509Certificate Object Of Issuer
-   * @throws IOException
-   * @throws CertificateException
-   */
   private X509Certificate getIssuerCert(X509Certificate cert) throws IOException, CertificateException {
     X509Certificate issuer = null;
     // get Authority Information Access extension (will be null if extension is not present)
     byte[] extVal = cert.getExtensionValue(Extension.authorityInfoAccess.getId());
     AuthorityInformationAccess aia = AuthorityInformationAccess
-        .getInstance(JcaX509ExtensionUtils.parseExtensionValue(extVal));
+        .getInstance(JcaX509ExtensionUtils.parseExtensionValue(extVal)
+        /* X509ExtensionUtil.fromExtensionValue(extVal) */);
     CertificateFactory certificateFactory;
     certificateFactory = CertificateFactory.getInstance("X.509");
     // check if there is a URL to issuer's certificate
@@ -368,19 +188,6 @@ public class OcspUtils {
     return issuer;
   }
 
-  /**
-   * Validate certificate
-   *
-   * @param certificate X509Certificate Object
-   * @param aia         Information of certificate
-   * @return Certificate status
-   * @throws IOException
-   * @throws IllegalStateException
-   * @throws URISyntaxException
-   * @throws OCSPException
-   * @throws CertificateException
-   * @throws NoSuchAlgorithmException
-   */
   private String validate(X509Certificate certificate, AIA aia) throws IOException, IllegalStateException,
       URISyntaxException, OCSPException, CertificateException, NoSuchAlgorithmException {
     String hash = getHash(aia.getIssuer());
@@ -393,10 +200,7 @@ public class OcspUtils {
       }
     }
     URI uri = new URI(aia.getOcsp());
-<<<<<<< HEAD
-=======
 
->>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
     // Step 3: Construct the OCSP request
     X509Certificate issuer = getIssuerCert(certificate);
     OCSPReq request = new OcspRequestBuilder().certificate(certificate).issuer(issuer).build();
@@ -419,6 +223,12 @@ public class OcspUtils {
       return CERT_STATUS_GOOD;
     }
     if (status instanceof RevokedStatus) {
+      final RevokedStatus revokedStatus = (RevokedStatus) status;
+      Date revocationDate = revokedStatus.getRevocationTime();
+      int reasonId = 0; // unspecified
+      if (revokedStatus.hasRevocationReason()) {
+        reasonId = revokedStatus.getRevocationReason();
+      }
       return CERT_STATUS_REVOKED;
     }
     if (status instanceof UnknownStatus) {
@@ -429,14 +239,8 @@ public class OcspUtils {
 
   /**
    * The OID for OCSP responder URLs.
-   * http://www.alvestrand.no/objectid/1.3.6.1.5.5.7.48.1.html
    *
-   * @param uri     Uri of ocsp
-   * @param request request data
-   * @param timeout request timeout
-   * @param unit    unit
-   * @return OCSPResp object
-   * @throws IOException
+   * http://www.alvestrand.no/objectid/1.3.6.1.5.5.7.48.1.html
    */
   private OCSPResp request(URI uri, OCSPReq request, long timeout, TimeUnit unit) throws IOException {
     byte[] encoded = request.getEncoded();
@@ -496,13 +300,6 @@ public class OcspUtils {
     }
   }
 
-  /**
-   * Extract AIA information from certificate
-   *
-   * @param certificate
-   * @return AIA object
-   * @throws IOException When load certificate error
-   */
   private AIA parseAIACertificate(X509Certificate certificate) throws Exception {
     AIA aia = new AIA();
     Principal principal = certificate.getIssuerDN();
@@ -514,13 +311,6 @@ public class OcspUtils {
     return aia;
   }
 
-  /**
-   * Get CRL from file if not expire, other download from url
-   *
-   * @param url The url to download
-   * @return X509CRL object
-   * @throws Exception
-   */
   private X509CRL getCrl(String uri) throws Exception {
     String hash = getHash(uri);
     String fileName = crlCachedFolder() + hash;
@@ -533,74 +323,24 @@ public class OcspUtils {
     return loadFromFile(fileName);
   }
 
-<<<<<<< HEAD
-  /**
-   * Load X509CRL from cache file
-   *
-   * @param file The file path
-   * @return X509CRL object
-   * @throws FileNotFoundException
-   * @throws FileNotFoundException
-   * @throws CRLException
-   * @throws CRLException
-   * @throws CertificateException
-   */
-  private X509CRL loadFromFile(String file)
-      throws FileNotFoundException, FileNotFoundException, CRLException, CRLException, CertificateException {
-    CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
-    FileInputStream fis = new FileInputStream(file);
-    X509CRL crl = (X509CRL) certFactory.generateCRL(fis);
-    return crl;
-  }
-
-  /**
-   * Get CRL distribute with OID = 2.5.29.31 of Certificate
-   *
-   * @param certificate X509Certificate Object
-   * @return the Url of CRL
-   * @throws IOException
-   */
-=======
   private X509CRL loadFromFile(String file) throws FileNotFoundException, CRLException, CertificateException {
     CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
     FileInputStream fis = new FileInputStream(file);
     return (X509CRL) certFactory.generateCRL(fis);
   }
 
->>>>>>> 1070697bfd4057f2558b23422a7d8150d2e0c7d9
   private String parseCDPUrls(X509Certificate certificate) throws IOException {
     return getExtension(certificate, CRL_DISTRIBUTION_POINTS);
   }
 
-  /**
-   * Get OCSP Url of Certificate
-   *
-   * @param certificate X509Certificate Object
-   * @return the Url of OCSP
-   * @throws IOException
-   */
   private String ocspUri(X509Certificate certificate) throws IOException {
     return getExtension(certificate, OCSP_RESPONDER_OID);
   }
 
-  /**
-   * Get Url of Issuer Certificate
-   *
-   * @param certificate X509Certificate Object
-   * @return the Url of Issuer Certificate
-   * @throws IOException
-   */
   private String issuerUrl(X509Certificate certificate) throws IOException {
     return getExtension(certificate, ID_AD_CAISSUERS);
   }
 
-  /**
-   * Download content form url and save to file
-   *
-   * @param url      The url to download
-   * @param filePath File to save content
-   * @throws IOException
-   */
   private static void download(String url, String filePath) throws IOException {
     URL website = new URL(url);
     ReadableByteChannel rbc = Channels.newChannel(website.openStream());
@@ -615,14 +355,6 @@ public class OcspUtils {
     return !(str != null && !str.isEmpty());
   }
 
-  /**
-   * Get a extension of certificate with OID
-   *
-   * @param certificate X509Certificate certificate
-   * @param oIdentifier OID
-   * @return String value
-   * @throws IOException
-   */
   private static String getExtension(X509Certificate certificate, ASN1ObjectIdentifier oIdentifier) throws IOException {
     byte[] value = certificate.getExtensionValue(Extension.authorityInfoAccess.getId());
     if (value == null) {
@@ -645,15 +377,6 @@ public class OcspUtils {
     return new String(encoded, 2, length, "UTF-8");
   }
 
-  /**
-   * Find a OID in certificate
-   *
-   * @param <T>      Type of object return
-   * @param sequence DLSequence of cert
-   * @param oid      OID
-   * @param type     Class type to return
-   * @return T object, other null
-   */
   private static <T> T findObject(DLSequence sequence, ASN1ObjectIdentifier oid, Class<T> type) {
     for (ASN1Encodable element : sequence) {
       if (!(element instanceof DLSequence)) {
@@ -672,12 +395,6 @@ public class OcspUtils {
     return null;
   }
 
-  /**
-   * Create directory at given path
-   *
-   * @param path The path of directory
-   * @return True: created directory, other false
-   */
   private static boolean createDir(String path) {
     try {
       File directory = new File(path);
@@ -691,12 +408,6 @@ public class OcspUtils {
     }
   }
 
-  /**
-   * Check directory exist
-   *
-   * @param path path of directory
-   * @return True is exist, other false
-   */
   private static boolean isExistPath(String path) {
     try {
       File directory = new File(path);
@@ -706,13 +417,6 @@ public class OcspUtils {
     }
   }
 
-  /**
-   * Get hash of string
-   *
-   * @param data Data to hash
-   * @return Hash of string
-   * @throws NoSuchAlgorithmException
-   */
   private static String getHash(String data) throws NoSuchAlgorithmException {
     MessageDigest md;
     md = MessageDigest.getInstance("SHA-1");
@@ -725,34 +429,17 @@ public class OcspUtils {
     return tmpHash;
   }
 
-  /**
-   * Get Cached directory of Issuers
-   *
-   * @return The root path of issuer Cached directory
-   */
   private String issuerCachedFolder() {
     String path = this.cachedDir + "Issuers" + File.separator;
     createDir(path);
     return path;
   }
 
-  /**
-   * Check cached directory of issuer
-   *
-   * @param url Url of issuer
-   * @return True is same path, other false
-   * @throws NoSuchAlgorithmException
-   */
   private boolean isIssuerCached(String url) throws NoSuchAlgorithmException {
     String hash = getHash(url);
     return isExistPath(issuerCachedFolder() + hash);
   }
 
-  /**
-   * Get Cached directory of crls
-   *
-   * @return The root path of crl Cached Folder
-   */
   private String crlCachedFolder() {
     String path = this.cachedDir + "Crl" + File.separator;
     createDir(path);

@@ -16,32 +16,37 @@ import org.bouncycastle.cert.ocsp.OCSPReq;
 import org.bouncycastle.cert.ocsp.OCSPReqBuilder;
 import org.bouncycastle.operator.DigestCalculator;
 
-class OcspRequestBuilder {
+/**
+ * Class to help build Ocsp request
+ *
+ * @author
+ */
+public class OcspRequestBuilder {
+
   private static final SecureRandom GENERATOR = new SecureRandom();
-
-  private SecureRandom generator = GENERATOR;
-
-  private DigestCalculator calculator = Digester.sha1();
+  private final SecureRandom generator = GENERATOR;
+  private final DigestCalculator calculator = Digester.sha1();
 
   private X509Certificate certificate;
-
   private X509Certificate issuer;
 
-  public OcspRequestBuilder generator(SecureRandom generator) {
-    this.generator = generator;
-    return this;
-  }
-
-  public OcspRequestBuilder calculator(DigestCalculator calculator) {
-    this.calculator = calculator;
-    return this;
-  }
-
+  /**
+   * Set certificate to builder
+   *
+   * @param certificate main certificate
+   * @return OcspRequestBuilder object
+   */
   public OcspRequestBuilder certificate(X509Certificate certificate) {
     this.certificate = certificate;
     return this;
   }
 
+  /**
+   * Set the certificate of issuer to builder
+   *
+   * @param issuer the certificate of issuer
+   * @return OcspRequestBuilder object
+   */
   public OcspRequestBuilder issuer(X509Certificate issuer) {
     this.issuer = issuer;
     return this;
@@ -51,29 +56,25 @@ class OcspRequestBuilder {
    * ATTENTION: The returned {@link OCSPReq} is not re-usable/cacheable! It
    * contains a one-time nonce and CA's will (should) reject subsequent requests
    * that have the same nonce value.
+   *
+   * @return the builded OCSPReq object
+   * @throws org.bouncycastle.cert.ocsp.OCSPException
+   * @throws java.io.IOException
+   * @throws java.security.cert.CertificateEncodingException
    */
   public OCSPReq build() throws OCSPException, IOException, CertificateEncodingException {
-    /*
-     * SecureRandom generator = checkNotNull(this.generator, "generator");
-     * DigestCalculator calculator = checkNotNull(this.calculator, "calculator");
-     * X509Certificate certificate = checkNotNull(this.certificate, "certificate");
-     * X509Certificate issuer = checkNotNull(this.issuer, "issuer");
-     */
 
-    SecureRandom generator = this.generator;
-    DigestCalculator calculator = this.calculator;
-    X509Certificate certificate = this.certificate;
-    X509Certificate issuer = this.issuer;
+    BigInteger serial;
+    serial = this.certificate.getSerialNumber();
 
-    BigInteger serial = certificate.getSerialNumber();
-
-    CertificateID certId = new CertificateID(calculator, new X509CertificateHolder(issuer.getEncoded()), serial);
+    CertificateID certId = new CertificateID(this.calculator, new X509CertificateHolder(this.issuer.getEncoded()),
+        serial);
 
     OCSPReqBuilder builder = new OCSPReqBuilder();
     builder.addRequest(certId);
 
     byte[] nonce = new byte[8];
-    generator.nextBytes(nonce);
+    this.generator.nextBytes(nonce);
 
     Extension[] extensions = new Extension[] {
         new Extension(OCSPObjectIdentifiers.id_pkix_ocsp_nonce, false, new DEROctetString(nonce)) };

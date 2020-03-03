@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.security.cert.X509Certificate;
 
-import com.wisekey.ocsp.*;
+import com.wisekey.ocsp.OcspUtils;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -25,7 +25,7 @@ public class SslClientAuthenticationTestResource {
   private HttpServletRequest request;
 
   @Autowired
-  private Environment env
+  private Environment env;
 
   @RequestMapping(method = GET, value = "/", produces = { MediaType.TEXT_PLAIN_VALUE })
   @ApiOperation(value = "Returns the distinguished name for the received SSL client certificate")

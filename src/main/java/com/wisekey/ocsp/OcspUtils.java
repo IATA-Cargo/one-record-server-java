@@ -95,6 +95,12 @@ public class OcspUtils {
     return Date.from(utc.toInstant());
   }
 
+  /**
+   * Validate certificate
+   * @param certificate X509Certificate Certificate
+   * @return Certificate status
+   * @throws Exception
+   */
   public String validate(X509Certificate certificate) throws Exception {
     if (certificate.getNotAfter().compareTo(getCurrentUtcTime()) < 0) {
       return CERT_STATUS_EXPIRED;
@@ -120,6 +126,11 @@ public class OcspUtils {
     }
   }
 
+  /**
+   * Get description of certificate status
+   * @param certStatus Certificate status
+   * @return description of status
+   */
   public String getDescStatus(String certStatus) {
     String descStatus;
     switch (certStatus) {
@@ -160,6 +171,13 @@ public class OcspUtils {
     return descStatus;
   }
 
+  /**
+   * Get certificate of issuer
+   * @param urlCert Url of issuer certificate
+   * @return The X509Certificate Object Of Issuer
+   * @throws IOException
+   * @throws CertificateException
+   */
   private X509Certificate getIssuerCert(X509Certificate cert) throws IOException, CertificateException {
     X509Certificate issuer = null;
     // get Authority Information Access extension (will be null if extension is not present)
@@ -188,6 +206,18 @@ public class OcspUtils {
     return issuer;
   }
 
+  /**
+   * Validate Certificate
+   * @param certificate X509Certificate Object
+   * @param aia Information of certificate
+   * @return Certificate status
+   * @throws IOException
+   * @throws IllegalStateException
+   * @throws URISyntaxException
+   * @throws OCSPException
+   * @throws CertificateException
+   * @throws NoSuchAlgorithmException
+   */
   private String validate(X509Certificate certificate, AIA aia) throws IOException, IllegalStateException,
       URISyntaxException, OCSPException, CertificateException, NoSuchAlgorithmException {
     String hash = getHash(aia.getIssuer());
@@ -237,11 +267,15 @@ public class OcspUtils {
     return CERT_STATUS_NOTHING;
   }
 
-  /**
-   * The OID for OCSP responder URLs.
-   *
-   * http://www.alvestrand.no/objectid/1.3.6.1.5.5.7.48.1.html
-   */
+   /**
+    * The OID for OCSP responder URLs. - http://www.alvestrand.no/objectid/1.3.6.1.5.5.7.48.1.html
+    * @param uri Uri of ocsp
+    * @param request request data
+    * @param timeout request timeout
+    * @param unit unit
+    * @return OCSPResp object
+    * @throws IOException
+    */
   private OCSPResp request(URI uri, OCSPReq request, long timeout, TimeUnit unit) throws IOException {
     byte[] encoded = request.getEncoded();
 
@@ -300,6 +334,12 @@ public class OcspUtils {
     }
   }
 
+  /**
+   * Get AIA information of certificate
+   * @param certificate
+   * @return AIA object
+   * @throws IOException When load certificate error
+   */
   private AIA parseAIACertificate(X509Certificate certificate) throws Exception {
     AIA aia = new AIA();
     Principal principal = certificate.getIssuerDN();
@@ -311,6 +351,12 @@ public class OcspUtils {
     return aia;
   }
 
+  /**
+   * Get CRL from file if not expire, other download from url
+   * @param url The url to download
+   * @return X509CRL object
+   * @throws Exception
+   */
   private X509CRL getCrl(String uri) throws Exception {
     String hash = getHash(uri);
     String fileName = crlCachedFolder() + hash;
@@ -323,6 +369,16 @@ public class OcspUtils {
     return loadFromFile(fileName);
   }
 
+  /**
+   * Load X509CRL from cache file
+   * @param file The file path
+   * @return X509CRL object
+   * @throws FileNotFoundException
+   * @throws FileNotFoundException
+   * @throws CRLException
+   * @throws CRLException
+   * @throws CertificateException
+   */
   private X509CRL loadFromFile(String file) throws FileNotFoundException, CRLException, CertificateException {
     CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
     FileInputStream fis = new FileInputStream(file);
@@ -355,6 +411,13 @@ public class OcspUtils {
     return !(str != null && !str.isEmpty());
   }
 
+  /**
+   * Get a extension of certificate with OID
+   * @param certificate X509Certificate certificate
+   * @param oIdentifier OID
+   * @return String value
+   * @throws IOException
+   */
   private static String getExtension(X509Certificate certificate, ASN1ObjectIdentifier oIdentifier) throws IOException {
     byte[] value = certificate.getExtensionValue(Extension.authorityInfoAccess.getId());
     if (value == null) {
@@ -377,6 +440,14 @@ public class OcspUtils {
     return new String(encoded, 2, length, "UTF-8");
   }
 
+  /**
+   * Find a OID in certificate
+   * @param <T> Type of object return
+   * @param sequence DLSequence of cert
+   * @param oid OID
+   * @param type Class type to return
+   * @return T object, other null
+   */
   private static <T> T findObject(DLSequence sequence, ASN1ObjectIdentifier oid, Class<T> type) {
     for (ASN1Encodable element : sequence) {
       if (!(element instanceof DLSequence)) {

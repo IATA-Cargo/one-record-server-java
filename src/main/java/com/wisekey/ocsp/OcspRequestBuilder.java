@@ -17,6 +17,9 @@ import java.security.SecureRandom;
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
 
+/**
+ * Class to help build Ocsp request
+ */
 class OcspRequestBuilder {
   private static final SecureRandom GENERATOR = new SecureRandom();
 
@@ -28,11 +31,21 @@ class OcspRequestBuilder {
 
   private X509Certificate issuer;
 
+  /**
+   * Set certificate to builder
+   * @param certificate main certificate
+   * @return OcspRequestBuilder object
+   */
   OcspRequestBuilder certificate(X509Certificate certificate) {
     this.certificate = certificate;
     return this;
   }
 
+  /**
+   * Set the certificate of issuer to builder
+   * @param issuer the certificate of issuer
+   * @return OcspRequestBuilder object
+   */
   OcspRequestBuilder issuer(X509Certificate issuer) {
     this.issuer = issuer;
     return this;
@@ -42,6 +55,10 @@ class OcspRequestBuilder {
    * ATTENTION: The returned {@link OCSPReq} is not re-usable/cacheable! It
    * contains a one-time nonce and CA's will (should) reject subsequent requests
    * that have the same nonce value.
+   * @return the builded OCSPReq object
+   * @throws org.bouncycastle.cert.ocsp.OCSPException
+   * @throws java.io.IOException
+   * @throws java.security.cert.CertificateEncodingException
    */
   OCSPReq build() throws OCSPException, IOException, CertificateEncodingException {
     SecureRandom generator = this.generator;

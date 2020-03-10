@@ -46,7 +46,7 @@ public class PatchRequest
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
-    protected Set<Operation> operations;
+    protected Set<PatchRequest> operations;
     /**
      * Reason for the change (optional)
      * 
@@ -62,8 +62,8 @@ public class PatchRequest
      */
     @OWLDataProperty(iri = Vocabulary.s_p_revision)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
     protected String revision;
 
@@ -112,11 +112,11 @@ public class PatchRequest
         return ((((("PatchRequest {"+ name)+"<")+ id)+">")+"}");
     }
 
-    public void setOperations(Set<Operation> operations) {
+    public void setOperations(Set<PatchRequest> operations) {
         this.operations = operations;
     }
 
-    public Set<Operation> getOperations() {
+    public Set<PatchRequest> getOperations() {
         return operations;
     }
 

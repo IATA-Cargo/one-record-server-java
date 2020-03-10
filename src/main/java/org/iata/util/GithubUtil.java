@@ -18,7 +18,7 @@ public class GithubUtil {
   private static final Logger LOG = LoggerFactory.getLogger(GithubUtil.class);
 
   private static final String ONE_RECORD_CARGO_ONTOLOGY_URL = "https://raw.githubusercontent.com/IATA-Cargo/ONE-Record/master/working_draft/ontology/iata.ttl";
-  private static final String ONE_RECORD_API_ONTOLOGY_URL = "https://raw.githubusercontent.com/IATA-Cargo/ONE-Record/master/working_draft/ontology/iata.ttl";
+  private static final String ONE_RECORD_API_ONTOLOGY_URL = "https://raw.githubusercontent.com/IATA-Cargo/ONE-Record/master/working_draft/ontology/api_models.ttl";
   private static final String CARGO_FILE = "iata.ttl";
   private static final String API_FILE = "api_models.ttl";
 

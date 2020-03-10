@@ -60,8 +60,16 @@ public class Vocabulary {
      */
     public final static String s_c_Error = "http://cargo.iata.org/Error";
     public final static IRI c_Error = IRI.create(s_c_Error);
+    /**
+     * Event (status update) model
+     * 
+     */
+    public final static String s_c_Event = "http://cargo.iata.org/Event";
+    public final static IRI c_Event = IRI.create(s_c_Event);
     public final static String s_c_HouseWaybill = "http://cargo.iata.org/HouseWaybill";
     public final static IRI c_HouseWaybill = IRI.create(s_c_HouseWaybill);
+    public final static String s_c_Location = "http://cargo.iata.org/Location";
+    public final static IRI c_Location = IRI.create(s_c_Location);
     /**
      * Notification sent by the publisher to the subscriber
      * 
@@ -140,6 +148,12 @@ public class Vocabulary {
      */
     public final static String s_p_details = "http://cargo.iata.org/Error#details";
     public final static IRI p_details = IRI.create(s_p_details);
+    /**
+     * Geo position of where the event occurred
+     * 
+     */
+    public final static String s_p_geo = "http://cargo.iata.org/Event#geo";
+    public final static IRI p_geo = IRI.create(s_p_geo);
     /**
      * PATCH object to modify
      * 
@@ -249,6 +263,36 @@ public class Vocabulary {
     public final static String s_p_title = "http://cargo.iata.org/Error#title";
     public final static IRI p_title = IRI.create(s_p_title);
     /**
+     * Logistics object the event is valid for
+     * 
+     */
+    public final static String s_p_logisticsObjectRef_A = "http://cargo.iata.org/Event#logisticsObjectRef";
+    public final static IRI p_logisticsObjectRef_A = IRI.create(s_p_logisticsObjectRef_A);
+    /**
+     * Valid status
+     * 
+     */
+    public final static String s_p_status_A = "http://cargo.iata.org/Event#status";
+    public final static IRI p_status_A = IRI.create(s_p_status_A);
+    /**
+     * Used only when the event is only applicable to certain linked logistics objects in the primary logistics object (logisticsObjectRef)
+     * 
+     */
+    public final static String s_p_statusApplicableTo = "http://cargo.iata.org/Event#statusApplicableTo";
+    public final static IRI p_statusApplicableTo = IRI.create(s_p_statusApplicableTo);
+    /**
+     * Company IoL identifier
+     * 
+     */
+    public final static String s_p_statusBy = "http://cargo.iata.org/Event#statusBy";
+    public final static IRI p_statusBy = IRI.create(s_p_statusBy);
+    /**
+     * Date and time when the event occurred
+     * 
+     */
+    public final static String s_p_statusTimestamp = "http://cargo.iata.org/Event#statusTimestamp";
+    public final static IRI p_statusTimestamp = IRI.create(s_p_statusTimestamp);
+    /**
      * OBJECT_CREATED or OBJECT_UPDATED
      * 
      */
@@ -258,8 +302,8 @@ public class Vocabulary {
      * Logistics Object reference for which the notification is sent
      * 
      */
-    public final static String s_p_logisticsObjectRef_A = "http://cargo.iata.org/Notification#logisticsObjectRef";
-    public final static IRI p_logisticsObjectRef_A = IRI.create(s_p_logisticsObjectRef_A);
+    public final static String s_p_logisticsObjectRef_A_A = "http://cargo.iata.org/Notification#logisticsObjectRef";
+    public final static IRI p_logisticsObjectRef_A_A = IRI.create(s_p_logisticsObjectRef_A_A);
     /**
      * Type of Logistics Object
      * 

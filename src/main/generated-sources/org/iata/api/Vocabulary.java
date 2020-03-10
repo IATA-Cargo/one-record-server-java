@@ -149,11 +149,11 @@ public class Vocabulary {
     public final static String s_p_details = "http://cargo.iata.org/Error#details";
     public final static IRI p_details = IRI.create(s_p_details);
     /**
-     * Geo position of where the event occurred
+     * Location of where the event occurred
      * 
      */
-    public final static String s_p_geo = "http://cargo.iata.org/Event#geo";
-    public final static IRI p_geo = IRI.create(s_p_geo);
+    public final static String s_p_location = "http://cargo.iata.org/Event#location";
+    public final static IRI p_location = IRI.create(s_p_location);
     /**
      * PATCH object to modify
      * 
@@ -263,35 +263,35 @@ public class Vocabulary {
     public final static String s_p_title = "http://cargo.iata.org/Error#title";
     public final static IRI p_title = IRI.create(s_p_title);
     /**
+     * Valid event
+     * 
+     */
+    public final static String s_p_event = "http://cargo.iata.org/Event#event";
+    public final static IRI p_event = IRI.create(s_p_event);
+    /**
+     * Used only when the event is only applicable to certain linked logistics objects in the primary logistics object (logisticsObjectRef)
+     * 
+     */
+    public final static String s_p_eventApplicableTo = "http://cargo.iata.org/Event#eventApplicableTo";
+    public final static IRI p_eventApplicableTo = IRI.create(s_p_eventApplicableTo);
+    /**
+     * Date and time when the event occurred
+     * 
+     */
+    public final static String s_p_eventTimestamp = "http://cargo.iata.org/Event#eventTimestamp";
+    public final static IRI p_eventTimestamp = IRI.create(s_p_eventTimestamp);
+    /**
      * Logistics object the event is valid for
      * 
      */
     public final static String s_p_logisticsObjectRef_A = "http://cargo.iata.org/Event#logisticsObjectRef";
     public final static IRI p_logisticsObjectRef_A = IRI.create(s_p_logisticsObjectRef_A);
     /**
-     * Valid status
+     * Company IoL identifier of the entity from which the event comes from
      * 
      */
-    public final static String s_p_status_A = "http://cargo.iata.org/Event#status";
-    public final static IRI p_status_A = IRI.create(s_p_status_A);
-    /**
-     * Used only when the event is only applicable to certain linked logistics objects in the primary logistics object (logisticsObjectRef)
-     * 
-     */
-    public final static String s_p_statusApplicableTo = "http://cargo.iata.org/Event#statusApplicableTo";
-    public final static IRI p_statusApplicableTo = IRI.create(s_p_statusApplicableTo);
-    /**
-     * Company IoL identifier
-     * 
-     */
-    public final static String s_p_statusBy = "http://cargo.iata.org/Event#statusBy";
-    public final static IRI p_statusBy = IRI.create(s_p_statusBy);
-    /**
-     * Date and time when the event occurred
-     * 
-     */
-    public final static String s_p_statusTimestamp = "http://cargo.iata.org/Event#statusTimestamp";
-    public final static IRI p_statusTimestamp = IRI.create(s_p_statusTimestamp);
+    public final static String s_p_performedBy = "http://cargo.iata.org/Event#performedBy";
+    public final static IRI p_performedBy = IRI.create(s_p_performedBy);
     /**
      * OBJECT_CREATED or OBJECT_UPDATED
      * 

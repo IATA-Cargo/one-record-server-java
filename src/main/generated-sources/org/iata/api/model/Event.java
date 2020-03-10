@@ -41,60 +41,60 @@ public class Event
     @Properties
     protected Map<String, Set<String>> properties;
     /**
-     * Geo position of where the event occurred
+     * Location of where the event occurred
      * 
      */
-    @OWLObjectProperty(iri = Vocabulary.s_p_geo)
+    @OWLObjectProperty(iri = Vocabulary.s_p_location)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
-    protected Location geo;
+    protected Location location;
+    /**
+     * Valid event
+     * 
+     */
+    @OWLDataProperty(iri = Vocabulary.s_p_event)
+    @ParticipationConstraints({
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+    })
+    protected String event;
+    /**
+     * Used only when the event is only applicable to certain linked logistics objects in the primary logistics object (logisticsObjectRef)
+     * 
+     */
+    @OWLDataProperty(iri = Vocabulary.s_p_eventApplicableTo)
+    protected Set<String> eventApplicableTo;
+    /**
+     * Date and time when the event occurred
+     * 
+     */
+    @OWLDataProperty(iri = Vocabulary.s_p_eventTimestamp)
+    @ParticipationConstraints({
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1)
+    })
+    protected Date eventTimestamp;
     /**
      * Logistics object the event is valid for
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_logisticsObjectRef_A)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
-    })
-    protected String logisticsObjectRef;
-    /**
-     * Valid status
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_status_A)
-    @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
-    protected String status;
+    protected String logisticsObjectRef;
     /**
-     * Used only when the event is only applicable to certain linked logistics objects in the primary logistics object (logisticsObjectRef)
+     * Company IoL identifier of the entity from which the event comes from
      * 
      */
-    @OWLDataProperty(iri = Vocabulary.s_p_statusApplicableTo)
-    protected Set<String> statusApplicableTo;
-    /**
-     * Company IoL identifier
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_statusBy)
+    @OWLDataProperty(iri = Vocabulary.s_p_performedBy)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
-    protected String statusBy;
-    /**
-     * Date and time when the event occurred
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_statusTimestamp)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
-    })
-    protected Date statusTimestamp;
+    protected String performedBy;
 
     public void setId(String id) {
         this.id = id;
@@ -141,12 +141,36 @@ public class Event
         return ((((("Event {"+ name)+"<")+ id)+">")+"}");
     }
 
-    public void setGeo(Location geo) {
-        this.geo = geo;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
-    public Location getGeo() {
-        return geo;
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setEvent(String event) {
+        this.event = event;
+    }
+
+    public String getEvent() {
+        return event;
+    }
+
+    public void setEventApplicableTo(Set<String> eventApplicableTo) {
+        this.eventApplicableTo = eventApplicableTo;
+    }
+
+    public Set<String> getEventApplicableTo() {
+        return eventApplicableTo;
+    }
+
+    public void setEventTimestamp(Date eventTimestamp) {
+        this.eventTimestamp = eventTimestamp;
+    }
+
+    public Date getEventTimestamp() {
+        return eventTimestamp;
     }
 
     public void setLogisticsObjectRef(String logisticsObjectRef) {
@@ -157,36 +181,12 @@ public class Event
         return logisticsObjectRef;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPerformedBy(String performedBy) {
+        this.performedBy = performedBy;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatusApplicableTo(Set<String> statusApplicableTo) {
-        this.statusApplicableTo = statusApplicableTo;
-    }
-
-    public Set<String> getStatusApplicableTo() {
-        return statusApplicableTo;
-    }
-
-    public void setStatusBy(String statusBy) {
-        this.statusBy = statusBy;
-    }
-
-    public String getStatusBy() {
-        return statusBy;
-    }
-
-    public void setStatusTimestamp(Date statusTimestamp) {
-        this.statusTimestamp = statusTimestamp;
-    }
-
-    public Date getStatusTimestamp() {
-        return statusTimestamp;
+    public String getPerformedBy() {
+        return performedBy;
     }
 
 }

@@ -1,5 +1,8 @@
 package org.iata.resource;
 
+import java.util.Collection;
+import java.util.List;
+import org.bouncycastle.asn1.x509.GeneralName;
 import com.wisekey.ocsp.OcspUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.core.env.Environment;
@@ -29,14 +32,42 @@ public class SslClientAuthenticationTestResource {
     this.env = env;
   }
 
-  @RequestMapping(method = GET, value = "/", produces = {MediaType.TEXT_PLAIN_VALUE})
+  @RequestMapping(method = GET, value = "/", produces = { MediaType.TEXT_PLAIN_VALUE })
   @ApiOperation(value = "Returns the distinguished name for the received SSL client certificate")
   public ResponseEntity<String> doIt() {
-    X509Certificate[] clientCertificateChain = (X509Certificate[]) request.getAttribute("javax.servlet.request.X509Certificate");
+    X509Certificate[] clientCertificateChain = (X509Certificate[]) request
+        .getAttribute("javax.servlet.request.X509Certificate");
     X509Certificate clientCertificate = clientCertificateChain[0];
     OcspUtils ocspUtils = new OcspUtils(env.getProperty("ocsp.cachedDir"));
     try {
       Principal subjectDN = clientCertificate.getSubjectDN();
+      Collection<List<?>> sans = clientCertificate.getSubjectAlternativeNames();
+      String sanString = "";
+      if (sans == null) {
+        sanString = "SANs are null.";
+      } else {
+        for (final List<?> item : sans) {
+          if (item.size() < 2) {
+            System.out.println("item.size < 2");
+            continue;
+          }
+          Object data = null;
+          switch ((Integer) item.get(0)) {
+          case GeneralName.uniformResourceIdentifier:
+          case GeneralName.dNSName:
+          case GeneralName.iPAddress:
+            data = item.get(1);
+            if (data instanceof String) {
+              sanString += ((String) data) + ", ";
+            } else {
+              System.out.println("data is not String");
+            }
+            break;
+          default:
+            System.out.println("we don't care other cases");
+          }
+        }
+      }
       String certStatus = ocspUtils.validate(clientCertificate);
       String statsDesc = ocspUtils.getDescStatus(certStatus);
       HttpStatus httpStats;
@@ -53,10 +84,11 @@ public class SslClientAuthenticationTestResource {
         httpStats = HttpStatus.OK;
       }
       return new ResponseEntity<>(String.format(
-          "Server side received (and validated) the following client certificate:\n\r\t{ Certificate-Info: %s; Certificate-Status: %s; Status-Description: %s}",
-          subjectDN, certStatus, statsDesc), httpStats);
+          "Server side received (and validated) the following client certificate:\n\r\t{ Certificate-Info: %s; Certificate-Status: %s; Status-Description: %s; SAN: %s}",
+          subjectDN, certStatus, statsDesc, sanString), httpStats);
     } catch (Exception e) {
-      return new ResponseEntity<>(String.format("Internal Server Error: %s", e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(String.format("Internal Server Error: %s", e.getMessage()),
+          HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 

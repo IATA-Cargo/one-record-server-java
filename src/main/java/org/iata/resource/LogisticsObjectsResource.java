@@ -4,6 +4,8 @@ import cz.cvut.kbss.jsonld.JsonLd;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.iata.api.model.AuditTrail;
+import org.iata.cargo.model.Event;
+import org.iata.cargo.model.Shipment;
 import org.iata.model.LogisticsObject;
 import org.iata.service.AuditTrailsService;
 import org.iata.service.LogisticsObjectsService;
@@ -62,6 +64,15 @@ public class LogisticsObjectsResource {
     return new ResponseEntity<>(headers, HttpStatus.CREATED);
   }
 
+  @RequestMapping(method = POST, value = "/companies/{companyId}/shipment", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @ResponseStatus(HttpStatus.CREATED)
+  @ApiOperation(value = "Creates a shipment")
+  public ResponseEntity<Void> addLogisticsObject(@Valid @RequestBody Shipment shipment) {
+    LOG.info(ocspService.verifyCertificate());
+    final HttpHeaders headers = RestUtils.createLocationHeaderFromCurrentUri("/{loId}", "TODO"); //TODO
+    return new ResponseEntity<>(headers, HttpStatus.CREATED);
+  }
+
   @RequestMapping(method = GET, value = "/companies/{companyId}/los", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Retrieves all the logistics objects for a given company")
   public ResponseEntity<List<LogisticsObject>> getLogisticsObjects(@PathVariable("companyId") String companyId) {
@@ -91,6 +102,23 @@ public class LogisticsObjectsResource {
   public ResponseEntity<List<AuditTrail>> getAuditTrail(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
     LOG.info(ocspService.verifyCertificate());
     return new ResponseEntity<>(auditTrailsService.findByLogisticsObjectRef(loId), HttpStatus.OK);
+  }
+
+  @RequestMapping(method = POST, value = "/companies/{companyId}/los/{loId}/events", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @ResponseStatus(HttpStatus.CREATED)
+  @ApiOperation(value = "Creates events for a given logistics object")
+  public ResponseEntity<Void> addEvents(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @Valid @RequestBody Event event) {
+    LOG.info(ocspService.verifyCertificate());
+    logisticsObjectsService.addEvent(loId, event);
+    final HttpHeaders headers = RestUtils.createLocationHeaderFromCurrentUri("/{eventId}", "TODO"); //TODO
+    return new ResponseEntity<>(headers, HttpStatus.CREATED);
+  }
+
+  @RequestMapping(method = GET, value = "/companies/{companyId}/los/{loId}/events", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @ApiOperation(value = "Retrieves the events of a given logistics object")
+  public ResponseEntity<List<Event>> getEvents(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
+    LOG.info(ocspService.verifyCertificate());
+    return new ResponseEntity<List<Event>>(logisticsObjectsService.findEvents(loId), HttpStatus.OK);
   }
 
 }

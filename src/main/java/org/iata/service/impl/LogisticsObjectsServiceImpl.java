@@ -1,5 +1,6 @@
 package org.iata.service.impl;
 
+import org.iata.cargo.model.Event;
 import org.iata.model.LogisticsObject;
 import org.iata.repository.LogisticsObjectsRepository;
 import org.iata.service.LogisticsObjectsService;
@@ -37,6 +38,19 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
   public void updateLogisticsObject(LogisticsObject logisticsObject) {
     logisticsObjectsRepository.save(logisticsObject);
     // TODO Use JSON-LD PATCH
+  }
+
+  @Override
+  public void addEvent(String loId, Event event) {
+
+  }
+
+  @Override
+  public List<Event> findEvents(String loId) {
+    return  null;
+        //logisticsObjectsRepository.findById(loId)
+       // .map(logisticsObject -> logisticsObject.getEvents())
+       // .orElse(null);
   }
 
 }

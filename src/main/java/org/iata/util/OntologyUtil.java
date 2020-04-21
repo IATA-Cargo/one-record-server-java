@@ -14,13 +14,16 @@ import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class GithubUtil {
-  private static final Logger LOG = LoggerFactory.getLogger(GithubUtil.class);
+public class OntologyUtil {
+  private static final Logger LOG = LoggerFactory.getLogger(OntologyUtil.class);
 
   private static final String ONE_RECORD_CARGO_ONTOLOGY_URL = "https://raw.githubusercontent.com/IATA-Cargo/ONE-Record/master/working_draft/ontology/iata.ttl";
-  private static final String ONE_RECORD_API_ONTOLOGY_URL = "https://raw.githubusercontent.com/IATA-Cargo/ONE-Record/master/working_draft/ontology/iata.ttl";
+  private static final String ONE_RECORD_API_ONTOLOGY_URL = "https://raw.githubusercontent.com/IATA-Cargo/ONE-Record/master/working_draft/ontology/api_models.ttl";
+  private static final String WEB_ACCESS_CONTROL_ONTOLOGY_URL = "http://www.w3.org/ns/auth/acl";
+
   private static final String CARGO_FILE = "iata.ttl";
   private static final String API_FILE = "api_models.ttl";
+  private static final String ACL_FILE = "acl.ttl";
 
   public static void main(String[] args) throws Throwable {
     LOG.info("Writing cargo ontology from Github to iata.ttl...");
@@ -37,6 +40,16 @@ public class GithubUtil {
 
     try (PrintWriter out = new PrintWriter(API_FILE)) {
       URL githubUrl = new URL(ONE_RECORD_API_ONTOLOGY_URL);
+      HttpURLConnection githubHttp = (HttpURLConnection) githubUrl.openConnection();
+      InputStream githubStream = githubHttp.getInputStream();
+      String githubResponse = getStringFromStream(githubStream);
+      out.println(githubResponse);
+    }
+
+    LOG.info("Writing Web Access Control ontology from W3 to acl.ttl...");
+
+    try (PrintWriter out = new PrintWriter(ACL_FILE)) {
+      URL githubUrl = new URL(WEB_ACCESS_CONTROL_ONTOLOGY_URL);
       HttpURLConnection githubHttp = (HttpURLConnection) githubUrl.openConnection();
       InputStream githubStream = githubHttp.getInputStream();
       String githubResponse = getStringFromStream(githubStream);
@@ -63,4 +76,5 @@ public class GithubUtil {
       return "No Contents";
     }
   }
+
 }

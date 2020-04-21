@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface AuditTrailRepository extends MongoRepository<AuditTrail, String> {
-  List<AuditTrail> findByLogisticsObjectRef(String companyId);
+  List<AuditTrail> findByLogisticsObjectRef(String loId);
 }

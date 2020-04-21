@@ -1,5 +1,6 @@
 package org.iata.service;
 
+import org.iata.cargo.model.Event;
 import org.iata.model.LogisticsObject;
 
 import java.util.List;
@@ -13,5 +14,9 @@ public interface LogisticsObjectsService {
   List<LogisticsObject> findByCompanyId(String companyId);
 
   void updateLogisticsObject(LogisticsObject logisticsObject);
+
+  void addEvent(String loId, Event event);
+
+  List<Event> findEvents(String loId);
 
 }

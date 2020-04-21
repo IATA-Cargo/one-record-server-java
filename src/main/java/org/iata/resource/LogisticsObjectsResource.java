@@ -6,7 +6,9 @@ import io.swagger.annotations.ApiOperation;
 import org.iata.api.model.AuditTrail;
 import org.iata.cargo.model.Event;
 import org.iata.cargo.model.Shipment;
+import org.iata.model.AccessControlList;
 import org.iata.model.LogisticsObject;
+import org.iata.service.AccessControlListService;
 import org.iata.service.AuditTrailsService;
 import org.iata.service.LogisticsObjectsService;
 import org.iata.service.handler.LogisticsObjectsHandler;
@@ -44,13 +46,15 @@ public class LogisticsObjectsResource {
   private final LogisticsObjectsHandler logisticsObjectsHandler;
   private final LogisticsObjectsService logisticsObjectsService;
   private final AuditTrailsService auditTrailsService;
+  private final AccessControlListService accessControlListService;
   private final OcspService ocspService;
 
   @Inject
-  public LogisticsObjectsResource(LogisticsObjectsHandler logisticsObjectsHandler, LogisticsObjectsService logisticsObjectsService, AuditTrailsService auditTrailsService, OcspService ocspService) {
+  public LogisticsObjectsResource(LogisticsObjectsHandler logisticsObjectsHandler, LogisticsObjectsService logisticsObjectsService, AuditTrailsService auditTrailsService, AccessControlListService accessControlListService, OcspService ocspService) {
     this.logisticsObjectsHandler = logisticsObjectsHandler;
     this.logisticsObjectsService = logisticsObjectsService;
     this.auditTrailsService = auditTrailsService;
+    this.accessControlListService = accessControlListService;
     this.ocspService = ocspService;
   }
 
@@ -118,7 +122,24 @@ public class LogisticsObjectsResource {
   @ApiOperation(value = "Retrieves the events of a given logistics object")
   public ResponseEntity<List<Event>> getEvents(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
     LOG.info(ocspService.verifyCertificate());
-    return new ResponseEntity<List<Event>>(logisticsObjectsService.findEvents(loId), HttpStatus.OK);
+    return new ResponseEntity<>(logisticsObjectsService.findEvents(loId), HttpStatus.OK);
+  }
+
+  @RequestMapping(method = POST, value = "/companies/{companyId}/los/{loId}/acl", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @ResponseStatus(HttpStatus.CREATED)
+  @ApiOperation(value = "Creates Access Control List item for a given logistics object")
+  public ResponseEntity<Void> addACL(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @Valid @RequestBody Event event) {
+    LOG.info(ocspService.verifyCertificate());
+    logisticsObjectsService.addEvent(loId, event);
+    final HttpHeaders headers = RestUtils.createLocationHeaderFromCurrentUri("/{eventId}", "TODO"); //TODO
+    return new ResponseEntity<>(headers, HttpStatus.CREATED);
+  }
+
+  @RequestMapping(method = GET, value = "/companies/{companyId}/los/{loId}/acl", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @ApiOperation(value = "Retrieves the Access Control List of a given logistics object")
+  public ResponseEntity<List<AccessControlList>> getACL(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
+    LOG.info(ocspService.verifyCertificate());
+    return new ResponseEntity<>(accessControlListService.findByLogisticsObjectRef(loId), HttpStatus.OK);
   }
 
 }

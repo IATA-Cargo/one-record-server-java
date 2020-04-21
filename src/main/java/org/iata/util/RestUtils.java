@@ -29,4 +29,13 @@ public class RestUtils {
         headers.set(HttpHeaders.LOCATION, location.toASCIIString());
         return headers;
     }
+
+    public static HttpHeaders createLinkHeaderFromCurrentURi(String path, Object... uriVariableValues) {
+        assert path != null;
+        final URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path(path).buildAndExpand(
+            uriVariableValues).toUri();
+        final HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.LINK, location.toASCIIString());
+        return headers;
+    }
 }

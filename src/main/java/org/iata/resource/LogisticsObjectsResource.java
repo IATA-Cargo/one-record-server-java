@@ -91,7 +91,7 @@ public class LogisticsObjectsResource {
     LOG.info(ocspService.verifyCertificate());
 
     // Return Access Control List Location in Link header
-    final HttpHeaders headers = RestUtils.createLinkHeaderFromCurrentURi("/acl", Collections.emptyList());
+    final HttpHeaders headers = RestUtils.createLinkHeaderFromCurrentURi("/acl", "acl", Collections.emptyList());
     return new ResponseEntity<>(logisticsObjectsService.findById(loId), headers, HttpStatus.OK);
   }
 

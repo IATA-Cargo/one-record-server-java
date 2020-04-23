@@ -4,7 +4,9 @@ import cz.cvut.kbss.jsonld.JsonLd;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.iata.api.model.CompanyInformation;
+import org.iata.api.model.Subscription;
 import org.iata.service.CompaniesService;
+import org.iata.service.SubscriptionsService;
 import org.iata.service.security.OcspService;
 import org.iata.util.RestUtils;
 import org.slf4j.Logger;
@@ -17,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,11 +41,13 @@ public class CompaniesResource {
   private static final Logger LOG = LoggerFactory.getLogger(CompaniesResource.class);
 
   private final CompaniesService companiesService;
+  private final SubscriptionsService subscriptionsService;
   private final OcspService ocspService;
 
   @Inject
-  public CompaniesResource(CompaniesService companiesService, OcspService ocspService) {
+  public CompaniesResource(CompaniesService companiesService, SubscriptionsService subscriptionsService, OcspService ocspService) {
     this.companiesService = companiesService;
+    this.subscriptionsService = subscriptionsService;
     this.ocspService = ocspService;
   }
 
@@ -86,6 +91,22 @@ public class CompaniesResource {
     LOG.info(ocspService.verifyCertificate());
     companiesService.deleteByCompanyId(companyId);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
+
+  @RequestMapping(method = POST, value = "/{companyId}/subscription", consumes={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @ApiOperation(value = "Creates subscription information for a company (sent usually to publishers)")
+  public ResponseEntity<Subscription> addSubscriptionInformation(@PathVariable("companyId") String companyId, @Valid @RequestBody Subscription subscription) {
+    LOG.info(ocspService.verifyCertificate());
+    subscription.setId(companyId); // TODO add topic
+    subscriptionsService.addSubscription(subscription);
+    return new ResponseEntity<>(HttpStatus.CREATED);
+  }
+
+  @RequestMapping(method = GET, value = "/{companyId}/subscription", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @ApiOperation(value = "Retrieves the subscription information (sent usually to publishers)")
+  public ResponseEntity<Subscription> getSubscriptionInformation(@PathVariable("companyId") String companyId, @RequestParam("topic") String topic) {
+    LOG.info(ocspService.verifyCertificate());
+    return new ResponseEntity<>(subscriptionsService.getSubscription(companyId, topic), HttpStatus.OK);
   }
 
 }

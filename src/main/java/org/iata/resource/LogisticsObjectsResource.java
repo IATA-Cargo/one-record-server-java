@@ -5,7 +5,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.iata.api.model.AuditTrail;
 import org.iata.cargo.model.Event;
-import org.iata.cargo.model.Shipment;
 import org.iata.model.AccessControlList;
 import org.iata.model.LogisticsObject;
 import org.iata.service.AccessControlListService;
@@ -29,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -68,14 +68,15 @@ public class LogisticsObjectsResource {
     return new ResponseEntity<>(headers, HttpStatus.CREATED);
   }
 
-  @RequestMapping(method = POST, value = "/companies/{companyId}/shipment", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
-  @ResponseStatus(HttpStatus.CREATED)
-  @ApiOperation(value = "Creates a shipment")
-  public ResponseEntity<Void> addLogisticsObject(@Valid @RequestBody Shipment shipment) {
-    LOG.info(ocspService.verifyCertificate());
-    final HttpHeaders headers = RestUtils.createLocationHeaderFromCurrentUri("/{loId}", "TODO"); //TODO
-    return new ResponseEntity<>(headers, HttpStatus.CREATED);
-  }
+  // TODO To remove - for testing purposes
+//  @RequestMapping(method = POST, value = "/companies/{companyId}/shipment", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+//  @ResponseStatus(HttpStatus.CREATED)
+//  @ApiOperation(value = "Creates a shipment")
+//  public ResponseEntity<Void> addLogisticsObject(@Valid @RequestBody Shipment shipment) {
+//    LOG.info(ocspService.verifyCertificate());
+//    final HttpHeaders headers = RestUtils.createLocationHeaderFromCurrentUri("/{loId}", "TODO"); //TODO
+//    return new ResponseEntity<>(headers, HttpStatus.CREATED);
+//  }
 
   @RequestMapping(method = GET, value = "/companies/{companyId}/los", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Retrieves all the logistics objects for a given company")
@@ -88,7 +89,10 @@ public class LogisticsObjectsResource {
   @ApiOperation(value = "Retrieves a logistics object")
   public ResponseEntity<LogisticsObject> getLogisticsObject(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
     LOG.info(ocspService.verifyCertificate());
-    return new ResponseEntity<LogisticsObject>(logisticsObjectsService.findById(loId), HttpStatus.OK);
+
+    // Return Access Control List Location in Link header
+    final HttpHeaders headers = RestUtils.createLinkHeaderFromCurrentURi("/acl", "acl", Collections.emptyList());
+    return new ResponseEntity<>(logisticsObjectsService.findById(loId), headers, HttpStatus.OK);
   }
 
   @RequestMapping(method = PATCH, value = "/companies/{companyId}/los/{loId}")

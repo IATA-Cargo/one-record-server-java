@@ -1,9 +1,7 @@
 
 package org.w3.acl.model;
 
-import java.io.Serializable;
-import java.util.Map;
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.Id;
 import cz.cvut.kbss.jopa.model.annotations.OWLAnnotationProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
@@ -11,6 +9,10 @@ import cz.cvut.kbss.jopa.model.annotations.Properties;
 import cz.cvut.kbss.jopa.model.annotations.Types;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
 import org.w3.acl.Vocabulary;
+
+import java.io.Serializable;
+import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -23,12 +25,14 @@ public class Thing
 {
 
     @Id(generated = true)
+@JsonProperty("@id")
     protected String id;
     @OWLAnnotationProperty(iri = RDFS.LABEL)
     protected String name;
     @OWLAnnotationProperty(iri = cz.cvut.kbss.jopa.vocabulary.DC.Elements.DESCRIPTION)
     protected String description;
     @Types
+@JsonProperty("@type")
     protected Set<String> types;
     @Properties
     protected Map<String, Set<String>> properties;

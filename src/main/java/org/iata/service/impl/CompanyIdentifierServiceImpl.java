@@ -27,7 +27,6 @@ public class CompanyIdentifierServiceImpl implements CompanyIdentifierService {
     companyInformation.setServerEndpoint(env.getProperty("companyInformation.serverEndpoint"));
     companyInformation.setSupportedContentTypes(Set.of(Objects.requireNonNull(env.getProperty("companyInformation.supportedContentTypes")).split(",")));
     companyInformation.setSupportedLogisticsObjects(Set.of((Objects.requireNonNull(env.getProperty("companyInformation.supportedLogisticsObjects")).split(","))));
-    companyInformation.setTypes(Set.of(CompanyInformation.class.toString()));
     return companyInformation;
   }
 

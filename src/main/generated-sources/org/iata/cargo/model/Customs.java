@@ -1,9 +1,8 @@
 
 package org.iata.cargo.model;
 
-import java.io.Serializable;
-import java.util.Map;
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.Id;
 import cz.cvut.kbss.jopa.model.annotations.OWLAnnotationProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
@@ -13,6 +12,10 @@ import cz.cvut.kbss.jopa.model.annotations.Properties;
 import cz.cvut.kbss.jopa.model.annotations.Types;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
 import org.iata.cargo.Vocabulary;
+
+import java.io.Serializable;
+import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -27,14 +30,19 @@ public class Customs
 {
 
     @Id(generated = true)
+@JsonProperty("@id")
     protected String id;
+    @JsonIgnore
     @OWLAnnotationProperty(iri = RDFS.LABEL)
     protected String name;
+    @JsonIgnore
     @OWLAnnotationProperty(iri = cz.cvut.kbss.jopa.vocabulary.DC.Elements.DESCRIPTION)
     protected String description;
     @Types
+@JsonProperty("@type")
     protected Set<String> types;
     @Properties
+    @JsonIgnore
     protected Map<String, Set<String>> properties;
     /**
      * Goods value declaration for customs

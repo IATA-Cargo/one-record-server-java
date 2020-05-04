@@ -33,7 +33,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.PATCH;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
-@RequestMapping(value = "/companies", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(value = "/", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
 @Validated
 @Api(value = "Companies Resource REST Endpoint")
 public class CompaniesResource {
@@ -51,7 +51,7 @@ public class CompaniesResource {
     this.ocspService = ocspService;
   }
 
-  @RequestMapping(method = POST, value = "/", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @RequestMapping(method = POST, value = "/companies", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ResponseStatus(HttpStatus.CREATED)
   @ApiOperation(value = "Creates a company")
   public ResponseEntity<Void> addCompany(@Valid @RequestBody CompanyInformation companyInformation) {
@@ -61,21 +61,21 @@ public class CompaniesResource {
     return new ResponseEntity<>(headers, HttpStatus.CREATED);
   }
 
-  @RequestMapping(method = GET, value = "/", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @RequestMapping(method = GET, value = "/companies", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Retrieves all the companies")
   public ResponseEntity<List<CompanyInformation>> getCompanies() {
     LOG.info(ocspService.verifyCertificate());
     return new ResponseEntity<>(companiesService.getCompanies(), HttpStatus.OK);
   }
 
-  @RequestMapping(method = GET, value = "/{companyId}", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @RequestMapping(method = GET, value = "/companies/{companyId}", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Retrieves a company for a given companyId")
   public ResponseEntity<CompanyInformation> getCompany(@PathVariable("companyId") String companyId) {
     LOG.info(ocspService.verifyCertificate());
     return new ResponseEntity<>(companiesService.findByCompanyId(companyId), HttpStatus.OK);
   }
 
-  @RequestMapping(method = PATCH, value = "/{companyId}")
+  @RequestMapping(method = PATCH, value = "/companies/{companyId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @ApiOperation(value = "Updates a company for a given companyId")
   public ResponseEntity<Void> updateCompany(@PathVariable("companyId") String companyId, @RequestBody CompanyInformation companyInformation) {
@@ -84,7 +84,7 @@ public class CompaniesResource {
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 
-  @RequestMapping(method = DELETE, value = "/{companyId}")
+  @RequestMapping(method = DELETE, value = "/companies/{companyId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @ApiOperation(value = "Deletes a company for a given companyId")
   public ResponseEntity<Void> deleteCompany(@PathVariable("companyId") String companyId) {
@@ -93,7 +93,7 @@ public class CompaniesResource {
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 
-  @RequestMapping(method = POST, value = "/{companyId}/subscription", consumes={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @RequestMapping(method = POST, value = "/companies/{companyId}/subscription", consumes={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Creates subscription information for a company (sent usually to publishers)")
   public ResponseEntity<Subscription> addSubscriptionInformation(@PathVariable("companyId") String companyId, @Valid @RequestBody Subscription subscription) {
     LOG.info(ocspService.verifyCertificate());
@@ -102,7 +102,7 @@ public class CompaniesResource {
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
-  @RequestMapping(method = GET, value = "/{companyId}/subscription", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @RequestMapping(method = GET, value = "/companies/{companyId}/subscription", produces={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Retrieves the subscription information (sent usually to publishers)")
   public ResponseEntity<Subscription> getSubscriptionInformation(@PathVariable("companyId") String companyId, @RequestParam("topic") String topic) {
     LOG.info(ocspService.verifyCertificate());

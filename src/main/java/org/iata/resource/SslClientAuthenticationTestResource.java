@@ -20,7 +20,7 @@ import java.security.cert.X509Certificate;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
-@RequestMapping(value = "/sslclientauthenticationtest")
+@RequestMapping(value = "/")
 public class SslClientAuthenticationTestResource {
 
   private final HttpServletRequest request;
@@ -32,7 +32,7 @@ public class SslClientAuthenticationTestResource {
     this.env = env;
   }
 
-  @RequestMapping(method = GET, value = "/", produces = { MediaType.TEXT_PLAIN_VALUE })
+  @RequestMapping(method = GET, value = "/sslclientauthenticationtest", produces = { MediaType.TEXT_PLAIN_VALUE })
   @ApiOperation(value = "Returns the distinguished name for the received SSL client certificate")
   public ResponseEntity<String> doIt() {
     X509Certificate[] clientCertificateChain = (X509Certificate[]) request

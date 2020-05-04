@@ -14,6 +14,7 @@ import cz.cvut.kbss.jopa.model.annotations.Properties;
 import cz.cvut.kbss.jopa.model.annotations.Types;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
 import org.iata.api.Vocabulary;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -27,6 +28,7 @@ import java.util.Set;
  * 
  */
 @OWLClass(iri = Vocabulary.s_c_Subscription)
+@Document(collection = "subscriptions")
 public class Subscription
     implements Serializable
 {
@@ -46,6 +48,7 @@ public class Subscription
     @Properties
     @JsonIgnore
     protected Map<String, Set<String>> properties;
+
     /**
      * Non mandatory error details
      * 

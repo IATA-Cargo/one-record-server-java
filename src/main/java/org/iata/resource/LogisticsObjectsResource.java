@@ -36,7 +36,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.PATCH;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
-@RequestMapping(value = "/", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(value = "/companies", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
 @Validated
 @Api(value = "ONE Record Server")
 public class LogisticsObjectsResource {
@@ -58,7 +58,7 @@ public class LogisticsObjectsResource {
     this.ocspService = ocspService;
   }
 
-  @RequestMapping(method = POST, value = "/companies/{companyId}/los", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @RequestMapping(method = POST, value = "/{companyId}/los", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ResponseStatus(HttpStatus.CREATED)
   @ApiOperation(value = "Creates a logistics object")
   public ResponseEntity<Void> addLogisticsObject(@Valid @RequestBody LogisticsObject logisticsObject) {
@@ -78,14 +78,14 @@ public class LogisticsObjectsResource {
 //    return new ResponseEntity<>(headers, HttpStatus.CREATED);
 //  }
 
-  @RequestMapping(method = GET, value = "/companies/{companyId}/los", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @RequestMapping(method = GET, value = "/{companyId}/los", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Retrieves all the logistics objects for a given company")
   public ResponseEntity<List<LogisticsObject>> getLogisticsObjects(@PathVariable("companyId") String companyId) {
     LOG.info(ocspService.verifyCertificate());
     return new ResponseEntity<>(logisticsObjectsService.findByCompanyId(companyId), HttpStatus.OK);
   }
 
-  @RequestMapping(method = GET, value = "/companies/{companyId}/los/{loId}", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @RequestMapping(method = GET, value = "/{companyId}/los/{loId}", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Retrieves a logistics object")
   public ResponseEntity<LogisticsObject> getLogisticsObject(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
     LOG.info(ocspService.verifyCertificate());
@@ -95,7 +95,7 @@ public class LogisticsObjectsResource {
     return new ResponseEntity<>(logisticsObjectsService.findById(loId), headers, HttpStatus.OK);
   }
 
-  @RequestMapping(method = PATCH, value = "/companies/{companyId}/los/{loId}")
+  @RequestMapping(method = PATCH, value = "/{companyId}/los/{loId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @ApiOperation(value = "Updates a logistics object")
   // TODO PATCH body must match the spec
@@ -105,14 +105,14 @@ public class LogisticsObjectsResource {
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 
-  @RequestMapping(method = GET, value = "/companies/{companyId}/los/{loId}/auditTrail", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @RequestMapping(method = GET, value = "/{companyId}/los/{loId}/auditTrail", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Retrieves the audit trail (history) of a given logistics object")
   public ResponseEntity<List<AuditTrail>> getAuditTrail(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
     LOG.info(ocspService.verifyCertificate());
     return new ResponseEntity<>(auditTrailsService.findByLogisticsObjectRef(loId), HttpStatus.OK);
   }
 
-  @RequestMapping(method = POST, value = "/companies/{companyId}/los/{loId}/events", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @RequestMapping(method = POST, value = "/{companyId}/los/{loId}/events", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ResponseStatus(HttpStatus.CREATED)
   @ApiOperation(value = "Creates events for a given logistics object")
   public ResponseEntity<Void> addEvents(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @Valid @RequestBody Event event) {
@@ -122,14 +122,14 @@ public class LogisticsObjectsResource {
     return new ResponseEntity<>(headers, HttpStatus.CREATED);
   }
 
-  @RequestMapping(method = GET, value = "/companies/{companyId}/los/{loId}/events", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @RequestMapping(method = GET, value = "/{companyId}/los/{loId}/events", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Retrieves the events of a given logistics object")
   public ResponseEntity<List<Event>> getEvents(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
     LOG.info(ocspService.verifyCertificate());
     return new ResponseEntity<>(logisticsObjectsService.findEvents(loId), HttpStatus.OK);
   }
 
-  @RequestMapping(method = POST, value = "/companies/{companyId}/los/{loId}/acl", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @RequestMapping(method = POST, value = "/{companyId}/los/{loId}/acl", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ResponseStatus(HttpStatus.CREATED)
   @ApiOperation(value = "Creates Access Control List item for a given logistics object")
   public ResponseEntity<Void> addACL(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @Valid @RequestBody Event event) {
@@ -139,7 +139,7 @@ public class LogisticsObjectsResource {
     return new ResponseEntity<>(headers, HttpStatus.CREATED);
   }
 
-  @RequestMapping(method = GET, value = "/companies/{companyId}/los/{loId}/acl", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @RequestMapping(method = GET, value = "/{companyId}/los/{loId}/acl", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Retrieves the Access Control List of a given logistics object")
   public ResponseEntity<List<AccessControlList>> getACL(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
     LOG.info(ocspService.verifyCertificate());

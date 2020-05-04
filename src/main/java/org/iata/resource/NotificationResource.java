@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ import javax.validation.Valid;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
-@RequestMapping(value = "/", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(value = "/companies", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
 @Validated
 @Api(value = "Notifications endpoint")
 public class NotificationResource {
@@ -38,9 +39,9 @@ public class NotificationResource {
     this.ocspService = ocspService;
   }
 
-  @RequestMapping(method = POST, value = "/callback", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @RequestMapping(method = POST, value = "/{companyId}/callback", consumes = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ApiOperation(value = "Callback URL for receiving notifications from publishers")
-  public ResponseEntity<Void> callbackUrl(@Valid @RequestBody Notification notification) {
+  public ResponseEntity<Void> callbackUrl(@PathVariable("companyId") String companyId,  @Valid @RequestBody Notification notification) {
     LOG.info(ocspService.verifyCertificate());
     notificationService.handleNotification(notification);
     return new ResponseEntity<>(HttpStatus.OK);

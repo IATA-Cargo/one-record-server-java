@@ -15,6 +15,7 @@ import cz.cvut.kbss.jopa.model.annotations.Types;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
 import org.iata.api.Vocabulary;
 import org.iata.cargo.model.Company;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -28,6 +29,7 @@ import java.util.Set;
  * 
  */
 @OWLClass(iri = Vocabulary.s_c_CompanyInformation)
+@Document(collection = "companies")
 public class CompanyInformation
     implements Serializable
 {

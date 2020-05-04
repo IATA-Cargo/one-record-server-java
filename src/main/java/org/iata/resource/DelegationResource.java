@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -23,7 +24,7 @@ import javax.validation.Valid;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
-@RequestMapping(value = "/", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(value = "/companies", produces = {JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
 @Validated
 @Api(value = "ONE Record Server")
 public class DelegationResource {
@@ -39,10 +40,10 @@ public class DelegationResource {
     this.ocspService = ocspService;
   }
 
-  @RequestMapping(method = POST, value = "/delegation", consumes={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
+  @RequestMapping(method = POST, value = "/{companyId}/delegation", consumes={JsonLd.MEDIA_TYPE, MediaType.APPLICATION_JSON_VALUE})
   @ResponseStatus(HttpStatus.OK)
   @ApiOperation(value = "Request delegation of access to third party to a logistics object")
-  public ResponseEntity<Void> delegate(@Valid @RequestBody DelegationRequest delegationRequest) {
+  public ResponseEntity<Void> delegate(@PathVariable("companyId") String companyId,  @Valid @RequestBody DelegationRequest delegationRequest) {
     LOG.info(ocspService.verifyCertificate());
     delegationService.delegateAccess(delegationRequest);
     return new ResponseEntity<>(HttpStatus.OK);

@@ -1150,7 +1150,7 @@ public class Vocabulary {
      * Product characteristics code - e.g. CLR - Color
      * 
      */
-    public final static String s_p_type = "https://onerecord.iata.org/Characteristics#type";
+    public final static String s_p_type = "https://onerecord.iata.org/Characteristics#characteristicsType";
     public final static IRI p_type = IRI.create(s_p_type);
     /**
      * Product characteristics value / attribute - e.g. Blue...

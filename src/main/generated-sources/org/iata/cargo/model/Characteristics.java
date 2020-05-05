@@ -48,7 +48,7 @@ public class Characteristics
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_type)
-    protected Set<String> type;
+    protected Set<String> characteristicsType;
     /**
      * Product characteristics value / attribute - e.g. Blue...
      * 
@@ -101,12 +101,12 @@ public class Characteristics
         return ((((("Characteristics {"+ name)+"<")+ id)+">")+"}");
     }
 
-    public void setType(Set<String> type) {
-        this.type = type;
+    public void setCharacteristicsType(Set<String> characteristicsType) {
+        this.characteristicsType = characteristicsType;
     }
 
-    public Set<String> getType() {
-        return type;
+    public Set<String> getCharacteristicsType() {
+        return characteristicsType;
     }
 
     public void setValue(Set<String> value) {

@@ -15,7 +15,6 @@ import cz.cvut.kbss.jopa.vocabulary.RDFS;
 import org.iata.cargo.Vocabulary;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 

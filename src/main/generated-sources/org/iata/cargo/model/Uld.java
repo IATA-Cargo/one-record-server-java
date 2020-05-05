@@ -14,7 +14,6 @@ import cz.cvut.kbss.jopa.vocabulary.RDFS;
 import org.iata.cargo.Vocabulary;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Set;
 
@@ -26,7 +25,7 @@ import java.util.Set;
  * 
  */
 @OWLClass(iri = Vocabulary.s_c_ULD)
-public class ULD
+public class Uld
     implements Serializable
 {
 

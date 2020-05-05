@@ -30,7 +30,7 @@ public class Address
 {
 
     @Id(generated = true)
-@JsonProperty("@id")
+    @JsonProperty("@id")
     protected String id;
     @JsonIgnore
     @OWLAnnotationProperty(iri = RDFS.LABEL)

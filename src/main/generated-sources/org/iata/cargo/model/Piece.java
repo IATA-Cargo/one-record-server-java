@@ -151,7 +151,7 @@ public class Piece
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_uldReference)
-    protected Set<ULD> uldReference;
+    protected Set<Uld> uldReference;
     /**
      * Volumetric weight details
      * 
@@ -383,11 +383,11 @@ public class Piece
         return transportSegment;
     }
 
-    public void setUldReference(Set<ULD> uldReference) {
+    public void setUldReference(Set<Uld> uldReference) {
         this.uldReference = uldReference;
     }
 
-    public Set<ULD> getUldReference() {
+    public Set<Uld> getUldReference() {
         return uldReference;
     }
 

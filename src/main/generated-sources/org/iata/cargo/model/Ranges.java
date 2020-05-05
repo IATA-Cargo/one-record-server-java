@@ -1,11 +1,6 @@
 
 package org.iata.cargo.model;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Map;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.Id;
@@ -16,6 +11,11 @@ import cz.cvut.kbss.jopa.model.annotations.Properties;
 import cz.cvut.kbss.jopa.model.annotations.Types;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
 import org.iata.cargo.Vocabulary;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Map;
+import java.util.Set;
 
 
 /**

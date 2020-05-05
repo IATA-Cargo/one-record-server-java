@@ -125,7 +125,7 @@ public class TransportSegment
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_uld)
-    protected Set<ULD> uld;
+    protected Set<Uld> uld;
     /**
      * e.g. Kerosene, Diesel, SAF, Electricity [renewable], Electricity [non-renewable]
      * 
@@ -302,11 +302,11 @@ public class TransportSegment
         return transportMeans;
     }
 
-    public void setUld(Set<ULD> uld) {
+    public void setUld(Set<Uld> uld) {
         this.uld = uld;
     }
 
-    public Set<ULD> getUld() {
+    public Set<Uld> getUld() {
         return uld;
     }
 

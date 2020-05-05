@@ -30,7 +30,6 @@ import java.util.Set;
  */
 @OWLClass(iri = Vocabulary.s_c_Item)
 public class Item
-    extends Product
     implements Serializable
 {
 

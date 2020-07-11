@@ -1,13 +1,18 @@
 package org.iata.service.impl;
 
+import com.google.common.collect.Lists;
+import org.iata.api.model.PatchRequest;
 import org.iata.cargo.model.Event;
-import org.iata.model.LogisticsObject;
+import org.iata.cargo.model.LogisticsObject;
 import org.iata.repository.LogisticsObjectsRepository;
 import org.iata.service.LogisticsObjectsService;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
@@ -30,27 +35,34 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
   }
 
   @Override
-  public List<LogisticsObject> findByCompanyId(String companyId) {
-    return logisticsObjectsRepository.findByCompanyId(companyId);
+  public List<LogisticsObject> findByCompanyIdentifier(String companyId) {
+    return logisticsObjectsRepository.findByCompanyIdentifier(companyId);
   }
 
   @Override
-  public void updateLogisticsObject(LogisticsObject logisticsObject) {
-    logisticsObjectsRepository.save(logisticsObject);
-    // TODO Use JSON-LD PATCH
+  public void updateLogisticsObject(PatchRequest patchRequest) {
+    LogisticsObject logisticsObject = logisticsObjectsRepository.findById(patchRequest.getLogisticsObjectRef()).orElse(null);
+    if (logisticsObject != null) {
+      logisticsObjectsRepository.save(logisticsObject);
+      // TODO
+    }
   }
 
   @Override
-  public void addEvent(String loId, Event event) {
-
+  public void addEvent(Event event) {
+    LogisticsObject logisticsObject = logisticsObjectsRepository.findById(event.getLogisticsObjectRef()).orElse(null);
+    if (logisticsObject != null) {
+      logisticsObject.getEvent().add(event);
+      logisticsObjectsRepository.save(logisticsObject);
+    }
   }
 
   @Override
-  public List<Event> findEvents(String loId) {
-    return  null;
-        //logisticsObjectsRepository.findById(loId)
-       // .map(logisticsObject -> logisticsObject.getEvents())
-       // .orElse(null);
+  public List<Event> findEvents(String loUri) {
+    Set<Event> set =  logisticsObjectsRepository.findById(loUri)
+     .map(logisticsObject -> Optional.ofNullable(logisticsObject.getEvent()).orElse(new HashSet<>()))
+     .orElse(new HashSet<>());
+    return Lists.newArrayList(set);
   }
 
 }

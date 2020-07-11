@@ -20,6 +20,7 @@ public class AccessControlListServiceImpl implements AccessControlListService {
 
   @Override
   public void addAccessControlList(AccessControlList accessControlList) {
+    accessControlList.setId(accessControlList.getLogisticsObjectRef() + "/acl");
     accessControlListRepository.save(accessControlList);
   }
 

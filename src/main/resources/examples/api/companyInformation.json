@@ -1,0 +1,83 @@
+{
+  "@type": [
+    "https://onerecord.iata.org/CompanyInformation"
+  ],
+  "https://onerecord.iata.org/CompanyInformation#companyId": "iata",
+  "https://onerecord.iata.org/CompanyInformation#company": {
+      "@type": [
+        "https://onerecord.iata.org/Company"
+      ],
+      "https://onerecord.iata.org/Company#airlineCode": "XB",
+      "https://onerecord.iata.org/Company#airlinePrefix": "XB",
+      "https://onerecord.iata.org/Company#branch": {
+        "@type": [
+          "https://onerecord.iata.org/Branch"
+        ],
+        "https://onerecord.iata.org/Branch#branchName": "IATA Geneva",
+        "https://onerecord.iata.org/Branch#contactPerson": [
+          {
+            "@type": [
+              "https://onerecord.iata.org/Person"
+            ],
+            "contact": [
+              {
+                "@type": [
+                  "https://onerecord.iata.org/Contact"
+                ],
+                "https://onerecord.iata.org/Contact#emailAddress": "onerecord@iata.org",
+                "other": {
+                  "@type": [
+                    "https://onerecord.iata.org/ContactOther"
+                  ],
+                  "https://onerecord.iata.org/ContactOther#detail": "ONE Record email"
+                },
+                "https://onerecord.iata.org/Contact#phoneNumber": "123456789"
+              }
+            ],
+            "https://onerecord.iata.org/Person#department": "Digital Cargo"
+          }
+        ],
+        "https://onerecord.iata.org/Branch#iATACargoAgentLocationIdentifier": 0,
+        "https://onerecord.iata.org/Branch#location": {
+          "@type": [
+            "https://onerecord.iata.org/Location"
+          ],
+          "https://onerecord.iata.org/Location#address": {
+            "@type": [
+              "https://onerecord.iata.org/Address"
+            ],
+            "https://onerecord.iata.org/Address#cityCode": "GVA",
+            "https://onerecord.iata.org/Address#cityName": "Geneva",
+            "https://onerecord.iata.org/Address#country": {
+              "@type": [
+                "https://onerecord.iata.org/Country"
+              ],
+              "https://onerecord.iata.org/Country#countryCode": "CH",
+              "https://onerecord.iata.org/Country#countryName": "Switzerland"
+            },
+            "https://onerecord.iata.org/Address#postalCode": "1212",
+            "https://onerecord.iata.org/Address#regionCode": "GVA",
+            "https://onerecord.iata.org/Address#regionName": "Geneva",
+            "https://onerecord.iata.org/Address#street": [
+              "Route de l'aeroport"
+            ]
+          },
+          "https://onerecord.iata.org/Location#locationName": "IATA Office",
+          "https://onerecord.iata.org/Location#locationType": "Office"
+        }
+      },
+      "https://onerecord.iata.org/Company#companyName": "IATA Geneva"
+    },
+  "https://onerecord.iata.org/CompanyInformation#serverEndpoint": "http://localhost:8080/",
+  "https://onerecord.iata.org/CompanyInformation#supportedContentTypes": [
+    "application/ld+json"
+  ],
+  "https://onerecord.iata.org/CompanyInformation#supportedLogisticsObjects": [
+    "https://onerecord.iata.org/Waybill",
+    "https://onerecord.iata.org/Shipment",
+    "https://onerecord.iata.org/Booking",
+    "https://onerecord.iata.org/Piece",
+    "https://onerecord.iata.org/Item",
+    "https://onerecord.iata.org/Product"
+  ]
+}

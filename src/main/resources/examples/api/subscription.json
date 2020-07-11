@@ -1,0 +1,15 @@
+{
+  "@type": [
+    "https://onerecord.iata.org/Subscription"
+  ],
+  "https://onerecord.iata.org/Subscription#cacheFor": "86400",
+  "https://onerecord.iata.org/Subscription#callbackUrl": "http://localhost:8080/companies/iata/callback?topic=Piece",
+  "https://onerecord.iata.org/Subscription#contentType": [
+    "application/ld+json"
+  ],
+  "https://onerecord.iata.org/Subscription#myCompanyIdentifier": "http://localhost:8080/companies/iata",
+  "https://onerecord.iata.org/Subscription#secret": "iuegskvndvsdnvuknefkm",
+  "https://onerecord.iata.org/Subscription#sendLogisticsObjectBody": false,
+  "https://onerecord.iata.org/Subscription#subscribeToStatusUpdates": true,
+  "https://onerecord.iata.org/Subscription#topic": "https://onerecord.iata.org/Piece"
+}

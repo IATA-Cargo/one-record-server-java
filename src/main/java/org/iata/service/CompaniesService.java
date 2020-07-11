@@ -6,13 +6,14 @@ import java.util.List;
 
 public interface CompaniesService {
 
-  void addCompany(CompanyInformation company);
+  void addCompany(CompanyInformation company, String companyIdentifierForIoL, String companyId);
 
   List<CompanyInformation> getCompanies();
 
-  void updateCompany(CompanyInformation companyInformation);
-
   CompanyInformation findByCompanyId(String companyId);
 
-  void deleteByCompanyId(String companyId);
+  CompanyInformation findById(String id);
+
+  void deleteById(String id);
+
 }

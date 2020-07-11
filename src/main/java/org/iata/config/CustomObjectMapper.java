@@ -17,7 +17,6 @@ public class CustomObjectMapper {
   @Bean
   public ObjectMapper objectMapper() {
     ObjectMapper mapper = new ObjectMapper();
-    mapper = new ObjectMapper();
     mapper.registerModule(new JavaTimeModule());
     mapper.registerModule(new Jdk8Module());
     mapper.registerModule(new JsonLdModule());

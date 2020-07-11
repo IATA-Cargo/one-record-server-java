@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 public class RestUtils {
+
     public static HttpHeaders createLocationHeaderFromCurrentUri(String path, Object... uriVariableValues) {
         assert path != null;
 
@@ -37,6 +38,20 @@ public class RestUtils {
         final HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.LINK, location.toASCIIString() + " ;rel=\"" + relType + "\"");
         return headers;
+    }
+
+    public static String createCompanyIdentifierFromCurrentUri(String path, Object... uriVariableValues) {
+        assert path != null;
+
+        final URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path(path).buildAndExpand(
+            uriVariableValues).toUri();
+        return location.toASCIIString();
+    }
+
+    public static String getCurrentUri() {
+        ServletUriComponentsBuilder builder = ServletUriComponentsBuilder.fromCurrentRequestUri();
+        URI uri = builder.build().toUri();
+        return uri.toASCIIString();
     }
 
 }

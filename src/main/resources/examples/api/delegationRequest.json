@@ -1,0 +1,15 @@
+{
+  "@type": [
+    "https://onerecord.iata.org/DelegationRequest"
+  ],
+  "https://onerecord.iata.org/DelegationRequest#action": "DELEGATE",
+  "https://onerecord.iata.org/DelegationRequest#operations": [
+    "GET"
+  ],
+  "https://onerecord.iata.org/DelegationRequest#targetCompany": [
+    "http://localhost:8080/companies/iata"
+  ],
+  "https://onerecord.iata.org/DelegationRequest#targetLogisticsObject": [
+    "http://localhost:8080/companies/iata/los/lo1"
+  ]
+}

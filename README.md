@@ -18,8 +18,7 @@ For testing the application locally, follow the next steps:
 4. (Optional) Generate ONE Record cargo related data model by running `mvn package -Dbuild=cargo`
 5. (Optional) Generate ONE Record API related models by running `mvn package -Dbuild=api`
 6. (Optional) Generate W3C Web Access Control ACL (Access Control List) related models by running `mvn package -Dbuild=acl`
-7. Run `mvn package -DskipTests=true -Dpath.to.nginx.ssl_certificate=src/main/resources/ssl_certificate.crt -Dpath.to.nginx.ssl_certificate_key=src/main/resources/ssl_certificate_key.key -Dpath.to.nginx.ssl_client_certificate=src/main/resources/ssl_client_certificate.crt`
-8. Run the server from OneRecordApplication or from the command line via `mvn spring-boot:run`. Your application should be available at [https://localhost:8443](http://localhost:8443).
+7. Run the server from OneRecordApplication or from the command line via `mvn spring-boot:run`. Your application should be available at [https://localhost:8443](http://localhost:8443).
 
 ## Swagger API Documentation
 Swagger API Documentation can be accessed and tested via [https://yourserverurl/swagger-ui.html](https://yourserverurl/swagger-ui.html). If you run the server locally, Swagger documentation can be accessed via [https://localhost:8443/swagger-ui.html](https://localhost:8443/swagger-ui.html).

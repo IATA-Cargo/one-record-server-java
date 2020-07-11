@@ -30,6 +30,7 @@ public class NotificationServiceImpl implements NotificationService {
   @Override
   public void handleNotification(Notification notification) {
     LOG.info("Saving notification...");
+    notification.setId(notification.getLogisticsObjectRef());
     notificationsRepository.save(notification);
 
     LOG.info("Retrieve content of the logistics object from publisher...");

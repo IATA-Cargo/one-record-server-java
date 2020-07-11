@@ -1,0 +1,12 @@
+{
+  "@type": [
+    "https://onerecord.iata.org/ServiceRequest"
+  ],
+  "https://onerecord.iata.org/LogisticsObject#companyIdentifier": "http://localhost:8080/companies/iata",
+  "https://onerecord.iata.org/ServiceRequest#code": "CODE",
+  "https://onerecord.iata.org/ServiceRequest#serviceRequestDescription": "Some description2",
+  "https://onerecord.iata.org/ServiceRequest#statementText": "statement text",
+  "https://onerecord.iata.org/ServiceRequest#statementType": [
+    "statement type"
+  ]
+}

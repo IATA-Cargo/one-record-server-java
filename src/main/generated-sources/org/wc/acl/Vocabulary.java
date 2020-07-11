@@ -1,5 +1,5 @@
 
-package org.w3.acl;
+package org.wc.acl;
 
 import org.semanticweb.owlapi.model.IRI;
 

@@ -1,0 +1,8 @@
+{
+  "@type": [
+    "https://onerecord.iata.org/Memento"
+  ],
+  "https://onerecord.iata.org/Memento#createdBy": "test",
+  "https://onerecord.iata.org/Memento#label": "version1",
+  "https://onerecord.iata.org/Memento#original": "http://localhost:8080/companies/andra/los/Piece_922982"
+}

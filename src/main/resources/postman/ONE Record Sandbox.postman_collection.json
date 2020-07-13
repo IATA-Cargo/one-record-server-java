@@ -1,0 +1,807 @@
+{
+	"info": {
+		"_postman_id": "493283a7-30a7-451d-8faf-9328ca4b5910",
+		"name": "ONE Record Sandbox",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "companyIdentifier",
+			"item": [
+				{
+					"name": "POST companies",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/CompanyInformation\"\r\n  ],\r\n  \"https://onerecord.iata.org/CompanyInformation#companyId\": \"andra\",\r\n  \"https://onerecord.iata.org/CompanyInformation#company\": {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/Company\"\r\n      ],\r\n      \"https://onerecord.iata.org/Company#airlineCode\": \"XB\",\r\n      \"https://onerecord.iata.org/Company#airlinePrefix\": \"XB\",\r\n      \"https://onerecord.iata.org/Company#branch\": {\r\n        \"@type\": [\r\n          \"https://onerecord.iata.org/Branch\"\r\n        ],\r\n        \"https://onerecord.iata.org/Branch#branchName\": \"IATA Geneva\",\r\n        \"https://onerecord.iata.org/Branch#contactPerson\": [\r\n          {\r\n            \"@type\": [\r\n              \"https://onerecord.iata.org/Person\"\r\n            ],\r\n            \"contact\": [\r\n              {\r\n                \"@type\": [\r\n                  \"https://onerecord.iata.org/Contact\"\r\n                ],\r\n                \"https://onerecord.iata.org/Contact#emailAddress\": \"onerecord@iata.org\",\r\n                \"other\": {\r\n                  \"@type\": [\r\n                    \"https://onerecord.iata.org/ContactOther\"\r\n                  ],\r\n                  \"https://onerecord.iata.org/ContactOther#detail\": \"ONE Record email\"\r\n                },\r\n                \"https://onerecord.iata.org/Contact#phoneNumber\": \"123456789\"\r\n              }\r\n            ],\r\n            \"https://onerecord.iata.org/Person#department\": \"Digital Cargo\"\r\n          }\r\n        ],\r\n        \"https://onerecord.iata.org/Branch#iATACargoAgentLocationIdentifier\": 0,\r\n        \"https://onerecord.iata.org/Branch#location\": {\r\n          \"@type\": [\r\n            \"https://onerecord.iata.org/Location\"\r\n          ],\r\n          \"https://onerecord.iata.org/Location#address\": {\r\n            \"@type\": [\r\n              \"https://onerecord.iata.org/Address\"\r\n            ],\r\n            \"https://onerecord.iata.org/Address#cityCode\": \"GVA\",\r\n            \"https://onerecord.iata.org/Address#cityName\": \"Geneva\",\r\n            \"https://onerecord.iata.org/Address#country\": {\r\n              \"@type\": [\r\n                \"https://onerecord.iata.org/Country\"\r\n              ],\r\n              \"https://onerecord.iata.org/Country#countryCode\": \"CH\",\r\n              \"https://onerecord.iata.org/Country#countryName\": \"Switzerland\"\r\n            },\r\n            \"https://onerecord.iata.org/Address#postalCode\": \"1212\",\r\n            \"https://onerecord.iata.org/Address#regionCode\": \"GVA\",\r\n            \"https://onerecord.iata.org/Address#regionName\": \"Geneva\",\r\n            \"https://onerecord.iata.org/Address#street\": [\r\n              \"Route de l'aeroport\"\r\n            ]\r\n          },\r\n          \"https://onerecord.iata.org/Location#locationName\": \"IATA Office\",\r\n          \"https://onerecord.iata.org/Location#locationType\": \"Office\"\r\n        }\r\n      },\r\n      \"https://onerecord.iata.org/Company#companyName\": \"IATA Geneva\"\r\n    },\r\n  \"https://onerecord.iata.org/CompanyInformation#serverEndpoint\": \"http://localhost:8080/companies/andra\",\r\n  \"https://onerecord.iata.org/CompanyInformation#supportedContentTypes\": [\r\n    \"application/ld+json\"\r\n  ],\r\n  \"https://onerecord.iata.org/CompanyInformation#supportedLogisticsObjects\": [\r\n    \"https://onerecord.iata.org/Waybill\",\r\n    \"https://onerecord.iata.org/Shipment\",\r\n    \"https://onerecord.iata.org/Booking\",\r\n    \"https://onerecord.iata.org/Piece\",\r\n    \"https://onerecord.iata.org/Item\",\r\n    \"https://onerecord.iata.org/Product\",\r\n    \"https://onerecord.iata.org/ServiceRequest\"\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET companies",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"companyName\": \"test\",\r\n  \"companyId\": \"andra\",\r\n  \"companyType\": \"shipper\",\r\n  \"contactName\": \"test\",\r\n  \"contactEmail\": \"test\",\r\n  \"companyImage\": \"test\",\r\n  \"companyDescription\": \"test\",\r\n  \"companyPin\": \"1234\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET company",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"companyName\": \"test\",\r\n  \"companyId\": \"andra\",\r\n  \"companyType\": \"shipper\",\r\n  \"contactName\": \"test\",\r\n  \"contactEmail\": \"test\",\r\n  \"companyImage\": \"test\",\r\n  \"companyDescription\": \"test\",\r\n  \"companyPin\": \"1234\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET company with topic",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"companyName\": \"test\",\r\n  \"companyId\": \"andra\",\r\n  \"companyType\": \"shipper\",\r\n  \"contactName\": \"test\",\r\n  \"contactEmail\": \"test\",\r\n  \"companyImage\": \"test\",\r\n  \"companyDescription\": \"test\",\r\n  \"companyPin\": \"1234\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra?topic=SHIPMENT",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra"
+							],
+							"query": [
+								{
+									"key": "topic",
+									"value": "SHIPMENT"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "pub/sub",
+			"item": [
+				{
+					"name": "GET subscribers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra/subscribers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra",
+								"subscribers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST subscribers",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/Subscription\"\r\n  ],\r\n  \"https://onerecord.iata.org/Subscription#cacheFor\": \"86400\",\r\n  \"https://onerecord.iata.org/Subscription#callbackUrl\": \"http://localhost:8080/companies/iata/callback?topic=Piece\",\r\n  \"https://onerecord.iata.org/Subscription#contentType\": [\r\n    \"application/ld+json\"\r\n  ],\r\n  \"https://onerecord.iata.org/Subscription#myCompanyIdentifier\": \"http://localhost:8080/companies/andra\",\r\n  \"https://onerecord.iata.org/Subscription#secret\": \"iuegskvndvsdnvuknefkm\",\r\n  \"https://onerecord.iata.org/Subscription#sendLogisticsObjectBody\": false,\r\n  \"https://onerecord.iata.org/Subscription#subscribeToStatusUpdates\": true,\r\n  \"https://onerecord.iata.org/Subscription#topic\": \"https://onerecord.iata.org/Piece\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra/subscribers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra",
+								"subscribers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST notification",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/Notification\"\r\n  ],\r\n  \"https://onerecord.iata.org/Notification#eventType\": \"OBJECT_CREATED\",\r\n  \"https://onerecord.iata.org/Notification#logisticsObjectRef\": \"http://localhost:8080/companies/andra/los/lo1\",\r\n  \"https://onerecord.iata.org/Notification#topic\": \"https://onerecord.iata.org/Piece\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra/callback",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra",
+								"callback"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST delegation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/DelegationRequest\"\r\n  ],\r\n  \"https://onerecord.iata.org/DelegationRequest#action\": \"DELEGATE\",\r\n  \"https://onerecord.iata.org/DelegationRequest#operations\": [\r\n    \"GET\"\r\n  ],\r\n  \"https://onerecord.iata.org/DelegationRequest#targetCompany\": [\r\n    \"http://localhost:8080/companies/iata\"\r\n  ],\r\n  \"https://onerecord.iata.org/DelegationRequest#targetLogisticsObject\": [\r\n    \"http://localhost:8080/companies/iata/los/lo1\"\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra/delegation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra",
+								"delegation"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "logisticsObject",
+			"item": [
+				{
+					"name": "POST LO",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/Piece\"\r\n  ],\r\n  \"https://onerecord.iata.org/LogisticsObject#companyIdentifier\": \"http://localhost:8080/companies/andra\",\r\n  \"https://onerecord.iata.org/Piece#coload\": true,\r\n  \"https://onerecord.iata.org/Piece#dimensions\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/Dimensions\"\r\n    ],\r\n    \"https://onerecord.iata.org/Dimensions#height\": {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/Value\"\r\n      ],\r\n      \"https://onerecord.iata.org/Value#unit\": \"cm\",\r\n      \"https://onerecord.iata.org/Value#value\": \"160\"\r\n    },\r\n    \"https://onerecord.iata.org/Dimensions#length\": {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/Value\"\r\n      ],\r\n      \"https://onerecord.iata.org/Value#unit\": \"cm\",\r\n      \"https://onerecord.iata.org/Value#value\": \"120\"\r\n    },\r\n    \"https://onerecord.iata.org/Dimensions#volume\": {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/Value\"\r\n      ],\r\n      \"https://onerecord.iata.org/Value#unit\": \"m3\",\r\n      \"https://onerecord.iata.org/Value#value\": \"1.536\"\r\n    },\r\n    \"https://onerecord.iata.org/Dimensions#width\": {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/Value\"\r\n      ],\r\n      \"https://onerecord.iata.org/Value#unit\": \"cm\",\r\n      \"https://onerecord.iata.org/Value#value\": \"80\"\r\n    }\r\n  },\r\n  \"https://onerecord.iata.org/Piece#externalReference\": [\r\n    {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/ExternalReference\"\r\n      ],\r\n      \"https://onerecord.iata.org/ExternalReference#documentID\": \"http://localhost:8080/companies/andra/los/Waybill_8531225\",\r\n      \"https://onerecord.iata.org/ExternalReference#documentName\": \"AirWaybill\",\r\n      \"https://onerecord.iata.org/ExternalReference#documentType\": \"https://onerecord.iata.org/Waybill\",\r\n      \"https://onerecord.iata.org/ExternalReference#documentVersion\": \"1.0\"\r\n    }\r\n  ],\r\n  \"https://onerecord.iata.org/Piece#goodsDescription\": \"Face masks\",\r\n  \"https://onerecord.iata.org/Piece#grossWeight\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/Value\"\r\n    ],\r\n    \"https://onerecord.iata.org/Value#unit\": \"kg\",\r\n    \"https://onerecord.iata.org/Value#value\": \"600\"\r\n  },\r\n  \"https://onerecord.iata.org/Piece#product\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/Product\"\r\n    ],\r\n    \"https://onerecord.iata.org/LogisticsObject#companyIdentifier\": \"http://localhost:8080/companies/andra/los/Product_8415222\",\r\n    \"https://onerecord.iata.org/Product#commodityCode\": \"CODE\",\r\n    \"https://onerecord.iata.org/Product#commodityDescription\": \"PPE\",\r\n    \"https://onerecord.iata.org/Product#commodityName\": \"Face mask\",\r\n    \"https://onerecord.iata.org/Product#productDescription\": \"Face mask PPE\"\r\n  },\r\n  \"https://onerecord.iata.org/Piece#productionCountry\": [\r\n    {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/Country\"\r\n      ],\r\n      \"https://onerecord.iata.org/Country#countryCode\": \"CN\",\r\n      \"https://onerecord.iata.org/Country#countryName\": \"China\"\r\n    }\r\n  ],\r\n  \"https://onerecord.iata.org/Piece#securityStatus\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/SecurityStatus\"\r\n    ],\r\n    \"https://onerecord.iata.org/LogisticsObject#companyIdentifier\": \"http://localhost:8080/companies/andra\",\r\n    \"https://onerecord.iata.org/SecurityStatus#issuedOn\": \"Sat Jun 01 12:53:10 IST 2020\",\r\n    \"https://onerecord.iata.org/SecurityStatus#regulatedPartyType\": \"Forwarder\",\r\n    \"https://onerecord.iata.org/SecurityStatus#regulatingAuthority\": \"Forwarder PVG\",\r\n    \"https://onerecord.iata.org/SecurityStatus#statusCode\": \"SCR\"\r\n  },\r\n  \"https://onerecord.iata.org/Piece#shipper\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/Company\"\r\n    ],\r\n    \"https://onerecord.iata.org/Company#branch\": {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/Branch\"\r\n      ],\r\n      \"https://onerecord.iata.org/Branch#branchName\": \"Face mask company\",\r\n      \"https://onerecord.iata.org/Branch#contactPerson\": [\r\n        {\r\n          \"@type\": [\r\n            \"https://onerecord.iata.org/Person\"\r\n          ],\r\n          \"https://onerecord.iata.org/Person#contact\": [\r\n            {\r\n              \"@type\": [\r\n                \"https://onerecord.iata.org/Contact\"\r\n              ],\r\n              \"https://onerecord.iata.org/Contact#emailAddress\": \"contact@facemask.test\",\r\n              \"https://onerecord.iata.org/Contact#phoneNumber\": \"41525333662\"\r\n            }\r\n          ]\r\n        }\r\n      ],\r\n      \"https://onerecord.iata.org/Branch#location\": {\r\n        \"@type\": [\r\n          \"https://onerecord.iata.org/Location\"\r\n        ],\r\n        \"https://onerecord.iata.org/Location#address\": {\r\n          \"@type\": [\r\n            \"https://onerecord.iata.org/Address\"\r\n          ],\r\n          \"https://onerecord.iata.org/Address#cityCode\": \"SHA\",\r\n          \"https://onerecord.iata.org/Address#cityName\": \"Shanghai\",\r\n          \"https://onerecord.iata.org/Address#country\": {\r\n            \"@type\": [\r\n              \"https://onerecord.iata.org/Country\"\r\n            ],\r\n            \"https://onerecord.iata.org/Country#countryCode\": \"CN\",\r\n            \"https://onerecord.iata.org/Country#countryName\": \"China\"\r\n          },\r\n          \"https://onerecord.iata.org/Address#poBox\": \"123\",\r\n          \"https://onerecord.iata.org/Address#postalCode\": \"123456\"\r\n        }\r\n      }\r\n    },\r\n    \"https://onerecord.iata.org/Company#companyName\": \"Face mask CO\"\r\n  },\r\n  \"https://onerecord.iata.org/Piece#slac\": 600,\r\n  \"https://onerecord.iata.org/Piece#stackable\": true,\r\n  \"https://onerecord.iata.org/Piece#turnable\": true,\r\n  \"https://onerecord.iata.org/Piece#upid\": \"412820244\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra/los",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra",
+								"los"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET LO",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra/los/Piece_922982",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra",
+								"los",
+								"Piece_922982"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET LO ACL",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra/los/Piece_922982/acl",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra",
+								"los",
+								"Piece_922982",
+								"acl"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET LO Timemap",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra/los/Piece_922982/timemap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra",
+								"los",
+								"Piece_922982",
+								"timemap"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET auditTrail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra/los/Piece_922982/auditTrail",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra",
+								"los",
+								"Piece_922982",
+								"auditTrail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET auditTrail with dates",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra/los/Piece_922982/auditTrail?updatedFrom=2016-10-31&updatedTo=2019-10-31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra",
+								"los",
+								"Piece_922982",
+								"auditTrail"
+							],
+							"query": [
+								{
+									"key": "updatedFrom",
+									"value": "2016-10-31"
+								},
+								{
+									"key": "updatedTo",
+									"value": "2019-10-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH LO",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra/los/Piece_922982",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra",
+								"los",
+								"Piece_922982"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST events",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/Event\"\r\n  ],\r\n  \"https://onerecord.iata.org/Event#dateTime\": \"2020-06-10 14:00:00\",\r\n  \"https://onerecord.iata.org/Event#eventCode\": \"DEP\",\r\n  \"https://onerecord.iata.org/Event#eventName\": \"Arrival\",\r\n  \"https://onerecord.iata.org/Event#eventTypeIndicator\": \"Test\",\r\n  \"https://onerecord.iata.org/Event#location\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/Location\"\r\n    ],\r\n    \"https://onerecord.iata.org/Location#code\": \"GVA\",\r\n    \"https://onerecord.iata.org/Location#locationName\": \"Geneva\",\r\n    \"https://onerecord.iata.org/Location#locationType\": \"Office\"\r\n  },\r\n  \"https://onerecord.iata.org/Event#logisticsObjectRef\": \"http://localhost:8080/companies/andra/los/Piece_922982\",\r\n  \"https://onerecord.iata.org/Event#performedBy\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/Company\"\r\n    ],\r\n    \"https://onerecord.iata.org/Company#airlineCode\": \"XB\",\r\n    \"https://onerecord.iata.org/Company#airlinePrefix\": \"XB\",\r\n    \"https://onerecord.iata.org/Company#companyName\": \"IATA\"\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra/los/Piece_922982/events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra",
+								"los",
+								"Piece_922982",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET events",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra/los/Piece_922982/events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra",
+								"los",
+								"Piece_922982",
+								"events"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "versioning",
+			"item": [
+				{
+					"name": "GET LO TimeMap",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra/los/Piece_922982/timemap",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra",
+								"los",
+								"Piece_922982",
+								"timemap"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST LO Memento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/ld+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/Memento\"\r\n  ],\r\n  \"https://onerecord.iata.org/Memento#createdBy\": \"andra\",\r\n  \"https://onerecord.iata.org/Memento#label\": \"version2\",\r\n  \"https://onerecord.iata.org/Memento#original\": \"http://localhost:8080/companies/andra/los/Piece_922982\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra/los/Piece_922982/mementos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra",
+								"los",
+								"Piece_922982",
+								"mementos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET LO Memento",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra/los/Piece_922982/mementos/66da074533184ab8a6826684d187e7ea",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra",
+								"los",
+								"Piece_922982",
+								"mementos",
+								"66da074533184ab8a6826684d187e7ea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET LO TimeGate",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept-Datetime",
+								"value": "2020-07-13 14:00:00",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/companies/andra/los/Piece_922982/timegate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"companies",
+								"andra",
+								"los",
+								"Piece_922982",
+								"timegate"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Swagger.json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v2/api-docs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v2",
+						"api-docs"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

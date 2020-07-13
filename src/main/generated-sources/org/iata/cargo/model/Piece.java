@@ -228,7 +228,7 @@ public class Piece
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#decimal", max = 1)
     })
     @JsonProperty(Vocabulary.s_p_slac)
-    protected BigDecimal slac;
+    protected Integer slac;
     /**
      * Stackable indicator for the pieces (boolean)
      * 
@@ -428,11 +428,11 @@ public class Piece
         return loadType;
     }
 
-    public void setSlac(BigDecimal slac) {
+    public void setSlac(Integer slac) {
         this.slac = slac;
     }
 
-    public BigDecimal getSlac() {
+    public Integer getSlac() {
         return slac;
     }
 
@@ -460,11 +460,9 @@ public class Piece
         return upid;
     }
 
-
     public Set<String> getTypes() {
         return types;
     }
-
 
     public void setTypes(Set<String> types) {
         this.types = types;

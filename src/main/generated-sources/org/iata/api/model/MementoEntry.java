@@ -58,7 +58,7 @@ public class MementoEntry
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1)
     })
     @JsonProperty(Vocabulary.s_p_datetime)
-    protected Set<Date> datetime;
+    protected Date datetime;
     /**
      * Non mandatory label of the memento
      * 
@@ -126,11 +126,11 @@ public class MementoEntry
         return ((((("MementoEntry {"+ name)+"<")+ id)+">")+"}");
     }
 
-    public void setDatetime(Set<Date> datetime) {
+    public void setDatetime(Date datetime) {
         this.datetime = datetime;
     }
 
-    public Set<Date> getDatetime() {
+    public Date getDatetime() {
         return datetime;
     }
 

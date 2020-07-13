@@ -100,12 +100,12 @@ public class Address
      * Post Office box number / code
      * 
      */
-    @OWLDataProperty(iri = Vocabulary.s_p_pOBox)
+    @OWLDataProperty(iri = Vocabulary.s_p_poBox)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
-    @JsonProperty(Vocabulary.s_p_pOBox)
-    protected String pOBox;
+    @JsonProperty(Vocabulary.s_p_poBox)
+    protected String poBox;
     /**
      * Postal / ZIP code
      * 
@@ -229,14 +229,6 @@ public class Address
         return cityName;
     }
 
-    public void setPOBox(String pOBox) {
-        this.pOBox = pOBox;
-    }
-
-    public String getPOBox() {
-        return pOBox;
-    }
-
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
@@ -269,6 +261,11 @@ public class Address
         return street;
     }
 
+    public String getPoBox() {
+        return poBox;
+    }
 
-
+    public void setPoBox(String poBox) {
+        this.poBox = poBox;
+    }
 }

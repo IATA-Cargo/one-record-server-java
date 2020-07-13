@@ -1056,8 +1056,8 @@ public class Vocabulary {
      * Post Office box number / code
      * 
      */
-    public final static String s_p_pOBox = "https://onerecord.iata.org/Address#pOBox";
-    public final static IRI p_pOBox = IRI.create(s_p_pOBox);
+    public final static String s_p_poBox = "https://onerecord.iata.org/Address#poBox";
+    public final static IRI p_ox = IRI.create(s_p_poBox);
     /**
      * Postal / ZIP code
      * 

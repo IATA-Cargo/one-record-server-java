@@ -8,11 +8,15 @@ import org.iata.service.AuditTrailsService;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class AuditTrailServiceImpl implements AuditTrailsService {
@@ -48,8 +52,18 @@ public class AuditTrailServiceImpl implements AuditTrailsService {
   }
 
   @Override
-  public AuditTrail findById(String auditTrailId) {
-    return auditTrailRepository.findById(auditTrailId).orElse(null);
+  public AuditTrail findById(String auditTrailId, LocalDate updatedFrom, LocalDate updatedTo) {
+    AuditTrail auditTrail = auditTrailRepository.findById(auditTrailId).orElse(null);
+    if (auditTrail != null) {
+      List<ChangeRequest> changeRequests = Optional.ofNullable(auditTrail.getChangeRequests()).map(a -> a
+          .stream()
+          .filter(changeRequest -> (updatedFrom != null && changeRequest.getTimestamp().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isAfter(updatedFrom))
+              && (updatedTo != null && changeRequest.getTimestamp().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(updatedTo)))
+          .collect(Collectors.toList())).orElse(new ArrayList<>());
+      auditTrail.setChangeRequests(new HashSet<>(changeRequests));
+    }
+
+    return auditTrail;
   }
 
 }

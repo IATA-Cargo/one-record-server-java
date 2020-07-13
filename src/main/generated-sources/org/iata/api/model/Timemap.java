@@ -13,8 +13,10 @@ import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
 import cz.cvut.kbss.jopa.model.annotations.Properties;
 import cz.cvut.kbss.jopa.model.annotations.Types;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.iata.api.Vocabulary;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -28,6 +30,8 @@ import java.util.Set;
  * 
  */
 @OWLClass(iri = Vocabulary.s_c_Timemap)
+@Document(collection = "timemaps")
+@ApiModel
 public class Timemap
     implements Serializable
 {

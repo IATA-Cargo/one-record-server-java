@@ -97,8 +97,13 @@ public class CompaniesResource {
   @ApiOperation(value = "INTERNAL In a pub/sub scenario, when the current server is the publisher, it creates subscription information for a company.")
   public ResponseEntity<Subscription> addSubscriptionInformation(@PathVariable("companyId") String companyId, @RequestBody Subscription subscription) {
     LOG.info(ocspService.verifyCertificate());
-    subscription.setId(subscription.getMyCompanyIdentifier());
+    if (subscription.getTopic() == null) {
+      subscription.setId(subscription.getMyCompanyIdentifier());
+    } else {
+      subscription.setId(subscription.getMyCompanyIdentifier() + "?topic=" + subscription.getTopic());
+    }
     subscriptionsService.addSubscription(subscription);
+
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
@@ -106,7 +111,8 @@ public class CompaniesResource {
   @ApiOperation(value = "INTERNAL Get all the subscribers that are subscriber to this company.")
   public ResponseEntity<List<Subscription>> getAllSubscribers(@PathVariable("companyId") String companyId) {
     LOG.info(ocspService.verifyCertificate());
-    return new ResponseEntity<>(subscriptionsService.getSubscribers(companyId), HttpStatus.OK);
+    final String id = RestUtils.getCurrentUri().replace("/subscribers", "");
+    return new ResponseEntity<>(subscriptionsService.getSubscribers(id), HttpStatus.OK);
   }
 
 }

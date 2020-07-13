@@ -43,7 +43,7 @@ public class NotificationResource {
   @ApiOperation(value = "Callback URL for receiving notifications from publishers")
   public ResponseEntity<Void> callbackUrl(@PathVariable("companyId") String companyId,
                                           @RequestBody Notification notification,
-                                          @RequestParam("topic") TopicEnum topic) {
+                                          @RequestParam(value = "topic", required = false) TopicEnum topic) {
     LOG.info(ocspService.verifyCertificate());
     notificationService.handleNotification(notification);
     return new ResponseEntity<>(HttpStatus.OK);

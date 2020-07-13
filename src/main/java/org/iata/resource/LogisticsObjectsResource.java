@@ -8,6 +8,7 @@ import org.iata.api.model.PatchRequest;
 import org.iata.cargo.model.Event;
 import org.iata.cargo.model.LogisticsObject;
 import org.iata.model.AccessControlList;
+import org.iata.model.enums.TopicEnum;
 import org.iata.service.AccessControlListService;
 import org.iata.service.AuditTrailsService;
 import org.iata.service.LogisticsObjectsService;
@@ -16,6 +17,7 @@ import org.iata.service.security.OcspService;
 import org.iata.util.RestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +25,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
+import java.time.LocalDate;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -100,9 +105,14 @@ public class LogisticsObjectsResource {
 
   @RequestMapping(method = GET, value = "/{companyId}/los/{loId}/auditTrail", produces = JsonLd.MEDIA_TYPE)
   @ApiOperation(value = "Retrieves the audit trail (history) of a given logistics object")
-  public ResponseEntity<AuditTrail> getAuditTrail(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
+  public ResponseEntity<AuditTrail> getAuditTrail(@PathVariable("companyId") String companyId,
+                                                  @PathVariable("loId") String loId,
+                                                  @RequestParam(value = "updatedFrom", required = false)
+                                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate updatedFrom,
+                                                  @RequestParam(value = "updatedTo", required = false)
+                                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate updatedTo) {
     LOG.info(ocspService.verifyCertificate());
-    return new ResponseEntity<>(auditTrailsService.findById(getCurrentUri()), HttpStatus.OK);
+    return new ResponseEntity<>(auditTrailsService.findById(getCurrentUri(), updatedFrom, updatedTo), HttpStatus.OK);
   }
 
   @RequestMapping(method = POST, value = "/{companyId}/los/{loId}/events", consumes = JsonLd.MEDIA_TYPE)

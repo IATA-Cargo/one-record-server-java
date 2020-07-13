@@ -6,6 +6,7 @@ import org.iata.cargo.model.Event;
 import org.iata.cargo.model.LogisticsObject;
 import org.iata.repository.LogisticsObjectsRepository;
 import org.iata.service.LogisticsObjectsService;
+import org.iata.util.Utils;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -51,8 +52,11 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
   @Override
   public void addEvent(Event event) {
     LogisticsObject logisticsObject = logisticsObjectsRepository.findById(event.getLogisticsObjectRef()).orElse(null);
+    event.setId(event.getLogisticsObjectRef() + "/Event_" + Utils.getRandomNumberString());
     if (logisticsObject != null) {
-      logisticsObject.getEvent().add(event);
+      Set<Event> events = Optional.ofNullable(logisticsObject.getEvent()).orElse(new HashSet<>());
+      events.add(event);
+      logisticsObject.setEvent(events);
       logisticsObjectsRepository.save(logisticsObject);
     }
   }

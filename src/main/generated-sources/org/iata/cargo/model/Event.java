@@ -17,7 +17,6 @@ import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
@@ -80,7 +79,7 @@ public class Event
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1)
     })
     @JsonProperty(Vocabulary.s_p_dateTime)
-    protected Date dateTime;
+    protected String dateTime;
     /**
      * Movement or milestone code. Refer CXML Code List 1.18, e.g. DEP, ARR, FOH, RCS
      * 
@@ -185,11 +184,11 @@ public class Event
         return performedBy;
     }
 
-    public void setDateTime(Date dateTime) {
+    public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 
-    public Date getDateTime() {
+    public String getDateTime() {
         return dateTime;
     }
 

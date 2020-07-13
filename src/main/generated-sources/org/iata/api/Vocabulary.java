@@ -318,24 +318,7 @@ public class Vocabulary {
      */
     public final static String s_p_label = "https://onerecord.iata.org/Memento#label";
     public final static IRI p_label = IRI.create(s_p_label);
-    /**
-     * Date and time of the memento last modification
-     * 
-     */
-    public final static String s_p_lastModified = "https://onerecord.iata.org/Memento#lastModified";
-    public final static IRI p_lastModified = IRI.create(s_p_lastModified);
-    /**
-     * Name of the memento last modifier
-     * 
-     */
-    public final static String s_p_lastModifiedBy = "https://onerecord.iata.org/Memento#lastModifiedBy";
-    public final static IRI p_lastModifiedBy = IRI.create(s_p_lastModifiedBy);
-    /**
-     * URL of the version/memento
-     * 
-     */
-    public final static String s_p_memento = "https://onerecord.iata.org/Memento#memento";
-    public final static IRI p_memento = IRI.create(s_p_memento);
+
     /**
      * First version of the Logistics Object
      * 

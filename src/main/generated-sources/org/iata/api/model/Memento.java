@@ -12,8 +12,10 @@ import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
 import cz.cvut.kbss.jopa.model.annotations.Properties;
 import cz.cvut.kbss.jopa.model.annotations.Types;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.iata.api.Vocabulary;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -28,6 +30,8 @@ import java.util.Set;
  * 
  */
 @OWLClass(iri = Vocabulary.s_c_Memento)
+@Document(collection = "mementos")
+@ApiModel
 public class Memento
     implements Serializable
 {
@@ -81,39 +85,7 @@ public class Memento
     })
     @JsonProperty(Vocabulary.s_p_label)
     protected String label;
-    /**
-     * Date and time of the memento last modification
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_lastModified)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1)
-    })
-    @JsonProperty(Vocabulary.s_p_lastModified)
-    protected Date lastModified;
-    /**
-     * Name of the memento last modifier
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_lastModifiedBy)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
-    })
-    @JsonProperty(Vocabulary.s_p_lastModifiedBy)
-    protected String lastModifiedBy;
-    /**
-     * URL of the version/memento
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_memento)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
-    })
-    @JsonProperty(Vocabulary.s_p_memento)
-    protected String memento;
+
     /**
      * First version of the Logistics Object
      * 
@@ -193,30 +165,6 @@ public class Memento
 
     public String getLabel() {
         return label;
-    }
-
-    public void setLastModified(Date lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public Date getLastModified() {
-        return lastModified;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public void setMemento(String memento) {
-        this.memento = memento;
-    }
-
-    public String getMemento() {
-        return memento;
     }
 
     public void setOriginal(String original) {

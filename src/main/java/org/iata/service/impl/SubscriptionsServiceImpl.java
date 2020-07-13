@@ -47,7 +47,7 @@ public class SubscriptionsServiceImpl implements SubscriptionsService {
 
   @Override
   public List<Subscription> getSubscribers(String companyId) {
-    return subscriptionsRepository.findAll(); // TODO filter by companyId
+    return subscriptionsRepository.findByMyCompanyIdentifier(companyId);
   }
 
 }

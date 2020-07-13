@@ -2,186 +2,25 @@
   "@type": [
     "https://onerecord.iata.org/Event"
   ],
-  "https://onerecord.iata.org/Event#dateTime": "2020-07-10T14:44:10.434Z",
-  "https://onerecord.iata.org/Event#eventCode": "string",
-  "https://onerecord.iata.org/Event#eventName": "string",
-  "https://onerecord.iata.org/Event#eventTypeIndicator": "string",
+  "https://onerecord.iata.org/Event#dateTime": "09-07-2020",
+  "https://onerecord.iata.org/Event#eventCode": "ARR",
+  "https://onerecord.iata.org/Event#eventName": "Arrival",
+  "https://onerecord.iata.org/Event#eventTypeIndicator": "Test",
   "https://onerecord.iata.org/Event#location": {
     "@type": [
       "https://onerecord.iata.org/Location"
     ],
-    "https://onerecord.iata.org/Location#address": {
-      "@type": [
-        "https://onerecord.iata.org/Address"
-      ],
-      "https://onerecord.iata.org/Address#addressCode": [
-        "string"
-      ],
-      "https://onerecord.iata.org/Address#addressCodeType": "string",
-      "https://onerecord.iata.org/Address#cityCode": "string",
-      "https://onerecord.iata.org/Address#cityName": "string",
-      "https://onerecord.iata.org/Address#country": {
-        "@type": [
-          "https://onerecord.iata.org/Country"
-        ],
-        "https://onerecord.iata.org/Country#countryCode": "string",
-        "https://onerecord.iata.org/Country#countryName": "string"
-      },
-      "https://onerecord.iata.org/Address#pOBox": "string",
-      "https://onerecord.iata.org/Address#postalCode": "string",
-      "https://onerecord.iata.org/Address#regionCode": "string",
-      "https://onerecord.iata.org/Address#regionName": "string",
-      "https://onerecord.iata.org/Address#street": [
-        "string"
-      ],
-      "pobox": "string"
-    },
-    "https://onerecord.iata.org/Location#code": "string",
-    "https://onerecord.iata.org/Location#geolocation": {
-      "@type": [
-        "https://onerecord.iata.org/Geolocation"
-      ],
-      "https://onerecord.iata.org/Geolocation#elevation": {
-        "@type": [
-          "https://onerecord.iata.org/Value"
-        ],
-        "https://onerecord.iata.org/Value#unit": "string",
-        "https://onerecord.iata.org/Value#value": "string"
-      },
-      "https://onerecord.iata.org/Geolocation#latitude": {
-        "@type": [
-          "https://onerecord.iata.org/Value"
-        ],
-        "https://onerecord.iata.org/Value#unit": "string",
-        "https://onerecord.iata.org/Value#value": "string"
-      },
-      "https://onerecord.iata.org/Geolocation#longitude": {
-        "@type": [
-          "https://onerecord.iata.org/Value"
-        ],
-        "https://onerecord.iata.org/Value#unit": "string",
-        "https://onerecord.iata.org/Value#value": "string"
-      }
-    },
-    "https://onerecord.iata.org/Location#locationName": "string",
-    "https://onerecord.iata.org/Location#locationType": "string"
+    "https://onerecord.iata.org/Location#code": "GVA",
+    "https://onerecord.iata.org/Location#locationName": "Geneva",
+    "https://onerecord.iata.org/Location#locationType": "Office"
   },
-  "https://onerecord.iata.org/Event#logisticsObjectRef": "string",
+  "https://onerecord.iata.org/Event#logisticsObjectRef": "http://localhost:8080/companies/andra/los/Piece_922982",
   "https://onerecord.iata.org/Event#performedBy": {
     "@type": [
       "https://onerecord.iata.org/Company"
     ],
-    "https://onerecord.iata.org/Company#airlineCode": "string",
-    "https://onerecord.iata.org/Company#airlinePrefix": "string",
-    "https://onerecord.iata.org/Company#branch": {
-      "@type": [
-        "https://onerecord.iata.org/Branch"
-      ],
-      "https://onerecord.iata.org/Branch#branchName": "string",
-      "https://onerecord.iata.org/Branch#contactPerson": [
-        {
-          "@type": [
-            "https://onerecord.iata.org/Person"
-          ],
-          "https://onerecord.iata.org/Person#contact": [
-            {
-              "@type": [
-                "https://onerecord.iata.org/Contact"
-              ],
-              "https://onerecord.iata.org/Contact#emailAddress": "string",
-              "https://onerecord.iata.org/Contact#other": {
-                "@type": [
-                  "https://onerecord.iata.org/ContactOther"
-                ],
-                "https://onerecord.iata.org/ContactOther#detail": "string",
-                "https://onerecord.iata.org/ContactOther#otherType": "string"
-              },
-              "https://onerecord.iata.org/Contact#phoneNumber": "string"
-            }
-          ],
-          "https://onerecord.iata.org/Person#contactType": "string",
-          "https://onerecord.iata.org/Person#department": "string",
-          "https://onerecord.iata.org/Person#employeeId": "string",
-          "https://onerecord.iata.org/Person#firstName": "string",
-          "https://onerecord.iata.org/Person#jobTitle": "string",
-          "https://onerecord.iata.org/Person#lastName": "string",
-          "https://onerecord.iata.org/Person#middleName": "string",
-          "https://onerecord.iata.org/Person#salutation": "string"
-        }
-      ],
-      "https://onerecord.iata.org/Branch#iATACargoAgentLocationIdentifier": 0,
-      "https://onerecord.iata.org/Branch#location": {
-        "@type": [
-          "https://onerecord.iata.org/Location"
-        ],
-        "https://onerecord.iata.org/Location#address": {
-          "@type": [
-            "https://onerecord.iata.org/Address"
-          ],
-          "https://onerecord.iata.org/Address#addressCode": [
-            "string"
-          ],
-          "https://onerecord.iata.org/Address#addressCodeType": "string",
-          "https://onerecord.iata.org/Address#cityCode": "string",
-          "https://onerecord.iata.org/Address#cityName": "string",
-          "https://onerecord.iata.org/Address#country": {
-            "@type": [
-              "https://onerecord.iata.org/Country"
-            ],
-            "https://onerecord.iata.org/Country#countryCode": "string",
-            "https://onerecord.iata.org/Country#countryName": "string"
-          },
-          "https://onerecord.iata.org/Address#pOBox": "string",
-          "https://onerecord.iata.org/Address#postalCode": "string",
-          "https://onerecord.iata.org/Address#regionCode": "string",
-          "https://onerecord.iata.org/Address#regionName": "string",
-          "https://onerecord.iata.org/Address#street": [
-            "string"
-          ],
-          "pobox": "string"
-        },
-        "https://onerecord.iata.org/Location#code": "string",
-        "https://onerecord.iata.org/Location#geolocation": {
-          "@type": [
-            "https://onerecord.iata.org/Geolocation"
-          ],
-          "https://onerecord.iata.org/Geolocation#elevation": {
-            "@type": [
-              "https://onerecord.iata.org/Value"
-            ],
-            "https://onerecord.iata.org/Value#unit": "string",
-            "https://onerecord.iata.org/Value#value": "string"
-          },
-          "https://onerecord.iata.org/Geolocation#latitude": {
-            "@type": [
-              "https://onerecord.iata.org/Value"
-            ],
-            "https://onerecord.iata.org/Value#unit": "string",
-            "https://onerecord.iata.org/Value#value": "string"
-          },
-          "https://onerecord.iata.org/Geolocation#longitude": {
-            "@type": [
-              "https://onerecord.iata.org/Value"
-            ],
-            "https://onerecord.iata.org/Value#unit": "string",
-            "https://onerecord.iata.org/Value#value": "string"
-          }
-        },
-        "https://onerecord.iata.org/Location#locationName": "string",
-        "https://onerecord.iata.org/Location#locationType": "string"
-      },
-      "https://onerecord.iata.org/Branch#otherIdentifier": [
-        {
-          "@type": [
-            "https://onerecord.iata.org/OtherIdentifier"
-          ],
-          "https://onerecord.iata.org/OtherIdentifier#identifier": "string",
-          "https://onerecord.iata.org/OtherIdentifier#otherIdentifierType": "string"
-        }
-      ],
-      "iatacargoAgentLocationIdentifier": 0
-    },
-    "https://onerecord.iata.org/Company#companyName": "string",
-    "https://onerecord.iata.org/Company#iataCargoAgentCode": "string"
+    "https://onerecord.iata.org/Company#airlineCode": "XB",
+    "https://onerecord.iata.org/Company#airlinePrefix": "XB",
+    "https://onerecord.iata.org/Company#companyName": "IATA"
   }
 }

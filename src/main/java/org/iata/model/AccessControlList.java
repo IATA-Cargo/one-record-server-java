@@ -114,4 +114,5 @@ public class AccessControlList implements Serializable {
   public void setProperties(Map<String, Set<String>> properties) {
     this.properties = properties;
   }
+
 }

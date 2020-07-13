@@ -25,6 +25,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 @RequestMapping(value = "/")
+@ApiIgnore
 public class SslClientAuthenticationTestResource {
 
   private final HttpServletRequest request;

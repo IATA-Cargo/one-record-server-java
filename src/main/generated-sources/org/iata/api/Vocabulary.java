@@ -94,7 +94,7 @@ public class Vocabulary {
      * Object to modify in the PATCH request
      * 
      */
-    public final static String s_c_Object = "https://onerecord.iata.org/Object";
+    public final static String s_c_Object = "https://onerecord.iata.org/OperationObject";
     public final static IRI c_Object = IRI.create(s_c_Object);
     /**
      * Operation Request contained in the PATCH body
@@ -377,13 +377,13 @@ public class Vocabulary {
      * Data type of the field to update
      * 
      */
-    public final static String s_p_datatype = "https://onerecord.iata.org/Object#datatype";
+    public final static String s_p_datatype = "https://onerecord.iata.org/OperationObject#datatype";
     public final static IRI p_datatype = IRI.create(s_p_datatype);
     /**
      * Value to update
      * 
      */
-    public final static String s_p_value = "https://onerecord.iata.org/Object#value";
+    public final static String s_p_value = "https://onerecord.iata.org/OperationObject#value";
     public final static IRI p_value = IRI.create(s_p_value);
     /**
      * Operation objects must have exactly one op (operation) member; this value indicates which operation is to be performed. The value must be one of add or del; all other values result in an error

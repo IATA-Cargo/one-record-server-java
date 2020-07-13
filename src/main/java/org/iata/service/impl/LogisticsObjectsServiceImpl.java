@@ -44,8 +44,12 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
   public void updateLogisticsObject(PatchRequest patchRequest) {
     LogisticsObject logisticsObject = logisticsObjectsRepository.findById(patchRequest.getLogisticsObjectRef()).orElse(null);
     if (logisticsObject != null) {
-      logisticsObjectsRepository.save(logisticsObject);
+      patchRequest.getOperations()
+          .forEach(operation -> {
+
+          });
       // TODO
+      logisticsObjectsRepository.save(logisticsObject);
     }
   }
 

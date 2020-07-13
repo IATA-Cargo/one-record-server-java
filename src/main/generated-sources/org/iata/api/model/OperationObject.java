@@ -27,7 +27,7 @@ import java.util.Set;
  * 
  */
 @OWLClass(iri = Vocabulary.s_c_Object)
-public class Object
+public class OperationObject
     implements Serializable
 {
 

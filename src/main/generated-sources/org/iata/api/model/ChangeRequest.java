@@ -15,7 +15,6 @@ import cz.cvut.kbss.jopa.model.annotations.Types;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
 import io.swagger.annotations.ApiModelProperty;
 import org.iata.api.Vocabulary;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnJava;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -60,7 +59,7 @@ public class ChangeRequest
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
     @JsonProperty(Vocabulary.s_p_changeRequest)
-    protected Set<PatchRequest> changeRequest;
+    protected PatchRequest changeRequest;
     /**
      * Company which sent the change request
      * 
@@ -140,11 +139,11 @@ public class ChangeRequest
         return ((((("ChangeRequest {"+ name)+"<")+ id)+">")+"}");
     }
 
-    public void setChangeRequest(Set<PatchRequest> changeRequest) {
+    public void setChangeRequest(PatchRequest changeRequest) {
         this.changeRequest = changeRequest;
     }
 
-    public Set<PatchRequest> getChangeRequest() {
+    public PatchRequest getChangeRequest() {
         return changeRequest;
     }
 

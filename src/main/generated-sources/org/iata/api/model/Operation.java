@@ -58,7 +58,7 @@ public class Operation
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
     @JsonProperty(Vocabulary.s_p_o)
-    protected Set<Object> o;
+    protected Set<OperationObject> o;
     /**
      * Operation objects must have exactly one op (operation) member; this value indicates which operation is to be performed. The value must be one of add or del; all other values result in an error
      * 
@@ -127,11 +127,11 @@ public class Operation
         return ((((("Operation {"+ name)+"<")+ id)+">")+"}");
     }
 
-    public void setO(Set<Object> o) {
+    public void setO(Set<OperationObject> o) {
         this.o = o;
     }
 
-    public Set<Object> getO() {
+    public Set<OperationObject> getO() {
         return o;
     }
 

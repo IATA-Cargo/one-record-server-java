@@ -8,7 +8,6 @@ import org.iata.api.model.PatchRequest;
 import org.iata.cargo.model.Event;
 import org.iata.cargo.model.LogisticsObject;
 import org.iata.model.AccessControlList;
-import org.iata.model.enums.TopicEnum;
 import org.iata.service.AccessControlListService;
 import org.iata.service.AuditTrailsService;
 import org.iata.service.LogisticsObjectsService;
@@ -28,11 +27,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -75,6 +74,7 @@ public class LogisticsObjectsResource {
 
   @RequestMapping(method = GET, value = "/{companyId}/los", produces = JsonLd.MEDIA_TYPE)
   @ApiOperation(value = "INTERNAL Retrieves all the logistics objects for a given company")
+  @ApiIgnore
   public ResponseEntity<List<LogisticsObject>> getLogisticsObjects(@PathVariable("companyId") String companyId) {
     LOG.info(ocspService.verifyCertificate());
     final String id = getCurrentUri().replace("/los", "");
@@ -135,6 +135,7 @@ public class LogisticsObjectsResource {
   @RequestMapping(method = POST, value = "/{companyId}/los/{loId}/acl", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.CREATED)
   @ApiOperation(value = "INTERNAL Creates Access Control List item for a given logistics object")
+  @ApiIgnore
   public ResponseEntity<Void> addACL(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @RequestBody AccessControlList acl) {
     LOG.info(ocspService.verifyCertificate());
     accessControlListService.addAccessControlList(acl);

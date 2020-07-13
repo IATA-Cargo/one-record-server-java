@@ -45,7 +45,7 @@ public class AuditTrailServiceImpl implements AuditTrailsService {
     ChangeRequest changeRequest = new ChangeRequest();
     changeRequest.setTimestamp(new Date());
     changeRequest.setCompanyId(patchRequest.getRequestorCompanyIdentifier());
-    changeRequest.getChangeRequest().add(patchRequest);
+    changeRequest.setChangeRequest(patchRequest);
     changeRequests.add(changeRequest);
     auditTrail.setChangeRequests(changeRequests);
     auditTrailRepository.save(auditTrail);

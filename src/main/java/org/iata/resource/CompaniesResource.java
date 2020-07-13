@@ -86,6 +86,7 @@ public class CompaniesResource {
   @RequestMapping(method = DELETE, value = "/companies/{companyId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @ApiOperation(value = "INTERNAL Deletes a company for a given companyId")
+  @ApiIgnore
   public ResponseEntity<Void> deleteCompany(@PathVariable("companyId") String companyId) {
     LOG.info(ocspService.verifyCertificate());
     final String id = RestUtils.getCurrentUri();

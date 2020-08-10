@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import cz.cvut.kbss.jsonld.ConfigParam;
 import cz.cvut.kbss.jsonld.jackson.JsonLdModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +20,12 @@ public class CustomObjectMapper {
     ObjectMapper mapper = new ObjectMapper();
     mapper.registerModule(new JavaTimeModule());
     mapper.registerModule(new Jdk8Module());
-    mapper.registerModule(new JsonLdModule());
+
+    JsonLdModule jsonLdModule = new JsonLdModule();
+    jsonLdModule.configure(ConfigParam.SCAN_PACKAGE, "org.iata");
+    jsonLdModule.configure(ConfigParam.SCAN_PACKAGE, "com.wisekey");
+    mapper.registerModule(jsonLdModule);
+
     mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     mapper.disable(SerializationFeature.INDENT_OUTPUT);
     mapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);

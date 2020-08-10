@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.1.RELEASE</version>
+        <version>2.3.2.RELEASE</version>
     </parent>
 
     <organization>
@@ -18,10 +18,6 @@
     <groupId>org.iata</groupId>
     <artifactId>one-record-server-java</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-    <prerequisites>
-        <maven>3.0</maven>
-    </prerequisites>
 
     <dependencies>
         <dependency>
@@ -54,11 +50,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <version>${spring-boot.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jersey</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
@@ -153,6 +144,13 @@
             <artifactId>bcmail-jdk15on</artifactId>
             <version>${bouncycastle.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.jsonld-java</groupId>
+            <artifactId>jsonld-java</artifactId>
+            <version>${jsonld.java.version}</version>
+        </dependency>
+
         <!-- test dependencies -->
         <dependency>
             <groupId>junit</groupId>
@@ -160,19 +158,21 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <properties>
-        <spring-boot.version>2.3.1.RELEASE</spring-boot.version>
+        <spring-boot.version>2.3.2.RELEASE</spring-boot.version>
         <commons-lang3.version>3.10</commons-lang3.version>
         <auto-value.version>1.7.3</auto-value.version>
         <jackson.version>2.11.0</jackson.version>
         <junit.version>4.13</junit.version>
-        <mongodb.version>3.12.6</mongodb.version>
+        <jsonld.java.version>0.13.0</jsonld.java.version>
+        <mongodb.version>3.12.7</mongodb.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
-        <cz.cvut.kbss.jopa.version>0.14.6</cz.cvut.kbss.jopa.version>
-        <cz.cvut.kbss.jb4jsonld.version>0.5.1</cz.cvut.kbss.jb4jsonld.version>
+        <cz.cvut.kbss.jopa.version>0.14.7</cz.cvut.kbss.jopa.version>
+        <cz.cvut.kbss.jb4jsonld.version>0.7.1</cz.cvut.kbss.jb4jsonld.version>
         <bouncycastle.version>1.65</bouncycastle.version>
         <path.to.nginx.ssl_certificate>src/main/resources/ssl_certificate.crt</path.to.nginx.ssl_certificate>
         <path.to.nginx.ssl_certificate_key>src/main/resources/ssl_certificate_key.key</path.to.nginx.ssl_certificate_key>
@@ -198,11 +198,6 @@
                         <configuration>
                             <mainClass>org.iata.util.OntologyUtil</mainClass>
                         </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-maven-plugin</artifactId>
-                        <version>${spring-boot.version}</version>
                     </plugin>
                     <plugin>
                         <!-- Generates vocabulary from the specified ontology -->
@@ -285,11 +280,6 @@
                         <configuration>
                             <mainClass>org.iata.util.OntologyUtil</mainClass>
                         </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-maven-plugin</artifactId>
-                        <version>${spring-boot.version}</version>
                     </plugin>
                     <plugin>
                         <!-- Generates vocabulary from the specified ontology -->
@@ -375,11 +365,6 @@
                         </configuration>
                     </plugin>
                     <plugin>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-maven-plugin</artifactId>
-                        <version>${spring-boot.version}</version>
-                    </plugin>
-                    <plugin>
                         <!-- Generates vocabulary from the specified ontology -->
                         <groupId>cz.cvut.kbss.jopa</groupId>
                         <artifactId>jopa-maven-plugin</artifactId>
@@ -456,18 +441,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
@@ -503,26 +476,6 @@
                     </execution>
                 </executions>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-assembly-plugin</artifactId>-->
-<!--                <version>2.4.1</version>-->
-<!--                <configuration>-->
-<!--                    <descriptorRefs>-->
-<!--                        <descriptorRef>jar-with-dependencies</descriptorRef>-->
-<!--                    </descriptorRefs>-->
-<!--                </configuration>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>make-assembly</id>-->
-<!--                        &lt;!&ndash; bind to the packaging phase &ndash;&gt;-->
-<!--                        <phase>package</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>single</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -532,39 +485,47 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>create-aws-eb-zip</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <tasks>
-                                <!-- TODO ughhh try to simplify the following packaging logic!, maybe look for a EB Maven plugin intended to create this ZIP package. -->
-                                <mkdir dir="${project.build.directory}/${project.build.finalName}-aws-eb-zip/"/>
-                                <copy todir="${project.build.directory}/${project.build.finalName}-aws-eb-zip/" overwrite="false">
-                                    <fileset dir="${project.build.directory}" includes="${project.build.finalName}.jar"/>
-                                </copy>
-                                <copy todir="${project.build.directory}/${project.build.finalName}-aws-eb-zip/" overwrite="false">
-                                    <fileset dir="./" includes="Procfile"/>
-                                </copy>
-                                <copy todir="${project.build.directory}/${project.build.finalName}-aws-eb-zip/" overwrite="false">
-                                    <fileset dir="./" includes=".platform/**"/>
-                                </copy>
-                                <!-- Using properties for path to these files as they shouldn't be part of the project directory. -->
-                                <copy file="${path.to.nginx.ssl_certificate}" tofile="${project.build.directory}/${project.build.finalName}-aws-eb-zip/.platform/nginx/conf.d/ssl_certificate.crt"/>
-                                <copy file="${path.to.nginx.ssl_certificate_key}" tofile="${project.build.directory}/${project.build.finalName}-aws-eb-zip/.platform/nginx/conf.d/ssl_certificate_key.key"/>
-                                <copy file="${path.to.nginx.ssl_client_certificate}" tofile="${project.build.directory}/${project.build.finalName}-aws-eb-zip/.platform/nginx/conf.d/ssl_client_certificate.crt"/>
-                                <zip compress="false" destfile="${project.build.directory}/${project.build.finalName}-aws-eb.zip" basedir="${project.build.directory}/${project.build.finalName}-aws-eb-zip"/>
-                            </tasks>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--            <plugin>-->
+            <!--                <groupId>org.apache.maven.plugins</groupId>-->
+            <!--                <artifactId>maven-antrun-plugin</artifactId>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>create-aws-eb-zip</id>-->
+            <!--                        <phase>package</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>run</goal>-->
+            <!--                        </goals>-->
+            <!--                        <configuration>-->
+            <!--                            <tasks>-->
+            <!--                                &lt;!&ndash; TODO ughhh try to simplify the following packaging logic!, maybe look for a EB Maven plugin intended to create this ZIP package. &ndash;&gt;-->
+            <!--                                <mkdir dir="${project.build.directory}/${project.build.finalName}-aws-eb-zip/"/>-->
+            <!--                                <copy todir="${project.build.directory}/${project.build.finalName}-aws-eb-zip/" overwrite="false">-->
+            <!--                                    <fileset dir="${project.build.directory}" includes="${project.build.finalName}.jar"/>-->
+            <!--                                </copy>-->
+            <!--                                <copy todir="${project.build.directory}/${project.build.finalName}-aws-eb-zip/" overwrite="false">-->
+            <!--                                    <fileset dir="./" includes="Procfile"/>-->
+            <!--                                </copy>-->
+            <!--                                <copy todir="${project.build.directory}/${project.build.finalName}-aws-eb-zip/" overwrite="false">-->
+            <!--                                    <fileset dir="./" includes=".platform/**"/>-->
+            <!--                                </copy>-->
+            <!--                                &lt;!&ndash; Using properties for path to these files as they shouldn't be part of the project directory. &ndash;&gt;-->
+            <!--                                <copy file="${path.to.nginx.ssl_certificate}" tofile="${project.build.directory}/${project.build.finalName}-aws-eb-zip/.platform/nginx/conf.d/ssl_certificate.crt"/>-->
+            <!--                                <copy file="${path.to.nginx.ssl_certificate_key}" tofile="${project.build.directory}/${project.build.finalName}-aws-eb-zip/.platform/nginx/conf.d/ssl_certificate_key.key"/>-->
+            <!--                                <copy file="${path.to.nginx.ssl_client_certificate}" tofile="${project.build.directory}/${project.build.finalName}-aws-eb-zip/.platform/nginx/conf.d/ssl_client_certificate.crt"/>-->
+            <!--                                <zip compress="false" destfile="${project.build.directory}/${project.build.finalName}-aws-eb.zip" basedir="${project.build.directory}/${project.build.finalName}-aws-eb-zip"/>-->
+            <!--                            </tasks>-->
+            <!--                        </configuration>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 </project>

@@ -23,7 +23,6 @@ public class CustomObjectMapper {
 
     JsonLdModule jsonLdModule = new JsonLdModule();
     jsonLdModule.configure(ConfigParam.SCAN_PACKAGE, "org.iata");
-    jsonLdModule.configure(ConfigParam.SCAN_PACKAGE, "com.wisekey");
     mapper.registerModule(jsonLdModule);
 
     mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);

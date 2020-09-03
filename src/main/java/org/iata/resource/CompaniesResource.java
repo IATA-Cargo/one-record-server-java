@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.inject.Inject;
-import javax.ws.rs.core.Response;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
@@ -72,14 +71,14 @@ public class CompaniesResource {
   @RequestMapping(method = GET, value = "/companies/{companyId}", produces = JsonLd.MEDIA_TYPE)
   @ApiOperation(value = "Retrieves a company for a given companyId. If topic is sent, the endpoint returns the subscription information for that topic, information" +
       "that is usually sent back to publishers.")
-  public Object getCompany(@PathVariable("companyId") String companyId,
+  public ResponseEntity<Object> getCompany(@PathVariable("companyId") String companyId,
                            @RequestParam(value = "topic", required = false) TopicEnum topic) {
     LOG.info(ocspService.verifyCertificate());
     final String id = RestUtils.getCurrentUri();
     if (topic == null) {
-      return Response.ok(companiesService.findById(id)).build().getEntity();
+      return ResponseEntity.ok(companiesService.findById(id));
     } else {
-      return Response.ok(subscriptionsService.getSubscription(id, companyId, topic)).build().getEntity();
+      return ResponseEntity.ok(subscriptionsService.getSubscription(id, companyId, topic));
     }
   }
 

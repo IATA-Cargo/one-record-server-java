@@ -15,11 +15,11 @@ Before deploying the server, you will need to update the `application.properties
 For testing the application locally, follow the next steps:
 1. Install `Java = 8` and `Maven`. 
 2. Install the Maven dependencies by running `mvn clean install`. 
-As the latest models are already generated and commited in this repository according to the latest ontologies, kindly skip steps 3, 4, 5 and 6.
 3. (Optional) Download the latest ONE Record Turtle ontologies from Github + the latest Web Access Control from W3C by running `mvn exec:java`.
-4. (Optional) Generate ONE Record cargo related data model by running `mvn package -Dbuild=cargo`
-5. (Optional) Generate ONE Record API related models by running `mvn package -Dbuild=api`
-6. (Optional) Generate W3C Web Access Control ACL (Access Control List) related models by running `mvn package -Dbuild=acl`
+As the latest models are already generated and commited in this repository according to the latest ontologies, kindly skip steps 4, 5 and 6.
+4. (SKIP) Generate ONE Record API related models by running `mvn package -Dbuild=api`
+5. (SKIP) Generate ONE Record cargo related data model by running `mvn package -Dbuild=cargo`
+6. (SKIP) Generate W3C Web Access Control ACL (Access Control List) related models by running `mvn package -Dbuild=acl`
 7. Run the server from OneRecordApplication or from the command line via `mvn spring-boot:run`. Your application should be available at [http://localhost:8080](http://localhost:8080).
 
 ## Swagger API Documentation

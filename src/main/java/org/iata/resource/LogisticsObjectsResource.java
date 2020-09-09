@@ -96,7 +96,7 @@ public class LogisticsObjectsResource {
 
   @RequestMapping(method = PATCH, value = "/{companyId}/los/{loId}", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  @ApiOperation(value = "Updates a logistics object")
+  @ApiOperation(value = "Updates a logistics object - NOT WORKING CORRECTLY YET")
   public ResponseEntity<Void> updateLogisticsObject(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @RequestBody PatchRequest patchRequest) {
     LOG.info(ocspService.verifyCertificate());
     logisticsObjectsHandler.handleUpdateLogisticsObject(patchRequest);

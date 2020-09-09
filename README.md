@@ -39,6 +39,25 @@ ONE Record Server uses a MongoDB database. In order to setup quickly your own Mo
 1. To get started with MongoDB Atlas, [follow these steps](https://docs.atlas.mongodb.com/getting-started/). 
 2. Add your database URL to `application.properties` file: `'spring.data.mongodb.uri': 'mongodb+srv://<username>:<password>@<databaseURI>/<databaseName>?retryWrites=true&w=majority'`
 
+## Deployment to Heroku
+You can deploy the ONE Record sandbox on the platform that you wish. We are providing you with simple steps to deploy the application on [Heroku platform](https://www.heroku.com/home). You can find the complete instructions on how to deploy a `Node.js` application on Heroku [here](https://devcenter.heroku.com/articles/deploying-nodejs).
+1. Create a free [Heroku account](https://signup.heroku.com/signup/dc).
+2. Download and install [Heroku CLI](https://cli.heroku.com/).
+3. Login to Heroku via command line: `heroku login -i`
+4. Checkout the Github repository
+5. Create an app on Heroku via `heroku create`. The output of the command should look like:
+
+> Creating app... done, ⬢ some-random-name
+> https://some-random-name.herokuapp.com/ |
+> https://git.heroku.com/some-random-name.git
+
+ You can now visualize your app via [your Heroku dashboard](https://dashboard.heroku.com/apps).
+
+7. Add your Heroku remote as a remote in your current repository via the following command:
+`heroku git:remote -a some-random-name`
+8. Push the code from the Github repository to newly created app: `git push heroku master`.
+9. All set! Your server should be available at https://some-random-name.com.
+
 # Security in ONE Record
 By default, the security layer supporting mutual TLS is disabled in this sandbox, however the needed code can be found under `com.wisekey.ocsp` package and can be tested via
 `SslClientAuthenticationTestResource` controller. If one wish to test mutual TLS, test certificates can be generated via [IATA Certificate Portal](https://iatacms.wisekeydemo.com/web).

@@ -7,6 +7,7 @@ import org.iata.api.model.AuditTrail;
 import org.iata.api.model.PatchRequest;
 import org.iata.cargo.model.Event;
 import org.iata.cargo.model.LogisticsObject;
+import org.iata.exception.LogisticsObjectNotFoundException;
 import org.iata.model.AccessControlList;
 import org.iata.service.AccessControlListService;
 import org.iata.service.AuditTrailsService;
@@ -91,7 +92,13 @@ public class LogisticsObjectsResource {
     final HttpHeaders headersMementos = RestUtils.createLinkHeaderFromCurrentURi("/timemap", "timemap", Collections.emptyList());
     headers.addAll(headersMementos);
 
-    return new ResponseEntity<>(logisticsObjectsService.findById(getCurrentUri()), headers, HttpStatus.OK);
+    LogisticsObject logisticsObject = logisticsObjectsService.findById(getCurrentUri());
+
+    if (logisticsObject == null) {
+      throw new LogisticsObjectNotFoundException();
+    }
+
+    return new ResponseEntity<>(logisticsObject, headers, HttpStatus.OK);
   }
 
   @RequestMapping(method = PATCH, value = "/{companyId}/los/{loId}", consumes = JsonLd.MEDIA_TYPE)
@@ -108,9 +115,9 @@ public class LogisticsObjectsResource {
   public ResponseEntity<AuditTrail> getAuditTrail(@PathVariable("companyId") String companyId,
                                                   @PathVariable("loId") String loId,
                                                   @RequestParam(value = "updatedFrom", required = false)
-                                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate updatedFrom,
+                                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate updatedFrom,
                                                   @RequestParam(value = "updatedTo", required = false)
-                                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate updatedTo) {
+                                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate updatedTo) {
     LOG.info(ocspService.verifyCertificate());
     return new ResponseEntity<>(auditTrailsService.findById(getCurrentUri(), updatedFrom, updatedTo), HttpStatus.OK);
   }

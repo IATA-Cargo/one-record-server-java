@@ -3,6 +3,7 @@ package org.iata.service.impl;
 import org.iata.api.model.AuditTrail;
 import org.iata.api.model.ChangeRequest;
 import org.iata.api.model.PatchRequest;
+import org.iata.exception.LogisticsObjectNotFoundException;
 import org.iata.repository.AuditTrailRepository;
 import org.iata.service.AuditTrailsService;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,9 @@ public class AuditTrailServiceImpl implements AuditTrailsService {
 
   @Override
   public void updateAuditTrail(PatchRequest patchRequest) {
-    AuditTrail auditTrail = auditTrailRepository.findByLogisticsObjectRef(patchRequest.getLogisticsObjectRef()).get(0);
+    AuditTrail auditTrail = auditTrailRepository
+        .findByLogisticsObjectRef(patchRequest.getLogisticsObjectRef())
+        .stream().findFirst().orElseThrow(LogisticsObjectNotFoundException::new);
     Set<ChangeRequest> changeRequests = Optional.ofNullable(auditTrail.getChangeRequests()).orElse(new HashSet<>());
     ChangeRequest changeRequest = new ChangeRequest();
     changeRequest.setTimestamp(new Date());

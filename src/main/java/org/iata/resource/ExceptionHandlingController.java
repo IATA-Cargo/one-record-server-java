@@ -28,22 +28,22 @@ public class ExceptionHandlingController {
     return error;
   }
 
-  @ExceptionHandler(Exception.class)
-  @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-  public @ResponseBody
-  Error handleException(final Exception exception,
-                        final HttpServletRequest request) {
-
-    exception.printStackTrace();
-
-    Error error = new Error();
-    error.setTitle("Internal Server Error");
-    Set<Details> details = new HashSet<>();
-    Details detail = new Details();
-    detail.setMessage(exception.getMessage());
-    details.add(detail);
-    error.setDetails(details);
-
-    return error;
-  }
+//  @ExceptionHandler(Exception.class)
+//  @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+//  public @ResponseBody
+//  Error handleException(final Exception exception,
+//                        final HttpServletRequest request) {
+//
+//    exception.printStackTrace();
+//
+//    Error error = new Error();
+//    error.setTitle("Internal Server Error");
+//    Set<Details> details = new HashSet<>();
+//    Details detail = new Details();
+//    detail.setMessage(exception.getMessage());
+//    details.add(detail);
+//    error.setDetails(details);
+//
+//    return error;
+//  }
 }

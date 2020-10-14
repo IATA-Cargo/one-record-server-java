@@ -160,7 +160,7 @@
         <commons-lang3.version>3.11</commons-lang3.version>
         <auto-value.version>1.7.4</auto-value.version>
         <jackson.version>2.11.2</jackson.version>
-        <junit.version>4.13</junit.version>
+        <junit.version>4.13.1</junit.version>
         <mongodb.version>3.12.7</mongodb.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>

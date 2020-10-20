@@ -58,7 +58,7 @@ public class Create
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
     @JsonProperty(Vocabulary.s_p_lo)
-    protected java.lang.Object lo;
+    protected Object lo;
 
     public void setId(String id) {
         this.id = id;
@@ -105,11 +105,11 @@ public class Create
         return ((((("Create {"+ name)+"<")+ id)+">")+"}");
     }
 
-    public void setLo(java.lang.Object lo) {
+    public void setLo(Object lo) {
         this.lo = lo;
     }
 
-    public java.lang.Object getLo() {
+    public Object getLo() {
         return lo;
     }
 

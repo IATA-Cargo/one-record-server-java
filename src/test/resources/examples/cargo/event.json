@@ -14,7 +14,7 @@
     "https://onerecord.iata.org/Location#locationName": "Geneva",
     "https://onerecord.iata.org/Location#locationType": "Office"
   },
-  "https://onerecord.iata.org/Event#logisticsObjectRef": "http://localhost:8080/companies/andra/los/Piece_922982",
+  "https://onerecord.iata.org/Event#linkedObject": "http://localhost:8080/companies/andra/los/Piece_922982",
   "https://onerecord.iata.org/Event#performedBy": {
     "@type": [
       "https://onerecord.iata.org/Company"

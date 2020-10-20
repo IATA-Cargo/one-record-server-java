@@ -11,7 +11,6 @@ public enum TopicEnum {
   SHIPMENT (Vocabulary.s_c_Shipment),
   BOOKING (Vocabulary.s_c_Booking),
   ULD (Vocabulary.s_c_ULD),
-  BOOKING_REQUEST (Vocabulary.s_c_BookingRequest),
   ITEM (Vocabulary.s_c_Item),
   INSURANCE (Vocabulary.s_c_Insurance),
   PRODUCT (Vocabulary.s_c_Product),

@@ -164,8 +164,8 @@
         <mongodb.version>3.12.7</mongodb.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
-        <cz.cvut.kbss.jopa.version>0.14.7</cz.cvut.kbss.jopa.version>
-        <cz.cvut.kbss.jb4jsonld.version>0.7.1</cz.cvut.kbss.jb4jsonld.version>
+        <cz.cvut.kbss.jopa.version>0.15.2</cz.cvut.kbss.jopa.version>
+        <cz.cvut.kbss.jb4jsonld.version>0.8.0</cz.cvut.kbss.jb4jsonld.version>
         <bouncycastle.version>1.65</bouncycastle.version>
         <path.to.nginx.ssl_certificate>src/main/resources/ssl_certificate.crt</path.to.nginx.ssl_certificate>
         <path.to.nginx.ssl_certificate_key>src/main/resources/ssl_certificate_key.key</path.to.nginx.ssl_certificate_key>
@@ -191,6 +191,11 @@
                         <configuration>
                             <mainClass>org.iata.util.OntologyUtil</mainClass>
                         </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <version>${spring-boot.version}</version>
                     </plugin>
                     <plugin>
                         <!-- Generates vocabulary from the specified ontology -->
@@ -273,6 +278,11 @@
                         <configuration>
                             <mainClass>org.iata.util.OntologyUtil</mainClass>
                         </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <version>${spring-boot.version}</version>
                     </plugin>
                     <plugin>
                         <!-- Generates vocabulary from the specified ontology -->
@@ -358,6 +368,11 @@
                         </configuration>
                     </plugin>
                     <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <version>${spring-boot.version}</version>
+                    </plugin>
+                    <plugin>
                         <!-- Generates vocabulary from the specified ontology -->
                         <groupId>cz.cvut.kbss.jopa</groupId>
                         <artifactId>jopa-maven-plugin</artifactId>
@@ -432,6 +447,18 @@
                 <configuration>
                     <mainClass>org.iata.util.OntologyUtil</mainClass>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

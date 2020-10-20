@@ -91,17 +91,17 @@ public class Vocabulary {
     public final static String s_c_Notification = "https://onerecord.iata.org/Notification";
     public final static IRI c_Notification = IRI.create(s_c_Notification);
     /**
-     * Object to modify in the PATCH request
-     * 
-     */
-    public final static String s_c_Object = "https://onerecord.iata.org/OperationObject";
-    public final static IRI c_Object = IRI.create(s_c_Object);
-    /**
      * Operation Request contained in the PATCH body
      * 
      */
     public final static String s_c_Operation = "https://onerecord.iata.org/Operation";
     public final static IRI c_Operation = IRI.create(s_c_Operation);
+    /**
+     * Object to modify in the PATCH request
+     * 
+     */
+    public final static String s_c_OperationObject = "https://onerecord.iata.org/OperationObject";
+    public final static IRI c_OperationObject = IRI.create(s_c_OperationObject);
     /**
      * PATCH Request body containing updates on a Logistics Object
      * 
@@ -229,6 +229,12 @@ public class Vocabulary {
     public final static String s_p_timestamp = "https://onerecord.iata.org/ChangeRequest#timestamp";
     public final static IRI p_timestamp = IRI.create(s_p_timestamp);
     /**
+     * Company Id, for example airline code.
+     * 
+     */
+    public final static String s_p_companyId_A = "https://onerecord.iata.org/CompanyInformation#companyId";
+    public final static IRI p_companyId_A = IRI.create(s_p_companyId_A);
+    /**
      * Endpoint of the company in the Internet of Logistics
      * 
      */
@@ -318,7 +324,6 @@ public class Vocabulary {
      */
     public final static String s_p_label = "https://onerecord.iata.org/Memento#label";
     public final static IRI p_label = IRI.create(s_p_label);
-
     /**
      * First version of the Logistics Object
      * 
@@ -341,8 +346,8 @@ public class Vocabulary {
      * Link to the memento
      * 
      */
-    public final static String s_p_memento_A = "https://onerecord.iata.org/MementoEntry#memento";
-    public final static IRI p_memento_A = IRI.create(s_p_memento_A);
+    public final static String s_p_memento = "https://onerecord.iata.org/MementoEntry#memento";
+    public final static IRI p_memento = IRI.create(s_p_memento);
     /**
      * First memento of the Logistics Object
      * 
@@ -374,18 +379,6 @@ public class Vocabulary {
     public final static String s_p_topic = "https://onerecord.iata.org/Notification#topic";
     public final static IRI p_topic = IRI.create(s_p_topic);
     /**
-     * Data type of the field to update
-     * 
-     */
-    public final static String s_p_datatype = "https://onerecord.iata.org/OperationObject#datatype";
-    public final static IRI p_datatype = IRI.create(s_p_datatype);
-    /**
-     * Value to update
-     * 
-     */
-    public final static String s_p_value = "https://onerecord.iata.org/OperationObject#value";
-    public final static IRI p_value = IRI.create(s_p_value);
-    /**
      * Operation objects must have exactly one op (operation) member; this value indicates which operation is to be performed. The value must be one of add or del; all other values result in an error
      * 
      */
@@ -398,29 +391,41 @@ public class Vocabulary {
     public final static String s_p_p = "https://onerecord.iata.org/Operation#p";
     public final static IRI p_p = IRI.create(s_p_p);
     /**
+     * Data type of the field to update
+     * 
+     */
+    public final static String s_p_datatype = "https://onerecord.iata.org/OperationObject#datatype";
+    public final static IRI p_datatype = IRI.create(s_p_datatype);
+    /**
+     * Value to update
+     * 
+     */
+    public final static String s_p_value = "https://onerecord.iata.org/OperationObject#value";
+    public final static IRI p_value = IRI.create(s_p_value);
+    /**
      * Reason for the change (optional)
      * 
      */
     public final static String s_p_description = "https://onerecord.iata.org/PatchRequest#description";
     public final static IRI p_description = IRI.create(s_p_description);
     /**
+     * Reference of the Logistics Object to which te change request is applied to
+     * 
+     */
+    public final static String s_p_logisticsObjectRef_A_A = "https://onerecord.iata.org/PatchRequest#logisticsObjectRef";
+    public final static IRI p_logisticsObjectRef_A_A = IRI.create(s_p_logisticsObjectRef_A_A);
+    /**
+     * The company identifier of the entity that is requesting the change request
+     * 
+     */
+    public final static String s_p_requestorCompanyIdentifier = "https://onerecord.iata.org/PatchRequest#requestorCompanyIdentifier";
+    public final static IRI p_requestorCompanyIdentifier = IRI.create(s_p_requestorCompanyIdentifier);
+    /**
      * Revision number of the Logistics Object
      * 
      */
     public final static String s_p_revision = "https://onerecord.iata.org/PatchRequest#revision";
     public final static IRI p_revision = IRI.create(s_p_revision);
-    /**
-     * Reference of the Logistics Object to which te change request is applied to
-     *
-     */
-    public final static String s_p_logisticsObjectRef_P = "https://onerecord.iata.org/PatchRequest#logisticsObjectRef";
-    public final static IRI p_logisticsObjectRef_P = IRI.create(s_p_logisticsObjectRef_P);
-    /**
-     * The company identifier of the entity that is requesting the change request
-     *
-     */
-    public final static String s_p_requestorCompanyIdentifier = "https://onerecord.iata.org/PatchRequest#requestorCompanyIdentifier";
-    public final static IRI p_requestorCompanyIdentifier = IRI.create(s_p_requestorCompanyIdentifier);
     /**
      * Duration of the period to cache the subscription information in seconds
      * 
@@ -434,17 +439,17 @@ public class Vocabulary {
     public final static String s_p_callbackUrl = "https://onerecord.iata.org/Subscription#callbackUrl";
     public final static IRI p_callbackUrl = IRI.create(s_p_callbackUrl);
     /**
-     * Callback URL of the Client Subscription API where the subscriber receives Logistics Objects
-     *
-     */
-    public final static String s_p_myCompanyIdentifier = "https://onerecord.iata.org/Subscription#myCompanyIdentifier";
-    public final static IRI p_myCompanyIdentifier = IRI.create(s_p_myCompanyIdentifier);
-    /**
      * Content type that the subscriber wants to receive in the notifications
      * 
      */
     public final static String s_p_contentType = "https://onerecord.iata.org/Subscription#contentType";
     public final static IRI p_contentType = IRI.create(s_p_contentType);
+    /**
+     * The company identifier from the Internet of Logistics of my company.
+     * 
+     */
+    public final static String s_p_myCompanyIdentifier = "https://onerecord.iata.org/Subscription#myCompanyIdentifier";
+    public final static IRI p_myCompanyIdentifier = IRI.create(s_p_myCompanyIdentifier);
     /**
      * Either a secret or API Key that ensures that only companies with this subscription information can POST to the subscriber callback endpoint
      * 
@@ -495,8 +500,5 @@ public class Vocabulary {
     public final static IRI p_comment = IRI.create(s_p_comment);
     public final static String s_p_label_A_A = "http://www.w3.org/2000/01/rdf-schema#label";
     public final static IRI p_label_A_A = IRI.create(s_p_label_A_A);
-
-    public final static String s_p_companyIdentifier = "https://onerecord.iata.org/CompanyInformation#companyId";
-    public final static IRI p_companyIdentifier = IRI.create(s_p_companyIdentifier);
 
 }

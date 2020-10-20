@@ -70,6 +70,28 @@ public class PatchRequest
     @JsonProperty(Vocabulary.s_p_description)
     protected String description1;
     /**
+     * Reference of the Logistics Object to which te change request is applied to
+     * 
+     */
+    @OWLDataProperty(iri = Vocabulary.s_p_logisticsObjectRef_A_A)
+    @ParticipationConstraints({
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+    })
+    @JsonProperty(Vocabulary.s_p_logisticsObjectRef_A_A)
+    protected String logisticsObjectRef;
+    /**
+     * The company identifier of the entity that is requesting the change request
+     * 
+     */
+    @OWLDataProperty(iri = Vocabulary.s_p_requestorCompanyIdentifier)
+    @ParticipationConstraints({
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+    })
+    @JsonProperty(Vocabulary.s_p_requestorCompanyIdentifier)
+    protected String requestorCompanyIdentifier;
+    /**
      * Revision number of the Logistics Object
      * 
      */
@@ -80,30 +102,6 @@ public class PatchRequest
     })
     @JsonProperty(Vocabulary.s_p_revision)
     protected String revision;
-
-    /**
-     * Reference of the Logistics Object to which te change request is applied to
-     *
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_logisticsObjectRef_P)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
-    })
-    @JsonProperty(Vocabulary.s_p_logisticsObjectRef_P)
-    protected String logisticsObjectRef;
-
-    /**
-     * The company identifier of the entity that is requesting the change request
-     *
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_requestorCompanyIdentifier)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
-    })
-    @JsonProperty(Vocabulary.s_p_requestorCompanyIdentifier)
-    protected String requestorCompanyIdentifier;
 
     public void setId(String id) {
         this.id = id;
@@ -166,6 +164,22 @@ public class PatchRequest
         return description1;
     }
 
+    public void setLogisticsObjectRef(String logisticsObjectRef) {
+        this.logisticsObjectRef = logisticsObjectRef;
+    }
+
+    public String getLogisticsObjectRef() {
+        return logisticsObjectRef;
+    }
+
+    public void setRequestorCompanyIdentifier(String requestorCompanyIdentifier) {
+        this.requestorCompanyIdentifier = requestorCompanyIdentifier;
+    }
+
+    public String getRequestorCompanyIdentifier() {
+        return requestorCompanyIdentifier;
+    }
+
     public void setRevision(String revision) {
         this.revision = revision;
     }
@@ -174,19 +188,4 @@ public class PatchRequest
         return revision;
     }
 
-    public String getLogisticsObjectRef() {
-        return logisticsObjectRef;
-    }
-
-    public void setLogisticsObjectRef(String logisticsObjectRef) {
-        this.logisticsObjectRef = logisticsObjectRef;
-    }
-
-    public String getRequestorCompanyIdentifier() {
-        return requestorCompanyIdentifier;
-    }
-
-    public void setRequestorCompanyIdentifier(String requestorCompanyIdentifier) {
-        this.requestorCompanyIdentifier = requestorCompanyIdentifier;
-    }
 }

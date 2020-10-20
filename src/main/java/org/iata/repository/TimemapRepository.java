@@ -1,6 +1,5 @@
 package org.iata.repository;
 
-import org.iata.api.model.Memento;
 import org.iata.api.model.Timemap;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

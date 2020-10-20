@@ -56,7 +56,8 @@ public class ChangeRequest
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_changeRequest)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
     @JsonProperty(Vocabulary.s_p_changeRequest)
     protected PatchRequest changeRequest;
@@ -66,8 +67,8 @@ public class ChangeRequest
      */
     @OWLDataProperty(iri = Vocabulary.s_p_companyId)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
     @JsonProperty(Vocabulary.s_p_companyId)
     protected String companyId;

@@ -13,6 +13,7 @@ import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
 import cz.cvut.kbss.jopa.model.annotations.Properties;
 import cz.cvut.kbss.jopa.model.annotations.Types;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.iata.api.Vocabulary;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -30,6 +31,7 @@ import java.util.Set;
  */
 @OWLClass(iri = Vocabulary.s_c_Subscription)
 @Document(collection = "subscriptions")
+@ApiModel
 public class Subscription
     implements Serializable
 {
@@ -74,29 +76,28 @@ public class Subscription
      */
     @OWLDataProperty(iri = Vocabulary.s_p_callbackUrl)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
     @JsonProperty(Vocabulary.s_p_callbackUrl)
     protected String callbackUrl;
-    /**
-     * The company identifier from the Internet of Logistics of my company
-     *
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_myCompanyIdentifier)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
-    })
-    @JsonProperty(Vocabulary.s_p_myCompanyIdentifier)
-    protected String myCompanyIdentifier;
     /**
      * Content type that the subscriber wants to receive in the notifications
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_contentType)
-    @JsonProperty(Vocabulary.s_p_contentType)
     protected Set<String> contentType;
+    /**
+     * The company identifier from the Internet of Logistics of my company.
+     * 
+     */
+    @OWLDataProperty(iri = Vocabulary.s_p_myCompanyIdentifier)
+    @ParticipationConstraints({
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+    })
+    @JsonProperty(Vocabulary.s_p_myCompanyIdentifier)
+    protected String myCompanyIdentifier;
     /**
      * Either a secret or API Key that ensures that only companies with this subscription information can POST to the subscriber callback endpoint
      * 
@@ -133,8 +134,8 @@ public class Subscription
      */
     @OWLDataProperty(iri = Vocabulary.s_p_subscribedTo)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
     @JsonProperty(Vocabulary.s_p_subscribedTo)
     protected String subscribedTo;
@@ -144,6 +145,7 @@ public class Subscription
      */
     @OWLDataProperty(iri = Vocabulary.s_p_topic_A)
     @ParticipationConstraints({
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
     @JsonProperty(Vocabulary.s_p_topic_A)
@@ -226,6 +228,14 @@ public class Subscription
         return contentType;
     }
 
+    public void setMyCompanyIdentifier(String myCompanyIdentifier) {
+        this.myCompanyIdentifier = myCompanyIdentifier;
+    }
+
+    public String getMyCompanyIdentifier() {
+        return myCompanyIdentifier;
+    }
+
     public void setSecret(String secret) {
         this.secret = secret;
     }
@@ -266,11 +276,4 @@ public class Subscription
         return topic;
     }
 
-    public String getMyCompanyIdentifier() {
-        return myCompanyIdentifier;
-    }
-
-    public void setMyCompanyIdentifier(String myCompanyIdentifier) {
-        this.myCompanyIdentifier = myCompanyIdentifier;
-    }
 }

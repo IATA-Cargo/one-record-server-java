@@ -55,7 +55,8 @@ public class MementoEntry
      */
     @OWLDataProperty(iri = Vocabulary.s_p_datetime)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
     })
     @JsonProperty(Vocabulary.s_p_datetime)
     protected Date datetime;
@@ -73,12 +74,12 @@ public class MementoEntry
      * Link to the memento
      * 
      */
-    @OWLDataProperty(iri = Vocabulary.s_p_memento_A)
+    @OWLDataProperty(iri = Vocabulary.s_p_memento)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
-    @JsonProperty(Vocabulary.s_p_memento_A)
+    @JsonProperty(Vocabulary.s_p_memento)
     protected String memento;
 
     public void setId(String id) {

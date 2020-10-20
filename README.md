@@ -1,4 +1,4 @@
-# Welcome to ONE Record Java Sandbox!
+# Welcome to ONE Record Java Sandbox
 This repository contains the code and instructions that will help you deploy your first ONE Record Server. Please follow the instructions in order to get the application running.
 
 # Configuration 

@@ -8,7 +8,6 @@ import org.iata.api.model.Subscription;
 import org.iata.model.enums.TopicEnum;
 import org.iata.service.CompaniesService;
 import org.iata.service.SubscriptionsService;
-import org.iata.service.security.OcspService;
 import org.iata.util.RestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,20 +38,17 @@ public class CompaniesResource {
 
   private final CompaniesService companiesService;
   private final SubscriptionsService subscriptionsService;
-  private final OcspService ocspService;
 
   @Inject
-  public CompaniesResource(CompaniesService companiesService, SubscriptionsService subscriptionsService, OcspService ocspService) {
+  public CompaniesResource(CompaniesService companiesService, SubscriptionsService subscriptionsService) {
     this.companiesService = companiesService;
     this.subscriptionsService = subscriptionsService;
-    this.ocspService = ocspService;
   }
 
   @RequestMapping(method = POST, value = "/companies", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.CREATED)
   @ApiOperation(value = "INTERNAL Creates a company")
   public ResponseEntity<Void> addCompany(@RequestBody CompanyInformation companyInformation) {
-    LOG.info(ocspService.verifyCertificate());
     final String companyId = companyInformation.getCompanyId();
     final String companyIdentifierForIoL = RestUtils.createCompanyIdentifierFromCurrentUri("/{companyId}", companyId);
     companiesService.addCompany(companyInformation, companyIdentifierForIoL, companyId);
@@ -64,7 +60,6 @@ public class CompaniesResource {
   @ApiOperation(value = "Retrieves all the companies")
   @ApiIgnore
   public ResponseEntity<List<CompanyInformation>> getCompanies() {
-    LOG.info(ocspService.verifyCertificate());
     return new ResponseEntity<>(companiesService.getCompanies(), HttpStatus.OK);
   }
 
@@ -73,7 +68,6 @@ public class CompaniesResource {
       "that is usually sent back to publishers.")
   public ResponseEntity<Object> getCompany(@PathVariable("companyId") String companyId,
                            @RequestParam(value = "topic", required = false) TopicEnum topic) {
-    LOG.info(ocspService.verifyCertificate());
     final String id = RestUtils.getCurrentUri();
     if (topic == null) {
       return ResponseEntity.ok(companiesService.findById(id));
@@ -87,7 +81,6 @@ public class CompaniesResource {
   @ApiOperation(value = "INTERNAL Deletes a company for a given companyId")
   @ApiIgnore
   public ResponseEntity<Void> deleteCompany(@PathVariable("companyId") String companyId) {
-    LOG.info(ocspService.verifyCertificate());
     final String id = RestUtils.getCurrentUri();
     companiesService.deleteById(id);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -96,7 +89,6 @@ public class CompaniesResource {
   @RequestMapping(method = POST, value = "/companies/{companyId}/subscribers", consumes = JsonLd.MEDIA_TYPE)
   @ApiOperation(value = "INTERNAL In a pub/sub scenario, when the current server is the publisher, it creates subscription information for a company.")
   public ResponseEntity<Subscription> addSubscriptionInformation(@PathVariable("companyId") String companyId, @RequestBody Subscription subscription) {
-    LOG.info(ocspService.verifyCertificate());
     if (subscription.getTopic() == null) {
       subscription.setId(subscription.getMyCompanyIdentifier());
     } else {
@@ -110,7 +102,6 @@ public class CompaniesResource {
   @RequestMapping(method = GET, value = "/companies/{companyId}/subscribers", produces = JsonLd.MEDIA_TYPE)
   @ApiOperation(value = "INTERNAL Get all the subscribers that are subscriber to this company.")
   public ResponseEntity<List<Subscription>> getAllSubscribers(@PathVariable("companyId") String companyId) {
-    LOG.info(ocspService.verifyCertificate());
     final String id = RestUtils.getCurrentUri().replace("/subscribers", "");
     return new ResponseEntity<>(subscriptionsService.getSubscribers(id), HttpStatus.OK);
   }

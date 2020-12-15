@@ -156,7 +156,7 @@
     </dependencies>
 
     <properties>
-        <spring-boot.version>2.3.3.RELEASE</spring-boot.version>
+        <spring-boot.version>2.3.6.RELEASE</spring-boot.version>
         <commons-lang3.version>3.11</commons-lang3.version>
         <auto-value.version>1.7.4</auto-value.version>
         <jackson.version>2.11.2</jackson.version>
@@ -164,12 +164,8 @@
         <mongodb.version>3.12.7</mongodb.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
-        <cz.cvut.kbss.jopa.version>0.15.2</cz.cvut.kbss.jopa.version>
-        <cz.cvut.kbss.jb4jsonld.version>0.8.0</cz.cvut.kbss.jb4jsonld.version>
-        <bouncycastle.version>1.65</bouncycastle.version>
-        <path.to.nginx.ssl_certificate>src/main/resources/ssl_certificate.crt</path.to.nginx.ssl_certificate>
-        <path.to.nginx.ssl_certificate_key>src/main/resources/ssl_certificate_key.key</path.to.nginx.ssl_certificate_key>
-        <path.to.nginx.ssl_client_certificate>src/main/resources/ssl_client_certificate.crt</path.to.nginx.ssl_client_certificate>
+        <cz.cvut.kbss.jopa.version>0.16.2</cz.cvut.kbss.jopa.version>
+        <cz.cvut.kbss.jb4jsonld.version>0.8.2</cz.cvut.kbss.jb4jsonld.version>
     </properties>
 
     <profiles>
@@ -504,40 +500,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-antrun-plugin</artifactId>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <id>create-aws-eb-zip</id>-->
-            <!--                        <phase>package</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>run</goal>-->
-            <!--                        </goals>-->
-            <!--                        <configuration>-->
-            <!--                            <tasks>-->
-            <!--                                &lt;!&ndash; TODO ughhh try to simplify the following packaging logic!, maybe look for a EB Maven plugin intended to create this ZIP package. &ndash;&gt;-->
-            <!--                                <mkdir dir="${project.build.directory}/${project.build.finalName}-aws-eb-zip/"/>-->
-            <!--                                <copy todir="${project.build.directory}/${project.build.finalName}-aws-eb-zip/" overwrite="false">-->
-            <!--                                    <fileset dir="${project.build.directory}" includes="${project.build.finalName}.jar"/>-->
-            <!--                                </copy>-->
-            <!--                                <copy todir="${project.build.directory}/${project.build.finalName}-aws-eb-zip/" overwrite="false">-->
-            <!--                                    <fileset dir="./" includes="Procfile"/>-->
-            <!--                                </copy>-->
-            <!--                                <copy todir="${project.build.directory}/${project.build.finalName}-aws-eb-zip/" overwrite="false">-->
-            <!--                                    <fileset dir="./" includes=".platform/**"/>-->
-            <!--                                </copy>-->
-            <!--                                &lt;!&ndash; Using properties for path to these files as they shouldn't be part of the project directory. &ndash;&gt;-->
-            <!--                                <copy file="${path.to.nginx.ssl_certificate}" tofile="${project.build.directory}/${project.build.finalName}-aws-eb-zip/.platform/nginx/conf.d/ssl_certificate.crt"/>-->
-            <!--                                <copy file="${path.to.nginx.ssl_certificate_key}" tofile="${project.build.directory}/${project.build.finalName}-aws-eb-zip/.platform/nginx/conf.d/ssl_certificate_key.key"/>-->
-            <!--                                <copy file="${path.to.nginx.ssl_client_certificate}" tofile="${project.build.directory}/${project.build.finalName}-aws-eb-zip/.platform/nginx/conf.d/ssl_client_certificate.crt"/>-->
-            <!--                                <zip compress="false" destfile="${project.build.directory}/${project.build.finalName}-aws-eb.zip" basedir="${project.build.directory}/${project.build.finalName}-aws-eb-zip"/>-->
-            <!--                            </tasks>-->
-            <!--                        </configuration>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
         </plugins>
         <resources>
             <resource>

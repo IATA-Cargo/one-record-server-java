@@ -6,9 +6,6 @@ Before deploying the server, you will need to update the `application.properties
 1. the credentials for accessing your MongoDB database. You can find the instructions on how to setup a MongoDB database below.  
 `    spring.data.mongodb.uri:mongodb+srv://<username>:<password>@<databaseURI>/<databaseName>?retryWrites=true&w=majority
 `  
-2. path to a directory in which temporary certificates will be stored.
-    `    ocsp.cachedDir=C:\\`
-
 # Local testing
 
 ## Build & run the sandbox code
@@ -59,9 +56,7 @@ You can deploy the ONE Record sandbox on the platform that you wish. We are prov
 9. All set! Your server should be available at https://some-random-name.com.
 
 # Security in ONE Record
-By default, the security layer supporting mutual TLS is disabled in this sandbox, however the needed code can be found under `com.wisekey.ocsp` package and can be tested via
-`SslClientAuthenticationTestResource` controller. If one wish to test mutual TLS, test certificates can be generated via [IATA Certificate Portal](https://iatacms.wisekeydemo.com/web).
-Instructions for creating a subscriber account, as well as ONE Record security documentation can be found [here](https://github.com/IATA-Cargo/ONE-Record/tree/master/working_draft/security).
+By default, the security layer supporting mutual TLS is disabled in this sandbox.
 
 # IATA ONE Record
 You can find further information about ONE Record specifications on the [main Github repository](https://github.com/IATA-Cargo/ONE-Record), 

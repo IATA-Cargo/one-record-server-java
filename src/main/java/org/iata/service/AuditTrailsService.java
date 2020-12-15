@@ -4,7 +4,6 @@ import org.iata.api.model.AuditTrail;
 import org.iata.api.model.PatchRequest;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 public interface AuditTrailsService {

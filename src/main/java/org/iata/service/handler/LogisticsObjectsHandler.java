@@ -2,8 +2,6 @@ package org.iata.service.handler;
 
 import org.iata.api.model.AuditTrail;
 import org.iata.api.model.Create;
-import org.iata.api.model.Memento;
-import org.iata.api.model.Mementos;
 import org.iata.api.model.PatchRequest;
 import org.iata.api.model.Timemap;
 import org.iata.cargo.model.LogisticsObject;

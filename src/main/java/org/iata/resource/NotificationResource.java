@@ -6,7 +6,6 @@ import io.swagger.annotations.ApiOperation;
 import org.iata.api.model.Notification;
 import org.iata.model.enums.TopicEnum;
 import org.iata.service.NotificationService;
-import org.iata.service.security.OcspService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -31,12 +30,10 @@ public class NotificationResource {
   private static final Logger LOG = LoggerFactory.getLogger(NotificationResource.class);
 
   private final NotificationService notificationService;
-  private final OcspService ocspService;
 
   @Inject
-  public NotificationResource(NotificationService notificationService, OcspService ocspService) {
+  public NotificationResource(NotificationService notificationService) {
     this.notificationService = notificationService;
-    this.ocspService = ocspService;
   }
 
   @RequestMapping(method = POST, value = "/{companyId}/callback", consumes = JsonLd.MEDIA_TYPE)
@@ -44,7 +41,6 @@ public class NotificationResource {
   public ResponseEntity<Void> callbackUrl(@PathVariable("companyId") String companyId,
                                           @RequestBody Notification notification,
                                           @RequestParam(value = "topic", required = false) TopicEnum topic) {
-    LOG.info(ocspService.verifyCertificate());
     notificationService.handleNotification(notification);
     return new ResponseEntity<>(HttpStatus.OK);
   }

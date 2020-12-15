@@ -6,7 +6,6 @@ import io.swagger.annotations.ApiOperation;
 import org.iata.api.model.Memento;
 import org.iata.api.model.Timemap;
 import org.iata.service.VersioningService;
-import org.iata.service.security.OcspService;
 import org.iata.util.RestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,19 +37,16 @@ public class VersioningResource {
   private static final Logger LOG = LoggerFactory.getLogger(VersioningResource.class);
 
   private final VersioningService versioningService;
-  private final OcspService ocspService;
 
   @Inject
-  public VersioningResource(VersioningService versioningService, OcspService ocspService) {
+  public VersioningResource(VersioningService versioningService) {
     this.versioningService = versioningService;
-    this.ocspService = ocspService;
   }
 
   @RequestMapping(method = POST, value = "/{companyId}/los/{loId}/mementos", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.CREATED)
   @ApiOperation(value = "INTERNAL Creates a snapshot (memento) of the data")
   public ResponseEntity<Void> addMemento(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @RequestBody Memento memento) {
-    LOG.info(ocspService.verifyCertificate());
     final String loUri = getCurrentUri().replace("/mementos", "");
     final String mementoId = versioningService.addMemento(getCurrentUri(), loUri, memento);
     final HttpHeaders headers = new HttpHeaders();
@@ -63,14 +59,12 @@ public class VersioningResource {
   public ResponseEntity<Memento> getMemento(@PathVariable("companyId") String companyId,
                                             @PathVariable("loId") String loId,
                                             @PathVariable("mementoId") String mementoId) {
-    LOG.info(ocspService.verifyCertificate());
     return new ResponseEntity<>(versioningService.getMemento(getCurrentUri()), HttpStatus.OK);
   }
 
   @RequestMapping(method = GET, value = "/{companyId}/los/{loId}/timemap", produces = JsonLd.MEDIA_TYPE)
   @ApiOperation(value = "Retrieves the TimeMap of a given logistics object")
   public ResponseEntity<Timemap> getTimemap(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
-    LOG.info(ocspService.verifyCertificate());
     return new ResponseEntity<>(versioningService.getTimemap(getCurrentUri()), HttpStatus.OK);
   }
 
@@ -79,7 +73,6 @@ public class VersioningResource {
   public ResponseEntity<Void> getTimegate(@PathVariable("companyId") String companyId,
                                           @PathVariable("loId") String loId,
                                           @RequestHeader("Accept-Datetime") String dateTime) throws ParseException {
-    LOG.info(ocspService.verifyCertificate());
     final String loUri = getCurrentUri().replace("/timegate", "");
     Date date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(dateTime);
     Memento memento = versioningService.findMementoByDate(loUri, date);

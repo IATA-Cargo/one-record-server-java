@@ -3,7 +3,6 @@ package org.iata.service;
 import org.iata.api.model.PatchRequest;
 import org.iata.cargo.model.Event;
 import org.iata.cargo.model.LogisticsObject;
-import org.iata.model.AccessControlList;
 
 import java.util.List;
 

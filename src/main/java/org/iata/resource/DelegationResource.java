@@ -5,7 +5,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.iata.api.model.DelegationRequest;
 import org.iata.service.DelegationService;
-import org.iata.service.security.OcspService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -30,19 +29,16 @@ public class DelegationResource {
   private static final Logger LOG = LoggerFactory.getLogger(DelegationResource.class);
 
   private final DelegationService delegationService;
-  private final OcspService ocspService;
 
   @Inject
-  public DelegationResource(DelegationService delegationService, OcspService ocspService) {
+  public DelegationResource(DelegationService delegationService) {
     this.delegationService = delegationService;
-    this.ocspService = ocspService;
   }
 
   @RequestMapping(method = POST, value = "/{companyId}/delegation", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.OK)
   @ApiOperation(value = "Request delegation of access to third party to a logistics object")
   public ResponseEntity<Void> delegate(@PathVariable("companyId") String companyId, @RequestBody DelegationRequest delegationRequest) {
-    LOG.info(ocspService.verifyCertificate());
     delegationService.delegateAccess(delegationRequest);
     return new ResponseEntity<>(HttpStatus.OK);
   }

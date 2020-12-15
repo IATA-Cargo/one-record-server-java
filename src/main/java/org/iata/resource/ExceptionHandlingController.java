@@ -1,6 +1,5 @@
 package org.iata.resource;
 
-import org.iata.api.model.Details;
 import org.iata.api.model.Error;
 import org.iata.exception.LogisticsObjectNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashSet;
-import java.util.Set;
 
 @ControllerAdvice
 public class ExceptionHandlingController {

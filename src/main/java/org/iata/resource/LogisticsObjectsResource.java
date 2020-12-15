@@ -13,7 +13,6 @@ import org.iata.service.AccessControlListService;
 import org.iata.service.AuditTrailsService;
 import org.iata.service.LogisticsObjectsService;
 import org.iata.service.handler.LogisticsObjectsHandler;
-import org.iata.service.security.OcspService;
 import org.iata.util.RestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,22 +50,20 @@ public class LogisticsObjectsResource {
   private final LogisticsObjectsService logisticsObjectsService;
   private final AuditTrailsService auditTrailsService;
   private final AccessControlListService accessControlListService;
-  private final OcspService ocspService;
 
   @Inject
-  public LogisticsObjectsResource(LogisticsObjectsHandler logisticsObjectsHandler, LogisticsObjectsService logisticsObjectsService, AuditTrailsService auditTrailsService, AccessControlListService accessControlListService, OcspService ocspService) {
+  public LogisticsObjectsResource(LogisticsObjectsHandler logisticsObjectsHandler, LogisticsObjectsService logisticsObjectsService,
+                                  AuditTrailsService auditTrailsService, AccessControlListService accessControlListService) {
     this.logisticsObjectsHandler = logisticsObjectsHandler;
     this.logisticsObjectsService = logisticsObjectsService;
     this.auditTrailsService = auditTrailsService;
     this.accessControlListService = accessControlListService;
-    this.ocspService = ocspService;
   }
 
   @RequestMapping(method = POST, value = "/{companyId}/los", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.CREATED)
   @ApiOperation(value = "Creates a logistics object")
   public ResponseEntity<Void> addLogisticsObject(@PathVariable("companyId") String companyId, @RequestBody LogisticsObject logisticsObject) {
-    LOG.info(ocspService.verifyCertificate());
     LogisticsObject lo = logisticsObjectsHandler.handleAddLogisticsObject(logisticsObject, getCurrentUri());
     final HttpHeaders headers = new HttpHeaders();
     headers.set(HttpHeaders.LOCATION, lo.getId());
@@ -77,7 +74,6 @@ public class LogisticsObjectsResource {
   @ApiOperation(value = "INTERNAL Retrieves all the logistics objects for a given company")
   @ApiIgnore
   public ResponseEntity<List<LogisticsObject>> getLogisticsObjects(@PathVariable("companyId") String companyId) {
-    LOG.info(ocspService.verifyCertificate());
     final String id = getCurrentUri().replace("/los", "");
     return new ResponseEntity<>(logisticsObjectsService.findByCompanyIdentifier(id), HttpStatus.OK);
   }
@@ -85,8 +81,6 @@ public class LogisticsObjectsResource {
   @RequestMapping(method = GET, value = "/{companyId}/los/{loId}", produces = JsonLd.MEDIA_TYPE)
   @ApiOperation(value = "Retrieves a logistics object")
   public ResponseEntity<LogisticsObject> getLogisticsObject(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
-    LOG.info(ocspService.verifyCertificate());
-
     // Add ACL and Timemap location to Link headers
     final HttpHeaders headers = RestUtils.createLinkHeaderFromCurrentURi("/acl", "acl", Collections.emptyList());
     final HttpHeaders headersMementos = RestUtils.createLinkHeaderFromCurrentURi("/timemap", "timemap", Collections.emptyList());
@@ -105,7 +99,6 @@ public class LogisticsObjectsResource {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @ApiOperation(value = "Updates a logistics object - NOT WORKING CORRECTLY YET")
   public ResponseEntity<Void> updateLogisticsObject(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @RequestBody PatchRequest patchRequest) {
-    LOG.info(ocspService.verifyCertificate());
     logisticsObjectsHandler.handleUpdateLogisticsObject(patchRequest);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
@@ -118,7 +111,6 @@ public class LogisticsObjectsResource {
                                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate updatedFrom,
                                                   @RequestParam(value = "updatedTo", required = false)
                                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate updatedTo) {
-    LOG.info(ocspService.verifyCertificate());
     return new ResponseEntity<>(auditTrailsService.findById(getCurrentUri(), updatedFrom, updatedTo), HttpStatus.OK);
   }
 
@@ -126,7 +118,6 @@ public class LogisticsObjectsResource {
   @ResponseStatus(HttpStatus.CREATED)
   @ApiOperation(value = "Creates events for a given logistics object")
   public ResponseEntity<Void> addEvents(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @RequestBody Event event) {
-    LOG.info(ocspService.verifyCertificate());
     logisticsObjectsService.addEvent(event);
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
@@ -134,7 +125,6 @@ public class LogisticsObjectsResource {
   @RequestMapping(method = GET, value = "/{companyId}/los/{loId}/events", produces = JsonLd.MEDIA_TYPE)
   @ApiOperation(value = "Retrieves the events of a given logistics object")
   public ResponseEntity<List<Event>> getEvents(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
-    LOG.info(ocspService.verifyCertificate());
     final String loUri = getCurrentUri().replace("/events", "");
     return new ResponseEntity<>(logisticsObjectsService.findEvents(loUri), HttpStatus.OK);
   }
@@ -144,7 +134,6 @@ public class LogisticsObjectsResource {
   @ApiOperation(value = "INTERNAL Creates Access Control List item for a given logistics object")
   @ApiIgnore
   public ResponseEntity<Void> addACL(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @RequestBody AccessControlList acl) {
-    LOG.info(ocspService.verifyCertificate());
     accessControlListService.addAccessControlList(acl);
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
@@ -152,7 +141,6 @@ public class LogisticsObjectsResource {
   @RequestMapping(method = GET, value = "/{companyId}/los/{loId}/acl", produces = JsonLd.MEDIA_TYPE)
   @ApiOperation(value = "Retrieves the Access Control List of a given logistics object")
   public ResponseEntity<List<AccessControlList>> getACL(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
-    LOG.info(ocspService.verifyCertificate());
     final String loUri = getCurrentUri().replace("/acl", "");
     return new ResponseEntity<>(accessControlListService.findByLogisticsObjectRef(loUri), HttpStatus.OK);
   }

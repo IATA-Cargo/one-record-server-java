@@ -231,10 +231,10 @@ public class TransportSegment
      */
     @OWLDataProperty(iri = Vocabulary.s_p_transportIdentifier)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#decimal", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
     @JsonProperty(Vocabulary.s_p_transportIdentifier)
-    protected BigDecimal transportIdentifier;
+    protected String transportIdentifier;
 
     public void setArrivalLocation(Location arrivalLocation) {
         this.arrivalLocation = arrivalLocation;
@@ -396,11 +396,11 @@ public class TransportSegment
         return segmentLevel;
     }
 
-    public void setTransportIdentifier(BigDecimal transportIdentifier) {
+    public void setTransportIdentifier(String transportIdentifier) {
         this.transportIdentifier = transportIdentifier;
     }
 
-    public BigDecimal getTransportIdentifier() {
+    public String getTransportIdentifier() {
         return transportIdentifier;
     }
 

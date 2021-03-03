@@ -91,6 +91,7 @@ public class Subscription
      *
      */
     @OWLDataProperty(iri = Vocabulary.s_p_contentType)
+    @JsonProperty(Vocabulary.s_p_contentType)
     protected Set<String> contentType;
     /**
      * The company identifier from the Internet of Logistics of my company.

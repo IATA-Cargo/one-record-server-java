@@ -38,8 +38,7 @@ public class Subscription
 {
 
     @Id(generated = true)
-    //@ApiModelProperty(readOnly = true)
-
+    @ApiModelProperty(readOnly = true)
     protected String id;
     @JsonIgnore
     @OWLAnnotationProperty(iri = RDFS.LABEL)

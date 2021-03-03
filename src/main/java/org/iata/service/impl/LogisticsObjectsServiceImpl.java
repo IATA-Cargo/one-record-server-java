@@ -42,7 +42,7 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
 
   @Override
   public void updateLogisticsObject(PatchRequest patchRequest) {
-    LogisticsObject logisticsObject = logisticsObjectsRepository.findById(patchRequest.getLogisticsObjectRef()).orElse(null);
+    LogisticsObject logisticsObject = logisticsObjectsRepository.findById(patchRequest.getLogisticsObjectRef().getLogisticsObjectId()).orElse(null);
     if (logisticsObject != null) {
       patchRequest.getOperations()
           .forEach(operation -> {

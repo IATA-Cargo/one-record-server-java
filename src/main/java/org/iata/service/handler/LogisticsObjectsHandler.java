@@ -1,7 +1,8 @@
 package org.iata.service.handler;
 
 import org.iata.api.model.AuditTrail;
-import org.iata.api.model.Create;
+import org.iata.api.model.LogisticsObjectRef;
+import org.iata.api.model.Memento;
 import org.iata.api.model.PatchRequest;
 import org.iata.api.model.Timemap;
 import org.iata.cargo.model.LogisticsObject;
@@ -60,11 +61,13 @@ public class LogisticsObjectsHandler {
     AuditTrail auditTrail = new AuditTrail();
     String auditTrailId = loid + "/auditTrail";
     auditTrail.setId(auditTrailId);
-    Create create = new Create();
-    create.setId(auditTrailId + "/create");
-    create.setLo(logisticsObject);
-    auditTrail.setCreate(create);
-    auditTrail.setLogisticsObjectRef(loid);
+    Memento initialLo = new Memento();
+    // TODO fonctionality for creating snapshots/mementos
+    initialLo.setId(auditTrailId + "/loInitialSnapshot");
+    auditTrail.setLoInitialSnapshot(initialLo);
+    LogisticsObjectRef logisticsObjectRef = new LogisticsObjectRef();
+    logisticsObjectRef.setLogisticsObjectId(loid);
+    auditTrail.setLogisticsObjectRef(logisticsObjectRef);
     auditTrailsService.addAuditTrail(auditTrail);
   }
 

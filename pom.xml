@@ -129,21 +129,6 @@
             <artifactId>jb4jsonld-jackson</artifactId>
             <version>${cz.cvut.kbss.jb4jsonld.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-            <version>${bouncycastle.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpkix-jdk15on</artifactId>
-            <version>${bouncycastle.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcmail-jdk15on</artifactId>
-            <version>${bouncycastle.version}</version>
-        </dependency>
 
         <!-- test dependencies -->
         <dependency>
@@ -164,8 +149,8 @@
         <mongodb.version>3.12.7</mongodb.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
-        <cz.cvut.kbss.jopa.version>0.16.2</cz.cvut.kbss.jopa.version>
-        <cz.cvut.kbss.jb4jsonld.version>0.8.2</cz.cvut.kbss.jb4jsonld.version>
+        <cz.cvut.kbss.jopa.version>0.16.4</cz.cvut.kbss.jopa.version>
+        <cz.cvut.kbss.jb4jsonld.version>0.8.4</cz.cvut.kbss.jb4jsonld.version>
     </properties>
 
     <profiles>

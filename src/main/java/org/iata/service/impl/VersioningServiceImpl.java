@@ -61,7 +61,9 @@ public class VersioningServiceImpl implements VersioningService {
     mementoList.setId(mementoId + "/mementoList");
     MementoEntry mementoEntry = new MementoEntry();
     mementoEntry.setId(mementoId + "/mementoList/mementoEntry_" + Utils.getRandomNumberString());
-    mementoEntry.setMemento(mementoId);
+    Memento mem = new Memento();
+    mem.setId(mementoId);
+    mementoEntry.setMemento(mem);
     mementoEntry.setLabel(memento.getLabel());
     mementoEntry.setDatetime(memento.getCreated());
     if (mementoList.getMementoEntry() == null) {

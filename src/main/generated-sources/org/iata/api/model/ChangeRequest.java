@@ -16,6 +16,7 @@ import cz.cvut.kbss.jopa.vocabulary.DC;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
 import io.swagger.annotations.ApiModelProperty;
 import org.iata.api.Vocabulary;
+import org.iata.cargo.model.Branch;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -60,19 +61,30 @@ public class ChangeRequest
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_patchRequest)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
     @JsonProperty(Vocabulary.s_p_patchRequest)
     protected PatchRequest patchRequest;
+    /**
+     * The party that has requested the change request
+     * 
+     */
+    @OWLObjectProperty(iri = Vocabulary.s_p_requestingParty)
+    @ParticipationConstraints({
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
+    })
+    @JsonProperty(Vocabulary.s_p_requestingParty)
+    protected Branch requestingParty;
     /**
      * Company which sent the change request
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_companyId)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
     @JsonProperty(Vocabulary.s_p_companyId)
     protected String companyId;
@@ -150,6 +162,14 @@ public class ChangeRequest
 
     public PatchRequest getPatchRequest() {
         return patchRequest;
+    }
+
+    public void setRequestingParty(Branch requestingParty) {
+        this.requestingParty = requestingParty;
+    }
+
+    public Branch getRequestingParty() {
+        return requestingParty;
     }
 
     public void setCompanyId(String companyId) {

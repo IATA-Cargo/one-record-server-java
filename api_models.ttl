@@ -80,6 +80,13 @@ changeRequest:patchRequest rdf:type owl:ObjectProperty ;
                rdfs:comment "PATCH body of a change request sent for a specific Logistics Object"@en ;
                rdfs:label "changeRequest:patchRequest"@en .
 
+               ###  https://onerecord.iata.org/ChangeRequest#requestingParty
+               changeRequest:requestingParty rdf:type owl:ObjectProperty ;
+                              rdfs:domain :ChangeRequest ;
+                              rdfs:range :Branch ;
+                              rdfs:comment "The party that has requested the change request"@en ;
+                              rdfs:label "changeRequest:requestingParty"@en .
+
 ###  https://onerecord.iata.org/CompanyInformation#company
 companyInformation:company rdf:type owl:ObjectProperty ;
                rdfs:domain :CompanyInformation ;
@@ -686,6 +693,18 @@ timemap:timegate rdf:type owl:DatatypeProperty ;
                        ] ,
                        [ rdf:type owl:Restriction ;
                          owl:onProperty changeRequest:patchRequest;
+                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty changeRequest:requestingParty;
+                         owl:allValuesFrom <https://onerecord.iata.org/Branch>
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty changeRequest:requestingParty;
+                         owl:minCardinality "1"^^xsd:nonNegativeInteger
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty changeRequest:requestingParty;
                          owl:maxCardinality "1"^^xsd:nonNegativeInteger
                        ] ,
                        [ rdf:type owl:Restriction ;

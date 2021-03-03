@@ -20,6 +20,8 @@ public class Vocabulary {
      */
     public final static String s_c_AuditTrail = "https://onerecord.iata.org/AuditTrail";
     public final static IRI c_AuditTrail = IRI.create(s_c_AuditTrail);
+    public final static String s_c_Branch = "https://onerecord.iata.org/Branch";
+    public final static IRI c_Branch = IRI.create(s_c_Branch);
     /**
      * Change Request for the audit trail
      * 
@@ -148,6 +150,12 @@ public class Vocabulary {
      */
     public final static String s_p_patchRequest = "https://onerecord.iata.org/ChangeRequest#patchRequest";
     public final static IRI p_patchRequest = IRI.create(s_p_patchRequest);
+    /**
+     * The party that has requested the change request
+     * 
+     */
+    public final static String s_p_requestingParty = "https://onerecord.iata.org/ChangeRequest#requestingParty";
+    public final static IRI p_requestingParty = IRI.create(s_p_requestingParty);
     /**
      * Company details
      * 

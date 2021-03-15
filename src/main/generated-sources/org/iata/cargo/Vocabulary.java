@@ -627,6 +627,18 @@ public class Vocabulary {
     public final static String s_p_customsInfo = "https://onerecord.iata.org/Piece#customsInfo";
     public final static IRI p_customsInfo = IRI.create(s_p_customsInfo);
     /**
+     * The value of a shipment declared for carriage purposes , NVD if no value declared
+     *
+     */
+    public final static String s_p_declaredValueForCarriage = "https://onerecord.iata.org/Piece#declaredValueForCarriage";
+    public final static IRI p_declaredValueForCarriage = IRI.create(s_p_declaredValueForCarriage);
+    /**
+     * The value of a shipment declared for customs purposes , NVD if no value declared
+     *
+     */
+    public final static String s_p_declaredValueForCustoms = "https://onerecord.iata.org/Piece#declaredValueForCustoms";
+    public final static IRI p_declaredValueForCustoms = IRI.create(s_p_declaredValueForCustoms);
+    /**
      * Reference to the Dangerous Goods declaration
      * 
      */

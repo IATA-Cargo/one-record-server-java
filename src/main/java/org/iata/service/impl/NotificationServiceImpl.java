@@ -29,7 +29,7 @@ public class NotificationServiceImpl implements NotificationService {
   @Override
   public void handleNotification(Notification notification) {
     LOG.info("Saving notification...");
-    notification.setId(notification.getLogisticsObjectRef().getLogisticsObjectId());
+    notification.setId(notification.getLogisticsObject().getId());
     notificationsRepository.save(notification);
 
     LOG.info("Retrieve content of the logistics object from publisher...");
@@ -41,7 +41,7 @@ public class NotificationServiceImpl implements NotificationService {
     URL url;
     HttpURLConnection connection = null;
     try {
-      url = new URL(notification.getLogisticsObjectRef().getLogisticsObjectId());
+      url = new URL(notification.getLogisticsObject().getId());
       connection = (HttpURLConnection) url.openConnection();
       connection.setRequestMethod("GET");
       connection.setRequestProperty("Content-Type", "application/ld+json");

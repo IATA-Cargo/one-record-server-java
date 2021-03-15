@@ -23,7 +23,8 @@ public class DelegationServiceImpl implements DelegationService {
 
   @Override
   public void delegateAccess(DelegationRequest delegationRequest) {
-    final String delegationId = delegationRequest.getTargetLogisticsObject() + "#" + delegationRequest.getTargetCompany() + "#" + delegationRequest.getAction();
+    // TODO for each
+    final String delegationId = delegationRequest.getTargetLogisticsObjects() + "#" + delegationRequest.getTargetCompanies() + "#" + delegationRequest.getAction();
     if (delegationRequest.getAction().equalsIgnoreCase("DELEGATE")) {
       delegationRequest.setId(delegationId);
       delegationRequestRepository.save(delegationRequest);

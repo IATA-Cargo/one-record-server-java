@@ -1,4 +1,5 @@
 {
+  "@language": "en",
   "@type": [
     "https://onerecord.iata.org/DelegationRequest"
   ],
@@ -6,10 +7,10 @@
   "https://onerecord.iata.org/DelegationRequest#operations": [
     "GET"
   ],
-  "https://onerecord.iata.org/DelegationRequest#targetCompany": [
+  "https://onerecord.iata.org/DelegationRequest#targetCompanies": [
     "http://localhost:8080/companies/iata"
   ],
-  "https://onerecord.iata.org/DelegationRequest#targetLogisticsObject": [
+  "https://onerecord.iata.org/DelegationRequest#targetLogisticsObjects": [
     "http://localhost:8080/companies/iata/los/lo1"
   ]
 }

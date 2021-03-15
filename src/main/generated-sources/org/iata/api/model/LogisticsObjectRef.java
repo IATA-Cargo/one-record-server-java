@@ -38,8 +38,8 @@ public class LogisticsObjectRef
     @JsonIgnore
     @OWLAnnotationProperty(iri = RDFS.LABEL)
     protected String name;
-    @OWLAnnotationProperty(iri = DC.Elements.DESCRIPTION)
     @JsonIgnore
+    @OWLAnnotationProperty(iri = cz.cvut.kbss.jopa.vocabulary.DC.Elements.DESCRIPTION)
     protected String description;
     @Types
     @JsonProperty("@type")
@@ -69,8 +69,8 @@ public class LogisticsObjectRef
      */
     @OWLDataProperty(iri = Vocabulary.s_p_logisticsObjectType)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
     @JsonProperty(Vocabulary.s_p_logisticsObjectType)
     protected String logisticsObjectType;

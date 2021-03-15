@@ -41,7 +41,7 @@ public class MementoEntry
     @OWLAnnotationProperty(iri = RDFS.LABEL)
     protected String name;
     @JsonIgnore
-    @OWLAnnotationProperty(iri = DC.Elements.DESCRIPTION)
+    @OWLAnnotationProperty(iri = cz.cvut.kbss.jopa.vocabulary.DC.Elements.DESCRIPTION)
     protected String description;
     @Types
     @JsonProperty("@type")
@@ -71,8 +71,8 @@ public class MementoEntry
      */
     @OWLDataProperty(iri = Vocabulary.s_p_datetime)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
     })
     @JsonProperty(Vocabulary.s_p_datetime)
     protected Date datetime;

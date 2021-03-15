@@ -39,7 +39,7 @@ public class MementoList
     @OWLAnnotationProperty(iri = RDFS.LABEL)
     protected String name;
     @JsonIgnore
-    @OWLAnnotationProperty(iri = DC.Elements.DESCRIPTION)
+    @OWLAnnotationProperty(iri = cz.cvut.kbss.jopa.vocabulary.DC.Elements.DESCRIPTION)
     protected String description;
     @Types
     @ApiModelProperty(allowableValues = Vocabulary.s_c_MementoList)

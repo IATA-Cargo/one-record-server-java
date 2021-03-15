@@ -54,6 +54,8 @@ public class Vocabulary {
      */
     public final static String s_c_Error = "https://onerecord.iata.org/Error";
     public final static IRI c_Error = IRI.create(s_c_Error);
+    public final static String s_c_LogisticsObject = "https://onerecord.iata.org/LogisticsObject";
+    public final static IRI c_LogisticsObject = IRI.create(s_c_LogisticsObject);
     /**
      * Reference to a Logistics Object
      * 
@@ -121,17 +123,17 @@ public class Vocabulary {
     public final static String s_c_Timemap = "https://onerecord.iata.org/Timemap";
     public final static IRI c_Timemap = IRI.create(s_c_Timemap);
     /**
-     * List of change requests that were sent as PATCH on for a Logitstics Object
+     * List of change requests that were sent as PATCH on for a Logistics Object
      * 
      */
-    public final static String s_p_changeRequest = "https://onerecord.iata.org/AuditTrail#changeRequest";
-    public final static IRI p_changeRequest = IRI.create(s_p_changeRequest);
+    public final static String s_p_changeRequests = "https://onerecord.iata.org/AuditTrail#changeRequests";
+    public final static IRI p_changeRequests = IRI.create(s_p_changeRequests);
     /**
      * Non mandatory error details
      * 
      */
-    public final static String s_p_error = "https://onerecord.iata.org/AuditTrail#error";
-    public final static IRI p_error = IRI.create(s_p_error);
+    public final static String s_p_errors = "https://onerecord.iata.org/AuditTrail#errors";
+    public final static IRI p_errors = IRI.create(s_p_errors);
     /**
      * Initial content of the Logistics Object at the creation moment, represented via a Memento
      * 
@@ -166,14 +168,14 @@ public class Vocabulary {
      * Non mandatory error details
      * 
      */
-    public final static String s_p_error_A = "https://onerecord.iata.org/CompanyInformation#error";
-    public final static IRI p_error_A = IRI.create(s_p_error_A);
+    public final static String s_p_errors_A = "https://onerecord.iata.org/CompanyInformation#errors";
+    public final static IRI p_errors_A = IRI.create(s_p_errors_A);
     /**
-     * Identifier of the logistics object to which the access is requested
+     * Identifiers of the logistics objects to which the access is requested
      * 
      */
-    public final static String s_p_targetLogisticsObject = "https://onerecord.iata.org/DelegationRequest#targetLogisticsObject";
-    public final static IRI p_targetLogisticsObject = IRI.create(s_p_targetLogisticsObject);
+    public final static String s_p_targetLogisticsObjects = "https://onerecord.iata.org/DelegationRequest#targetLogisticsObjects";
+    public final static IRI p_targetLogisticsObjects = IRI.create(s_p_targetLogisticsObjects);
     /**
      * Error details
      * 
@@ -199,11 +201,11 @@ public class Vocabulary {
     public final static String s_p_list = "https://onerecord.iata.org/Mementos#list";
     public final static IRI p_list = IRI.create(s_p_list);
     /**
-     * Logistics Object reference for which the notification is sent
+     * Logistics Object for which the notification is sent
      * 
      */
-    public final static String s_p_logisticsObjectRef_A = "https://onerecord.iata.org/Notification#logisticsObjectRef";
-    public final static IRI p_logisticsObjectRef_A = IRI.create(s_p_logisticsObjectRef_A);
+    public final static String s_p_logisticsObject = "https://onerecord.iata.org/Notification#logisticsObject";
+    public final static IRI p_logisticsObject = IRI.create(s_p_logisticsObject);
     /**
      * PATCH object to modify
      * 
@@ -214,8 +216,8 @@ public class Vocabulary {
      * Reference of the Logistics Object to which the change request is applied to
      * 
      */
-    public final static String s_p_logisticsObjectRef_A_A = "https://onerecord.iata.org/PatchRequest#logisticsObjectRef";
-    public final static IRI p_logisticsObjectRef_A_A = IRI.create(s_p_logisticsObjectRef_A_A);
+    public final static String s_p_logisticsObjectRef_A = "https://onerecord.iata.org/PatchRequest#logisticsObjectRef";
+    public final static IRI p_logisticsObjectRef_A = IRI.create(s_p_logisticsObjectRef_A);
     /**
      * List of operations to apply as PATCH on a Logistics Object
      * 
@@ -226,8 +228,8 @@ public class Vocabulary {
      * Non mandatory error details
      * 
      */
-    public final static String s_p_error_A_A = "https://onerecord.iata.org/Subscription#error";
-    public final static IRI p_error_A_A = IRI.create(s_p_error_A_A);
+    public final static String s_p_errors_A_A = "https://onerecord.iata.org/Subscription#errors";
+    public final static IRI p_errors_A_A = IRI.create(s_p_errors_A_A);
     /**
      * List of mementos of a Logistics Object
      * 
@@ -289,11 +291,11 @@ public class Vocabulary {
     public final static String s_p_operations_A = "https://onerecord.iata.org/DelegationRequest#operations";
     public final static IRI p_operations_A = IRI.create(s_p_operations_A);
     /**
-     * Party that receives the delegated rights
+     * Parties that receive the delegated rights
      * 
      */
-    public final static String s_p_targetCompany = "https://onerecord.iata.org/DelegationRequest#targetCompany";
-    public final static IRI p_targetCompany = IRI.create(s_p_targetCompany);
+    public final static String s_p_targetCompanies = "https://onerecord.iata.org/DelegationRequest#targetCompanies";
+    public final static IRI p_targetCompanies = IRI.create(s_p_targetCompanies);
     /**
      * Field of the object for which the error applies
      * 
@@ -451,11 +453,11 @@ public class Vocabulary {
     public final static String s_p_callbackUrl = "https://onerecord.iata.org/Subscription#callbackUrl";
     public final static IRI p_callbackUrl = IRI.create(s_p_callbackUrl);
     /**
-     * Content type that the subscriber wants to receive in the notifications
+     * Content types that the subscriber wants to receive in the notifications
      * 
      */
-    public final static String s_p_contentType = "https://onerecord.iata.org/Subscription#contentType";
-    public final static IRI p_contentType = IRI.create(s_p_contentType);
+    public final static String s_p_contentTypes = "https://onerecord.iata.org/Subscription#contentTypes";
+    public final static IRI p_contentTypes = IRI.create(s_p_contentTypes);
     /**
      * The company identifier from the Internet of Logistics of my company.
      * 

@@ -40,7 +40,7 @@ public class PatchRequest
     @OWLAnnotationProperty(iri = RDFS.LABEL)
     protected String name;
     @JsonIgnore
-    @OWLAnnotationProperty(iri = DC.Elements.DESCRIPTION)
+    @OWLAnnotationProperty(iri = cz.cvut.kbss.jopa.vocabulary.DC.Elements.DESCRIPTION)
     protected String description;
     @Types
     @JsonProperty("@type")
@@ -57,12 +57,12 @@ public class PatchRequest
      * Reference of the Logistics Object to which the change request is applied to
      * 
      */
-    @OWLObjectProperty(iri = Vocabulary.s_p_logisticsObjectRef_A_A)
+    @OWLObjectProperty(iri = Vocabulary.s_p_logisticsObjectRef_A)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
-    @JsonProperty(Vocabulary.s_p_logisticsObjectRef_A_A)
+    @JsonProperty(Vocabulary.s_p_logisticsObjectRef_A)
     protected LogisticsObjectRef logisticsObjectRef;
     /**
      * List of operations to apply as PATCH on a Logistics Object

@@ -44,13 +44,13 @@ public class AuditTrailServiceImpl implements AuditTrailsService {
     AuditTrail auditTrail = auditTrailRepository
         .findByLogisticsObjectRef(patchRequest.getLogisticsObjectRef().getLogisticsObjectId())
         .stream().findFirst().orElseThrow(LogisticsObjectNotFoundException::new);
-    Set<ChangeRequest> changeRequests = Optional.ofNullable(auditTrail.getChangeRequest()).orElse(new HashSet<>());
+    Set<ChangeRequest> changeRequests = Optional.ofNullable(auditTrail.getChangeRequests()).orElse(new HashSet<>());
     ChangeRequest changeRequest = new ChangeRequest();
     changeRequest.setTimestamp(new Date());
     changeRequest.setCompanyId(patchRequest.getRequestorCompanyIdentifier());
     changeRequest.setPatchRequest(patchRequest);
     changeRequests.add(changeRequest);
-    auditTrail.setChangeRequest(changeRequests);
+    auditTrail.setChangeRequests(changeRequests);
     auditTrailRepository.save(auditTrail);
   }
 
@@ -58,12 +58,12 @@ public class AuditTrailServiceImpl implements AuditTrailsService {
   public AuditTrail findById(String auditTrailId, LocalDate updatedFrom, LocalDate updatedTo) {
     AuditTrail auditTrail = auditTrailRepository.findById(auditTrailId).orElse(null);
     if (auditTrail != null) {
-      List<ChangeRequest> changeRequests = Optional.ofNullable(auditTrail.getChangeRequest()).map(a -> a
+      List<ChangeRequest> changeRequests = Optional.ofNullable(auditTrail.getChangeRequests()).map(a -> a
           .stream()
           .filter(changeRequest -> (updatedFrom != null && changeRequest.getTimestamp().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isAfter(updatedFrom))
               && (updatedTo != null && changeRequest.getTimestamp().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(updatedTo)))
           .collect(Collectors.toList())).orElse(new ArrayList<>());
-      auditTrail.setChangeRequest(new HashSet<>(changeRequests));
+      auditTrail.setChangeRequests(new HashSet<>(changeRequests));
     }
 
     return auditTrail;

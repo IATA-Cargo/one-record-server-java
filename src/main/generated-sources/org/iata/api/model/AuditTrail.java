@@ -43,7 +43,7 @@ public class AuditTrail
     @OWLAnnotationProperty(iri = RDFS.LABEL)
     protected String name;
     @JsonIgnore
-    @OWLAnnotationProperty(iri = DC.Elements.DESCRIPTION)
+    @OWLAnnotationProperty(iri = cz.cvut.kbss.jopa.vocabulary.DC.Elements.DESCRIPTION)
     protected String description;
     @Types
     @JsonProperty("@type")
@@ -57,33 +57,30 @@ public class AuditTrail
     protected String language;
 
     /**
-     * List of change requests that were sent as PATCH on for a Logitstics Object
+     * List of change requests that were sent as PATCH on for a Logistics Object
      * 
      */
-    @OWLObjectProperty(iri = Vocabulary.s_p_changeRequest)
+    @OWLObjectProperty(iri = Vocabulary.s_p_changeRequests)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
-    @JsonProperty(Vocabulary.s_p_changeRequest)
-    protected Set<ChangeRequest> changeRequest;
+    @JsonProperty(Vocabulary.s_p_changeRequests)
+    protected Set<ChangeRequest> changeRequests;
     /**
      * Non mandatory error details
      * 
      */
-    @OWLObjectProperty(iri = Vocabulary.s_p_error)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = -1)
-    })
-    @JsonProperty(Vocabulary.s_p_error)
-    protected Set<Error> error;
+    @OWLObjectProperty(iri = Vocabulary.s_p_errors)
+    @JsonProperty(Vocabulary.s_p_errors)
+    protected Set<Error> errors;
     /**
      * Initial content of the Logistics Object at the creation moment, represented via a Memento
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_loInitialSnapshot)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
     @JsonProperty(Vocabulary.s_p_loInitialSnapshot)
     protected Memento loInitialSnapshot;
@@ -144,20 +141,20 @@ public class AuditTrail
         return ((((("AuditTrail {"+ name)+"<")+ id)+">")+"}");
     }
 
-    public void setChangeRequest(Set<ChangeRequest> changeRequest) {
-        this.changeRequest = changeRequest;
+    public void setChangeRequests(Set<ChangeRequest> changeRequests) {
+        this.changeRequests = changeRequests;
     }
 
-    public Set<ChangeRequest> getChangeRequest() {
-        return changeRequest;
+    public Set<ChangeRequest> getChangeRequests() {
+        return changeRequests;
     }
 
-    public void setError(Set<Error> error) {
-        this.error = error;
+    public void setErrors(Set<Error> errors) {
+        this.errors = errors;
     }
 
-    public Set<Error> getError() {
-        return error;
+    public Set<Error> getErrors() {
+        return errors;
     }
 
     public void setLoInitialSnapshot(Memento loInitialSnapshot) {

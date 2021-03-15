@@ -45,7 +45,7 @@ public class CompanyInformation
     @OWLAnnotationProperty(iri = RDFS.LABEL)
     protected String name;
     @JsonIgnore
-    @OWLAnnotationProperty(iri = DC.Elements.DESCRIPTION)
+    @OWLAnnotationProperty(iri = cz.cvut.kbss.jopa.vocabulary.DC.Elements.DESCRIPTION)
     protected String description;
     @Types
     @ApiModelProperty(allowableValues = Vocabulary.s_c_CompanyInformation)
@@ -73,9 +73,9 @@ public class CompanyInformation
      * Non mandatory error details
      * 
      */
-    @OWLObjectProperty(iri = Vocabulary.s_p_error_A)
-    @JsonProperty(Vocabulary.s_p_error_A)
-    protected Set<Error> error;
+    @OWLObjectProperty(iri = Vocabulary.s_p_errors_A)
+    @JsonProperty(Vocabulary.s_p_errors_A)
+    protected Set<Error> errors;
     /**
      * Company Id, for example airline code.
      * 
@@ -93,8 +93,8 @@ public class CompanyInformation
      */
     @OWLDataProperty(iri = Vocabulary.s_p_serverEndpoint)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
     @JsonProperty(Vocabulary.s_p_serverEndpoint)
     protected String serverEndpoint;
@@ -172,12 +172,12 @@ public class CompanyInformation
         return company;
     }
 
-    public void setError(Set<Error> error) {
-        this.error = error;
+    public void setErrors(Set<Error> errors) {
+        this.errors = errors;
     }
 
-    public Set<Error> getError() {
-        return error;
+    public Set<Error> getErrors() {
+        return errors;
     }
 
     public void setCompanyId(String companyId) {

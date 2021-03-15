@@ -39,7 +39,7 @@ public class SubscriptionsServiceImpl implements SubscriptionsService {
     subscription.setSubscribeToStatusUpdates(Boolean.valueOf(env.getProperty("subscription.subscribeToStatusUpdates")));
     subscription.setSecret(env.getProperty("subscription.secret"));
     subscription.setCacheFor(Objects.requireNonNull(env.getProperty("subscription.cacheFor")));
-    subscription.setContentType(new HashSet<>(Collections.singleton(Objects.requireNonNull(env.getProperty("subscription.contentType")))));
+    subscription.setContentTypes(new HashSet<>(Collections.singleton(Objects.requireNonNull(env.getProperty("subscription.contentType")))));
     subscription.setTopic(topic.getTopic());
     subscription.setMyCompanyIdentifier(companyUrl);
     return subscription;

@@ -44,7 +44,7 @@ public class DelegationRequest
     @OWLAnnotationProperty(iri = RDFS.LABEL)
     protected String name;
     @JsonIgnore
-    @OWLAnnotationProperty(iri = DC.Elements.DESCRIPTION)
+    @OWLAnnotationProperty(iri = cz.cvut.kbss.jopa.vocabulary.DC.Elements.DESCRIPTION)
     protected String description;
     @Types
     @JsonProperty("@type")
@@ -58,15 +58,15 @@ public class DelegationRequest
     protected String language;
 
     /**
-     * Identifier of the logistics object to which the access is requested
+     * Identifiers of the logistics objects to which the access is requested
      * 
      */
-    @OWLObjectProperty(iri = Vocabulary.s_p_targetLogisticsObject)
+    @OWLObjectProperty(iri = Vocabulary.s_p_targetLogisticsObjects)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
-    @JsonProperty(Vocabulary.s_p_targetLogisticsObject)
-    protected Set<LogisticsObjectRef> targetLogisticsObject;
+    @JsonProperty(Vocabulary.s_p_targetLogisticsObjects)
+    protected Set<LogisticsObjectRef> targetLogisticsObjects;
     /**
      * REVOKE or DELEGATE
      * 
@@ -89,15 +89,15 @@ public class DelegationRequest
     @JsonProperty(Vocabulary.s_p_operations_A)
     protected Set<String> operations;
     /**
-     * Party that receives the delegated rights
+     * Parties that receive the delegated rights
      * 
      */
-    @OWLDataProperty(iri = Vocabulary.s_p_targetCompany)
+    @OWLDataProperty(iri = Vocabulary.s_p_targetCompanies)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
-    @JsonProperty(Vocabulary.s_p_targetCompany)
-    protected Set<String> targetCompany;
+    @JsonProperty(Vocabulary.s_p_targetCompanies)
+    protected Set<String> targetCompanies;
 
     public void setId(String id) {
         this.id = id;
@@ -144,12 +144,12 @@ public class DelegationRequest
         return ((((("DelegationRequest {"+ name)+"<")+ id)+">")+"}");
     }
 
-    public void setTargetLogisticsObject(Set<LogisticsObjectRef> targetLogisticsObject) {
-        this.targetLogisticsObject = targetLogisticsObject;
+    public void setTargetLogisticsObjects(Set<LogisticsObjectRef> targetLogisticsObjects) {
+        this.targetLogisticsObjects = targetLogisticsObjects;
     }
 
-    public Set<LogisticsObjectRef> getTargetLogisticsObject() {
-        return targetLogisticsObject;
+    public Set<LogisticsObjectRef> getTargetLogisticsObjects() {
+        return targetLogisticsObjects;
     }
 
     public void setAction(String action) {
@@ -168,12 +168,12 @@ public class DelegationRequest
         return operations;
     }
 
-    public void setTargetCompany(Set<String> targetCompany) {
-        this.targetCompany = targetCompany;
+    public void setTargetCompanies(Set<String> targetCompanies) {
+        this.targetCompanies = targetCompanies;
     }
 
-    public Set<String> getTargetCompany() {
-        return targetCompany;
+    public Set<String> getTargetCompanies() {
+        return targetCompanies;
     }
 
     public String getLanguage() {

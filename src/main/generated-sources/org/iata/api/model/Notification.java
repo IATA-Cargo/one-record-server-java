@@ -17,6 +17,7 @@ import cz.cvut.kbss.jopa.vocabulary.RDFS;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.iata.api.Vocabulary;
+import org.iata.cargo.model.LogisticsObject;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
@@ -44,7 +45,7 @@ public class Notification
     @OWLAnnotationProperty(iri = RDFS.LABEL)
     protected String name;
     @JsonIgnore
-    @OWLAnnotationProperty(iri = DC.Elements.DESCRIPTION)
+    @OWLAnnotationProperty(iri = cz.cvut.kbss.jopa.vocabulary.DC.Elements.DESCRIPTION)
     protected String description;
     @Types
     @ApiModelProperty(allowableValues = Vocabulary.s_c_Notification)
@@ -58,16 +59,16 @@ public class Notification
     protected String language;
 
     /**
-     * Logistics Object reference for which the notification is sent
+     * Logistics Object for which the notification is sent
      * 
      */
-    @OWLObjectProperty(iri = Vocabulary.s_p_logisticsObjectRef_A)
+    @OWLObjectProperty(iri = Vocabulary.s_p_logisticsObject)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
-    @JsonProperty(Vocabulary.s_p_logisticsObjectRef_A)
-    protected LogisticsObjectRef logisticsObjectRef;
+    @JsonProperty(Vocabulary.s_p_logisticsObject)
+    protected LogisticsObject logisticsObject;
     /**
      * OBJECT_CREATED or OBJECT_UPDATED
      * 
@@ -85,8 +86,8 @@ public class Notification
      */
     @OWLDataProperty(iri = Vocabulary.s_p_topic)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
     @JsonProperty(Vocabulary.s_p_topic)
     protected String topic;
@@ -136,12 +137,12 @@ public class Notification
         return ((((("Notification {"+ name)+"<")+ id)+">")+"}");
     }
 
-    public void setLogisticsObjectRef(LogisticsObjectRef logisticsObjectRef) {
-        this.logisticsObjectRef = logisticsObjectRef;
+    public void setLogisticsObject(LogisticsObject logisticsObject) {
+        this.logisticsObject = logisticsObject;
     }
 
-    public LogisticsObjectRef getLogisticsObjectRef() {
-        return logisticsObjectRef;
+    public LogisticsObject getLogisticsObject() {
+        return logisticsObject;
     }
 
     public void setEventType(String eventType) {

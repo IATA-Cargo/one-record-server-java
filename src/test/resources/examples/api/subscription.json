@@ -1,10 +1,11 @@
 {
+  "@language": "en",
   "@type": [
     "https://onerecord.iata.org/Subscription"
   ],
   "https://onerecord.iata.org/Subscription#cacheFor": "86400",
   "https://onerecord.iata.org/Subscription#callbackUrl": "http://localhost:8080/companies/iata/callback?topic=Piece",
-  "https://onerecord.iata.org/Subscription#contentType": [
+  "https://onerecord.iata.org/Subscription#contentTypes": [
     "application/ld+json"
   ],
   "https://onerecord.iata.org/Subscription#myCompanyIdentifier": "http://localhost:8080/companies/iata",

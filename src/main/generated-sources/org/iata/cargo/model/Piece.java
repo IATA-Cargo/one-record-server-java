@@ -54,6 +54,20 @@ public class Piece
     @JsonProperty(Vocabulary.s_p_customsInfo)
     protected Set<CustomsInfo> customsInfo;
     /**
+     * The value of a shipment declared for carriage purposes , NVD if no value declared
+     *
+     */
+    @OWLObjectProperty(iri = Vocabulary.s_p_declaredValueForCarriage)
+    @JsonProperty(Vocabulary.s_p_declaredValueForCarriage)
+    protected String declaredValueForCarriage;
+    /**
+     * The value of a shipment declared for customs purposes , NVD if no value declared
+     *
+     */
+    @OWLObjectProperty(iri = Vocabulary.s_p_declaredValueForCustoms)
+    @JsonProperty(Vocabulary.s_p_declaredValueForCustoms)
+    protected String declaredValueForCustoms;
+    /**
      * Reference to the Dangerous Goods declaration
      * 
      */
@@ -288,6 +302,22 @@ public class Piece
 
     public Set<CustomsInfo> getCustomsInfo() {
         return customsInfo;
+    }
+
+    public String getDeclaredValueForCarriage() {
+        return declaredValueForCarriage;
+    }
+
+    public void setDeclaredValueForCarriage(String declaredValueForCarriage) {
+        this.declaredValueForCarriage = declaredValueForCarriage;
+    }
+
+    public String getDeclaredValueForCustoms() {
+        return declaredValueForCustoms;
+    }
+
+    public void setDeclaredValueForCustoms(String declaredValueForCustoms) {
+        this.declaredValueForCustoms = declaredValueForCustoms;
     }
 
     public void setDgDeclaration(DgDeclaration dgDeclaration) {

@@ -15,7 +15,7 @@ For testing the application locally, follow the next steps:
 3. (Optional) Download the latest ONE Record Turtle ontologies from Github + the latest Web Access Control from W3C by running `mvn exec:java`.
 As the latest models are already generated and commited in this repository according to the latest ontologies, kindly skip steps 4, 5 and 6.
 4. (SKIP) Generate ONE Record API related models by running `mvn package -Dbuild=api`
-5. (SKIP) Generate ONE Record cargo related data model by running `mvn package -Dbuild=cargo`
+5. (SKIP) Generate ONE Record cargo related data model by running `mvn package -Dbuild=cargo`. Optionally remove directory `src/main/generated-sources/org/iata/cargo` prior generating.
 6. (SKIP) Generate W3C Web Access Control ACL (Access Control List) related models by running `mvn package -Dbuild=acl`
 7. Run the server from OneRecordApplication or from the command line via `mvn spring-boot:run`. Your application should be available at [http://localhost:8080](http://localhost:8080).
 

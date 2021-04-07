@@ -2,10 +2,15 @@
 package org.iata.cargo.model;
 
 import java.io.Serializable;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -20,6 +25,10 @@ public class Ranges
     extends LogisticsObject
     implements Serializable
 {
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_Ranges)
+    protected Set<String> types;
 
     /**
      * Amount
@@ -29,6 +38,7 @@ public class Ranges
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#double", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_amount)
     protected Double amount;
     /**
      * Maximum quantity
@@ -38,6 +48,7 @@ public class Ranges
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#double", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_maximumQuantity)
     protected Double maximumQuantity;
     /**
      * Minimum quantity
@@ -47,6 +58,7 @@ public class Ranges
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#double", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_minimumQuantity)
     protected Double minimumQuantity;
     /**
      * Rate class code e.g. Q
@@ -56,6 +68,7 @@ public class Ranges
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_rateClassCode)
     protected String rateClassCode;
     /**
      * rating type - list uldRatingType
@@ -65,6 +78,7 @@ public class Ranges
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_ratingType)
     protected String ratingType;
     /**
      * Specific commodity rates linked to commodity
@@ -74,6 +88,7 @@ public class Ranges
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_scr)
     protected String scr;
     /**
      * Specific commodity code linked to commodity
@@ -83,6 +98,7 @@ public class Ranges
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_unitBasis)
     protected String unitBasis;
 
     public void setAmount(Double amount) {
@@ -141,4 +157,11 @@ public class Ranges
         return unitBasis;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

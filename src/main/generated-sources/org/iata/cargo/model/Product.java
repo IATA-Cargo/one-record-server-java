@@ -3,11 +3,15 @@ package org.iata.cargo.model;
 
 import java.io.Serializable;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -23,11 +27,17 @@ public class Product
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_Product)
+    protected Set<String> types;
+
     /**
      * Charateristics of the product
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_characteristics)
+    @JsonProperty(Vocabulary.s_p_characteristics)
     protected Set<Characteristics> characteristics;
     /**
      * Manufacturing company details and contacts
@@ -37,12 +47,14 @@ public class Product
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_manufacturer)
     protected Company manufacturer;
     /**
      * Other product identifier (e.g. Bar code, UPC, EAN, Amazon)
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_otherIdentifier_A_A_A)
+    @JsonProperty(Vocabulary.s_p_otherIdentifier_A_A_A)
     protected Set<OtherIdentifier> otherIdentifier;
     /**
      * Indicates the specific commodity on which the rate class code is applied
@@ -52,6 +64,7 @@ public class Product
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_commodityItemNumber)
     protected String commodityItemNumber;
     /**
      * Reference identifying the type of standard code to be used for the Commodity Classification (Brussels Tariff Nomenclature, EU Harmonized System Code, UN Standard International Trade Classification). Mandatory if the commodity code is more than 6 digits
@@ -59,9 +72,10 @@ public class Product
      */
     @OWLDataProperty(iri = Vocabulary.s_p_hsCode)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_hsCode)
     protected String hsCode;
     /**
      * Commodity description
@@ -69,15 +83,17 @@ public class Product
      */
     @OWLDataProperty(iri = Vocabulary.s_p_hsCommodityDescription)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_hsCommodityDescription)
     protected String hsCommodityDescription;
     /**
      * If no Code provided, name of commodity
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_hsCommodityName)
+    @JsonProperty(Vocabulary.s_p_hsCommodityName)
     protected Set<String> hsCommodityName;
     /**
      * Issuer of the Commodity Code - e.g. Brussels Tariff Nomenclature, EU Harmonized System Code, UN Standard International Trade, etc.
@@ -85,9 +101,10 @@ public class Product
      */
     @OWLDataProperty(iri = Vocabulary.s_p_hsType)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_hsType)
     protected String hsType;
     /**
      * Product description
@@ -97,6 +114,7 @@ public class Product
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_productDescription_A)
     protected String productDescription;
     /**
      * Manufacturer's unique product identifier
@@ -106,6 +124,7 @@ public class Product
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_productIdentifier)
     protected String productIdentifier;
 
     public void setCharacteristics(Set<Characteristics> characteristics) {
@@ -188,4 +207,11 @@ public class Product
         return productIdentifier;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

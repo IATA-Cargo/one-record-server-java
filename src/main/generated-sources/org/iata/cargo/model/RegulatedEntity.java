@@ -5,6 +5,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.Id;
 import cz.cvut.kbss.jopa.model.annotations.OWLAnnotationProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
@@ -14,7 +17,9 @@ import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
 import cz.cvut.kbss.jopa.model.annotations.Properties;
 import cz.cvut.kbss.jopa.model.annotations.Types;
+import cz.cvut.kbss.jopa.vocabulary.DC;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -30,15 +35,25 @@ public class RegulatedEntity
 {
 
     @Id(generated = true)
+    @ApiModelProperty(readOnly = true)
     protected String id;
+    @JsonIgnore
     @OWLAnnotationProperty(iri = RDFS.LABEL)
     protected String name;
+    @JsonIgnore
     @OWLAnnotationProperty(iri = cz.cvut.kbss.jopa.vocabulary.DC.Elements.DESCRIPTION)
     protected String description;
     @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_RegulatedEntity)
     protected Set<String> types;
     @Properties
+    @JsonIgnore
     protected Map<String, Set<String>> properties;
+    @JsonProperty("@language")
+    @OWLAnnotationProperty(iri = DC.Terms.LANGUAGE)
+    protected String language;
+
     /**
      * Branch/Company
      * 
@@ -48,6 +63,7 @@ public class RegulatedEntity
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_entity)
     protected Branch entity;
     /**
      * Regulated entity identifier (e.g. Regulated Agent Identifier) is mandatory
@@ -57,6 +73,7 @@ public class RegulatedEntity
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_regulatedEntityIdentifier)
     protected Company regulatedEntityIdentifier;
     /**
      * Expiry date 4 digits month/year
@@ -67,6 +84,7 @@ public class RegulatedEntity
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1),
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_expiryDate)
     protected Date expiryDate;
     /**
      * Party type - e.g. RA - Regulated Agent, KC - Known Consignor, AO - Aircraft Operator, RC - Regulated Carrier
@@ -76,6 +94,7 @@ public class RegulatedEntity
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_regulatedEntityCategory)
     protected String regulatedEntityCategory;
 
     public void setId(String id) {
@@ -155,4 +174,11 @@ public class RegulatedEntity
         return regulatedEntityCategory;
     }
 
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 }

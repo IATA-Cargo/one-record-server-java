@@ -4,11 +4,15 @@ package org.iata.cargo.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -24,17 +28,24 @@ public class Price
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_Price)
+    protected Set<String> types;
+
     /**
      * Reference to the Booking or Offer
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_bookingOption)
+    @JsonProperty(Vocabulary.s_p_bookingOption)
     protected Set<BookingOption> bookingOption;
     /**
      * Reference to the Booking or Offer
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_bookingRef)
+    @JsonProperty(Vocabulary.s_p_bookingRef)
     protected Set<Booking> bookingRef;
     /**
      * Rating used for pricing
@@ -44,12 +55,14 @@ public class Price
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_ratings)
     protected Ratings ratings;
     /**
      * Charge code for carrier, eg. CA, CB, etc
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_carrierChargeCode)
+    @JsonProperty(Vocabulary.s_p_carrierChargeCode)
     protected Set<String> carrierChargeCode;
     /**
      * Total price
@@ -59,6 +72,7 @@ public class Price
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#double", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_grandTotal)
     protected Double grandTotal;
     /**
      * Terms of validity
@@ -68,6 +82,7 @@ public class Price
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_validTo)
     protected Date validTo;
 
     public void setBookingOption(Set<BookingOption> bookingOption) {
@@ -118,4 +133,11 @@ public class Price
         return validTo;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

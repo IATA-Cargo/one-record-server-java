@@ -4,6 +4,8 @@ package org.iata.cargo.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
@@ -32,6 +34,7 @@ public class PieceLiveAnimals
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_associatedEpermit)
     protected EpermitConsignment associatedEpermit;
     /**
      * Country of last re-export (box 12a)
@@ -41,6 +44,7 @@ public class PieceLiveAnimals
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_exportTradeCountry)
     protected Country exportTradeCountry;
     /**
      * country of origin (box 12)
@@ -50,6 +54,7 @@ public class PieceLiveAnimals
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_originTradeCountry)
     protected Country originTradeCountry;
     /**
      * Defined in Resolution Conf. 13.6 and is required for pre-Convention specimens (box 12b)
@@ -59,6 +64,7 @@ public class PieceLiveAnimals
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_acquisitionDatetime)
     protected Date acquisitionDatetime;
     /**
      * total number of specimens exported in the current calendar year and the current annuela quota for the species concerned (box 11a)
@@ -68,12 +74,14 @@ public class PieceLiveAnimals
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#integer", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_annualQuotaQuantity)
     protected Integer annualQuotaQuantity;
     /**
      * Operations code ID. Refers to the number of the registered captive-breeding or artifical propagation operation (box 12b)
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_categoryCode)
+    @JsonProperty(Vocabulary.s_p_categoryCode)
     protected Set<String> categoryCode;
     /**
      * Appendix number of the convention (I, II or III) (box 10)
@@ -81,9 +89,10 @@ public class PieceLiveAnimals
      */
     @OWLDataProperty(iri = Vocabulary.s_p_goodsTypeCode)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_goodsTypeCode)
     protected String goodsTypeCode;
     /**
      * Appendix number of the convention (I, II or III) (box 10)
@@ -91,9 +100,10 @@ public class PieceLiveAnimals
      */
     @OWLDataProperty(iri = Vocabulary.s_p_goodsTypeExtensionCode)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_goodsTypeExtensionCode)
     protected String goodsTypeExtensionCode;
     /**
      * Issuing date for Origin reference permit or re-export reference Certificate (box 12)
@@ -103,6 +113,7 @@ public class PieceLiveAnimals
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_originReferencePermitDatetime)
     protected Date originReferencePermitDatetime;
     /**
      * identifier of Origin reference permit or re-export reference Certificate (box 12/12a)
@@ -112,6 +123,7 @@ public class PieceLiveAnimals
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_originReferencePermitId)
     protected String originReferencePermitId;
     /**
      * Document type code of origin reference permit or re-export reference Certificate (box 12/12a)
@@ -121,6 +133,7 @@ public class PieceLiveAnimals
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_originReferencePermitTypeCode)
     protected String originReferencePermitTypeCode;
     /**
      * Quantity including units (box 11)
@@ -130,18 +143,21 @@ public class PieceLiveAnimals
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#integer", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_quantityAnimals)
     protected Integer quantityAnimals;
     /**
      * Species common name (box 8)
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_speciesCommonName)
+    @JsonProperty(Vocabulary.s_p_speciesCommonName)
     protected Set<String> speciesCommonName;
     /**
      * Species scientific name (box 7)
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_speciesScientificName)
+    @JsonProperty(Vocabulary.s_p_speciesScientificName)
     protected Set<String> speciesScientificName;
     /**
      * Description of specimens, including age and sex if LA (box 9)
@@ -151,6 +167,7 @@ public class PieceLiveAnimals
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_specimenDescription)
     protected String specimenDescription;
     /**
      * Description of specimens, CITES type code (box 9)
@@ -160,6 +177,7 @@ public class PieceLiveAnimals
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_specimenTypeCode)
     protected String specimenTypeCode;
 
     public void setAssociatedEpermit(EpermitConsignment associatedEpermit) {

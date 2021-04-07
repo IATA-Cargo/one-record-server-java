@@ -2,10 +2,15 @@
 package org.iata.cargo.model;
 
 import java.io.Serializable;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -21,6 +26,11 @@ public class DgRadioactiveIsotope
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_DgRadioactiveIsotope)
+    protected Set<String> types;
+
     /**
      * Numeric expression of the activity of a radioactive Item
      * 
@@ -29,6 +39,7 @@ public class DgRadioactiveIsotope
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_activityLevelMeasure)
     protected String activityLevelMeasure;
     /**
      * Applies to fissile material only, other than fissile excepted. A numeric value expressed to one decimal place preceded by the letters CSI.
@@ -38,6 +49,7 @@ public class DgRadioactiveIsotope
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_criticalitySafetyIndexNumeric)
     protected String criticalitySafetyIndexNumeric;
     /**
      * Id of each radionuclide or for mixtures of radionuclides.
@@ -48,6 +60,7 @@ public class DgRadioactiveIsotope
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_isotopeId)
     protected String isotopeId;
     /**
      * The name or symbol of each radionuclide or for mixtures of radionuclides, an appropriate general description, or a list of the most restrictive radionuclides. 
@@ -57,6 +70,7 @@ public class DgRadioactiveIsotope
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_isotopeName)
     protected String isotopeName;
     /**
      * A notation that the material is low dispersible radioactive material.
@@ -66,6 +80,7 @@ public class DgRadioactiveIsotope
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#boolean", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_lowDispersibleIndicator)
     protected Boolean lowDispersibleIndicator;
     /**
      * A description of the physical and chemical form of the material.
@@ -75,6 +90,7 @@ public class DgRadioactiveIsotope
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_physicalChemicalForm)
     protected String physicalChemicalForm;
     /**
      * A notation that the material is special form
@@ -84,6 +100,7 @@ public class DgRadioactiveIsotope
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#boolean", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_specialFormIndicator)
     protected Boolean specialFormIndicator;
 
     public void setActivityLevelMeasure(String activityLevelMeasure) {
@@ -142,4 +159,11 @@ public class DgRadioactiveIsotope
         return specialFormIndicator;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

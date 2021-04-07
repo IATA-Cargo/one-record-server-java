@@ -2911,6 +2911,12 @@ public class Vocabulary {
     public final static String s_p_value_A = "https://onerecord.iata.org/Value#value";
     public final static IRI p_value_A = IRI.create(s_p_value_A);
     /**
+     * Indicates the details of accounting information. Free text e.g. PAYMENT BY CERTIFIED CHEQUE etc.
+     * 
+     */
+    public final static String s_p_accountingInformation = "https://onerecord.iata.org/Waybill#accountingInformation";
+    public final static IRI p_accountingInformation = IRI.create(s_p_accountingInformation);
+    /**
      * Charges levied at destination accruing to the last carrier, in destination currency
      * 
      */

@@ -3,11 +3,16 @@ package org.iata.cargo.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -23,6 +28,11 @@ public class EpermitSignature
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_EpermitSignature)
+    protected Set<String> types;
+
     /**
      * Signatory company name
      * 
@@ -32,6 +42,7 @@ public class EpermitSignature
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_signatoryCompany)
     protected Company signatoryCompany;
     /**
      * Security Stamp ID
@@ -41,6 +52,7 @@ public class EpermitSignature
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_securityStampId)
     protected String securityStampId;
     /**
      * Role of the signatory with regards to the ePermit: Applicant, Permit issuer, Issuing Authority or Examining authority
@@ -48,9 +60,10 @@ public class EpermitSignature
      */
     @OWLDataProperty(iri = Vocabulary.s_p_signatoryRole)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_signatoryRole)
     protected String signatoryRole;
     /**
      * Date and time of the signature
@@ -58,9 +71,10 @@ public class EpermitSignature
      */
     @OWLDataProperty(iri = Vocabulary.s_p_signatureDate)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_signatureDate)
     protected Date signatureDate;
     /**
      * Signatory signature authentication text
@@ -70,6 +84,7 @@ public class EpermitSignature
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_signatureStatement)
     protected String signatureStatement;
     /**
      * Code specifying a type of government action such asinspection, detention, fumigation, security.
@@ -79,6 +94,7 @@ public class EpermitSignature
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_signatureTypeCode)
     protected String signatureTypeCode;
 
     public void setSignatoryCompany(Company signatoryCompany) {
@@ -129,4 +145,11 @@ public class EpermitSignature
         return signatureTypeCode;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

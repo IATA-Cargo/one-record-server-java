@@ -3,11 +3,15 @@ package org.iata.cargo.model;
 
 import java.io.Serializable;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -23,11 +27,17 @@ public class ULD
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_ULD)
+    protected Set<String> types;
+
     /**
      * Reference documents details 
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_externalReference_A_A_A)
+    @JsonProperty(Vocabulary.s_p_externalReference_A_A_A)
     protected Set<ExternalReference> externalReference;
     /**
      * Tare weight of the empty ULD
@@ -37,18 +47,21 @@ public class ULD
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_tareWeight)
     protected Value tareWeight;
     /**
      * Segment related to the ULD movement
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_transportSegment_A_A)
+    @JsonProperty(Vocabulary.s_p_transportSegment_A_A)
     protected Set<TransportSegment> transportSegment;
     /**
      * Details of contained (virtual) piece(s)
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_upid)
+    @JsonProperty(Vocabulary.s_p_upid)
     protected Set<Piece> upid;
     /**
      * US / ATA Unit Load Device type code e.g. M2
@@ -58,6 +71,7 @@ public class ULD
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_ataDesignator)
     protected String ataDesignator;
     /**
      * Indicates if the ULD is Damaged
@@ -68,6 +82,7 @@ public class ULD
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#boolean", max = 1),
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#boolean", min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_damageFlag)
     protected Boolean damageFlag;
     /**
      * Contains three designator of demurrage code, refer to RP 1654 (BCC, HHH, XXX, ZZZ)
@@ -78,6 +93,7 @@ public class ULD
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_demurrageCode)
     protected String demurrageCode;
     /**
      * ULD height or loading limitation code. Refer CXML Code List 1.47,  e.g. R - ULD Height above 244 centimetres
@@ -87,6 +103,7 @@ public class ULD
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_loadingIndicator)
     protected String loadingIndicator;
     /**
      * Number of doors
@@ -96,6 +113,7 @@ public class ULD
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#integer", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_nbDoor)
     protected Integer nbDoor;
     /**
      * Number of fittings
@@ -105,6 +123,7 @@ public class ULD
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#integer", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_nbFittings)
     protected Integer nbFittings;
     /**
      * Number of nets
@@ -114,6 +133,7 @@ public class ULD
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#integer", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_nbNets)
     protected Integer nbNets;
     /**
      * Number of straps
@@ -123,6 +143,7 @@ public class ULD
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#integer", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_nbStraps)
     protected Integer nbStraps;
     /**
      * Contains two designator codes of ODLN or Operational Damage Limit Notices. ODLN code is used to define type of damage after visually check the serviceability of ULDs section 7, Standard Specifications 40/3 or 40/4 in ULD Regulations
@@ -132,6 +153,7 @@ public class ULD
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_odlnCode)
     protected String odlnCode;
     /**
      * Owner code of the ULD in aa, an or na format - owner can be an airline or leasing company
@@ -141,6 +163,7 @@ public class ULD
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_ownerCode)
     protected String ownerCode;
     /**
      * ULD serial number
@@ -150,6 +173,7 @@ public class ULD
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_serialNumber)
     protected String serialNumber;
     /**
      * Designator of serviceablity condition e.g. SER or DAM 
@@ -160,6 +184,7 @@ public class ULD
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_serviceabilityCode)
     protected String serviceabilityCode;
     /**
      * Remarks or Supplement Information
@@ -169,6 +194,7 @@ public class ULD
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_uldRemarks)
     protected String uldRemarks;
     /**
      * ULD seal number if applicable
@@ -178,6 +204,7 @@ public class ULD
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_uldSealNumber)
     protected String uldSealNumber;
     /**
      * Standard Unit Load Device type code e.g. AKE - Certified Container - Contoured
@@ -187,6 +214,7 @@ public class ULD
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_uldTypeCode)
     protected String uldTypeCode;
 
     public void setExternalReference(Set<ExternalReference> externalReference) {
@@ -341,4 +369,11 @@ public class ULD
         return uldTypeCode;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

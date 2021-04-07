@@ -2,6 +2,8 @@
 package org.iata.cargo.model;
 
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
@@ -30,6 +32,7 @@ public class PieceDg
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_dgDeclaration)
     protected DgDeclaration dgDeclaration;
     /**
      * A statement identifying that the dangerous goods listed above are all contained in the same outer packaging. Takes the form All packed in one aaaa (description of packaging type) x nn (number of packages). Applies to air transport only. (Air) 
@@ -39,6 +42,7 @@ public class PieceDg
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#boolean", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_allPackedInOneIndicator)
     protected Boolean allPackedInOneIndicator;
     /**
      * Applies to fissile material only, other than fissile excepted. A numeric value expressed to one decimal place preceded by the letters CSI. 
@@ -48,6 +52,7 @@ public class PieceDg
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_overpackCriticalitySafetyIndexNumeric)
     protected String overpackCriticalitySafetyIndexNumeric;
     /**
      * Overpack indicator 
@@ -57,6 +62,7 @@ public class PieceDg
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#boolean", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_overpackIndicator)
     protected Boolean overpackIndicator;
     /**
      * A single number assigned to a package, overpack or freight container to provide control over radiation exposure. 
@@ -66,6 +72,7 @@ public class PieceDg
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_overpackT1)
     protected String overpackT1;
     /**
      * Identifies the Logistic Unit package type. UN Recommendation on Transport of Dangerous Goods, Model Regulations 
@@ -75,6 +82,7 @@ public class PieceDg
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_overpackTypeCode)
     protected String overpackTypeCode;
     /**
      * Most instances of all packed in one will require the addition of the Q value which  1. Applies to air transport only. (Air)  
@@ -84,6 +92,7 @@ public class PieceDg
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#double", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_qValueNumeric)
     protected Double qValueNumeric;
 
     public void setDgDeclaration(DgDeclaration dgDeclaration) {

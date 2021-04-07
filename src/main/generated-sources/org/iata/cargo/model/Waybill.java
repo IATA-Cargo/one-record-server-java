@@ -3,11 +3,15 @@ package org.iata.cargo.model;
 
 import java.io.Serializable;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -23,6 +27,11 @@ public class Waybill
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_Waybill)
+    protected Set<String> types;
+
     /**
      * Refers to the Booking option
      * 
@@ -31,6 +40,7 @@ public class Waybill
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_uldTypeCode)
     protected BookingOption booking;
     /**
      * Refers to the Booking 
@@ -40,42 +50,56 @@ public class Waybill
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_uldTypeCode)
     protected Booking bookingRef;
     /**
      * Refers to the Waybill(s) contained
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_containedWaybill)
+    @JsonProperty(Vocabulary.s_p_uldTypeCode)
     protected Set<Waybill> containedWaybill;
+    /**
+     * Indicates the details of accounting information. Free text e.g. PAYMENT BY CERTIFIED CHEQUE etc.
+     * 
+     */
+    @OWLDataProperty(iri = Vocabulary.s_p_accountingInformation)
+    @JsonProperty(Vocabulary.s_p_uldTypeCode)
+    protected Set<String> accountingInformation;
     /**
      * Charges levied at destination accruing to the last carrier, in destination currency
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_destinationCharges)
+    @JsonProperty(Vocabulary.s_p_uldTypeCode)
     protected Set<Double> destinationCharges;
     /**
      * ISO 3-letter currency code of destination
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_destinationCurrencyCode)
+    @JsonProperty(Vocabulary.s_p_uldTypeCode)
     protected Set<String> destinationCurrencyCode;
     /**
      * Conversion rate applied
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_destinationCurrencyRate)
+    @JsonProperty(Vocabulary.s_p_uldTypeCode)
     protected Set<Double> destinationCurrencyRate;
     /**
      * The shipper or its Agent may enter the appropriate optional shipping
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_optionalShippingInfo)
+    @JsonProperty(Vocabulary.s_p_uldTypeCode)
     protected Set<String> optionalShippingInfo;
     /**
      * Optional shipping reference number if any
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_optionalShippingRefNo)
+    @JsonProperty(Vocabulary.s_p_uldTypeCode)
     protected Set<String> optionalShippingRefNo;
     /**
      * House or Master Waybill unique identifier
@@ -86,6 +110,7 @@ public class Waybill
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#long", min = 1, max = -1),
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#long", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_uldTypeCode)
     protected Long waybillNumber;
     /**
      * Prefix used for the Waybill Number
@@ -95,6 +120,7 @@ public class Waybill
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#integer", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_uldTypeCode)
     protected Integer waybillPrefix;
     /**
      * Type of the Waybill: House or Master
@@ -104,6 +130,7 @@ public class Waybill
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_uldTypeCode)
     protected String waybillType;
 
     public void setBooking(BookingOption booking) {
@@ -128,6 +155,14 @@ public class Waybill
 
     public Set<Waybill> getContainedWaybill() {
         return containedWaybill;
+    }
+
+    public void setAccountingInformation(Set<String> accountingInformation) {
+        this.accountingInformation = accountingInformation;
+    }
+
+    public Set<String> getAccountingInformation() {
+        return accountingInformation;
     }
 
     public void setDestinationCharges(Set<Double> destinationCharges) {
@@ -194,4 +229,11 @@ public class Waybill
         return waybillType;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

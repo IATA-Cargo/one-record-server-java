@@ -4,11 +4,15 @@ package org.iata.cargo.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -24,6 +28,11 @@ public class TransportSegment
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_TransportSegment)
+    protected Set<String> types;
+
     /**
      * Arrival details including time and date
      * 
@@ -32,6 +41,7 @@ public class TransportSegment
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_arrivalLocation)
     protected Location arrivalLocation;
     /**
      * Method of calculation of the CO2 emissions
@@ -41,12 +51,14 @@ public class TransportSegment
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_co2CalculationMethod)
     protected CO2CalcMethod co2CalculationMethod;
     /**
      * Amount of CO2 emitted (e.g. 34 kg/km)
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_co2Emissions)
+    @JsonProperty(Vocabulary.s_p_co2Emissions)
     protected Set<CO2Emissions> co2Emissions;
     /**
      * Departure details including time and date
@@ -56,6 +68,7 @@ public class TransportSegment
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_departureLocation)
     protected Location departureLocation;
     /**
      * Distance calculated if distance measured is not available
@@ -65,6 +78,7 @@ public class TransportSegment
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_distanceCalculated)
     protected Value distanceCalculated;
     /**
      * Distance based on actual measured distance (with IOT-devices), or is it a calculated value?
@@ -74,6 +88,7 @@ public class TransportSegment
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_distanceMeasured)
     protected Value distanceMeasured;
     /**
      * Reference to document or logistics object (URI)
@@ -83,6 +98,7 @@ public class TransportSegment
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_externalReference_A_A)
     protected ExternalReference externalReference;
     /**
      * calculated fuel consumption, if measured not available
@@ -92,6 +108,7 @@ public class TransportSegment
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_fuelAmountCalculated)
     protected Value fuelAmountCalculated;
     /**
      * actual measured fuel consumption
@@ -101,12 +118,14 @@ public class TransportSegment
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_fuelAmountMeasured)
     protected Value fuelAmountMeasured;
     /**
      * Actual payload for the transport
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_payload)
+    @JsonProperty(Vocabulary.s_p_payload)
     protected Set<Value> payload;
     /**
      * Transport means details
@@ -116,24 +135,28 @@ public class TransportSegment
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_transportMeans)
     protected TransportMeans transportMeans;
     /**
      * Name of the person operating the transport means (e.g. aircraft captain, truck driver)
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_transportMeansOperator)
+    @JsonProperty(Vocabulary.s_p_transportMeansOperator)
     protected Set<Person> transportMeansOperator;
     /**
      * Pieces assigned to the transport segment
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_transportedPieces)
+    @JsonProperty(Vocabulary.s_p_transportedPieces)
     protected Set<Piece> transportedPieces;
     /**
      * ULDs assigned to the transport segment
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_transportedUlds)
+    @JsonProperty(Vocabulary.s_p_transportedUlds)
     protected Set<ULD> transportedUlds;
     /**
      * Arrival date and time. Actual or planned depends on the movementType property
@@ -143,6 +166,7 @@ public class TransportSegment
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_arrivalDate)
     protected Date arrivalDate;
     /**
      * Departure date and time. Actual or planned depends on the movementType property
@@ -152,6 +176,7 @@ public class TransportSegment
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_departureDate)
     protected Date departureDate;
     /**
      * e.g. Kerosene, Diesel, SAF, Electricity [renewable], Electricity [non-renewable]
@@ -161,6 +186,7 @@ public class TransportSegment
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_fuelType)
     protected String fuelType;
     /**
      * Mode Code
@@ -170,6 +196,7 @@ public class TransportSegment
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_modeCode)
     protected String modeCode;
     /**
      * Pre-Carriage, Main-Carriage or On-Carriage
@@ -179,6 +206,7 @@ public class TransportSegment
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_modeQualifier)
     protected String modeQualifier;
     /**
      * Refers to the type of movement: Actual or planned
@@ -188,6 +216,7 @@ public class TransportSegment
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_movementType)
     protected String movementType;
     /**
      * Seal identifier
@@ -197,6 +226,7 @@ public class TransportSegment
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_seal)
     protected String seal;
     /**
      * Identification of the segment level in the movement of the pieces: contractual, flight leg, truck movement, etc.
@@ -206,6 +236,7 @@ public class TransportSegment
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_segmentLevel)
     protected String segmentLevel;
     /**
      * Airline flight number, or rail /  truck / maritime line id
@@ -215,6 +246,7 @@ public class TransportSegment
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_transportIdentifier)
     protected String transportIdentifier;
 
     public void setArrivalLocation(Location arrivalLocation) {
@@ -401,4 +433,11 @@ public class TransportSegment
         return transportIdentifier;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

@@ -4,6 +4,9 @@ package org.iata.cargo.model;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.Id;
 import cz.cvut.kbss.jopa.model.annotations.OWLAnnotationProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
@@ -13,8 +16,11 @@ import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
 import cz.cvut.kbss.jopa.model.annotations.Properties;
 import cz.cvut.kbss.jopa.model.annotations.Types;
+import cz.cvut.kbss.jopa.vocabulary.DC;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 
 /**
@@ -24,25 +30,33 @@ import org.iata.cargo.Vocabulary;
  * 
  */
 @OWLClass(iri = Vocabulary.s_c_LogisticsObject)
+@Document(collection = "logisticsObjects")
 public class LogisticsObject
     implements Serializable
 {
 
     @Id(generated = true)
+    @ApiModelProperty(readOnly = true)
     protected String id;
     @OWLAnnotationProperty(iri = RDFS.LABEL)
+    @JsonIgnore
     protected String name;
     @OWLAnnotationProperty(iri = cz.cvut.kbss.jopa.vocabulary.DC.Elements.DESCRIPTION)
+    @JsonIgnore
     protected String description;
-    @Types
-    protected Set<String> types;
     @Properties
+    @JsonIgnore
     protected Map<String, Set<String>> properties;
+    @JsonProperty("@language")
+    @OWLAnnotationProperty(iri = DC.Terms.LANGUAGE)
+    protected String language;
+
     /**
      * Events object
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_event)
+    @JsonProperty(Vocabulary.s_p_event)
     protected Set<Event> event;
     /**
      * Company identifier from the Internet of Logistics of the entity that hosts the Logistics Object.
@@ -53,6 +67,7 @@ public class LogisticsObject
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_companyIdentifier)
     protected String companyIdentifier;
 
     public void setId(String id) {
@@ -77,14 +92,6 @@ public class LogisticsObject
 
     public String getDescription() {
         return description;
-    }
-
-    public void setTypes(Set<String> types) {
-        this.types = types;
-    }
-
-    public Set<String> getTypes() {
-        return types;
     }
 
     public void setProperties(Map<String, Set<String>> properties) {
@@ -116,4 +123,11 @@ public class LogisticsObject
         return companyIdentifier;
     }
 
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 }

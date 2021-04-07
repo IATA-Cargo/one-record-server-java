@@ -2,10 +2,15 @@
 package org.iata.cargo.model;
 
 import java.io.Serializable;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -21,6 +26,11 @@ public class SpecialHandling
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_SpecialHandling)
+    protected Set<String> types;
+
     /**
      * Special handling code following IATA standards. Refer CXML1.16,  e.g. PEP - Fruits and Vegetables
      * 
@@ -29,6 +39,7 @@ public class SpecialHandling
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_code_A_A)
     protected String code;
     /**
      * Special handling text
@@ -38,6 +49,7 @@ public class SpecialHandling
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_handlingText)
     protected String handlingText;
 
     public void setCode(String code) {
@@ -56,4 +68,11 @@ public class SpecialHandling
         return handlingText;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

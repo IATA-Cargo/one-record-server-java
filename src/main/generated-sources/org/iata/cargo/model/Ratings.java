@@ -3,11 +3,15 @@ package org.iata.cargo.model;
 
 import java.io.Serializable;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -23,11 +27,17 @@ public class Ratings
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_Ratings)
+    protected Set<String> types;
+
     /**
      * Reference to the ranges
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_ranges)
+    @JsonProperty(Vocabulary.s_p_ranges)
     protected Set<Ranges> ranges;
     /**
      * Code of the charge e.g. MY, SC, etc.
@@ -37,6 +47,7 @@ public class Ratings
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_chargeCode)
     protected String chargeCode;
     /**
      * Description of the charge e.g. Airfreight, fuel, etc.
@@ -46,12 +57,14 @@ public class Ratings
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_chargeDescription)
     protected String chargeDescription;
     /**
      * Indicates if charge is prepaid or collect (S, P)
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_chargePaymentType)
+    @JsonProperty(Vocabulary.s_p_chargePaymentType)
     protected Set<String> chargePaymentType;
     /**
      * Type of charge e.g. Freight, Surcharges, etc.
@@ -61,6 +74,7 @@ public class Ratings
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_chargeType)
     protected String chargeType;
     /**
      * Specification of the price e.g. Street, Group, Spot, etc.
@@ -70,6 +84,7 @@ public class Ratings
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_priceSpecification)
     protected String priceSpecification;
     /**
      * Reference of price specifications
@@ -79,12 +94,14 @@ public class Ratings
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_priceSpecificationRef)
     protected String priceSpecificationRef;
     /**
      * IATA 3-letter code of the rate combination point
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_rcp)
+    @JsonProperty(Vocabulary.s_p_rcp)
     protected Set<String> rcp;
     /**
      * Subtotal of the charge
@@ -94,6 +111,7 @@ public class Ratings
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#double", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_subTotal)
     protected Double subTotal;
 
     public void setRanges(Set<Ranges> ranges) {
@@ -168,4 +186,11 @@ public class Ratings
         return subTotal;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

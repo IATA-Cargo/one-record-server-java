@@ -4,6 +4,9 @@ package org.iata.cargo.model;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.Id;
 import cz.cvut.kbss.jopa.model.annotations.OWLAnnotationProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
@@ -13,7 +16,9 @@ import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
 import cz.cvut.kbss.jopa.model.annotations.Properties;
 import cz.cvut.kbss.jopa.model.annotations.Types;
+import cz.cvut.kbss.jopa.vocabulary.DC;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -29,15 +34,25 @@ public class OtherParty
 {
 
     @Id(generated = true)
+    @ApiModelProperty(readOnly = true)
     protected String id;
+    @JsonIgnore
     @OWLAnnotationProperty(iri = RDFS.LABEL)
     protected String name;
+    @JsonIgnore
     @OWLAnnotationProperty(iri = cz.cvut.kbss.jopa.vocabulary.DC.Elements.DESCRIPTION)
     protected String description;
     @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_OtherParty)
     protected Set<String> types;
     @Properties
+    @JsonIgnore
     protected Map<String, Set<String>> properties;
+    @JsonProperty("@language")
+    @OWLAnnotationProperty(iri = DC.Terms.LANGUAGE)
+    protected String language;
+
     /**
      * Company details
      * 
@@ -46,6 +61,7 @@ public class OtherParty
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_companyDetails)
     protected Company companyDetails;
     /**
      * Specifies the code of an additional party if required. Standard codes from UN/EDIFACT 3035 Party function code qualifier can be used.
@@ -53,9 +69,10 @@ public class OtherParty
      */
     @OWLDataProperty(iri = Vocabulary.s_p_partyTypeCode)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_partyTypeCode)
     protected String partyTypeCode;
     /**
      * Role of other party - e.g. Notify party, Nominated agent, Customs broker, Manufacturer, Importer, Payer, Payee, ShipTo, ShipFrom, BillTo, BillFrom, RemitTo, RemitFrom 
@@ -65,6 +82,7 @@ public class OtherParty
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_roleName)
     protected String roleName;
 
     public void setId(String id) {
@@ -136,4 +154,11 @@ public class OtherParty
         return roleName;
     }
 
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 }

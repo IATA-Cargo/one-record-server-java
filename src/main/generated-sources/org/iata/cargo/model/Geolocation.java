@@ -4,6 +4,9 @@ package org.iata.cargo.model;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.Id;
 import cz.cvut.kbss.jopa.model.annotations.OWLAnnotationProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
@@ -12,7 +15,9 @@ import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
 import cz.cvut.kbss.jopa.model.annotations.Properties;
 import cz.cvut.kbss.jopa.model.annotations.Types;
+import cz.cvut.kbss.jopa.vocabulary.DC;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -28,15 +33,25 @@ public class Geolocation
 {
 
     @Id(generated = true)
+    @ApiModelProperty(readOnly = true)
     protected String id;
+    @JsonIgnore
     @OWLAnnotationProperty(iri = RDFS.LABEL)
     protected String name;
+    @JsonIgnore
     @OWLAnnotationProperty(iri = cz.cvut.kbss.jopa.vocabulary.DC.Elements.DESCRIPTION)
     protected String description;
     @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_Geolocation)
     protected Set<String> types;
     @Properties
+    @JsonIgnore
     protected Map<String, Set<String>> properties;
+    @JsonProperty("@language")
+    @OWLAnnotationProperty(iri = DC.Terms.LANGUAGE)
+    protected String language;
+
     /**
      * Elevation from sea level - Change of data type to string as of version 1.2
      * 
@@ -45,6 +60,7 @@ public class Geolocation
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#double", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_elevation)
     protected Double elevation;
     /**
      * re of the Geolocation coordinates, standard is Degree
@@ -54,6 +70,7 @@ public class Geolocation
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_geolocationUnit)
     protected String geolocationUnit;
     /**
      * Location latitude - Change of data type to string as of version 1.2
@@ -63,6 +80,7 @@ public class Geolocation
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#double", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_latitude)
     protected Double latitude;
     /**
      * Location longitude - Change of data type to string as of version 1.2
@@ -72,6 +90,7 @@ public class Geolocation
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#double", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_longitude)
     protected Double longitude;
 
     public void setId(String id) {
@@ -151,4 +170,11 @@ public class Geolocation
         return longitude;
     }
 
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 }

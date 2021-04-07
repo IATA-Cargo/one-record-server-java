@@ -4,11 +4,15 @@ package org.iata.cargo.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -24,21 +28,28 @@ public class SecurityDeclaration
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_SecurityDeclaration)
+    protected Set<String> types;
+
     /**
      * Name of person (or employee ID) who issued the security status
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_issuedBy)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_issuedBy)
     protected Person issuedBy;
     /**
      * Any other regulated entity that accepts custody of the cargo and accepts the security status originally issued
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_otherRegulatedEntity)
+    @JsonProperty(Vocabulary.s_p_otherRegulatedEntity)
     protected Set<RegulatedEntity> otherRegulatedEntity;
     /**
      * Piece linked to the Security Declaration
@@ -48,6 +59,7 @@ public class SecurityDeclaration
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_piece)
     protected Piece piece;
     /**
      * Regulated entity that tendered the consignment
@@ -57,6 +69,7 @@ public class SecurityDeclaration
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_receivedFrom)
     protected RegulatedEntity receivedFrom;
     /**
      * Regulated entity issuing the Security Declaration
@@ -67,6 +80,7 @@ public class SecurityDeclaration
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_regulatedEntityIssuer)
     protected RegulatedEntity regulatedEntityIssuer;
     /**
      * Any additional information that may be required by an ICAO Member State
@@ -76,12 +90,14 @@ public class SecurityDeclaration
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_additionalSecurityInformation)
     protected String additionalSecurityInformation;
     /**
      * Exemption code - e.g. BIOM- Bio-Medical Samples 
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_groundsForExemption)
+    @JsonProperty(Vocabulary.s_p_groundsForExemption)
     protected Set<String> groundsForExemption;
     /**
      * Date and time when the security status was issued
@@ -89,21 +105,24 @@ public class SecurityDeclaration
      */
     @OWLDataProperty(iri = Vocabulary.s_p_issuedOn)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_issuedOn)
     protected Date issuedOn;
     /**
      * Other methods used to secure the cargo
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_otherScreeningMethods)
+    @JsonProperty(Vocabulary.s_p_otherScreeningMethods)
     protected Set<String> otherScreeningMethods;
     /**
      * Screening methods which have been used to secure the cargo - e.g. EDS- Explosive Detection System  
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_screeningMethod)
+    @JsonProperty(Vocabulary.s_p_screeningMethod)
     protected Set<String> screeningMethod;
     /**
      * Security status indicator (CXML 1.103) - e.g. SPX- Cargo Secure for Passenger and All-Cargo Aircraft 
@@ -111,9 +130,10 @@ public class SecurityDeclaration
      */
     @OWLDataProperty(iri = Vocabulary.s_p_securityStatus_A)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_securityStatus_A)
     protected String securityStatus;
 
     public void setIssuedBy(Person issuedBy) {
@@ -204,4 +224,11 @@ public class SecurityDeclaration
         return securityStatus;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

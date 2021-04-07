@@ -3,10 +3,15 @@ package org.iata.cargo.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -22,6 +27,11 @@ public class Routing
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_Routing)
+    protected Set<String> types;
+
     /**
      * Aircraft possibility code
      * 
@@ -30,6 +40,7 @@ public class Routing
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_aircraftPossibilityCode)
     protected String aircraftPossibilityCode;
     /**
      * Latest Arrival date time (requested or proposed)
@@ -39,6 +50,7 @@ public class Routing
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_latestArrivalDateTime)
     protected Date latestArrivalDateTime;
     /**
      * Maximum number of connections of the transport movement (requested or proposed)
@@ -48,6 +60,7 @@ public class Routing
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#integer", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_maxConnections)
     protected Integer maxConnections;
     /**
      * Indicates interlining (requested or proposed)
@@ -57,6 +70,7 @@ public class Routing
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#boolean", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_onlineInd)
     protected Boolean onlineInd;
     /**
      * Indicates if RFS (Road Feeder Services) is included (requested or proposed)
@@ -66,6 +80,7 @@ public class Routing
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#boolean", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_rfsInd)
     protected Boolean rfsInd;
 
     public void setAircraftPossibilityCode(String aircraftPossibilityCode) {
@@ -108,4 +123,11 @@ public class Routing
         return rfsInd;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

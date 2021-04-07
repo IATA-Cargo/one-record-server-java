@@ -2,11 +2,16 @@
 package org.iata.cargo.model;
 
 import java.io.Serializable;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -22,6 +27,11 @@ public class TransportMeans
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_TransportMeans)
+    protected Set<String> types;
+
     /**
      * Company operating the transport means
      * 
@@ -30,6 +40,7 @@ public class TransportMeans
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_transportCompany)
     protected Company transportCompany;
     /**
      * Associated transport segment
@@ -39,6 +50,7 @@ public class TransportMeans
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_transportSegment_A)
     protected TransportSegment transportSegment;
     /**
      * Required for some CO2 calculations
@@ -48,6 +60,7 @@ public class TransportMeans
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_typicalCO2Coefficient)
     protected Value typicalCO2Coefficient;
     /**
      * Typical fuel comsumption (e.g. 20 000L / 1 000nm)
@@ -57,6 +70,7 @@ public class TransportMeans
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_typicalFuelConsumption)
     protected Value typicalFuelConsumption;
     /**
      * Vehicle identification - e.g. aircraft registration number
@@ -66,6 +80,7 @@ public class TransportMeans
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_vehicleRegistration)
     protected String vehicleRegistration;
     /**
      * Size of the vehicle - free text
@@ -75,6 +90,7 @@ public class TransportMeans
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_vehicleSize)
     protected String vehicleSize;
     /**
      * Vehicle or container type. Refer UNECE28, e.g. 4.00.0 - Aircraft, type unknown
@@ -84,6 +100,7 @@ public class TransportMeans
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_vehicleType)
     protected String vehicleType;
 
     public void setTransportCompany(Company transportCompany) {
@@ -142,4 +159,11 @@ public class TransportMeans
         return vehicleType;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

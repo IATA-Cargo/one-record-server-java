@@ -3,10 +3,14 @@ package org.iata.cargo.model;
 
 import java.io.Serializable;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -22,6 +26,11 @@ public class ServiceRequest
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_ServiceRequest)
+    protected Set<String> types;
+
     /**
      * Service request code
      * 
@@ -30,6 +39,7 @@ public class ServiceRequest
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_code_A)
     protected String code;
     /**
      * Service request description
@@ -39,6 +49,7 @@ public class ServiceRequest
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_serviceRequestDescription)
     protected String serviceRequestDescription;
     /**
      * Service request statement text
@@ -48,12 +59,14 @@ public class ServiceRequest
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_statementText)
     protected String statementText;
     /**
      * Service request statement type - e.g. Dangerous Goods, Lithium Ion Battery, Live Animal Certificate
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_statementType)
+    @JsonProperty(Vocabulary.s_p_statementType)
     protected Set<String> statementType;
 
     public void setCode(String code) {
@@ -88,4 +101,11 @@ public class ServiceRequest
         return statementType;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

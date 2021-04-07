@@ -3,11 +3,15 @@ package org.iata.cargo.model;
 
 import java.io.Serializable;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -23,6 +27,11 @@ public class IotDevice
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_IotDevice)
+    protected Set<String> types;
+
     /**
      * Manufacturer of the device
      * 
@@ -31,12 +40,14 @@ public class IotDevice
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_deviceManufacturer)
     protected Company deviceManufacturer;
     /**
      * Reference to the sensors linked to the device
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_sensors)
+    @JsonProperty(Vocabulary.s_p_sensors)
     protected Set<Sensor> sensors;
     /**
      * Reference of the Logistic Object to which the Connected Device is linked (URI)
@@ -46,6 +57,7 @@ public class IotDevice
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_associatedObject)
     protected String associatedObject;
     /**
      * Natural language description of the device. It can describe how and where the device is attached.
@@ -55,6 +67,7 @@ public class IotDevice
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_deviceDescription)
     protected String deviceDescription;
     /**
      * Commercial denomination of the device
@@ -64,6 +77,7 @@ public class IotDevice
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_deviceModel)
     protected String deviceModel;
     /**
      * Name of the device defined by the device's owner
@@ -73,6 +87,7 @@ public class IotDevice
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_deviceName)
     protected String deviceName;
     /**
      * Serial number that allows to uniquely identify the device
@@ -82,6 +97,7 @@ public class IotDevice
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_deviceSerialNumber)
     protected String deviceSerialNumber;
 
     public void setDeviceManufacturer(Company deviceManufacturer) {
@@ -140,4 +156,11 @@ public class IotDevice
         return deviceSerialNumber;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

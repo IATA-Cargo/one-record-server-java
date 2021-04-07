@@ -4,11 +4,15 @@ package org.iata.cargo.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -24,6 +28,11 @@ public class Item
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_Item)
+    protected Set<String> types;
+
     /**
      * Dimensions of the item
      * 
@@ -32,6 +41,7 @@ public class Item
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_dimensions)
     protected Dimensions dimensions;
     /**
      * URI of the PIECE that contains the Item
@@ -41,12 +51,14 @@ public class Item
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_isInPiece)
     protected Piece isInPiece;
     /**
      * Other identifier details
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_otherIdentifier_A)
+    @JsonProperty(Vocabulary.s_p_otherIdentifier_A)
     protected Set<OtherIdentifier> otherIdentifier;
     /**
      * URI of the product
@@ -54,9 +66,10 @@ public class Item
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_product)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_product)
     protected Product product;
     /**
      * Production country details
@@ -66,6 +79,7 @@ public class Item
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_productionCountry)
     protected Country productionCountry;
     /**
      * Quantity of the item when applicable, witth associated units of measure
@@ -75,6 +89,7 @@ public class Item
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_quantity)
     protected Value quantity;
     /**
      * Item target country
@@ -84,6 +99,7 @@ public class Item
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_targetCountry)
     protected Country targetCountry;
     /**
      * Product price per unit in the base
@@ -93,6 +109,7 @@ public class Item
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_unitPrice)
     protected Value unitPrice;
     /**
      * Weight of the item
@@ -102,6 +119,7 @@ public class Item
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_weight)
     protected Value weight;
     /**
      * Production batch number / reference
@@ -111,6 +129,7 @@ public class Item
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_batchNumber)
     protected String batchNumber;
     /**
      * Production lot number / reference
@@ -120,6 +139,7 @@ public class Item
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_lotNumber)
     protected String lotNumber;
     /**
      * Product expiry date - e.g. for perishables goods or goods with programmed obsolescence
@@ -129,6 +149,7 @@ public class Item
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_productExpiryDate)
     protected Date productExpiryDate;
     /**
      * Production date
@@ -138,6 +159,7 @@ public class Item
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_productionDate)
     protected Date productionDate;
     /**
      * Product quantity for unit price - e.g. 12 (eggs for one USD 1)
@@ -147,6 +169,7 @@ public class Item
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#double", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_quantityForUnitPrice)
     protected Double quantityForUnitPrice;
 
     public void setDimensions(Dimensions dimensions) {
@@ -261,4 +284,11 @@ public class Item
         return quantityForUnitPrice;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

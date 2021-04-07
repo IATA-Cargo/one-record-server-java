@@ -3,11 +3,15 @@ package org.iata.cargo.model;
 
 import java.io.Serializable;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -23,23 +27,31 @@ public class Piece
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_Piece)
+    protected Set<String> types;
+
     /**
      * Reference to the item(s) contained in the piece
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_containedItems)
+    @JsonProperty(Vocabulary.s_p_containedItems)
     protected Set<Item> containedItems;
     /**
      * Details of contained piece(s)
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_containedPiece)
+    @JsonProperty(Vocabulary.s_p_containedPiece)
     protected Set<Piece> containedPiece;
     /**
      * Customs details
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_customsInfo)
+    @JsonProperty(Vocabulary.s_p_customsInfo)
     protected Set<CustomsInfo> customsInfo;
     /**
      * Dimensions details
@@ -49,12 +61,14 @@ public class Piece
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_dimensions_A)
     protected Dimensions dimensions;
     /**
      * Reference documents details
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_externalReference)
+    @JsonProperty(Vocabulary.s_p_externalReference)
     protected Set<ExternalReference> externalReference;
     /**
      * Weight details
@@ -65,18 +79,21 @@ public class Piece
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_grossWeight)
     protected Value grossWeight;
     /**
      * Other piece identification ( e.g. Shipping Marks, Seal)
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_otherIdentifier_A_A)
+    @JsonProperty(Vocabulary.s_p_otherIdentifier_A_A)
     protected Set<OtherIdentifier> otherIdentifier;
     /**
      * Other party company details - e.g. the party to be notified
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_otherParty)
+    @JsonProperty(Vocabulary.s_p_otherParty)
     protected Set<Company> otherParty;
     /**
      * Packaging details 
@@ -86,6 +103,7 @@ public class Piece
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_packagingType)
     protected PackagingType packagingType;
     /**
      * Product of the piece, mandatory when there are no items
@@ -95,12 +113,14 @@ public class Piece
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_product_A)
     protected Product product;
     /**
      * Goods production country, mandatory when there are no Items
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_productionCountry_A)
+    @JsonProperty(Vocabulary.s_p_productionCountry_A)
     protected Set<Country> productionCountry;
     /**
      * Security details
@@ -110,12 +130,14 @@ public class Piece
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_securityStatus)
     protected SecurityDeclaration securityStatus;
     /**
      * Security requests
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_serviceRequest)
+    @JsonProperty(Vocabulary.s_p_serviceRequest)
     protected Set<ServiceRequest> serviceRequest;
     /**
      * Shipper company details - e.g. the party shipping the piece
@@ -125,18 +147,21 @@ public class Piece
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_shipper_A_A)
     protected Company shipper;
     /**
      * Special Handling details
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_specialHandling)
+    @JsonProperty(Vocabulary.s_p_specialHandling)
     protected Set<SpecialHandling> specialHandling;
     /**
      * Segment related to the transport status
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_transportSegment)
+    @JsonProperty(Vocabulary.s_p_transportSegment)
     protected Set<TransportSegment> transportSegment;
     /**
      * ULD on which the (virtual) piece has been loaded into - URIs of the ULD
@@ -146,6 +171,7 @@ public class Piece
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_uldReference)
     protected ULD uldReference;
     /**
      * Volumetric weight details
@@ -156,6 +182,7 @@ public class Piece
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_volumetricWeight)
     protected VolumetricWeight volumetricWeight;
     /**
      * Coload indicator for the pieces (boolean)
@@ -165,18 +192,21 @@ public class Piece
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#boolean", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_coload)
     protected Boolean coload;
     /**
      * The value of a shipment declared for carriage purposes , NVD if no value declared
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_declaredValueForCarriage)
+    @JsonProperty(Vocabulary.s_p_declaredValueForCarriage)
     protected Set<String> declaredValueForCarriage;
     /**
      * The value of a shipment declared for customs purposes , NVD if no value declared
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_declaredValueForCustoms)
+    @JsonProperty(Vocabulary.s_p_declaredValueForCustoms)
     protected Set<String> declaredValueForCustoms;
     /**
      * General goods description
@@ -187,6 +217,7 @@ public class Piece
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_goodsDescription)
     protected String goodsDescription;
     /**
      * Specify how the piece will be delivered (bulk or ULD)
@@ -196,6 +227,7 @@ public class Piece
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_loadType)
     protected String loadType;
     /**
      * Reference identifying how the package is marked. Field is hardcode to "SSCC-18", "UPC" or "Other"
@@ -205,6 +237,7 @@ public class Piece
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_packageMarkCoded)
     protected String packageMarkCoded;
     /**
      * SSCC-18 code for the value of the package mark, company or bar code, free text, pallet code, etc.
@@ -214,12 +247,14 @@ public class Piece
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_packagedeIdentifier)
     protected String packagedeIdentifier;
     /**
      * Shipping marks
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_shippingMarks)
+    @JsonProperty(Vocabulary.s_p_shippingMarks)
     protected Set<String> shippingMarks;
     /**
      * Shipper's Load And Count  ( total contained piece count as provided by shipper)
@@ -229,6 +264,7 @@ public class Piece
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#integer", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_slac)
     protected Integer slac;
     /**
      * Stackable indicator for the pieces (boolean)
@@ -238,6 +274,7 @@ public class Piece
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#boolean", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_stackable)
     protected Boolean stackable;
     /**
      * Turnable indicator for the pieces (boolean)
@@ -247,6 +284,7 @@ public class Piece
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#boolean", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_turnable)
     protected Boolean turnable;
     /**
      * Unique Piece Identifier (UPID) of the piece. Refer IATA Recommended Practice 1689
@@ -256,6 +294,7 @@ public class Piece
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_upid_A)
     protected String upid;
 
     public void setContainedItems(Set<Item> containedItems) {
@@ -498,4 +537,11 @@ public class Piece
         return upid;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

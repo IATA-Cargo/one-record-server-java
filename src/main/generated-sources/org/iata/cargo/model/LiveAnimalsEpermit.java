@@ -4,11 +4,15 @@ package org.iata.cargo.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -24,15 +28,21 @@ public class LiveAnimalsEpermit
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_LiveAnimalsEpermit)
+    protected Set<String> types;
+
     /**
      * Consignee company details, including complete name and address (box 3)
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_consignee_A_A)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_consignee_A_A)
     protected Company consignee;
     /**
      * Reference to the pieces and properties linked to the Permit (box 7 to 12)
@@ -42,6 +52,7 @@ public class LiveAnimalsEpermit
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_consignments)
     protected Set<EpermitConsignment> consignments;
     /**
      * List of all the signatures of the Epermit (applicant box 4, issuing authority box 6, issuer box 13 and examining authority box 14)
@@ -51,6 +62,7 @@ public class LiveAnimalsEpermit
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_signatures)
     protected Set<EpermitSignature> signatures;
     /**
      * Indicates if the permit is a copy (true) or an original (false) (box 1)
@@ -61,6 +73,7 @@ public class LiveAnimalsEpermit
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_permitCopyIndicator)
     protected String permitCopyIndicator;
     /**
      * The original number is a unique number allocated to each document by the relevant Management Authority. (box 1)
@@ -68,9 +81,10 @@ public class LiveAnimalsEpermit
      */
     @OWLDataProperty(iri = Vocabulary.s_p_permitNumber)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_permitNumber)
     protected String permitNumber;
     /**
      * Code specifying the document name. (box 1)
@@ -81,6 +95,7 @@ public class LiveAnimalsEpermit
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_permitTypeCode)
     protected String permitTypeCode;
     /**
      * Description if TypeCode is Other (box 1)
@@ -90,6 +105,7 @@ public class LiveAnimalsEpermit
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_permitTypeOther)
     protected String permitTypeOther;
     /**
      * Permit Valid from (box 2)
@@ -99,6 +115,7 @@ public class LiveAnimalsEpermit
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_permitValidFrom)
     protected Date permitValidFrom;
     /**
      * Permit Valid until (box 2)
@@ -108,6 +125,7 @@ public class LiveAnimalsEpermit
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_permitValidUntil)
     protected Date permitValidUntil;
     /**
      * Special conditions (box 5)
@@ -117,6 +135,7 @@ public class LiveAnimalsEpermit
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_specialConditions)
     protected String specialConditions;
     /**
      * Code indicating the purpose of the transaction (box 5a)
@@ -124,9 +143,10 @@ public class LiveAnimalsEpermit
      */
     @OWLDataProperty(iri = Vocabulary.s_p_transactionPurposeCode)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_transactionPurposeCode)
     protected String transactionPurposeCode;
     /**
      * Purpose of the transaction in free text (box 5a)
@@ -136,6 +156,7 @@ public class LiveAnimalsEpermit
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_transactionPurposeText)
     protected String transactionPurposeText;
     /**
      * Reference to the Air Waybill or other transport contract document (box 15)
@@ -146,6 +167,7 @@ public class LiveAnimalsEpermit
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_transportContractId)
     protected String transportContractId;
     /**
      * Code specifying the transport document name (box 15)
@@ -153,9 +175,10 @@ public class LiveAnimalsEpermit
      */
     @OWLDataProperty(iri = Vocabulary.s_p_transportContractTypeCode)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_transportContractTypeCode)
     protected String transportContractTypeCode;
 
     public void setConsignee(Company consignee) {
@@ -270,4 +293,11 @@ public class LiveAnimalsEpermit
         return transportContractTypeCode;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

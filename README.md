@@ -13,7 +13,7 @@ For testing the application locally, follow the next steps:
 1. Install `Java = 8` and `Maven`. 
 2. Install the Maven dependencies by running `mvn clean install`. 
 3. (Optional) Download the latest ONE Record Turtle ontologies from Github + the latest Web Access Control from W3C by running `mvn exec:java`.
-As the latest models are already generated and commited in this repository according to the latest ontologies, kindly skip steps 4, 5 and 6.
+As the latest models are already generated and committed in this repository according to the latest ontologies, kindly skip steps 4, 5 and 6.
 4. (SKIP) Generate ONE Record API related models by running `mvn package -Dbuild=api`
 5. (SKIP) Generate ONE Record cargo related data model by running `mvn package -Dbuild=cargo`. Optionally remove directory `src/main/generated-sources/org/iata/cargo` prior generating.
 6. (SKIP) Generate W3C Web Access Control ACL (Access Control List) related models by running `mvn package -Dbuild=acl`

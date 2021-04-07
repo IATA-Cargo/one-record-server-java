@@ -2,11 +2,15 @@
 package org.iata.cargo.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -22,15 +26,21 @@ public class Schedule
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_Schedule)
+    protected Set<String> types;
+
     /**
      * arliest acceptance date time (requested or proposed)
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_earliestAcceptanceTime)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
-    protected Date earliestAcceptanceTime;
+    @JsonProperty(Vocabulary.s_p_earliestAcceptanceTime)
+    protected String earliestAcceptanceTime;
     /**
      * Latest Acceptance time as per CargoIQ definition (requested, proposed or actual)
      * 
@@ -39,6 +49,7 @@ public class Schedule
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_latestAcceptanceTime_A)
     protected String latestAcceptanceTime;
     /**
      * Time of availability of the shipment as per CargoIQ definition
@@ -48,6 +59,7 @@ public class Schedule
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_timeOfAvailability_A)
     protected String timeOfAvailability;
     /**
      * Total transit time as per CargoIQ definition
@@ -57,13 +69,14 @@ public class Schedule
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_totalTransitTime_A)
     protected String totalTransitTime;
 
-    public void setEarliestAcceptanceTime(Date earliestAcceptanceTime) {
+    public void setEarliestAcceptanceTime(String earliestAcceptanceTime) {
         this.earliestAcceptanceTime = earliestAcceptanceTime;
     }
 
-    public Date getEarliestAcceptanceTime() {
+    public String getEarliestAcceptanceTime() {
         return earliestAcceptanceTime;
     }
 
@@ -91,4 +104,11 @@ public class Schedule
         return totalTransitTime;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

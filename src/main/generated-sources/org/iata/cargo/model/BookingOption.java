@@ -4,11 +4,15 @@ package org.iata.cargo.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -24,6 +28,11 @@ public class BookingOption
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_BookingOption)
+    protected Set<String> types;
+
     /**
      * Carrier details
      * 
@@ -32,6 +41,7 @@ public class BookingOption
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_carrier_A)
     protected Set<Company> carrier;
     /**
      * Reference to the Carrier products included in the offer
@@ -41,6 +51,7 @@ public class BookingOption
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_carrierProductInfo_A)
     protected CarrierProduct carrierProductInfo;
     /**
      * Consignee details
@@ -50,6 +61,7 @@ public class BookingOption
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_consignee_A)
     protected Company consignee;
     /**
      * Freight forwarder details
@@ -59,12 +71,14 @@ public class BookingOption
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_freightForwarder_A)
     protected Set<Company> freightForwarder;
     /**
      * Other parties to be notified of the booking evolution
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_notifyParty_A)
+    @JsonProperty(Vocabulary.s_p_notifyParty_A)
     protected Set<Company> notifyParty;
     /**
      * Price of the Booking (if different from the offer)
@@ -74,6 +88,7 @@ public class BookingOption
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_price_A)
     protected Price price;
     /**
      * Reference to the Booking option request
@@ -83,6 +98,7 @@ public class BookingOption
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_requestRef_A)
     protected Request requestRef;
     /**
      * Routing details of the offer, to be compared with routing preferences of the quote request
@@ -92,6 +108,7 @@ public class BookingOption
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_routing_A)
     protected Routing routing;
     /**
      * Schedule details of the Booking Option (proposed or actual)
@@ -101,6 +118,7 @@ public class BookingOption
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_schedule)
     protected Schedule schedule;
     /**
      * Details of the shipement that is to be shipped
@@ -110,6 +128,7 @@ public class BookingOption
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_shipmentDetails_A)
     protected Shipment shipmentDetails;
     /**
      * Shipper details
@@ -119,6 +138,7 @@ public class BookingOption
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_shipper_A)
     protected Company shipper;
     /**
      * Transport segment linked to the offer, including the Departure and Arrival locations
@@ -128,6 +148,7 @@ public class BookingOption
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_transportMovement_A)
     protected TransportSegment transportMovement;
     /**
      * House or Master Waybill unique identifier
@@ -137,6 +158,7 @@ public class BookingOption
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_waybillNumber_A)
     protected Waybill waybillNumber;
     /**
      * Status of the Booking with regards to the step in the Quote & Book process: Quoted, Booked
@@ -146,6 +168,7 @@ public class BookingOption
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_bookingStatus_A)
     protected String bookingStatus;
     /**
      * Starting datetime of availability of the booking option
@@ -155,6 +178,7 @@ public class BookingOption
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_offerValidFrom)
     protected Date offerValidFrom;
     /**
      * Ending datetime of availability of the booking option
@@ -164,6 +188,7 @@ public class BookingOption
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_offerValidTo)
     protected Date offerValidTo;
     /**
      * Indicates if the offer is a perfect match to the quote request (boolean)
@@ -173,6 +198,7 @@ public class BookingOption
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#boolean", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_requestMatchInd_A)
     protected Boolean requestMatchInd;
     /**
      * Indicate the secruty state of the shipment, screened or not
@@ -182,6 +208,7 @@ public class BookingOption
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_shipmentSecurityStatus_A)
     protected String shipmentSecurityStatus;
 
     public void setCarrier(Set<Company> carrier) {
@@ -328,4 +355,11 @@ public class BookingOption
         return shipmentSecurityStatus;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

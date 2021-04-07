@@ -3,11 +3,15 @@ package org.iata.cargo.model;
 
 import java.io.Serializable;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -22,6 +26,10 @@ public class BookingOptionRequest
     extends LogisticsObject
     implements Serializable
 {
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_BookingOptionRequest)
+    protected Set<String> types;
 
     /**
      * Parties involved if known
@@ -31,6 +39,7 @@ public class BookingOptionRequest
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_parties)
     protected OtherParty parties;
     /**
      * Ratings preferences of the request
@@ -40,6 +49,7 @@ public class BookingOptionRequest
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_ratingsPreference)
     protected Ratings ratingsPreference;
     /**
      * Routing details that are part of the request, these details will be used to determine if the offer is a perfect match
@@ -49,12 +59,14 @@ public class BookingOptionRequest
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_routingPreferences)
     protected Routing routingPreferences;
     /**
      * Schedule preferences of the request
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_schedulePreferences)
+    @JsonProperty(Vocabulary.s_p_schedulePreferences)
     protected Set<Schedule> schedulePreferences;
     /**
      * Details of the shipement that is to be shipped
@@ -64,6 +76,7 @@ public class BookingOptionRequest
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_shipmentDetails_A_A)
     protected Shipment shipmentDetails;
     /**
      * Transport segment linked to the request, including the Departure and Arrival locations requested
@@ -73,6 +86,7 @@ public class BookingOptionRequest
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_transportMovement_A_A)
     protected TransportSegment transportMovement;
     /**
      * Unit preferences of the request (e.g. kg or cm)
@@ -82,6 +96,7 @@ public class BookingOptionRequest
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_unitsPreference)
     protected Value unitsPreference;
     /**
      * Reference to the Allotment as per the contracts between forwarders and carriers
@@ -91,12 +106,14 @@ public class BookingOptionRequest
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_allotment)
     protected String allotment;
     /**
      * Expected commodity for quote request purposes only. To be defined by MCD
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_expectedCommodity)
+    @JsonProperty(Vocabulary.s_p_expectedCommodity)
     protected Set<String> expectedCommodity;
     /**
      * Identification of the request type: Quote or Booking
@@ -106,12 +123,14 @@ public class BookingOptionRequest
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_requestType)
     protected String requestType;
     /**
      * Requested handling information for quote request purposes only
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_requestedHandling)
+    @JsonProperty(Vocabulary.s_p_requestedHandling)
     protected Set<String> requestedHandling;
     /**
      * Indicate the security state of the shipment, screened or not
@@ -121,6 +140,7 @@ public class BookingOptionRequest
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_shipmentSecurityStatus_A_A)
     protected String shipmentSecurityStatus;
 
     public void setParties(OtherParty parties) {
@@ -219,4 +239,11 @@ public class BookingOptionRequest
         return shipmentSecurityStatus;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

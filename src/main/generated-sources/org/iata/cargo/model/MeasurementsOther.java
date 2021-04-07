@@ -2,6 +2,8 @@
 package org.iata.cargo.model;
 
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
@@ -29,6 +31,7 @@ public class MeasurementsOther
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_genericMeasurement)
     protected Value genericMeasurement;
 
     public void setGenericMeasurement(Value genericMeasurement) {

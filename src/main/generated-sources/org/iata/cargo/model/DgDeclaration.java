@@ -2,10 +2,15 @@
 package org.iata.cargo.model;
 
 import java.io.Serializable;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -21,6 +26,11 @@ public class DgDeclaration
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_DgDeclaration)
+    protected Set<String> types;
+
     /**
      * Contains the Special Handling Code related to the prescribed limitation. Hardcoded to PASSENGER AND CARGO AIRCRAFT or CARGO AIRCRAFT ONLY. This field is mandatory for air (Air) 
      * 
@@ -30,6 +40,7 @@ public class DgDeclaration
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_aircraftLimitationInformation)
     protected String aircraftLimitationInformation;
     /**
      * Contains the warning message complying with the regulations text note. This field is mandatory for air (Air) 
@@ -40,6 +51,7 @@ public class DgDeclaration
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_complianceDeclarationText)
     protected String complianceDeclarationText;
     /**
      * Indicates an exclusive use shipment
@@ -49,6 +61,7 @@ public class DgDeclaration
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#boolean", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_exclusiveUseIndicator)
     protected Boolean exclusiveUseIndicator;
     /**
      * Free text. This may include items such as Control temperature for substances stabilized by temperature control, name and telephone number of a responsible person for infectious substances. 
@@ -58,6 +71,7 @@ public class DgDeclaration
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_handlingInformation)
     protected String handlingInformation;
     /**
      * Contains the shipper's declaration to comply with the regulations text note. Free text . This field is mandatory for air (Air)
@@ -68,6 +82,7 @@ public class DgDeclaration
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_shipperDeclarationText)
     protected String shipperDeclarationText;
 
     public void setAircraftLimitationInformation(String aircraftLimitationInformation) {
@@ -110,4 +125,11 @@ public class DgDeclaration
         return shipperDeclarationText;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

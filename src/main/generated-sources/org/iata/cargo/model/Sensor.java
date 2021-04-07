@@ -3,11 +3,15 @@ package org.iata.cargo.model;
 
 import java.io.Serializable;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -23,6 +27,11 @@ public class Sensor
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_Sensor)
+    protected Set<String> types;
+
     /**
      * Reference to the IoT Device to which the sensor is linked
      * 
@@ -31,6 +40,7 @@ public class Sensor
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
+    @JsonProperty(Vocabulary.s_p_iotDevice)
     protected Set<IotDevice> iotDevice;
     /**
      * Natural language description of the sensor
@@ -40,6 +50,7 @@ public class Sensor
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_sensorDescription)
     protected String sensorDescription;
     /**
      * Name of the sensor defined by the sensor's manufacturer
@@ -49,6 +60,7 @@ public class Sensor
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_sensorName)
     protected String sensorName;
     /**
      * Serial number that allows to uniquely identify the sensor
@@ -58,6 +70,7 @@ public class Sensor
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_sensorSerialNumber)
     protected String sensorSerialNumber;
     /**
      * Type of sensor as described in Interactive Cargo RP
@@ -67,6 +80,7 @@ public class Sensor
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_sensorType)
     protected String sensorType;
 
     public void setIotDevice(Set<IotDevice> iotDevice) {
@@ -109,4 +123,11 @@ public class Sensor
         return sensorType;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

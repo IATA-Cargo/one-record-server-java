@@ -2,11 +2,16 @@
 package org.iata.cargo.model;
 
 import java.io.Serializable;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
+import cz.cvut.kbss.jopa.model.annotations.Types;
+import io.swagger.annotations.ApiModelProperty;
 import org.iata.cargo.Vocabulary;
 
 
@@ -22,6 +27,11 @@ public class CO2Emissions
     implements Serializable
 {
 
+    @Types
+    @JsonProperty("@type")
+    @ApiModelProperty(allowableValues = Vocabulary.s_c_CO2Emissions)
+    protected Set<String> types;
+
     /**
      * CO2 emissions calculated
      * 
@@ -30,6 +40,7 @@ public class CO2Emissions
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_calculatedEmissions)
     protected Value calculatedEmissions;
     /**
      * Name of the CO2 calculation method
@@ -39,6 +50,7 @@ public class CO2Emissions
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_methodName_A)
     protected String methodName;
     /**
      * Version used for the calculation
@@ -48,6 +60,7 @@ public class CO2Emissions
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_methodVersion_A)
     protected String methodVersion;
 
     public void setCalculatedEmissions(Value calculatedEmissions) {
@@ -74,4 +87,11 @@ public class CO2Emissions
         return methodVersion;
     }
 
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
 }

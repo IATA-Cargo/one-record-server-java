@@ -3,6 +3,8 @@ package org.iata.cargo.model;
 
 import java.io.Serializable;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import org.iata.cargo.Vocabulary;
@@ -25,6 +27,7 @@ public class SensorGeoloc
      * 
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_val)
+    @JsonProperty(Vocabulary.s_p_val)
     protected Set<MeasurementsGeoloc> val;
 
     public void setVal(Set<MeasurementsGeoloc> val) {

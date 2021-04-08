@@ -186,7 +186,7 @@
                         <configuration>
                             <package>org.iata.cargo</package>
                             <output-directory>${project.basedir}/src/main/generated-sources</output-directory>
-                            <ontology-iri>https://onerecord.iata.org</ontology-iri>
+                            <ontology-iri>https://onerecord.iata.org/cargo</ontology-iri>
                             <mapping-file>${project.basedir}/mapping</mapping-file>
                             <!--                    <whole-ontology-as-ics>true</whole-ontology-as-ics>-->
                             <!--                    <vocabulary-only>false</vocabulary-only>-->
@@ -273,7 +273,7 @@
                         <configuration>
                             <package>org.iata.api</package>
                             <output-directory>${project.basedir}/src/main/generated-sources</output-directory>
-                            <ontology-iri>https://onerecord.iata.org</ontology-iri>
+                            <ontology-iri>https://onerecord.iata.org/api</ontology-iri>
                             <mapping-file>${project.basedir}/mapping_api</mapping-file>
                             <!--                    <whole-ontology-as-ics>true</whole-ontology-as-ics>-->
                             <!--                    <vocabulary-only>false</vocabulary-only>-->

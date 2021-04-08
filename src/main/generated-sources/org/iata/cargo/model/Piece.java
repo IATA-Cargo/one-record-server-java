@@ -172,7 +172,7 @@ public class Piece
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
     @JsonProperty(Vocabulary.s_p_uldReference)
-    protected ULD uldReference;
+    protected Uld uldReference;
     /**
      * Volumetric weight details
      * 
@@ -425,11 +425,11 @@ public class Piece
         return transportSegment;
     }
 
-    public void setUldReference(ULD uldReference) {
+    public void setUldReference(Uld uldReference) {
         this.uldReference = uldReference;
     }
 
-    public ULD getUldReference() {
+    public Uld getUldReference() {
         return uldReference;
     }
 

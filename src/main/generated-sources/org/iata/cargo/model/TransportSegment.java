@@ -157,7 +157,7 @@ public class TransportSegment
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_transportedUlds)
     @JsonProperty(Vocabulary.s_p_transportedUlds)
-    protected Set<ULD> transportedUlds;
+    protected Set<Uld> transportedUlds;
     /**
      * Arrival date and time. Actual or planned depends on the movementType property
      * 
@@ -353,11 +353,11 @@ public class TransportSegment
         return transportedPieces;
     }
 
-    public void setTransportedUlds(Set<ULD> transportedUlds) {
+    public void setTransportedUlds(Set<Uld> transportedUlds) {
         this.transportedUlds = transportedUlds;
     }
 
-    public Set<ULD> getTransportedUlds() {
+    public Set<Uld> getTransportedUlds() {
         return transportedUlds;
     }
 

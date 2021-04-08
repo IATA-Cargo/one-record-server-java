@@ -22,7 +22,7 @@ import org.iata.cargo.Vocabulary;
  * 
  */
 @OWLClass(iri = Vocabulary.s_c_ULD)
-public class ULD
+public class Uld
     extends LogisticsObject
     implements Serializable
 {

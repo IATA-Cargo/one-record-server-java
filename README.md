@@ -6,6 +6,11 @@ Before deploying the server, you will need to update the `application.properties
 1. the credentials for accessing your MongoDB database. You can find the instructions on how to setup a MongoDB database below.  
 `    spring.data.mongodb.uri:mongodb+srv://<username>:<password>@<databaseURI>/<databaseName>?retryWrites=true&w=majority
 `  
+
+There are two `application.properties` files to edit:
+* One under `src/main/resources`
+* One under `src/test/resources`.
+
 # Local testing
 
 ## Build & run the sandbox code
@@ -26,7 +31,7 @@ Swagger API Documentation can be accessed and tested via [https://yourserverurl/
 A Postman collection containing ONE Record API endpoints ready for testing can be found [here](https://github.com/IATA-Cargo/one-record-server-java/tree/master/src/test/resources/postman).
 
 ## JSON-LD models
-JSON-LD generated files for the ONE Record Cargo related models and the API specific models can be found [here](https://github.com/IATA-Cargo/ONE-Record/tree/master/working_draft/API/json-ld).
+JSON-LD generated files for the ONE Record Cargo related models, and the API specific models can be found [here](https://github.com/IATA-Cargo/ONE-Record/tree/master/working_draft/API/json-ld).
 Some examples with test values can be also found [here](https://github.com/IATA-Cargo/one-record-server-java/tree/master/src/test/resources/examples).
 
 # Deployment

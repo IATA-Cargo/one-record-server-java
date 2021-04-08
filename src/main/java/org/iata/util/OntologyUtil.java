@@ -17,8 +17,8 @@ import java.net.URL;
 public class OntologyUtil {
   private static final Logger LOG = LoggerFactory.getLogger(OntologyUtil.class);
 
-  private static final String ONE_RECORD_CARGO_ONTOLOGY_URL = "https://raw.githubusercontent.com/IATA-Cargo/ONE-Record/master/working_draft/ontology/IATA-1R-DM-Ontology-May2020.ttl";
-  private static final String ONE_RECORD_API_ONTOLOGY_URL = "https://raw.githubusercontent.com/IATA-Cargo/ONE-Record/master/working_draft/ontology/IATA-1R-API-Ontology-July2020.ttl";
+  private static final String ONE_RECORD_CARGO_ONTOLOGY_URL = "https://raw.githubusercontent.com/IATA-Cargo/ONE-Record/master/working_draft/ontology/IATA-1R-DM-Ontology.ttl";
+  private static final String ONE_RECORD_API_ONTOLOGY_URL = "https://raw.githubusercontent.com/IATA-Cargo/ONE-Record/master/working_draft/ontology/IATA-1R-API-Ontology.ttl";
   private static final String WEB_ACCESS_CONTROL_ONTOLOGY_URL = "http://www.w3.org/ns/auth/acl";
 
   private static final String CARGO_FILE = "iata.ttl";

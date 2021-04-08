@@ -6,6 +6,11 @@ Before deploying the server, you will need to update the `application.properties
 1. the credentials for accessing your MongoDB database. You can find the instructions on how to setup a MongoDB database below.  
 `    spring.data.mongodb.uri:mongodb+srv://<username>:<password>@<databaseURI>/<databaseName>?retryWrites=true&w=majority
 `  
+
+There are two `application.properties` files to edit:
+* One under `src/main/resources`
+* One under `src/test/resources`.
+
 # Local testing
 
 ## Build & run the sandbox code
@@ -13,9 +18,9 @@ For testing the application locally, follow the next steps:
 1. Install `Java = 8` and `Maven`. 
 2. Install the Maven dependencies by running `mvn clean install`. 
 3. (Optional) Download the latest ONE Record Turtle ontologies from Github + the latest Web Access Control from W3C by running `mvn exec:java`.
-As the latest models are already generated and commited in this repository according to the latest ontologies, kindly skip steps 4, 5 and 6.
+As the latest models are already generated and committed in this repository according to the latest ontologies, kindly skip steps 4, 5 and 6.
 4. (SKIP) Generate ONE Record API related models by running `mvn package -Dbuild=api`
-5. (SKIP) Generate ONE Record cargo related data model by running `mvn package -Dbuild=cargo`
+5. (SKIP) Generate ONE Record cargo related data model by running `mvn package -Dbuild=cargo`. Optionally remove directory `src/main/generated-sources/org/iata/cargo` prior generating.
 6. (SKIP) Generate W3C Web Access Control ACL (Access Control List) related models by running `mvn package -Dbuild=acl`
 7. Run the server from OneRecordApplication or from the command line via `mvn spring-boot:run`. Your application should be available at [http://localhost:8080](http://localhost:8080).
 
@@ -26,7 +31,7 @@ Swagger API Documentation can be accessed and tested via [https://yourserverurl/
 A Postman collection containing ONE Record API endpoints ready for testing can be found [here](https://github.com/IATA-Cargo/one-record-server-java/tree/master/src/test/resources/postman).
 
 ## JSON-LD models
-JSON-LD generated files for the ONE Record Cargo related models and the API specific models can be found [here](https://github.com/IATA-Cargo/ONE-Record/tree/master/working_draft/API/json-ld).
+JSON-LD generated files for the ONE Record Cargo related models, and the API specific models can be found [here](https://github.com/IATA-Cargo/ONE-Record/tree/master/working_draft/API/json-ld).
 Some examples with test values can be also found [here](https://github.com/IATA-Cargo/one-record-server-java/tree/master/src/test/resources/examples).
 
 # Deployment

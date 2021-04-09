@@ -5,10 +5,12 @@ import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
@@ -55,6 +57,11 @@ public class OneRecordApplication extends SpringBootServletInitializer {
     }
 
     return restTemplate;
+  }
+
+  @Autowired
+  void setMapKeyDotReplacement(MappingMongoConverter mappingMongoConverter) {
+    mappingMongoConverter.setMapKeyDotReplacement("-DOT");
   }
 
 }

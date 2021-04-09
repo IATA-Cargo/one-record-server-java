@@ -49,7 +49,7 @@ public class Contact
     @Properties
     @JsonIgnore
     protected Map<String, Set<String>> properties;
-    @JsonProperty("@language")
+    @JsonProperty("language")
     @OWLAnnotationProperty(iri = DC.Terms.LANGUAGE)
     protected String language;
 

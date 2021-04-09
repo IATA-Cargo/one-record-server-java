@@ -1,11 +1,10 @@
 {
-  "@language": "en",
   "@type": [
-    "https://onerecord.iata.org/Memento"
+    "https://onerecord.iata.org/api/Memento"
   ],
-  "id": "http://localhost:8080/companies/andra/los/Piece_922982/mementos/m-1",
-  "https://onerecord.iata.org/Memento#created": "2021-03-15T11:04:15.943Z",
-  "https://onerecord.iata.org/Memento#createdBy": "test",
-  "https://onerecord.iata.org/Memento#label": "version1",
-  "https://onerecord.iata.org/Memento#original": "http://localhost:8080/companies/andra/los/Piece_922982"
+  "id": "http://localhost:8080/companies/iata/los/Piece_770327/mementos/m-1",
+  "https://onerecord.iata.org/api/Memento#created": "Wed Mar 04 03:34:45 GMT+08:00 2021",
+  "https://onerecord.iata.org/api/Memento#createdBy": "test",
+  "https://onerecord.iata.org/api/Memento#label": "version1",
+  "https://onerecord.iata.org/api/Memento#original": "http://localhost:8080/companies/iata/los/Piece_770327"
 }

@@ -1,12 +1,13 @@
 {
-  "@language": "en",
   "@type": [
-    "https://onerecord.iata.org/Notification"
+    "https://onerecord.iata.org/api/Notification"
   ],
-  "https://onerecord.iata.org/Notification#eventType": "OBJECT_CREATED",
-  "https://onerecord.iata.org/Notification#logisticsObject": {
-    "https://onerecord.iata.org/LogisticsObject#companyIdentifier": "http://localhost:8080/companies/iata",
-    "id": "http://localhost:8080/companies/iata/los/lo1"
+  "https://onerecord.iata.org/api/Notification#eventType": "OBJECT_CREATED",
+  "https://onerecord.iata.org/api/Notification#logisticsObject": {
+    "@type": [
+      "https://onerecord.iata.org/cargo/LogisticsObject"
+    ],
+    "https://onerecord.iata.org/cargo/LogisticsObject#companyIdentifier": "http://localhost:8080/companies/iata"
   },
-  "https://onerecord.iata.org/Notification#topic": "https://onerecord.iata.org/Piece"
+  "https://onerecord.iata.org/api/Notification#topic": "https://onerecord.iata.org/cargo/Piece"
 }

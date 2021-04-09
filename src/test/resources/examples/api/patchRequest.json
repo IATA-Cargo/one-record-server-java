@@ -1,50 +1,48 @@
 {
-  "@language": "string",
   "@type": [
-    "https://onerecord.iata.org/PatchRequest"
+    "https://onerecord.iata.org/api/PatchRequest"
   ],
-  "https://onerecord.iata.org/PatchRequest#description": "Change coload",
-  "https://onerecord.iata.org/PatchRequest#logisticsObjectRef": {
-    "@language": "string",
+  "https://onerecord.iata.org/api/PatchRequest#description": "Change coload",
+  "https://onerecord.iata.org/api/PatchRequest#logisticsObjectRef": {
     "@type": [
-      "https://onerecord.iata.org/LogisticsObjectRef"
+      "https://onerecord.iata.org/api/LogisticsObjectRef"
     ],
-    "https://onerecord.iata.org/LogisticsObjectRef#logisticsObjectId": "http://localhost:8080/companies/andra/los/Piece_922982",
-    "https://onerecord.iata.org/LogisticsObjectRef#logisticsObjectType": "https://onerecord.iata.org/Piece"
+    "https://onerecord.iata.org/api/LogisticsObjectRef#logisticsObjectId": "http://localhost:8080/companies/iot/los/Piece_770327",
+    "https://onerecord.iata.org/api/LogisticsObjectRef#logisticsObjectType": "https://onerecord.iata.org/cargo/Piece"
   },
-  "https://onerecord.iata.org/PatchRequest#operations": [
+  "https://onerecord.iata.org/api/PatchRequest#operations": [
     {
       "@type": [
-        "https://onerecord.iata.org/Operation"
+        "https://onerecord.iata.org/api/Operation"
       ],
-      "https://onerecord.iata.org/Operation#o":
+      "https://onerecord.iata.org/api/Operation#o":
         {
           "@type": [
-            "https://onerecord.iata.org/OperationObject"
+            "https://onerecord.iata.org/api/OperationObject"
           ],
-          "https://onerecord.iata.org/OperationObject#datatype": "https://www.w3.org/2001/XMLSchema#boolean",
-          "https://onerecord.iata.org/OperationObject#value": "true"
+          "https://onerecord.iata.org/api/OperationObject#datatype": "https://www.w3.org/2001/XMLSchema#boolean",
+          "https://onerecord.iata.org/api/OperationObject#value": "true"
         },
 
-      "https://onerecord.iata.org/Operation#op": "del",
-      "https://onerecord.iata.org/Operation#p": "https://onerecord.iata.org/Piece#coload"
+      "https://onerecord.iata.org/api/Operation#op": "del",
+      "https://onerecord.iata.org/api/Operation#p": "https://onerecord.iata.org/cargo/Piece#coload"
     },
     {
       "@type": [
-        "https://onerecord.iata.org/Operation"
+        "https://onerecord.iata.org/api/Operation"
       ],
-      "https://onerecord.iata.org/Operation#o":
+      "https://onerecord.iata.org/api/Operation#o":
         {
           "@type": [
-            "https://onerecord.iata.org/OperationObject"
+            "https://onerecord.iata.org/api/OperationObject"
           ],
-          "https://onerecord.iata.org/OperationObject#datatype": "https://www.w3.org/2001/XMLSchema#boolean",
-          "https://onerecord.iata.org/OperationObject#value": "false"
+          "https://onerecord.iata.org/api/OperationObject#datatype": "https://www.w3.org/2001/XMLSchema#boolean",
+          "https://onerecord.iata.org/api/OperationObject#value": "false"
         },
-      "https://onerecord.iata.org/Operation#op": "add",
-      "https://onerecord.iata.org/Operation#p": "https://onerecord.iata.org/Piece#coload"
+      "https://onerecord.iata.org/api/Operation#op": "add",
+      "https://onerecord.iata.org/api/Operation#p": "https://onerecord.iata.org/cargo/Piece#coload"
     }
   ],
-  "https://onerecord.iata.org/PatchRequest#requestorCompanyIdentifier": "http://localhost:8080/companies/test",
-  "https://onerecord.iata.org/PatchRequest#revision": "1"
+  "https://onerecord.iata.org/api/PatchRequest#requestorCompanyIdentifier": "http://localhost:8080/companies/test",
+  "https://onerecord.iata.org/api/PatchRequest#revision": "1"
 }

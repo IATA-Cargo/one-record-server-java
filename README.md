@@ -22,7 +22,9 @@ As the latest models are already generated and committed in this repository acco
 4. (SKIP) Generate ONE Record API related models by running `mvn package -Dbuild=api`
 5. (SKIP) Generate ONE Record cargo related data model by running `mvn package -Dbuild=cargo`. Optionally remove directory `src/main/generated-sources/org/iata/cargo` prior generating.
 6. (SKIP) Generate W3C Web Access Control ACL (Access Control List) related models by running `mvn package -Dbuild=acl`
-7. Run the server from OneRecordApplication or from the command line via `mvn spring-boot:run`. Your application should be available at [http://localhost:8080](http://localhost:8080).
+7. MongoDB has updated their server, so in order to have it work properly, one needs to add an extra VM argument. The solution is actually change the TLS Version to 1.2 in JVM params.
+`-Djdk.tls.client.protocols=TLSv1.2`
+8. Run the server from OneRecordApplication or from the command line via `mvn spring-boot:run`. Your application should be available at [http://localhost:8080](http://localhost:8080).
 
 ## Swagger API Documentation
 Swagger API Documentation can be accessed and tested via [https://yourserverurl/swagger-ui.html](https://yourserverurl/swagger-ui.html). If you run the server locally, Swagger documentation can be accessed via [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html).

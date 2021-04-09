@@ -49,7 +49,7 @@ public class Branch
     @Properties
     @JsonIgnore
     protected Map<String, Set<String>> properties;
-    @JsonProperty("@language")
+    @JsonProperty("language")
     @OWLAnnotationProperty(iri = DC.Terms.LANGUAGE)
     protected String language;
 
@@ -95,6 +95,7 @@ public class Branch
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
+    @JsonProperty(Vocabulary.s_p_branchName)
     protected String branchName;
     /**
      * IATA CASS cargo agent 4 digit branch number / location identifier

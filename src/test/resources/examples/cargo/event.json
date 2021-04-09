@@ -1,26 +1,26 @@
 {
   "@type": [
-    "https://onerecord.iata.org/Event"
+    "https://onerecord.iata.org/cargo/Event"
   ],
-  "https://onerecord.iata.org/Event#dateTime": "09-07-2020",
-  "https://onerecord.iata.org/Event#eventCode": "ARR",
-  "https://onerecord.iata.org/Event#eventName": "Arrival",
-  "https://onerecord.iata.org/Event#eventTypeIndicator": "Test",
-  "https://onerecord.iata.org/Event#location": {
+  "https://onerecord.iata.org/cargo/Event#dateTime": "Wed Mar 04 03:34:45 GMT+08:00 2021",
+  "https://onerecord.iata.org/cargo/Event#eventCode": "ARR",
+  "https://onerecord.iata.org/cargo/Event#eventName": "Arrival",
+  "https://onerecord.iata.org/cargo/Event#eventTypeIndicator": "Test",
+  "https://onerecord.iata.org/cargo/Event#location": {
     "@type": [
-      "https://onerecord.iata.org/Location"
+      "https://onerecord.iata.org/cargo/Location"
     ],
-    "https://onerecord.iata.org/Location#code": "GVA",
-    "https://onerecord.iata.org/Location#locationName": "Geneva",
-    "https://onerecord.iata.org/Location#locationType": "Office"
+    "https://onerecord.iata.org/cargo/Location#code": "GVA",
+    "https://onerecord.iata.org/cargo/Location#locationName": "Geneva",
+    "https://onerecord.iata.org/cargo/Location#locationType": "Office"
   },
-  "https://onerecord.iata.org/Event#linkedObject": "http://localhost:8080/companies/andra/los/Piece_922982",
-  "https://onerecord.iata.org/Event#performedBy": {
+  "https://onerecord.iata.org/cargo/Event#linkedObject": "http://localhost:8080/companies/iata/los/Piece_770327",
+  "https://onerecord.iata.org/cargo/Event#performedBy": {
     "@type": [
-      "https://onerecord.iata.org/Company"
+      "https://onerecord.iata.org/cargo/Company"
     ],
-    "https://onerecord.iata.org/Company#airlineCode": "XB",
-    "https://onerecord.iata.org/Company#airlinePrefix": "XB",
-    "https://onerecord.iata.org/Company#companyName": "IATA"
+    "https://onerecord.iata.org/cargo/Company#airlineCode": "XB",
+    "https://onerecord.iata.org/cargo/Company#airlinePrefix": 12345,
+    "https://onerecord.iata.org/cargo/Company#companyName": "IATA"
   }
 }

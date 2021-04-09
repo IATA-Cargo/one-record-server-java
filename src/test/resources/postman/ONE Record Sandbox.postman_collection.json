@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/CompanyInformation\"\r\n  ],\r\n  \"https://onerecord.iata.org/CompanyInformation#companyId\": \"test\",\r\n  \"https://onerecord.iata.org/CompanyInformation#company\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/Company\"\r\n    ],\r\n    \"https://onerecord.iata.org/Company#airlineCode\": \"XB\",\r\n    \"https://onerecord.iata.org/Company#airlinePrefix\": 123,\r\n    \"https://onerecord.iata.org/Company#branch\": {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/Branch\"\r\n      ],\r\n      \"https://onerecord.iata.org/Branch#branchName\": \"IATA Geneva\",\r\n      \"https://onerecord.iata.org/Branch#contactPerson\": [\r\n        {\r\n          \"@type\": [\r\n            \"https://onerecord.iata.org/Person\"\r\n          ],\r\n          \"contact\": [\r\n            {\r\n              \"@type\": [\r\n                \"https://onerecord.iata.org/Contact\"\r\n              ],\r\n              \"https://onerecord.iata.org/Contact#emailAddress\": \"onerecord@iata.org\",\r\n              \"other\": {\r\n                \"@type\": [\r\n                  \"https://onerecord.iata.org/ContactOther\"\r\n                ],\r\n                \"https://onerecord.iata.org/ContactOther#detail\": \"ONE Record email\"\r\n              },\r\n              \"https://onerecord.iata.org/Contact#phoneNumber\": \"123456789\"\r\n            }\r\n          ],\r\n          \"https://onerecord.iata.org/Person#department\": \"Digital Cargo\"\r\n        }\r\n      ],\r\n      \"https://onerecord.iata.org/Branch#iataCargoAgentLocationIdentifier\": 0,\r\n      \"https://onerecord.iata.org/Branch#location\": {\r\n        \"@type\": [\r\n          \"https://onerecord.iata.org/Location\"\r\n        ],\r\n        \"https://onerecord.iata.org/Location#address\": {\r\n          \"@type\": [\r\n            \"https://onerecord.iata.org/Address\"\r\n          ],\r\n          \"https://onerecord.iata.org/Address#cityCode\": \"GVA\",\r\n          \"https://onerecord.iata.org/Address#cityName\": \"Geneva\",\r\n          \"https://onerecord.iata.org/Address#country\": {\r\n            \"@type\": [\r\n              \"https://onerecord.iata.org/Country\"\r\n            ],\r\n            \"https://onerecord.iata.org/Country#countryCode\": \"CH\",\r\n            \"https://onerecord.iata.org/Country#countryName\": \"Switzerland\"\r\n          },\r\n          \"https://onerecord.iata.org/Address#postalCode\": \"1212\",\r\n          \"https://onerecord.iata.org/Address#regionCode\": \"GVA\",\r\n          \"https://onerecord.iata.org/Address#regionName\": \"Geneva\",\r\n          \"https://onerecord.iata.org/Address#street\": [\r\n            \"Route de l'aeroport\"\r\n          ]\r\n        },\r\n        \"https://onerecord.iata.org/Location#locationName\": \"IATA Office\",\r\n        \"https://onerecord.iata.org/Location#locationType\": \"Office\"\r\n      }\r\n    },\r\n    \"https://onerecord.iata.org/Company#companyName\": \"IATA Geneva\"\r\n  },\r\n  \"https://onerecord.iata.org/CompanyInformation#serverEndpoint\": \"http://localhost:8080/companies/test\",\r\n  \"https://onerecord.iata.org/CompanyInformation#supportedContentTypes\": [\r\n    \"application/ld+json\"\r\n  ],\r\n  \"https://onerecord.iata.org/CompanyInformation#supportedLogisticsObjects\": [\r\n    \"https://onerecord.iata.org/Waybill\",\r\n    \"https://onerecord.iata.org/Shipment\",\r\n    \"https://onerecord.iata.org/Booking\",\r\n    \"https://onerecord.iata.org/Piece\",\r\n    \"https://onerecord.iata.org/Item\",\r\n    \"https://onerecord.iata.org/Product\",\r\n    \"https://onerecord.iata.org/ServiceRequest\"\r\n  ]\r\n}",
+							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/api/CompanyInformation\"\r\n  ],\r\n  \"https://onerecord.iata.org/api/CompanyInformation#companyId\": \"iata\",\r\n  \"https://onerecord.iata.org/api/CompanyInformation#company\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/cargo/Company\"\r\n    ],\r\n    \"https://onerecord.iata.org/cargo/Company#airlineCode\": \"XB\",\r\n    \"https://onerecord.iata.org/cargo/Company#airlinePrefix\": 123,\r\n    \"https://onerecord.iata.org/cargo/Company#branch\": {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/cargo/Branch\"\r\n      ],\r\n      \"https://onerecord.iata.org/cargo/Branch#branchName\": \"IATA Geneva\",\r\n      \"https://onerecord.iata.org/cargo/Branch#contactPerson\": [\r\n        {\r\n          \"@type\": [\r\n            \"https://onerecord.iata.org/cargo/Person\"\r\n          ],\r\n          \"https://onerecord.iata.org/cargo/Person#contact\": [\r\n            {\r\n              \"@type\": [\r\n                \"https://onerecord.iata.org/cargo/Contact\"\r\n              ],\r\n              \"https://onerecord.iata.org/cargo/Contact#emailAddress\": \"onerecord@iata.org\",\r\n              \"https://onerecord.iata.org/cargo/Contact#other\": {\r\n                \"@type\": [\r\n                  \"https://onerecord.iata.org/cargo/ContactOther\"\r\n                ],\r\n                \"https://onerecord.iata.org/cargo/ContactOther#detail\": \"ONE Record email\",\r\n                \"https://onerecord.iata.org/cargo/ContactOther#otherType\": \"Phone\"\r\n              },\r\n              \"https://onerecord.iata.org/cargo/Contact#phoneNumber\": \"123456789\"\r\n            }\r\n          ],\r\n          \"https://onerecord.iata.org/cargo/Person#department\": \"Digital Cargo\"\r\n        }\r\n      ],\r\n      \"https://onerecord.iata.org/cargo/Branch#iataCargoAgentLocationIdentifier\": 0,\r\n      \"https://onerecord.iata.org/cargo/Branch#location\": {\r\n        \"@type\": [\r\n          \"https://onerecord.iata.org/cargo/Location\"\r\n        ],\r\n        \"https://onerecord.iata.org/cargo/Location#address\": {\r\n          \"@type\": [\r\n            \"https://onerecord.iata.org/cargo/Address\"\r\n          ],\r\n          \"https://onerecord.iata.org/cargo/Address#addressCode\": [\r\n            \"GVA\"\r\n          ],\r\n          \"https://onerecord.iata.org/cargo/Address#cityCode\": \"GVA\",\r\n          \"https://onerecord.iata.org/cargo/Address#cityName\": \"Geneva\",\r\n          \"https://onerecord.iata.org/cargo/Address#country\": {\r\n            \"@type\": [\r\n              \"https://onerecord.iata.org/cargo/Country\"\r\n            ],\r\n            \"https://onerecord.iata.org/cargo/Country#countryCode\": \"CH\",\r\n            \"https://onerecord.iata.org/cargo/Country#countryName\": \"Switzerland\"\r\n          },\r\n          \"https://onerecord.iata.org/cargo/Address#postalCode\": \"1212\",\r\n          \"https://onerecord.iata.org/cargo/Address#regionCode\": \"GVA\",\r\n          \"https://onerecord.iata.org/cargo/Address#regionName\": \"Geneva\",\r\n          \"https://onerecord.iata.org/cargo/Address#street\": [\r\n            \"Av Aeroport\"\r\n          ]\r\n        },\r\n        \"https://onerecord.iata.org/cargo/Location#locationName\": \"IATA Office\",\r\n        \"https://onerecord.iata.org/cargo/Location#locationType\": \"Office\"\r\n      },\r\n      \"https://onerecord.iata.org/cargo/Company#companyName\": \"string\",\r\n      \"https://onerecord.iata.org/cargo/Company#iataCargoAgentCode\": 1234567\r\n    }\r\n  },\r\n  \"https://onerecord.iata.org/api/CompanyInformation#serverEndpoint\": \"http://localhost:8080/companies/iata\",\r\n  \"https://onerecord.iata.org/api/CompanyInformation#supportedContentTypes\": [\r\n    \"application/ld+json\"\r\n  ],\r\n  \"https://onerecord.iata.org/api/CompanyInformation#supportedLogisticsObjects\": [\r\n    \"https://onerecord.iata.org/cargo/Waybill\",\r\n    \"https://onerecord.iata.org/cargo/Shipment\",\r\n    \"https://onerecord.iata.org/cargo/Booking\",\r\n    \"https://onerecord.iata.org/cargo/Piece\",\r\n    \"https://onerecord.iata.org/cargo/Item\",\r\n    \"https://onerecord.iata.org/cargo/Product\",\r\n    \"https://onerecord.iata.org/cargo/ServiceRequest\"\r\n  ]\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -130,7 +130,7 @@
 							"raw": "{\r\n  \"companyName\": \"test\",\r\n  \"companyId\": \"andra\",\r\n  \"companyType\": \"shipper\",\r\n  \"contactName\": \"test\",\r\n  \"contactEmail\": \"test\",\r\n  \"companyImage\": \"test\",\r\n  \"companyDescription\": \"test\",\r\n  \"companyPin\": \"1234\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/companies/test?topic=PIECE",
+							"raw": "http://localhost:8080/companies/iata?topic=PIECE",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -138,7 +138,7 @@
 							"port": "8080",
 							"path": [
 								"companies",
-								"test"
+								"iata"
 							],
 							"query": [
 								{
@@ -150,8 +150,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "pub/sub",
@@ -205,7 +204,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/Subscription\"\r\n  ],\r\n  \"https://onerecord.iata.org/Subscription#cacheFor\": \"86400\",\r\n  \"https://onerecord.iata.org/Subscription#callbackUrl\": \"http://localhost:8080/companies/iata/callback?topic=Piece\",\r\n  \"https://onerecord.iata.org/Subscription#contentType\": [\r\n    \"application/ld+json\"\r\n  ],\r\n  \"https://onerecord.iata.org/Subscription#myCompanyIdentifier\": \"http://localhost:8080/companies/test\",\r\n  \"https://onerecord.iata.org/Subscription#secret\": \"iuegskvndvsdnvuknefkm\",\r\n  \"https://onerecord.iata.org/Subscription#sendLogisticsObjectBody\": false,\r\n  \"https://onerecord.iata.org/Subscription#subscribeToStatusUpdates\": true,\r\n  \"https://onerecord.iata.org/Subscription#topic\": \"https://onerecord.iata.org/Piece\"\r\n}"
+							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/api/Subscription\"\r\n  ],\r\n  \"https://onerecord.iata.org/api/Subscription#cacheFor\": \"86400\",\r\n  \"https://onerecord.iata.org/api/Subscription#callbackUrl\": \"http://localhost:8080/companies/iata/callback?topic=Piece\",\r\n  \"https://onerecord.iata.org/api/Subscription#contentTypes\": [\r\n    \"application/ld+json\"\r\n  ],\r\n  \"https://onerecord.iata.org/api/Subscription#myCompanyIdentifier\": \"http://localhost:8080/companies/iata\",\r\n  \"https://onerecord.iata.org/api/Subscription#secret\": \"iuegskvndvsdnvuknefkm\",\r\n  \"https://onerecord.iata.org/api/Subscription#sendLogisticsObjectBody\": false,\r\n  \"https://onerecord.iata.org/api/Subscription#subscribeToStatusUpdates\": true,\r\n  \"https://onerecord.iata.org/api/Subscription#topic\": \"https://onerecord.iata.org/api/Piece\"\r\n}\r\n"
 						},
 						"url": {
 							"raw": "http://localhost:8080/companies/test/subscribers",
@@ -237,10 +236,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/Notification\"\r\n  ],\r\n  \"https://onerecord.iata.org/Notification#eventType\": \"OBJECT_CREATED\",\r\n  \"https://onerecord.iata.org/Notification#logisticsObjectRef\": \"http://localhost:8080/companies/test/los/Piece_398534\",\r\n  \"https://onerecord.iata.org/Notification#topic\": \"https://onerecord.iata.org/Piece\"\r\n}"
+							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/api/Notification\"\r\n  ],\r\n  \"https://onerecord.iata.org/api/Notification#eventType\": \"OBJECT_CREATED\",\r\n  \"https://onerecord.iata.org/api/Notification#logisticsObject\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/cargo/LogisticsObject\"\r\n    ],\r\n    \"https://onerecord.iata.org/cargo/LogisticsObject#companyIdentifier\": \"http://localhost:8080/companies/iata\"\r\n  },\r\n  \"https://onerecord.iata.org/api/Notification#topic\": \"https://onerecord.iata.org/cargo/Piece\"\r\n}\r\n"
 						},
 						"url": {
-							"raw": "http://localhost:8080/companies/test/callback?topic=PIECE",
+							"raw": "http://localhost:8080/companies/iata/callback?topic=PIECE",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -248,7 +247,7 @@
 							"port": "8080",
 							"path": [
 								"companies",
-								"test",
+								"iata",
 								"callback"
 							],
 							"query": [
@@ -275,7 +274,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/DelegationRequest\"\r\n  ],\r\n  \"https://onerecord.iata.org/DelegationRequest#action\": \"DELEGATE\",\r\n  \"https://onerecord.iata.org/DelegationRequest#operations\": [\r\n    \"GET\"\r\n  ],\r\n  \"https://onerecord.iata.org/DelegationRequest#targetCompany\": [\r\n    \"http://localhost:8080/companies/iata\"\r\n  ],\r\n  \"https://onerecord.iata.org/DelegationRequest#targetLogisticsObject\": [\r\n    \"http://localhost:8080/companies/iata/los/lo1\"\r\n  ]\r\n}"
+							"raw": "{\r\n  \"@language\": \"en\",\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/api/DelegationRequest\"\r\n  ],\r\n  \"https://onerecord.iata.org/api/DelegationRequest#action\": \"DELEGATE\",\r\n  \"https://onerecord.iata.org/api/DelegationRequest#operations\": [\r\n    \"GET\"\r\n  ],\r\n  \"https://onerecord.iata.org/api/DelegationRequest#targetCompanies\": [\r\n    \"http://localhost:8080/companies/iata\"\r\n  ],\r\n  \"https://onerecord.iata.org/api/DelegationRequest#targetLogisticsObjects\": [\r\n    {\r\n      \"@language\": \"en\",\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/api/LogisticsObjectRef\"\r\n      ],\r\n      \"https://onerecord.iata.org/api/LogisticsObjectRef#logisticsObjectId\": \"http://localhost:8080/companies/iata/los/lo1\",\r\n      \"https://onerecord.iata.org/api/LogisticsObjectRef#logisticsObjectType\": \"https://onerecord.iata.org/cargo/Waybill\"\r\n    }\r\n  ]\r\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/companies/test/delegation",
@@ -293,8 +292,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "logisticsObject",
@@ -313,10 +311,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/Piece\"\r\n  ],\r\n  \"https://onerecord.iata.org/LogisticsObject#companyIdentifier\": \"http://localhost:8080/companies/test\",\r\n  \"https://onerecord.iata.org/Piece#coload\": true,\r\n  \"https://onerecord.iata.org/Piece#dimensions\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/Dimensions\"\r\n    ],\r\n    \"https://onerecord.iata.org/Dimensions#height\": {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/Value\"\r\n      ],\r\n      \"https://onerecord.iata.org/Value#unit\": \"cm\",\r\n      \"https://onerecord.iata.org/Value#value\": 160\r\n    },\r\n    \"https://onerecord.iata.org/Dimensions#length\": {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/Value\"\r\n      ],\r\n      \"https://onerecord.iata.org/Value#unit\": \"cm\",\r\n      \"https://onerecord.iata.org/Value#value\": 120\r\n    },\r\n    \"https://onerecord.iata.org/Dimensions#volume\": {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/Value\"\r\n      ],\r\n      \"https://onerecord.iata.org/Value#unit\": \"m3\",\r\n      \"https://onerecord.iata.org/Value#value\": 1.536\r\n    },\r\n    \"https://onerecord.iata.org/Dimensions#width\": {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/Value\"\r\n      ],\r\n      \"https://onerecord.iata.org/Value#unit\": \"cm\",\r\n      \"https://onerecord.iata.org/Value#value\": 80\r\n    }\r\n  },\r\n  \"https://onerecord.iata.org/Piece#externalReference\": [\r\n    {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/ExternalReference\"\r\n      ],\r\n      \"https://onerecord.iata.org/ExternalReference#documentID\": \"http://localhost:8080/companies/test/los/Waybill_8531225\",\r\n      \"https://onerecord.iata.org/ExternalReference#documentName\": \"AirWaybill\",\r\n      \"https://onerecord.iata.org/ExternalReference#documentType\": \"https://onerecord.iata.org/Waybill\",\r\n      \"https://onerecord.iata.org/ExternalReference#documentVersion\": \"1.0\"\r\n    }\r\n  ],\r\n  \"https://onerecord.iata.org/Piece#goodsDescription\": \"Face masks\",\r\n  \"https://onerecord.iata.org/Piece#grossWeight\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/Value\"\r\n    ],\r\n    \"https://onerecord.iata.org/Value#unit\": \"kg\",\r\n    \"https://onerecord.iata.org/Value#value\": 600\r\n  },\r\n  \"https://onerecord.iata.org/Piece#product\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/Product\"\r\n    ],\r\n    \"https://onerecord.iata.org/LogisticsObject#companyIdentifier\": \"http://localhost:8080/companies/test/los/Product_8415222\",\r\n    \"https://onerecord.iata.org/Product#commodityCode\": \"CODE\",\r\n    \"https://onerecord.iata.org/Product#commodityDescription\": \"PPE\",\r\n    \"https://onerecord.iata.org/Product#commodityName\": \"Face mask\",\r\n    \"https://onerecord.iata.org/Product#productDescription\": \"Face mask PPE\"\r\n  },\r\n  \"https://onerecord.iata.org/Piece#productionCountry\": [\r\n    {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/Country\"\r\n      ],\r\n      \"https://onerecord.iata.org/Country#countryCode\": \"CN\",\r\n      \"https://onerecord.iata.org/Country#countryName\": \"China\"\r\n    }\r\n  ],\r\n  \"https://onerecord.iata.org/Piece#securityStatus\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/SecurityStatus\"\r\n    ],\r\n    \"https://onerecord.iata.org/LogisticsObject#companyIdentifier\": \"http://localhost:8080/companies/test\",\r\n    \"https://onerecord.iata.org/SecurityStatus#issuedOn\": \"Sat Jun 01 12:53:10 IST 2020\",\r\n    \"https://onerecord.iata.org/SecurityStatus#regulatedPartyType\": \"Forwarder\",\r\n    \"https://onerecord.iata.org/SecurityStatus#regulatingAuthority\": \"Forwarder PVG\",\r\n    \"https://onerecord.iata.org/SecurityStatus#statusCode\": \"SCR\"\r\n  },\r\n  \"https://onerecord.iata.org/Piece#shipper\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/Company\"\r\n    ],\r\n    \"https://onerecord.iata.org/Company#branch\": {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/Branch\"\r\n      ],\r\n      \"https://onerecord.iata.org/Branch#branchName\": \"Face mask company\",\r\n      \"https://onerecord.iata.org/Branch#contactPerson\": [\r\n        {\r\n          \"@type\": [\r\n            \"https://onerecord.iata.org/Person\"\r\n          ],\r\n          \"https://onerecord.iata.org/Person#contact\": [\r\n            {\r\n              \"@type\": [\r\n                \"https://onerecord.iata.org/Contact\"\r\n              ],\r\n              \"https://onerecord.iata.org/Contact#emailAddress\": \"contact@facemask.test\",\r\n              \"https://onerecord.iata.org/Contact#phoneNumber\": \"41525333662\"\r\n            }\r\n          ]\r\n        }\r\n      ],\r\n      \"https://onerecord.iata.org/Branch#location\": {\r\n        \"@type\": [\r\n          \"https://onerecord.iata.org/Location\"\r\n        ],\r\n        \"https://onerecord.iata.org/Location#address\": {\r\n          \"@type\": [\r\n            \"https://onerecord.iata.org/Address\"\r\n          ],\r\n          \"https://onerecord.iata.org/Address#cityCode\": \"SHA\",\r\n          \"https://onerecord.iata.org/Address#cityName\": \"Shanghai\",\r\n          \"https://onerecord.iata.org/Address#country\": {\r\n            \"@type\": [\r\n              \"https://onerecord.iata.org/Country\"\r\n            ],\r\n            \"https://onerecord.iata.org/Country#countryCode\": \"CN\",\r\n            \"https://onerecord.iata.org/Country#countryName\": \"China\"\r\n          },\r\n          \"https://onerecord.iata.org/Address#poBox\": \"123\",\r\n          \"https://onerecord.iata.org/Address#postalCode\": \"123456\"\r\n        }\r\n      }\r\n    },\r\n    \"https://onerecord.iata.org/Company#companyName\": \"Face mask CO\"\r\n  },\r\n  \"https://onerecord.iata.org/Piece#slac\": 600,\r\n  \"https://onerecord.iata.org/Piece#stackable\": true,\r\n  \"https://onerecord.iata.org/Piece#turnable\": true,\r\n  \"https://onerecord.iata.org/Piece#upid\": \"412820244\"\r\n}"
+							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/cargo/Piece\"\r\n  ],\r\n  \"https://onerecord.iata.org/cargo/LogisticsObject#companyIdentifier\": \"http://localhost:8080/companies/iata\",\r\n  \"https://onerecord.iata.org/cargo/Piece#coload\": true,\r\n  \"https://onerecord.iata.org/cargo/Piece#dimensions\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/cargo/Dimensions\"\r\n    ],\r\n    \"https://onerecord.iata.org/cargo/Dimensions#height\": {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/cargo/Value\"\r\n      ],\r\n      \"https://onerecord.iata.org/cargo/Value#unit\": \"cm\",\r\n      \"https://onerecord.iata.org/cargo/Value#value\": 160\r\n    },\r\n    \"https://onerecord.iata.org/cargo/Dimensions#length\": {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/cargo/Value\"\r\n      ],\r\n      \"https://onerecord.iata.org/cargo/Value#unit\": \"cm\",\r\n      \"https://onerecord.iata.org/cargo/Value#value\": 120\r\n    },\r\n    \"https://onerecord.iata.org/cargo/Dimensions#volume\": {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/cargo/Value\"\r\n      ],\r\n      \"https://onerecord.iata.org/cargo/Value#unit\": \"m3\",\r\n      \"https://onerecord.iata.org/cargo/Value#value\": 1.536\r\n    },\r\n    \"https://onerecord.iata.org/cargo/Dimensions#width\": {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/cargo/Value\"\r\n      ],\r\n      \"https://onerecord.iata.org/cargo/Value#unit\": \"cm\",\r\n      \"https://onerecord.iata.org/cargo/Value#value\": 80\r\n    }\r\n  },\r\n  \"https://onerecord.iata.org/cargo/Piece#externalReference\": [\r\n    {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/cargo/ExternalReference\"\r\n      ],\r\n      \"https://onerecord.iata.org/cargo/ExternalReference#documentID\": \"http://localhost:8080/companies/iata/los/Waybill_8531225\",\r\n      \"https://onerecord.iata.org/cargo/ExternalReference#documentName\": \"AirWaybill\",\r\n      \"https://onerecord.iata.org/cargo/ExternalReference#documentType\": \"https://onerecord.iata.org/cargo/Waybill\",\r\n      \"https://onerecord.iata.org/cargo/ExternalReference#documentVersion\": \"1.0\"\r\n    }\r\n  ],\r\n  \"https://onerecord.iata.org/cargo/Piece#goodsDescription\": \"Face masks\",\r\n  \"https://onerecord.iata.org/cargo/Piece#grossWeight\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/cargo/Value\"\r\n    ],\r\n    \"https://onerecord.iata.org/cargo/Value#unit\": \"kg\",\r\n    \"https://onerecord.iata.org/cargo/Value#value\": 600\r\n  },\r\n  \"https://onerecord.iata.org/cargo/Piece#product\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/cargo/Product\"\r\n    ],\r\n    \"https://onerecord.iata.org/cargo/LogisticsObject#companyIdentifier\": \"http://localhost:8080/companies/iata/los/Product_8415222\",\r\n    \"https://onerecord.iata.org/cargo/Product#commodityCode\": \"CODE\",\r\n    \"https://onerecord.iata.org/cargo/Product#commodityDescription\": \"PPE\",\r\n    \"https://onerecord.iata.org/cargo/Product#commodityName\": \"Face mask\",\r\n    \"https://onerecord.iata.org/cargo/Product#productDescription\": \"Face mask PPE\"\r\n  },\r\n  \"https://onerecord.iata.org/cargo/Piece#productionCountry\": [\r\n    {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/cargo/Country\"\r\n      ],\r\n      \"https://onerecord.iata.org/cargo/Country#countryCode\": \"CN\",\r\n      \"https://onerecord.iata.org/cargo/Country#countryName\": \"China\"\r\n    }\r\n  ],\r\n  \"https://onerecord.iata.org/cargo/Piece#shipper\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/cargo/Company\"\r\n    ],\r\n    \"https://onerecord.iata.org/cargo/Company#branch\": {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/cargo/Branch\"\r\n      ],\r\n      \"https://onerecord.iata.org/cargo/Branch#branchName\": \"Face mask company\",\r\n      \"https://onerecord.iata.org/cargo/Branch#contactPerson\": [\r\n        {\r\n          \"@type\": [\r\n            \"https://onerecord.iata.org/cargo/Person\"\r\n          ],\r\n          \"https://onerecord.iata.org/cargo/Person#contact\": [\r\n            {\r\n              \"@type\": [\r\n                \"https://onerecord.iata.org/cargo/Contact\"\r\n              ],\r\n              \"https://onerecord.iata.org/cargo/Contact#emailAddress\": \"contact@facemask.test\",\r\n              \"https://onerecord.iata.org/cargo/Contact#phoneNumber\": \"41525333662\"\r\n            }\r\n          ]\r\n        }\r\n      ],\r\n      \"https://onerecord.iata.org/cargo/Branch#location\": {\r\n        \"@type\": [\r\n          \"https://onerecord.iata.org/cargo/Location\"\r\n        ],\r\n        \"https://onerecord.iata.org/cargo/Location#address\": {\r\n          \"@type\": [\r\n            \"https://onerecord.iata.org/cargo/Address\"\r\n          ],\r\n          \"https://onerecord.iata.org/cargo/Address#cityCode\": \"SHA\",\r\n          \"https://onerecord.iata.org/cargo/Address#cityName\": \"Shanghai\",\r\n          \"https://onerecord.iata.org/cargo/Address#country\": {\r\n            \"@type\": [\r\n              \"https://onerecord.iata.org/cargo/Country\"\r\n            ],\r\n            \"https://onerecord.iata.org/cargo/Country#countryCode\": \"CN\",\r\n            \"https://onerecord.iata.org/cargo/Country#countryName\": \"China\"\r\n          },\r\n          \"https://onerecord.iata.org/cargo/Address#poBox\": \"123\",\r\n          \"https://onerecord.iata.org/cargo/Address#postalCode\": \"123456\"\r\n        }\r\n      }\r\n    },\r\n    \"https://onerecord.iata.org/cargo/Company#companyName\": \"Face mask CO\"\r\n  },\r\n  \"https://onerecord.iata.org/cargo/Piece#slac\": 600,\r\n  \"https://onerecord.iata.org/cargo/Piece#stackable\": true,\r\n  \"https://onerecord.iata.org/cargo/Piece#turnable\": true,\r\n  \"https://onerecord.iata.org/cargo/Piece#upid\": \"412820244\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/companies/test/los",
+							"raw": "http://localhost:8080/companies/iata/los",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -324,7 +322,7 @@
 							"port": "8080",
 							"path": [
 								"companies",
-								"test",
+								"iata",
 								"los"
 							]
 						}
@@ -351,7 +349,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/companies/test/los/Piece_922982",
+							"raw": "http://localhost:8080/companies/iata/los/Piece_770327",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -359,9 +357,9 @@
 							"port": "8080",
 							"path": [
 								"companies",
-								"test",
+								"iata",
 								"los",
-								"Piece_922982"
+								"Piece_770327"
 							]
 						}
 					},
@@ -387,7 +385,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/companies/test/los/Piece_922982/acl",
+							"raw": "http://localhost:8080/companies/iata/los/Piece_770327/acl",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -395,9 +393,9 @@
 							"port": "8080",
 							"path": [
 								"companies",
-								"test",
+								"iata",
 								"los",
-								"Piece_922982",
+								"Piece_770327",
 								"acl"
 							]
 						}
@@ -424,7 +422,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/companies/test/los/Piece_922982/timemap",
+							"raw": "http://localhost:8080/companies/iata/los/Piece_770327/timemap",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -432,9 +430,9 @@
 							"port": "8080",
 							"path": [
 								"companies",
-								"test",
+								"iata",
 								"los",
-								"Piece_922982",
+								"Piece_770327",
 								"timemap"
 							]
 						}
@@ -461,7 +459,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/companies/test/los/Piece_922982/auditTrail",
+							"raw": "http://localhost:8080/companies/iata/los/Piece_770327/audit-trail",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -469,10 +467,10 @@
 							"port": "8080",
 							"path": [
 								"companies",
-								"test",
+								"iata",
 								"los",
-								"Piece_922982",
-								"auditTrail"
+								"Piece_770327",
+								"audit-trail"
 							]
 						}
 					},
@@ -498,7 +496,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/companies/test/los/Piece_922982/auditTrail?updatedFrom=2016-10-31&updatedTo=2019-10-31",
+							"raw": "http://localhost:8080/companies/test/los/Piece_922982/audit-trail?updatedFrom=2016-10-31&updatedTo=2019-10-31",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -509,7 +507,7 @@
 								"test",
 								"los",
 								"Piece_922982",
-								"auditTrail"
+								"audit-trail"
 							],
 							"query": [
 								{
@@ -539,10 +537,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/PatchRequest\"\r\n  ],\r\n  \"https://onerecord.iata.org/PatchRequest#description\": \"Change coload\",\r\n  \"https://onerecord.iata.org/PatchRequest#logisticsObjectRef\": \"http://localhost:8080/companies/andra/los/Piece_922982\",\r\n  \"https://onerecord.iata.org/PatchRequest#operations\": [\r\n    {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/Operation\"\r\n      ],\r\n      \"https://onerecord.iata.org/Operation#o\": [\r\n        {\r\n          \"@type\": [\r\n            \"https://onerecord.iata.org/OperationObject\"\r\n          ],\r\n          \"https://onerecord.iata.org/OperationObject#datatype\": \"https://www.w3.org/2001/XMLSchema#boolean\",\r\n          \"https://onerecord.iata.org/OperationObject#value\": \"true\"\r\n        }\r\n      ],\r\n      \"https://onerecord.iata.org/Operation#op\": \"del\",\r\n      \"https://onerecord.iata.org/Operation#p\": \"https://onerecord.iata.org/Piece#coload\"\r\n    },\r\n    {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/Operation\"\r\n      ],\r\n      \"https://onerecord.iata.org/Operation#o\": [\r\n        {\r\n          \"@type\": [\r\n            \"https://onerecord.iata.org/OperationObject\"\r\n          ],\r\n          \"https://onerecord.iata.org/OperationObject#datatype\": \"https://www.w3.org/2001/XMLSchema#boolean\",\r\n          \"https://onerecord.iata.org/OperationObject#value\": \"false\"\r\n        }\r\n      ],\r\n      \"https://onerecord.iata.org/Operation#op\": \"add\",\r\n      \"https://onerecord.iata.org/Operation#p\": \"https://onerecord.iata.org/Piece#coload\"\r\n    }\r\n  ],\r\n  \"https://onerecord.iata.org/PatchRequest#requestorCompanyIdentifier\": \"http://localhost:8080/companies/test\",\r\n  \"https://onerecord.iata.org/PatchRequest#revision\": \"1\"\r\n}"
+							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/api/PatchRequest\"\r\n  ],\r\n  \"https://onerecord.iata.org/api/PatchRequest#description\": \"Change coload\",\r\n  \"https://onerecord.iata.org/api/PatchRequest#logisticsObjectRef\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/api/LogisticsObjectRef\"\r\n    ],\r\n    \"https://onerecord.iata.org/api/LogisticsObjectRef#logisticsObjectId\": \"http://localhost:8080/companies/iot/los/Piece_770327\",\r\n    \"https://onerecord.iata.org/api/LogisticsObjectRef#logisticsObjectType\": \"https://onerecord.iata.org/cargo/Piece\"\r\n  },\r\n  \"https://onerecord.iata.org/api/PatchRequest#operations\": [\r\n    {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/api/Operation\"\r\n      ],\r\n      \"https://onerecord.iata.org/api/Operation#o\":\r\n        {\r\n          \"@type\": [\r\n            \"https://onerecord.iata.org/api/OperationObject\"\r\n          ],\r\n          \"https://onerecord.iata.org/api/OperationObject#datatype\": \"https://www.w3.org/2001/XMLSchema#boolean\",\r\n          \"https://onerecord.iata.org/api/OperationObject#value\": \"true\"\r\n        },\r\n\r\n      \"https://onerecord.iata.org/api/Operation#op\": \"del\",\r\n      \"https://onerecord.iata.org/api/Operation#p\": \"https://onerecord.iata.org/cargo/Piece#coload\"\r\n    },\r\n    {\r\n      \"@type\": [\r\n        \"https://onerecord.iata.org/api/Operation\"\r\n      ],\r\n      \"https://onerecord.iata.org/api/Operation#o\":\r\n        {\r\n          \"@type\": [\r\n            \"https://onerecord.iata.org/api/OperationObject\"\r\n          ],\r\n          \"https://onerecord.iata.org/api/OperationObject#datatype\": \"https://www.w3.org/2001/XMLSchema#boolean\",\r\n          \"https://onerecord.iata.org/api/OperationObject#value\": \"false\"\r\n        },\r\n      \"https://onerecord.iata.org/api/Operation#op\": \"add\",\r\n      \"https://onerecord.iata.org/api/Operation#p\": \"https://onerecord.iata.org/cargo/Piece#coload\"\r\n    }\r\n  ],\r\n  \"https://onerecord.iata.org/api/PatchRequest#requestorCompanyIdentifier\": \"http://localhost:8080/companies/test\",\r\n  \"https://onerecord.iata.org/api/PatchRequest#revision\": \"1\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/companies/test/los/Piece_922982",
+							"raw": "http://localhost:8080/companies/iata/los/Piece_770327",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -550,9 +548,9 @@
 							"port": "8080",
 							"path": [
 								"companies",
-								"test",
+								"iata",
 								"los",
-								"Piece_922982"
+								"Piece_770327"
 							]
 						}
 					},
@@ -572,10 +570,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/Event\"\r\n  ],\r\n  \"https://onerecord.iata.org/Event#dateTime\": \"2020-06-10 14:00:00\",\r\n  \"https://onerecord.iata.org/Event#eventCode\": \"DEP\",\r\n  \"https://onerecord.iata.org/Event#eventName\": \"Arrival\",\r\n  \"https://onerecord.iata.org/Event#eventTypeIndicator\": \"Test\",\r\n  \"https://onerecord.iata.org/Event#location\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/Location\"\r\n    ],\r\n    \"https://onerecord.iata.org/Location#code\": \"GVA\",\r\n    \"https://onerecord.iata.org/Location#locationName\": \"Geneva\",\r\n    \"https://onerecord.iata.org/Location#locationType\": \"Office\"\r\n  },\r\n  \"https://onerecord.iata.org/Event#logisticsObjectRef\": \"http://localhost:8080/companies/andra/los/Piece_922982\",\r\n  \"https://onerecord.iata.org/Event#performedBy\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/Company\"\r\n    ],\r\n    \"https://onerecord.iata.org/Company#airlineCode\": \"XB\",\r\n    \"https://onerecord.iata.org/Company#airlinePrefix\": \"XB\",\r\n    \"https://onerecord.iata.org/Company#companyName\": \"IATA\"\r\n  }\r\n}"
+							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/cargo/Event\"\r\n  ],\r\n  \"https://onerecord.iata.org/cargo/Event#dateTime\": \"Wed Mar 04 03:34:45 GMT+08:00 2021\",\r\n  \"https://onerecord.iata.org/cargo/Event#eventCode\": \"ARR\",\r\n  \"https://onerecord.iata.org/cargo/Event#eventName\": \"Arrival\",\r\n  \"https://onerecord.iata.org/cargo/Event#eventTypeIndicator\": \"Test\",\r\n  \"https://onerecord.iata.org/cargo/Event#location\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/cargo/Location\"\r\n    ],\r\n    \"https://onerecord.iata.org/cargo/Location#code\": \"GVA\",\r\n    \"https://onerecord.iata.org/cargo/Location#locationName\": \"Geneva\",\r\n    \"https://onerecord.iata.org/cargo/Location#locationType\": \"Office\"\r\n  },\r\n  \"https://onerecord.iata.org/cargo/Event#linkedObject\": \"http://localhost:8080/companies/iata/los/Piece_770327\",\r\n  \"https://onerecord.iata.org/cargo/Event#performedBy\": {\r\n    \"@type\": [\r\n      \"https://onerecord.iata.org/cargo/Company\"\r\n    ],\r\n    \"https://onerecord.iata.org/cargo/Company#airlineCode\": \"XB\",\r\n    \"https://onerecord.iata.org/cargo/Company#airlinePrefix\": 12345,\r\n    \"https://onerecord.iata.org/cargo/Company#companyName\": \"IATA\"\r\n  }\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/companies/test/los/Piece_922982/events",
+							"raw": "http://localhost:8080/companies/iata/los/Piece_770327/events",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -583,9 +581,9 @@
 							"port": "8080",
 							"path": [
 								"companies",
-								"test",
+								"iata",
 								"los",
-								"Piece_922982",
+								"Piece_770327",
 								"events"
 							]
 						}
@@ -612,7 +610,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/companies/andra/los/Piece_922982/events",
+							"raw": "http://localhost:8080/companies/iata/los/Piece_770327/events",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -620,17 +618,16 @@
 							"port": "8080",
 							"path": [
 								"companies",
-								"andra",
+								"iata",
 								"los",
-								"Piece_922982",
+								"Piece_770327",
 								"events"
 							]
 						}
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "versioning",
@@ -655,7 +652,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/companies/test/los/Piece_922982/timemap",
+							"raw": "http://localhost:8080/companies/iata/los/Piece_770327/timemap",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -663,9 +660,9 @@
 							"port": "8080",
 							"path": [
 								"companies",
-								"test",
+								"iata",
 								"los",
-								"Piece_922982",
+								"Piece_770327",
 								"timemap"
 							]
 						}
@@ -686,10 +683,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/Memento\"\r\n  ],\r\n  \"https://onerecord.iata.org/Memento#createdBy\": \"andra\",\r\n  \"https://onerecord.iata.org/Memento#label\": \"version2\",\r\n  \"https://onerecord.iata.org/Memento#original\": \"http://localhost:8080/companies/test/los/Piece_922982\"\r\n}"
+							"raw": "{\r\n  \"@type\": [\r\n    \"https://onerecord.iata.org/api/Memento\"\r\n  ],\r\n  \"id\": \"http://localhost:8080/companies/iata/los/Piece_770327/mementos/m-1\",\r\n  \"https://onerecord.iata.org/api/Memento#created\": \"Wed Mar 04 03:34:45 GMT+08:00 2021\",\r\n  \"https://onerecord.iata.org/api/Memento#createdBy\": \"test\",\r\n  \"https://onerecord.iata.org/api/Memento#label\": \"version1\",\r\n  \"https://onerecord.iata.org/api/Memento#original\": \"http://localhost:8080/companies/iata/los/Piece_770327\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/companies/test/los/Piece_922982/mementos",
+							"raw": "http://localhost:8080/companies/iata/los/Piece_770327/mementos",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -697,9 +694,9 @@
 							"port": "8080",
 							"path": [
 								"companies",
-								"test",
+								"iata",
 								"los",
-								"Piece_922982",
+								"Piece_770327",
 								"mementos"
 							]
 						}
@@ -726,7 +723,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/companies/test/los/Piece_922982/mementos/66da074533184ab8a6826684d187e7ea",
+							"raw": "http://localhost:8080/companies/iata/los/Piece_770327/mementos/ad17eacb157948c5ad4ee60ef7d0a342",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -734,11 +731,11 @@
 							"port": "8080",
 							"path": [
 								"companies",
-								"test",
+								"iata",
 								"los",
-								"Piece_922982",
+								"Piece_770327",
 								"mementos",
-								"66da074533184ab8a6826684d187e7ea"
+								"ad17eacb157948c5ad4ee60ef7d0a342"
 							]
 						}
 					},
@@ -760,7 +757,7 @@
 							},
 							{
 								"key": "Accept-Datetime",
-								"value": "2020-07-13 14:00:00",
+								"value": "2021-03-04 14:00:00",
 								"type": "text"
 							}
 						],
@@ -769,7 +766,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/companies/test/los/Piece_922982/timegate",
+							"raw": "http://localhost:8080/companies/iata/los/Piece_770327/timegate",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -777,17 +774,16 @@
 							"port": "8080",
 							"path": [
 								"companies",
-								"test",
+								"iata",
 								"los",
-								"Piece_922982",
+								"Piece_770327",
 								"timegate"
 							]
 						}
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Swagger.json",

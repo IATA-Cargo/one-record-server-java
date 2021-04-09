@@ -1,16 +1,21 @@
 {
-  "@language": "en",
   "@type": [
-    "https://onerecord.iata.org/DelegationRequest"
+    "https://onerecord.iata.org/api/DelegationRequest"
   ],
-  "https://onerecord.iata.org/DelegationRequest#action": "DELEGATE",
-  "https://onerecord.iata.org/DelegationRequest#operations": [
+  "https://onerecord.iata.org/api/DelegationRequest#action": "DELEGATE",
+  "https://onerecord.iata.org/api/DelegationRequest#operations": [
     "GET"
   ],
-  "https://onerecord.iata.org/DelegationRequest#targetCompanies": [
-    "http://localhost:8080/companies/iata"
+  "https://onerecord.iata.org/api/DelegationRequest#targetCompanies": [
+    "http://localhost:8080/companies/test"
   ],
-  "https://onerecord.iata.org/DelegationRequest#targetLogisticsObjects": [
-    "http://localhost:8080/companies/iata/los/lo1"
+  "https://onerecord.iata.org/api/DelegationRequest#targetLogisticsObjects": [
+    {
+      "@type": [
+        "https://onerecord.iata.org/api/LogisticsObjectRef"
+      ],
+      "https://onerecord.iata.org/api/LogisticsObjectRef#logisticsObjectId": "http://localhost:8080/companies/iata/los/lo1",
+      "https://onerecord.iata.org/api/LogisticsObjectRef#logisticsObjectType": "https://onerecord.iata.org/cargo/Waybill"
+    }
   ]
 }

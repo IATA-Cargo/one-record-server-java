@@ -1,16 +1,15 @@
 {
-  "@language": "en",
   "@type": [
-    "https://onerecord.iata.org/Subscription"
+    "https://onerecord.iata.org/api/Subscription"
   ],
-  "https://onerecord.iata.org/Subscription#cacheFor": "86400",
-  "https://onerecord.iata.org/Subscription#callbackUrl": "http://localhost:8080/companies/iata/callback?topic=Piece",
-  "https://onerecord.iata.org/Subscription#contentTypes": [
+  "https://onerecord.iata.org/api/Subscription#cacheFor": "86400",
+  "https://onerecord.iata.org/api/Subscription#callbackUrl": "http://localhost:8080/companies/iata/callback?topic=Piece",
+  "https://onerecord.iata.org/api/Subscription#contentTypes": [
     "application/ld+json"
   ],
-  "https://onerecord.iata.org/Subscription#myCompanyIdentifier": "http://localhost:8080/companies/iata",
-  "https://onerecord.iata.org/Subscription#secret": "iuegskvndvsdnvuknefkm",
-  "https://onerecord.iata.org/Subscription#sendLogisticsObjectBody": false,
-  "https://onerecord.iata.org/Subscription#subscribeToStatusUpdates": true,
-  "https://onerecord.iata.org/Subscription#topic": "https://onerecord.iata.org/Piece"
+  "https://onerecord.iata.org/api/Subscription#myCompanyIdentifier": "http://localhost:8080/companies/iata",
+  "https://onerecord.iata.org/api/Subscription#secret": "iuegskvndvsdnvuknefkm",
+  "https://onerecord.iata.org/api/Subscription#sendLogisticsObjectBody": false,
+  "https://onerecord.iata.org/api/Subscription#subscribeToStatusUpdates": true,
+  "https://onerecord.iata.org/api/Subscription#topic": "https://onerecord.iata.org/api/Piece"
 }

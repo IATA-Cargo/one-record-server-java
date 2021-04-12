@@ -24,6 +24,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Locale;
 
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -59,7 +60,7 @@ public class CompaniesResource {
   @RequestMapping(method = GET, value = "/companies", produces = JsonLd.MEDIA_TYPE)
   @ApiOperation(value = "Retrieves all the companies")
   @ApiIgnore
-  public ResponseEntity<List<CompanyInformation>> getCompanies() {
+  public ResponseEntity<List<CompanyInformation>> getCompanies(@RequestParam(value = "locale", required = false) Locale locale) {
     return new ResponseEntity<>(companiesService.getCompanies(), HttpStatus.OK);
   }
 
@@ -67,7 +68,8 @@ public class CompaniesResource {
   @ApiOperation(value = "Retrieves a company for a given companyId. If topic is sent, the endpoint returns the subscription information for that topic, information" +
       "that is usually sent back to publishers.")
   public ResponseEntity<Object> getCompany(@PathVariable("companyId") String companyId,
-                           @RequestParam(value = "topic", required = false) TopicEnum topic) {
+                                           @RequestParam(value = "topic", required = false) TopicEnum topic,
+                                           @RequestParam(value = "locale", required = false) Locale locale) {
     final String id = RestUtils.getCurrentUri();
     if (topic == null) {
       return ResponseEntity.ok(companiesService.findById(id));
@@ -101,7 +103,7 @@ public class CompaniesResource {
 
   @RequestMapping(method = GET, value = "/companies/{companyId}/subscribers", produces = JsonLd.MEDIA_TYPE)
   @ApiOperation(value = "INTERNAL Get all the subscribers that are subscriber to this company.")
-  public ResponseEntity<List<Subscription>> getAllSubscribers(@PathVariable("companyId") String companyId) {
+  public ResponseEntity<List<Subscription>> getAllSubscribers(@PathVariable("companyId") String companyId, @RequestParam(value = "locale", required = false) Locale locale) {
     final String id = RestUtils.getCurrentUri().replace("/subscribers", "");
     return new ResponseEntity<>(subscriptionsService.getSubscribers(id), HttpStatus.OK);
   }

@@ -16,7 +16,7 @@ There are two `application.properties` files to edit:
 ## Build & run the sandbox code
 For testing the application locally, follow the next steps:
 1. Install `Java = 8` and `Maven`. 
-2. Install the Maven dependencies by running `mvn clean install`. 
+2. Install the Maven dependencies by running `mvn -Djdk.tls.client.protocols=TLSv1.2 clean install`. 
 3. (Optional) Download the latest ONE Record Turtle ontologies from Github + the latest Web Access Control from W3C by running `mvn exec:java`.
 As the latest models are already generated and committed in this repository according to the latest ontologies, kindly skip steps 4, 5 and 6.
 4. (SKIP) Generate ONE Record API related models by running `mvn package -Dbuild=api`
@@ -24,8 +24,10 @@ As the latest models are already generated and committed in this repository acco
 6. (SKIP) Generate W3C Web Access Control ACL (Access Control List) related models by running `mvn package -Dbuild=acl`
 7. MongoDB has updated their server, so in order to have it work properly, one needs to add an extra VM argument. The solution is actually change the TLS Version to 1.2 in JVM params.
 `-Djdk.tls.client.protocols=TLSv1.2`
-8. Run the server from OneRecordApplication or from the command line via `mvn spring-boot:run`. Your application should be available at [http://localhost:8080](http://localhost:8080).
-
+8. Run the server from OneRecordApplication or from the command line via `mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Djdk.tls.client.protocols=TLSv1.2"`. Your application should be available at [http://localhost:8080](http://localhost:8080).
+9. The server can also be started by running the executable jar created in the `/target` folder after the `mvn clean install` command, via:
+`   java -jar -Djdk.tls.client.protocols=TLSv1.2 one-record-server-java-1.0-SNAPSHOT.jar`
+   
 ## Swagger API Documentation
 Swagger API Documentation can be accessed and tested via [https://yourserverurl/swagger-ui.html](https://yourserverurl/swagger-ui.html). If you run the server locally, Swagger documentation can be accessed via [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html).
 

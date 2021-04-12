@@ -33,6 +33,7 @@ import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.PATCH;
@@ -73,14 +74,17 @@ public class LogisticsObjectsResource {
   @RequestMapping(method = GET, value = "/{companyId}/los", produces = JsonLd.MEDIA_TYPE)
   @ApiOperation(value = "INTERNAL Retrieves all the logistics objects for a given company")
   @ApiIgnore
-  public ResponseEntity<List<LogisticsObject>> getLogisticsObjects(@PathVariable("companyId") String companyId) {
+  public ResponseEntity<List<LogisticsObject>> getLogisticsObjects(@PathVariable("companyId") String companyId,
+                                                                   @RequestParam(value = "locale", required = false) Locale locale) {
     final String id = getCurrentUri().replace("/los", "");
     return new ResponseEntity<>(logisticsObjectsService.findByCompanyIdentifier(id), HttpStatus.OK);
   }
 
   @RequestMapping(method = GET, value = "/{companyId}/los/{loId}", produces = JsonLd.MEDIA_TYPE)
   @ApiOperation(value = "Retrieves a logistics object")
-  public ResponseEntity<LogisticsObject> getLogisticsObject(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
+  public ResponseEntity<LogisticsObject> getLogisticsObject(@PathVariable("companyId") String companyId,
+                                                            @PathVariable("loId") String loId,
+                                                            @RequestParam(value = "locale", required = false) Locale locale) {
     // Add ACL and Timemap location to Link headers
     final HttpHeaders headers = RestUtils.createLinkHeaderFromCurrentURi("/acl", "acl", Collections.emptyList());
     final HttpHeaders headersMementos = RestUtils.createLinkHeaderFromCurrentURi("/timemap", "timemap", Collections.emptyList());
@@ -110,7 +114,8 @@ public class LogisticsObjectsResource {
                                                   @RequestParam(value = "updatedFrom", required = false)
                                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate updatedFrom,
                                                   @RequestParam(value = "updatedTo", required = false)
-                                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate updatedTo) {
+                                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate updatedTo,
+                                                  @RequestParam(value = "locale", required = false) Locale locale) {
     return new ResponseEntity<>(auditTrailsService.findById(getCurrentUri(), updatedFrom, updatedTo), HttpStatus.OK);
   }
 
@@ -124,7 +129,9 @@ public class LogisticsObjectsResource {
 
   @RequestMapping(method = GET, value = "/{companyId}/los/{loId}/events", produces = JsonLd.MEDIA_TYPE)
   @ApiOperation(value = "Retrieves the events of a given logistics object")
-  public ResponseEntity<List<Event>> getEvents(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
+  public ResponseEntity<List<Event>> getEvents(@PathVariable("companyId") String companyId,
+                                               @PathVariable("loId") String loId,
+                                               @RequestParam(value = "locale", required = false) Locale locale) {
     final String loUri = getCurrentUri().replace("/events", "");
     return new ResponseEntity<>(logisticsObjectsService.findEvents(loUri), HttpStatus.OK);
   }
@@ -140,7 +147,9 @@ public class LogisticsObjectsResource {
 
   @RequestMapping(method = GET, value = "/{companyId}/los/{loId}/acl", produces = JsonLd.MEDIA_TYPE)
   @ApiOperation(value = "Retrieves the Access Control List of a given logistics object")
-  public ResponseEntity<List<AccessControlList>> getACL(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
+  public ResponseEntity<List<AccessControlList>> getACL(@PathVariable("companyId") String companyId,
+                                                        @PathVariable("loId") String loId,
+                                                        @RequestParam(value = "locale", required = false) Locale locale) {
     final String loUri = getCurrentUri().replace("/acl", "");
     return new ResponseEntity<>(accessControlListService.findByLogisticsObjectRef(loUri), HttpStatus.OK);
   }

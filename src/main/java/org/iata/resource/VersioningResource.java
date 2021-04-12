@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +25,7 @@ import javax.inject.Inject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -58,13 +60,16 @@ public class VersioningResource {
   @ApiOperation(value = "Retrieves a memento for a given mementoId")
   public ResponseEntity<Memento> getMemento(@PathVariable("companyId") String companyId,
                                             @PathVariable("loId") String loId,
-                                            @PathVariable("mementoId") String mementoId) {
+                                            @PathVariable("mementoId") String mementoId,
+                                            @RequestParam(value = "locale", required = false) Locale locale) {
     return new ResponseEntity<>(versioningService.getMemento(getCurrentUri()), HttpStatus.OK);
   }
 
   @RequestMapping(method = GET, value = "/{companyId}/los/{loId}/timemap", produces = JsonLd.MEDIA_TYPE)
   @ApiOperation(value = "Retrieves the TimeMap of a given logistics object")
-  public ResponseEntity<Timemap> getTimemap(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId) {
+  public ResponseEntity<Timemap> getTimemap(@PathVariable("companyId") String companyId,
+                                            @PathVariable("loId") String loId,
+                                            @RequestParam(value = "locale", required = false) Locale locale) {
     return new ResponseEntity<>(versioningService.getTimemap(getCurrentUri()), HttpStatus.OK);
   }
 
@@ -72,7 +77,8 @@ public class VersioningResource {
   @ApiOperation(value = "Retrieves the memento for a logistics object closest to a given date time")
   public ResponseEntity<Void> getTimegate(@PathVariable("companyId") String companyId,
                                           @PathVariable("loId") String loId,
-                                          @RequestHeader("Accept-Datetime") String dateTime) throws ParseException {
+                                          @RequestHeader("Accept-Datetime") String dateTime,
+                                          @RequestParam(value = "locale", required = false) Locale locale) throws ParseException {
     final String loUri = getCurrentUri().replace("/timegate", "");
     Date date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(dateTime);
     Memento memento = versioningService.findMementoByDate(loUri, date);

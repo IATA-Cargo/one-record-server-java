@@ -13,7 +13,14 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
+/**
+ *
+ * Utility class used for downloading the latest ONE Record and W3C ACL ontologies to local files.
+ *
+ * @author blaja
+ */
 public class OntologyUtil {
   private static final Logger LOG = LoggerFactory.getLogger(OntologyUtil.class);
 
@@ -26,7 +33,7 @@ public class OntologyUtil {
   private static final String ACL_FILE = "acl.ttl";
 
   public static void main(String[] args) throws Throwable {
-    LOG.info("Writing cargo ontology from Github to iata.ttl...");
+    LOG.info("Writing cargo ontology from GitHub to iata.ttl...");
 
     try (PrintWriter out = new PrintWriter(CARGO_FILE)) {
       URL githubUrl = new URL(ONE_RECORD_CARGO_ONTOLOGY_URL);
@@ -36,7 +43,7 @@ public class OntologyUtil {
       out.println(githubResponse);
     }
 
-    LOG.info("Writing API ontology from Github to api_models.ttl...");
+    LOG.info("Writing API ontology from GitHub to api_models.ttl...");
 
     try (PrintWriter out = new PrintWriter(API_FILE)) {
       URL githubUrl = new URL(ONE_RECORD_API_ONTOLOGY_URL);
@@ -63,7 +70,7 @@ public class OntologyUtil {
 
       char[] buffer = new char[2048];
       try {
-        Reader reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
+        Reader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
         int counter;
         while ((counter = reader.read(buffer)) != -1) {
           writer.write(buffer, 0, counter);

@@ -7,6 +7,7 @@ import cz.cvut.kbss.jopa.model.annotations.Id;
 import cz.cvut.kbss.jopa.model.annotations.OWLAnnotationProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
+import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
 import cz.cvut.kbss.jopa.model.annotations.Properties;
@@ -16,6 +17,7 @@ import cz.cvut.kbss.jopa.vocabulary.RDFS;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.iata.api.Vocabulary;
+import org.iata.cargo.model.LogisticsObject;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
@@ -56,15 +58,25 @@ public class Memento
     @JsonProperty("language")
     @OWLAnnotationProperty(iri = DC.Terms.LANGUAGE)
     protected String language;
-
+    /**
+     * The actual data
+     * 
+     */
+    @OWLObjectProperty(iri = Vocabulary.s_p_data)
+    @ParticipationConstraints({
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
+    })
+    @JsonProperty(Vocabulary.s_p_data)
+    protected LogisticsObject data;
     /**
      * Date and time of the memento creation
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_created)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1)
     })
     @JsonProperty(Vocabulary.s_p_created)
     protected Date created;
@@ -74,8 +86,8 @@ public class Memento
      */
     @OWLDataProperty(iri = Vocabulary.s_p_createdBy)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
     @JsonProperty(Vocabulary.s_p_createdBy)
     protected String createdBy;
@@ -95,8 +107,8 @@ public class Memento
      */
     @OWLDataProperty(iri = Vocabulary.s_p_original)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
     @JsonProperty(Vocabulary.s_p_original)
     protected String original;
@@ -144,6 +156,14 @@ public class Memento
     @Override
     public String toString() {
         return ((((("Memento {"+ name)+"<")+ id)+">")+"}");
+    }
+
+    public void setData(LogisticsObject data) {
+        this.data = data;
+    }
+
+    public LogisticsObject getData() {
+        return data;
     }
 
     public void setCreated(Date created) {

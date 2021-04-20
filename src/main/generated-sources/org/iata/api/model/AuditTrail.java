@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import cz.cvut.kbss.jopa.model.annotations.Id;
 import cz.cvut.kbss.jopa.model.annotations.OWLAnnotationProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
+import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
@@ -95,6 +96,17 @@ public class AuditTrail
     })
     @JsonProperty(Vocabulary.s_p_logisticsObjectRef)
     protected LogisticsObjectRef logisticsObjectRef;
+    /**
+     * Latest revision of the Logistics Object
+     *
+     */
+    @OWLDataProperty(iri = Vocabulary.s_p_latestRevision)
+    @ParticipationConstraints({
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", max = 1)
+    })
+    @JsonProperty(Vocabulary.s_p_latestRevision)
+    protected Integer latestRevision;
 
     public void setId(String id) {
         this.id = id;
@@ -173,6 +185,14 @@ public class AuditTrail
         return logisticsObjectRef;
     }
 
+    public void setLatestRevision(Integer latestRevision) {
+        this.latestRevision = latestRevision;
+    }
+
+    public Integer getLatestRevision() {
+        return latestRevision;
+    }
+
     public String getLanguage() {
         return language;
     }
@@ -180,4 +200,5 @@ public class AuditTrail
     public void setLanguage(String language) {
         this.language = language;
     }
+
 }

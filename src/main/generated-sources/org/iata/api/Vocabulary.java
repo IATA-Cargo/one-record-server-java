@@ -10,7 +10,7 @@ import org.semanticweb.owlapi.model.IRI;
  */
 public class Vocabulary {
 
-    public final static String ONTOLOGY_IRI_onerecord_dot_iata_dot_org_generated = "https://onerecord.iata.org-generated";
+    public final static String ONTOLOGY_IRI_api_generated = "https://onerecord.iata.org/api-generated";
     public final static String ONTOLOGY_IRI_ = "https://onerecord.iata.org/api/";
     public final static String s_c_Thing = "http://www.w3.org/2002/07/owl#Thing";
     public final static IRI c_Thing = IRI.create(s_c_Thing);
@@ -20,13 +20,16 @@ public class Vocabulary {
      */
     public final static String s_c_AuditTrail = "https://onerecord.iata.org/api/AuditTrail";
     public final static IRI c_AuditTrail = IRI.create(s_c_AuditTrail);
+    public final static String s_c_Branch = "https://onerecord.iata.org/api/Branch";
+    public final static IRI c_Branch = IRI.create(s_c_Branch);
     /**
      * Change Request for the audit trail
      * 
      */
     public final static String s_c_ChangeRequest = "https://onerecord.iata.org/api/ChangeRequest";
     public final static IRI c_ChangeRequest = IRI.create(s_c_ChangeRequest);
-
+    public final static String s_c_Company = "https://onerecord.iata.org/api/Company";
+    public final static IRI c_Company = IRI.create(s_c_Company);
     /**
      * Company information in the Internet of Logistics
      * 
@@ -51,7 +54,8 @@ public class Vocabulary {
      */
     public final static String s_c_Error = "https://onerecord.iata.org/api/Error";
     public final static IRI c_Error = IRI.create(s_c_Error);
-
+    public final static String s_c_LogisticsObject = "https://onerecord.iata.org/api/LogisticsObject";
+    public final static IRI c_LogisticsObject = IRI.create(s_c_LogisticsObject);
     /**
      * Reference to a Logistics Object
      * 
@@ -122,6 +126,8 @@ public class Vocabulary {
     public final static IRI c_Branch_A = IRI.create(s_c_Branch_A);
     public final static String s_c_Company_A = "https://onerecord.iata.org/cargo/Company";
     public final static IRI c_Company_A = IRI.create(s_c_Company_A);
+    public final static String s_c_LogisticsObject_A = "https://onerecord.iata.org/cargo/LogisticsObject";
+    public final static IRI c_LogisticsObject_A = IRI.create(s_c_LogisticsObject_A);
     /**
      * List of change requests that were sent as PATCH on for a Logistics Object
      * 
@@ -183,6 +189,12 @@ public class Vocabulary {
     public final static String s_p_details = "https://onerecord.iata.org/api/Error#details";
     public final static IRI p_details = IRI.create(s_p_details);
     /**
+     * The actual data
+     * 
+     */
+    public final static String s_p_data = "https://onerecord.iata.org/api/Memento#data";
+    public final static IRI p_data = IRI.create(s_p_data);
+    /**
      * Link to the memento
      * 
      */
@@ -236,6 +248,12 @@ public class Vocabulary {
      */
     public final static String s_p_mementos = "https://onerecord.iata.org/api/Timemap#mementos";
     public final static IRI p_mementos = IRI.create(s_p_mementos);
+    /**
+     * Latest revision of the Logistics Object
+     * 
+     */
+    public final static String s_p_latestRevision = "https://onerecord.iata.org/api/AuditTrail#latestRevision";
+    public final static IRI p_latestRevision = IRI.create(s_p_latestRevision);
     /**
      * Company which sent the change request
      * 

@@ -89,7 +89,6 @@ public class LogisticsObjectsResource {
     final HttpHeaders headers = RestUtils.createLinkHeaderFromCurrentURi("/acl", "acl", Collections.emptyList());
     final HttpHeaders headersMementos = RestUtils.createLinkHeaderFromCurrentURi("/timemap", "timemap", Collections.emptyList());
     headers.addAll(headersMementos);
-
     LogisticsObject logisticsObject = logisticsObjectsService.findById(getCurrentUri());
 
     if (logisticsObject == null) {
@@ -123,7 +122,8 @@ public class LogisticsObjectsResource {
   @ResponseStatus(HttpStatus.CREATED)
   @ApiOperation(value = "Creates events for a given logistics object")
   public ResponseEntity<Void> addEvents(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @RequestBody Event event) {
-    logisticsObjectsService.addEvent(event);
+    final String loUri = getCurrentUri().replace("/events", "");
+    logisticsObjectsService.addEvent(event, loUri);
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 

@@ -16,7 +16,7 @@ public interface LogisticsObjectsService {
 
   void updateLogisticsObject(PatchRequest patchRequest);
 
-  void addEvent(Event event);
+  void addEvent(Event event, String loUri);
 
   List<Event> findEvents(String loId);
   

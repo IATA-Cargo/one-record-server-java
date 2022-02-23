@@ -58,9 +58,9 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
     LogisticsObject logisticsObject = logisticsObjectsRepository.findById(loUri).orElse(null);
     event.setId(loUri + "/Event_" + Utils.getRandomNumberString());
     if (logisticsObject != null) {
-      Set<Event> events = Optional.ofNullable(logisticsObject.getEvent()).orElse(new HashSet<>());
+      Set<Event> events = Optional.ofNullable(logisticsObject.getEvents()).orElse(new HashSet<>());
       events.add(event);
-      logisticsObject.setEvent(events);
+      logisticsObject.setEvents(events);
       logisticsObjectsRepository.save(logisticsObject);
     }
   }
@@ -68,7 +68,7 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
   @Override
   public List<Event> findEvents(String loUri) {
     Set<Event> set =  logisticsObjectsRepository.findById(loUri)
-     .map(logisticsObject -> Optional.ofNullable(logisticsObject.getEvent()).orElse(new HashSet<>()))
+     .map(logisticsObject -> Optional.ofNullable(logisticsObject.getEvents()).orElse(new HashSet<>()))
      .orElse(new HashSet<>());
     return Lists.newArrayList(set);
   }

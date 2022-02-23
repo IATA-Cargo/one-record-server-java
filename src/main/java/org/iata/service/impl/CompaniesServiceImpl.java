@@ -1,12 +1,8 @@
 package org.iata.service.impl;
 
 import org.iata.api.model.CompanyInformation;
-import org.iata.cargo.model.Branch;
+import org.iata.cargo.model.*;
 import org.iata.cargo.model.Company;
-import org.iata.cargo.model.Contact;
-import org.iata.cargo.model.Location;
-import org.iata.cargo.model.OtherIdentifier;
-import org.iata.cargo.model.Person;
 import org.iata.repository.CompaniesRepository;
 import org.iata.service.CompaniesService;
 import org.iata.util.Utils;
@@ -37,7 +33,7 @@ public class CompaniesServiceImpl implements CompaniesService {
     Company company = companyInformation.getCompany();
     company.setId(companyIdentifierForIoL + "/company");
 
-    Branch branch = company.getBranch();
+    CompanyBranch branch = company.getBranch();
     if (branch != null) {
       branch.setId(company.getId() + "/branch");
       Location location = branch.getLocation();
@@ -62,14 +58,14 @@ public class CompaniesServiceImpl implements CompaniesService {
         branch.setLocation(location);
       }
 
-      Set<OtherIdentifier> otherIdentifierSet = Optional.ofNullable(branch.getOtherIdentifier()).orElse(new HashSet<>());
+      Set<OtherIdentifier> otherIdentifierSet = Optional.ofNullable(branch.getOtherIdentifiers()).orElse(new HashSet<>());
       List<OtherIdentifier> otherIdentifiers = new ArrayList<>(otherIdentifierSet);
       otherIdentifiers.forEach(otherIdentifier -> {
         otherIdentifier.setId(branch.getId() + "/otherIdentifier" + Utils.increment(otherIdentifiers.indexOf(otherIdentifier), 1));
       });
-      branch.setOtherIdentifier(new HashSet<>(otherIdentifiers));
+      branch.setOtherIdentifiers(new HashSet<>(otherIdentifiers));
 
-      Set<Person> personSet = Optional.ofNullable(branch.getContactPerson()).orElse(new HashSet<>());
+      Set<Person> personSet = Optional.ofNullable(branch.getContactPersons()).orElse(new HashSet<>());
       List<Person> persons = new ArrayList<>(personSet);
       persons.forEach(person -> {
         person.setId(branch.getId() + "/person" + Utils.increment(persons.indexOf(person), 1));
@@ -82,7 +78,7 @@ public class CompaniesServiceImpl implements CompaniesService {
         person.setContact(new HashSet<>(contacts));
 
       });
-      branch.setContactPerson(new HashSet<>(persons));
+      branch.setContactPersons(new HashSet<>(persons));
     }
 
     company.setBranch(branch);

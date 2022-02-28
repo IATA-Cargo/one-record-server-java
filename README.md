@@ -85,5 +85,6 @@ You can deploy the ONE Record sandbox on the platform that you wish. We are prov
 By default, the security layer supporting mutual TLS is disabled in this sandbox.
 
 # IATA ONE Record
-You can find further information about ONE Record specifications on the [main Github repository](https://github.com/IATA-Cargo/ONE-Record) and on the [IATA dedicated webpage](https://www.iata.org/en/programs/cargo/e/one-record/).
+You can find further information about ONE Record specifications on the [main Github repository](https://github.com/IATA-Cargo/ONE-Record), 
+on the [ONE Record Developer Portal](https://onerecord.iata.org/) and on the [IATA dedicated webpage](https://www.iata.org/en/programs/cargo/e/one-record/).
 

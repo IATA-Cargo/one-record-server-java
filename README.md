@@ -13,6 +13,29 @@ There are two `application.properties` files to edit:
 
 # Local testing
 
+## Run with Docker
+### Requirements
+- [Docker](https://docs.docker.com/) & [Docker Compose](https://docs.docker.com/compose/)
+### Start the server
+For starting the One Record Java Sandbox with a MongoDB, use the following command:
+```bash
+docker compose up -d
+```
+Docker will pull the MongoDB image and builds the One Record Server image (if your local machine has not already pulled and/or built it before).
+Docker will then run both images in detached mode (-d Parameter).
+The application should be available at http://localhost:8080.
+
+### Stop the server
+For stopping all running containers, use the following commmand:
+```bash
+docker-compose down
+```
+
+For stopping and removing all containers, networks, and all images used by any service in <em>docker-compose.yml</em> file, use the following command:
+```bash
+docker-compose down --rmi all
+```
+
 ## Build & run the sandbox code
 For testing the application locally, follow the next steps:
 1. Install `Java = 8` and `Maven`. 

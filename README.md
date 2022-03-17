@@ -28,12 +28,12 @@ The application should be available at http://localhost:8080.
 ### Stop the server
 For stopping all running containers, use the following commmand:
 ```bash
-docker-compose down
+docker compose down
 ```
 
 For stopping and removing all containers, networks, and all images used by any service in <em>docker-compose.yml</em> file, use the following command:
 ```bash
-docker-compose down --rmi all
+docker compose down --rmi all
 ```
 
 ## Build & run the sandbox code

@@ -1,0 +1,11 @@
+{
+  "@context": {
+    "iata-cargo": "https://onerecord.iata.org/"
+  },
+  "@type": "https://onerecord.iata.org/Event",
+  "iata-cargo:Event#dateTime":  "Wed Mar 04 03:34:45 GMT+08:00 2022",
+  "iata-cargo:Event#eventCode":  "ARR",
+  "iata-cargo:Event#eventTypeIndicator":  "MOP",
+  "iata-cargo:Event#location":  "GVA",
+  "iata-cargo:Event#performedBy":  "Henk Mulder"
+}

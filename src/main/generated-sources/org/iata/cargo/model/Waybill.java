@@ -127,7 +127,7 @@ public class Waybill
     })
     protected String optionalShippingInfo;
     /**
-     * Optional shipping reference number if any
+     * waybill:optionalShippingRefNo
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_optionalShippingRefNo)

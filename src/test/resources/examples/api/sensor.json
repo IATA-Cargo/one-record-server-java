@@ -1,0 +1,11 @@
+{
+  "@context": {
+    "iata-cargo": "https://onerecord.iata.org/",
+    "iata-api": "https://onerecord.iata.org/api/"
+  },
+  "@type": "https://onerecord.iata.org/Sensor",
+  "iata-api:Sensor#sensorDescription": "GPS-tracker",
+  "iata-api:Sensor#sensorName":"GPx12-a",
+  "iata-api:Sensor#sensorSerialNumber": "142NL",
+  "iata-api:Sensor#sensorType": "GPS"
+}

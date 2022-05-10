@@ -44,8 +44,8 @@ public class PatchRequest
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_logisticsObjectRef_A)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
     protected LogisticsObjectRef logisticsObjectRef;
     /**

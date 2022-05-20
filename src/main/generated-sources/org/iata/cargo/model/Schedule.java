@@ -2,6 +2,7 @@
 package org.iata.cargo.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
@@ -27,9 +28,9 @@ public class Schedule
      */
     @OWLDataProperty(iri = Vocabulary.s_p_earliestAcceptanceTime_A)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
     })
-    protected String earliestAcceptanceTime;
+    protected Date earliestAcceptanceTime;
     /**
      * Latest Acceptance time as per CargoIQ definition (requested, proposed or actual)
      * 
@@ -58,11 +59,11 @@ public class Schedule
     })
     protected String totalTransitTime;
 
-    public void setEarliestAcceptanceTime(String earliestAcceptanceTime) {
+    public void setEarliestAcceptanceTime(Date earliestAcceptanceTime) {
         this.earliestAcceptanceTime = earliestAcceptanceTime;
     }
 
-    public String getEarliestAcceptanceTime() {
+    public Date getEarliestAcceptanceTime() {
         return earliestAcceptanceTime;
     }
 

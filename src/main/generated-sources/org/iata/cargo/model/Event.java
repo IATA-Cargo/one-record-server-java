@@ -45,8 +45,8 @@ public class Event
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_linkedObject)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_LogisticsObject, min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_LogisticsObject, min = 1, max = -1)
     })
     protected LogisticsObject linkedObject;
     /**
@@ -106,8 +106,8 @@ public class Event
      */
     @OWLDataProperty(iri = Vocabulary.s_p_eventTypeIndicator)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
     protected String eventTypeIndicator;
 

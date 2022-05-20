@@ -3,7 +3,6 @@ package org.iata.cargo.model;
 
 import java.io.Serializable;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
-import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
@@ -67,33 +66,6 @@ public class Request
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
     protected Value unitsPreference;
-    /**
-     * Reference to the Allotment as per the contracts between forwarders and carriers
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_allotment_A)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
-    })
-    protected String allotment;
-    /**
-     * Identification of the request type: Quote or Booking
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_requestType_A)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
-    })
-    protected String requestType;
-    /**
-     * Indicate the security state of the shipment, screened or not
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_shipmentSecurityStatus_A_A_A)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
-    })
-    protected String shipmentSecurityStatus;
 
     public void setParties(OtherParty parties) {
         this.parties = parties;
@@ -133,30 +105,6 @@ public class Request
 
     public Value getUnitsPreference() {
         return unitsPreference;
-    }
-
-    public void setAllotment(String allotment) {
-        this.allotment = allotment;
-    }
-
-    public String getAllotment() {
-        return allotment;
-    }
-
-    public void setRequestType(String requestType) {
-        this.requestType = requestType;
-    }
-
-    public String getRequestType() {
-        return requestType;
-    }
-
-    public void setShipmentSecurityStatus(String shipmentSecurityStatus) {
-        this.shipmentSecurityStatus = shipmentSecurityStatus;
-    }
-
-    public String getShipmentSecurityStatus() {
-        return shipmentSecurityStatus;
     }
 
 }

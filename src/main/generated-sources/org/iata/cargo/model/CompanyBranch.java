@@ -72,7 +72,7 @@ public class CompanyBranch
      * Company branch name
      * 
      */
-    @OWLDataProperty(iri = Vocabulary.s_p_branchName_A)
+    @OWLDataProperty(iri = Vocabulary.s_p_branchName)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
@@ -81,7 +81,7 @@ public class CompanyBranch
      * IATA CASS cargo agent 4 digit branch number / location identifier
      * 
      */
-    @OWLDataProperty(iri = Vocabulary.s_p_iataCargoAgentLocationIdentifier_A)
+    @OWLDataProperty(iri = Vocabulary.s_p_iataCargoAgentLocationIdentifier)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })

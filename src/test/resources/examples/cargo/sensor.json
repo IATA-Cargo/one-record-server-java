@@ -1,0 +1,12 @@
+{
+  "@id": "sensor123",
+  "@context": {
+    "cargo": "https://onerecord.iata.org/",
+    "api": "https://onerecord.iata.org/api/"
+  },
+  "@type": "cargo:Sensor",
+  "cargo:Sensor#sensorDescription": "temperature-tracker",
+  "cargo:Sensor#sensorName":"TPx14-a",
+  "cargo:Sensor#sensorSerialNumber": "142NL123",
+  "cargo:Sensor#sensorType": "Temperature"
+}

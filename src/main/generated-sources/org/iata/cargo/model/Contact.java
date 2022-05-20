@@ -65,24 +65,6 @@ public class Contact
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
     protected String contactValue;
-    /**
-     * E-mail address
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_emailAddress)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
-    })
-    protected String emailAddress;
-    /**
-     * Phone number
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_phoneNumber)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
-    })
-    protected String phoneNumber;
 
     public void setId(String id) {
         this.id = id;
@@ -151,22 +133,6 @@ public class Contact
 
     public String getContactValue() {
         return contactValue;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
     }
 
 }

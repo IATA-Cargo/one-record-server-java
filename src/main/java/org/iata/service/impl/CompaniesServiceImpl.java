@@ -2,7 +2,6 @@ package org.iata.service.impl;
 
 import org.iata.api.model.CompanyInformation;
 import org.iata.cargo.model.*;
-import org.iata.cargo.model.Company;
 import org.iata.repository.CompaniesRepository;
 import org.iata.service.CompaniesService;
 import org.iata.util.Utils;
@@ -81,7 +80,7 @@ public class CompaniesServiceImpl implements CompaniesService {
       branch.setContactPersons(new HashSet<>(persons));
     }
 
-    company.setBranch(branch);
+//    company.setBranch(branch);
     companyInformation.setCompany(company);
 
     companiesRepository.save(companyInformation);

@@ -30,7 +30,7 @@ public class Ratings
     @OWLObjectProperty(iri = Vocabulary.s_p_ranges)
     protected Set<Ranges> ranges;
     /**
-     * Billig charge identifiers to be used for CASS. Refer to CargoXML Code List 1.33
+     * Billing charge identifiers to be used for CASS. Refer to CargoXML Code List 1.33
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_billingChargeIdentifier)
@@ -63,7 +63,7 @@ public class Ratings
     @OWLDataProperty(iri = Vocabulary.s_p_chargePaymentType)
     protected Set<String> chargePaymentType;
     /**
-     * Type of charge e.g. Freight, Surcharges, etc.
+     * Type of charge that should match the code expressed in either chargeCode, otherChargeCode or billingChargeIndentifier data properties.
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_chargeType)
@@ -71,6 +71,15 @@ public class Ratings
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
     protected String chargeType;
+    /**
+     * Entitlement code to define if charges are Due carrier (C) or Due agent (A). Refer to CXML Code List 1.3
+     * 
+     */
+    @OWLDataProperty(iri = Vocabulary.s_p_entitlement)
+    @ParticipationConstraints({
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+    })
+    protected String entitlement;
     /**
      * Refer to CargoXML Code List 1.2 for Other Charges
      * 
@@ -98,6 +107,24 @@ public class Ratings
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
     protected String priceSpecificationRef;
+    /**
+     * Used if there is an applicable quantity to the rate (Usually a Time or a Number)
+     * 
+     */
+    @OWLDataProperty(iri = Vocabulary.s_p_quantity_A)
+    @ParticipationConstraints({
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+    })
+    protected String quantity;
+    /**
+     * Used to identify if the Ratings are Face, Published or Actual ratings. Expected values are F, A, C.
+     * 
+     */
+    @OWLDataProperty(iri = Vocabulary.s_p_ratingsType)
+    @ParticipationConstraints({
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+    })
+    protected String ratingsType;
     /**
      * IATA 3-letter code of the rate combination point
      * 
@@ -162,6 +189,14 @@ public class Ratings
         return chargeType;
     }
 
+    public void setEntitlement(String entitlement) {
+        this.entitlement = entitlement;
+    }
+
+    public String getEntitlement() {
+        return entitlement;
+    }
+
     public void setOtherChargeCode(String otherChargeCode) {
         this.otherChargeCode = otherChargeCode;
     }
@@ -184,6 +219,22 @@ public class Ratings
 
     public String getPriceSpecificationRef() {
         return priceSpecificationRef;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setRatingsType(String ratingsType) {
+        this.ratingsType = ratingsType;
+    }
+
+    public String getRatingsType() {
+        return ratingsType;
     }
 
     public void setRcp(Set<String> rcp) {

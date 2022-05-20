@@ -35,7 +35,7 @@ public class Schedule
      * Latest Acceptance time as per CargoIQ definition (requested, proposed or actual)
      * 
      */
-    @OWLDataProperty(iri = Vocabulary.s_p_latestAcceptanceTime_A_A)
+    @OWLDataProperty(iri = Vocabulary.s_p_latestAcceptanceTime_A)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
@@ -44,7 +44,7 @@ public class Schedule
      * Time of availability of the shipment as per CargoIQ definition
      * 
      */
-    @OWLDataProperty(iri = Vocabulary.s_p_timeOfAvailability_A_A)
+    @OWLDataProperty(iri = Vocabulary.s_p_timeOfAvailability_A)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
@@ -53,7 +53,7 @@ public class Schedule
      * Total transit time as per CargoIQ definition
      * 
      */
-    @OWLDataProperty(iri = Vocabulary.s_p_totalTransitTime_A_A)
+    @OWLDataProperty(iri = Vocabulary.s_p_totalTransitTime_A)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })

@@ -151,10 +151,10 @@ public class BookingOption
     })
     protected Waybill waybillNumber;
     /**
-     * Status of the Booking with regards to the step in the Quote and Book process: Quoted, Booked (to be confirmed)
+     * Status of the Booking with regards to the step in the Sales and Booking process: Quoted, Booked (to be confirmed)
      * 
      */
-    @OWLDataProperty(iri = Vocabulary.s_p_bookingStatus_A)
+    @OWLDataProperty(iri = Vocabulary.s_p_bookingStatus)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
@@ -181,7 +181,7 @@ public class BookingOption
      * Indicates if the offer is a perfect match to the quote request (boolean)
      * 
      */
-    @OWLDataProperty(iri = Vocabulary.s_p_requestMatchInd_A)
+    @OWLDataProperty(iri = Vocabulary.s_p_requestMatchInd)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#boolean", max = 1)
     })
@@ -190,7 +190,7 @@ public class BookingOption
      * Indicate the secruty state of the shipment, screened or not
      * 
      */
-    @OWLDataProperty(iri = Vocabulary.s_p_shipmentSecurityStatus_A)
+    @OWLDataProperty(iri = Vocabulary.s_p_shipmentSecurityStatus)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })

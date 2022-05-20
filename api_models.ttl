@@ -662,7 +662,7 @@ timemap:timegate rdf:type owl:DatatypeProperty ;
                          ] ,
                          [ rdf:type owl:Restriction ;
                            owl:onProperty companyInformation:company ;
-                           owl:allValuesFrom <https://onerecord.iata.org/Company>
+                           owl:allValuesFrom <https://onerecord.iata.org/api/Company>
                          ] ,
                          [ rdf:type owl:Restriction ;
                            owl:onProperty companyInformation:company ;

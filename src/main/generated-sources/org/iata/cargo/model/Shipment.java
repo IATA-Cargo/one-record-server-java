@@ -69,8 +69,8 @@ public class Shipment
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_totalGrossWeight)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
     protected Value totalGrossWeight;
     /**

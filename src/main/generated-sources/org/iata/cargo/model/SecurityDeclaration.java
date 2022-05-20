@@ -30,8 +30,8 @@ public class SecurityDeclaration
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_issuedBy)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
     protected Person issuedBy;
     /**
@@ -124,8 +124,8 @@ public class SecurityDeclaration
      */
     @OWLDataProperty(iri = Vocabulary.s_p_securityStatus_A)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
     protected String securityStatus;
 

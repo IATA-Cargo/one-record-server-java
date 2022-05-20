@@ -62,6 +62,7 @@ public class LogisticsObjectsHandler {
     String auditTrailId = loid + "/auditTrail";
     auditTrail.setId(auditTrailId);
     Memento initialLo = new Memento();
+
     // TODO fonctionality for creating snapshots/mementos
     initialLo.setId(auditTrailId + "/loInitialSnapshot");
     auditTrail.setLoInitialSnapshot(initialLo);

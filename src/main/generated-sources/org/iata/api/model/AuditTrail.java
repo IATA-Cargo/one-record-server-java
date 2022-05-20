@@ -59,8 +59,8 @@ public class AuditTrail
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_loInitialSnapshot)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
     protected Memento loInitialSnapshot;
     /**

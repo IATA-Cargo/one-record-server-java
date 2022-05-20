@@ -1,4 +1,5 @@
 {
+  "@id": "test",
   "@type": [
     "https://onerecord.iata.org/cargo/Piece"
   ],

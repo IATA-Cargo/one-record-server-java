@@ -3409,7 +3409,7 @@ public class Vocabulary {
     public final static String s_p_optionalShippingInfo = "https://onerecord.iata.org/Waybill#optionalShippingInfo";
     public final static IRI p_optionalShippingInfo = IRI.create(s_p_optionalShippingInfo);
     /**
-     * Optional shipping reference number if any
+     * waybill:optionalShippingRefNo
      * 
      */
     public final static String s_p_optionalShippingRefNo = "https://onerecord.iata.org/Waybill#optionalShippingRefNo";

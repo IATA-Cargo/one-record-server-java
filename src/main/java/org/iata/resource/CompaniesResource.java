@@ -14,15 +14,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.inject.Inject;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
 import java.util.Locale;
 
@@ -31,6 +27,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/", produces = JsonLd.MEDIA_TYPE)
 @Api(value = "Companies Resource REST Endpoint")
 public class CompaniesResource {
@@ -45,7 +42,6 @@ public class CompaniesResource {
     this.companiesService = companiesService;
     this.subscriptionsService = subscriptionsService;
   }
-
   @RequestMapping(method = POST, value = "/companies", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.CREATED)
   @ApiOperation(value = "INTERNAL Creates a company")

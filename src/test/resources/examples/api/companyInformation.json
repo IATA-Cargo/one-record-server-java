@@ -1,89 +1,23 @@
 {
-  "@type": [
-    "https://onerecord.iata.org/api/CompanyInformation"
-  ],
-  "https://onerecord.iata.org/api/CompanyInformation#companyId": "iata",
-  "https://onerecord.iata.org/api/CompanyInformation#company": {
-    "@type": [
-      "https://onerecord.iata.org/cargo/Company"
-    ],
-    "https://onerecord.iata.org/cargo/Company#airlineCode": "XB",
-    "https://onerecord.iata.org/cargo/Company#airlinePrefix": 123,
-    "https://onerecord.iata.org/cargo/Company#branch": {
-      "@type": [
-        "https://onerecord.iata.org/cargo/Branch"
-      ],
-      "https://onerecord.iata.org/cargo/Branch#branchName": "IATA Geneva",
-      "https://onerecord.iata.org/cargo/Branch#contactPerson": [
-        {
-          "@type": [
-            "https://onerecord.iata.org/cargo/Person"
-          ],
-          "https://onerecord.iata.org/cargo/Person#contact": [
-            {
-              "@type": [
-                "https://onerecord.iata.org/cargo/Contact"
-              ],
-              "https://onerecord.iata.org/cargo/Contact#emailAddress": "onerecord@iata.org",
-              "https://onerecord.iata.org/cargo/Contact#other": {
-                "@type": [
-                  "https://onerecord.iata.org/cargo/ContactOther"
-                ],
-                "https://onerecord.iata.org/cargo/ContactOther#detail": "ONE Record email",
-                "https://onerecord.iata.org/cargo/ContactOther#otherType": "Phone"
-              },
-              "https://onerecord.iata.org/cargo/Contact#phoneNumber": "123456789"
-            }
-          ],
-          "https://onerecord.iata.org/cargo/Person#department": "Digital Cargo"
-        }
-      ],
-      "https://onerecord.iata.org/cargo/Branch#iataCargoAgentLocationIdentifier": 0,
-      "https://onerecord.iata.org/cargo/Branch#location": {
-        "@type": [
-          "https://onerecord.iata.org/cargo/Location"
-        ],
-        "https://onerecord.iata.org/cargo/Location#address": {
-          "@type": [
-            "https://onerecord.iata.org/cargo/Address"
-          ],
-          "https://onerecord.iata.org/cargo/Address#addressCode": [
-            "GVA"
-          ],
-          "https://onerecord.iata.org/cargo/Address#cityCode": "GVA",
-          "https://onerecord.iata.org/cargo/Address#cityName": "Geneva",
-          "https://onerecord.iata.org/cargo/Address#country": {
-            "@type": [
-              "https://onerecord.iata.org/cargo/Country"
-            ],
-            "https://onerecord.iata.org/cargo/Country#countryCode": "CH",
-            "https://onerecord.iata.org/cargo/Country#countryName": "Switzerland"
-          },
-          "https://onerecord.iata.org/cargo/Address#postalCode": "1212",
-          "https://onerecord.iata.org/cargo/Address#regionCode": "GVA",
-          "https://onerecord.iata.org/cargo/Address#regionName": "Geneva",
-          "https://onerecord.iata.org/cargo/Address#street": [
-            "Av Aeroport"
-          ]
-        },
-        "https://onerecord.iata.org/cargo/Location#locationName": "IATA Office",
-        "https://onerecord.iata.org/cargo/Location#locationType": "Office"
-      },
-      "https://onerecord.iata.org/cargo/Company#companyName": "string",
-      "https://onerecord.iata.org/cargo/Company#iataCargoAgentCode": 1234567
-    }
+  "@context": {
+    "iata-cargo": "https://onerecord.iata.org/",
+    "iata-api": "https://onerecord.iata.org/api/"
   },
-  "https://onerecord.iata.org/api/CompanyInformation#serverEndpoint": "http://localhost:8080/companies/iata",
-  "https://onerecord.iata.org/api/CompanyInformation#supportedContentTypes": [
-    "application/ld+json"
-  ],
-  "https://onerecord.iata.org/api/CompanyInformation#supportedLogisticsObjects": [
-    "https://onerecord.iata.org/cargo/Waybill",
-    "https://onerecord.iata.org/cargo/Shipment",
-    "https://onerecord.iata.org/cargo/Booking",
-    "https://onerecord.iata.org/cargo/Piece",
-    "https://onerecord.iata.org/cargo/Item",
-    "https://onerecord.iata.org/cargo/Product",
-    "https://onerecord.iata.org/cargo/ServiceRequest"
+  "@type": "https://onerecord.iata.org/api/CompanyInformation",
+  "iata-api:CompanyInformation#companyId": "feb2022-5",
+  "iata-api:CompanyInformation#company": {
+    "@type":"iata-cargo:Company",
+    "iata-cargo:Company#airlineCode": "XB"
+  },
+  "iata-api:CompanyInformation#serverEndpoint": "http://localhost:8080/companies/feb2022-3",
+  "iata-api:CompanyInformation#supportedContentTypes": "application/ld+json",
+  "iata-api:CompanyInformation#supportedLogisticsObjects": [
+    "iata-cargo:Waybill",
+    "iata-cargo:Shipment",
+    "iata-cargo:Booking",
+    "iata-cargo:Piece",
+    "iata-cargo:Item",
+    "iata-cargo:Product",
+    "iata-cargo:ServiceRequest"
   ]
 }

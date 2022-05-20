@@ -6,6 +6,7 @@ import org.iata.repository.CompaniesRepository;
 import org.iata.service.CompaniesService;
 import org.iata.util.Utils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -14,7 +15,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+
 @Service
+
 public class CompaniesServiceImpl implements CompaniesService {
 
   private final CompaniesRepository companiesRepository;

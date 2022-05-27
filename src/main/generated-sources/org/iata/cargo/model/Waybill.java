@@ -73,8 +73,8 @@ public class Waybill
      */
     @OWLDataProperty(iri = Vocabulary.s_p_carrierDeclarationDate)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1)
     })
     protected Date carrierDeclarationDate;
     /**
@@ -83,8 +83,8 @@ public class Waybill
      */
     @OWLDataProperty(iri = Vocabulary.s_p_carrierDeclarationSignature)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
     protected String carrierDeclarationSignature;
     /**
@@ -93,6 +93,16 @@ public class Waybill
      */
     @OWLDataProperty(iri = Vocabulary.s_p_consignorDeclarationSignature)
     protected Set<String> consignorDeclarationSignature;
+    /**
+     * Code indicating the origin of goods for Customs purposes (e.g. For goods in free circulation in the EU) 
+     * List to be provided by local authorities
+     * 
+     */
+    @OWLDataProperty(iri = Vocabulary.s_p_customsOriginCode)
+    @ParticipationConstraints({
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral", max = 1)
+    })
+    protected String customsOriginCode;
     /**
      * Charges levied at destination accruing to the last carrier, in destination currency
      * 
@@ -127,7 +137,7 @@ public class Waybill
     })
     protected String optionalShippingInfo;
     /**
-     * Optional shipping reference number if any
+     * waybill:optionalShippingRefNo
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_optionalShippingRefNo)
@@ -150,8 +160,8 @@ public class Waybill
      */
     @OWLDataProperty(iri = Vocabulary.s_p_waybillNumber_A_A_A)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
     protected String waybillNumber;
     /**
@@ -160,9 +170,9 @@ public class Waybill
      */
     @OWLDataProperty(iri = Vocabulary.s_p_waybillPrefix)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#integer", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
-    protected Integer waybillPrefix;
+    protected String waybillPrefix;
     /**
      * Type of the Waybill: House, Direct or Master
      * 
@@ -237,6 +247,14 @@ public class Waybill
         return consignorDeclarationSignature;
     }
 
+    public void setCustomsOriginCode(String customsOriginCode) {
+        this.customsOriginCode = customsOriginCode;
+    }
+
+    public String getCustomsOriginCode() {
+        return customsOriginCode;
+    }
+
     public void setDestinationCharges(Set<Double> destinationCharges) {
         this.destinationCharges = destinationCharges;
     }
@@ -293,11 +311,11 @@ public class Waybill
         return waybillNumber;
     }
 
-    public void setWaybillPrefix(Integer waybillPrefix) {
+    public void setWaybillPrefix(String waybillPrefix) {
         this.waybillPrefix = waybillPrefix;
     }
 
-    public Integer getWaybillPrefix() {
+    public String getWaybillPrefix() {
         return waybillPrefix;
     }
 

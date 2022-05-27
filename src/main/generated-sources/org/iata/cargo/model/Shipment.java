@@ -28,8 +28,8 @@ public class Shipment
      * Details of contained piece(s)
      * 
      */
-    @OWLObjectProperty(iri = Vocabulary.s_p_containedPiece)
-    protected Set<Piece> containedPiece;
+    @OWLObjectProperty(iri = Vocabulary.s_p_containedPieces_A)
+    protected Set<Piece> containedPieces;
     /**
      * Name and UN/LOCODE code of the point or port of departure, shipment or destination, as required under the applicable delivery term
      * 
@@ -69,8 +69,8 @@ public class Shipment
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_totalGrossWeight)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
     protected Value totalGrossWeight;
     /**
@@ -88,8 +88,8 @@ public class Shipment
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_waybillNumber_A_A)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
     protected Waybill waybillNumber;
     /**
@@ -153,12 +153,12 @@ public class Shipment
     })
     protected String weightValuationIndicator;
 
-    public void setContainedPiece(Set<Piece> containedPiece) {
-        this.containedPiece = containedPiece;
+    public void setContainedPieces(Set<Piece> containedPieces) {
+        this.containedPieces = containedPieces;
     }
 
-    public Set<Piece> getContainedPiece() {
-        return containedPiece;
+    public Set<Piece> getContainedPieces() {
+        return containedPieces;
     }
 
     public void setDeliveryLocation(Set<Location> deliveryLocation) {

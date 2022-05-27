@@ -46,7 +46,7 @@ public class Person
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
-    protected Branch associatedBranch;
+    protected CompanyBranch associatedBranch;
     /**
      * Contact details
      * 
@@ -177,11 +177,11 @@ public class Person
         return ((((("Person {"+ name)+"<")+ id)+">")+"}");
     }
 
-    public void setAssociatedBranch(Branch associatedBranch) {
+    public void setAssociatedBranch(CompanyBranch associatedBranch) {
         this.associatedBranch = associatedBranch;
     }
 
-    public Branch getAssociatedBranch() {
+    public CompanyBranch getAssociatedBranch() {
         return associatedBranch;
     }
 

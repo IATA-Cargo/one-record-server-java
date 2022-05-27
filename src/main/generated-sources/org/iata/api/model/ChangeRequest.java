@@ -45,8 +45,8 @@ public class ChangeRequest
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_patchRequest)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
     protected PatchRequest patchRequest;
     /**
@@ -55,8 +55,8 @@ public class ChangeRequest
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_requestingParty)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
     protected Branch requestingParty;
     /**
@@ -65,8 +65,8 @@ public class ChangeRequest
      */
     @OWLDataProperty(iri = Vocabulary.s_p_companyId)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
     protected String companyId;
     /**
@@ -75,8 +75,8 @@ public class ChangeRequest
      */
     @OWLDataProperty(iri = Vocabulary.s_p_status)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
     protected String status;
     /**
@@ -85,8 +85,8 @@ public class ChangeRequest
      */
     @OWLDataProperty(iri = Vocabulary.s_p_timestamp)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
     })
     protected Date timestamp;
 

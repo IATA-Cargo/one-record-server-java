@@ -3,9 +3,6 @@ package org.iata.cargo.model;
 
 import java.io.Serializable;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
-import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
-import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
-import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
 import org.iata.cargo.Vocabulary;
 
 
@@ -21,39 +18,5 @@ public class CO2CalcMethod
     implements Serializable
 {
 
-    /**
-     * Name of the CO2 calculation method
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_methodName)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
-    })
-    protected String methodName;
-    /**
-     * Version of the CO2 calculation method
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_methodVersion)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
-    })
-    protected String methodVersion;
-
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
-    }
-
-    public String getMethodName() {
-        return methodName;
-    }
-
-    public void setMethodVersion(String methodVersion) {
-        this.methodVersion = methodVersion;
-    }
-
-    public String getMethodVersion() {
-        return methodVersion;
-    }
 
 }

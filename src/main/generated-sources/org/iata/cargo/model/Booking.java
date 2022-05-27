@@ -2,10 +2,8 @@
 package org.iata.cargo.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Set;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
-import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
@@ -129,60 +127,6 @@ public class Booking
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
     protected Waybill waybillNumber;
-    /**
-     * Status of the Booking with regards to the step in the Quote and Book process: Quoted, Booked
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_bookingStatus)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral", max = 1)
-    })
-    protected String bookingStatus;
-    /**
-     * Latest Acceptance time as per CargoIQ definition
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_latestAcceptanceTime)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
-    })
-    protected Date latestAcceptanceTime;
-    /**
-     * Indicates if the offer is a perfect match to the quote request (boolean)
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_requestMatchInd)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#boolean", max = 1)
-    })
-    protected Boolean requestMatchInd;
-    /**
-     * Indicate the secruty state of the shipment, screened or not
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_shipmentSecurityStatus)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral", max = 1)
-    })
-    protected String shipmentSecurityStatus;
-    /**
-     * Time of availability of the shipment as per CargoIQ definition
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_timeOfAvailability)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
-    })
-    protected Date timeOfAvailability;
-    /**
-     * Total transit time as per CargoIQ definition
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_totalTransitTime)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral", max = 1)
-    })
-    protected String totalTransitTime;
 
     public void setCarrier(Set<Company> carrier) {
         this.carrier = carrier;
@@ -278,54 +222,6 @@ public class Booking
 
     public Waybill getWaybillNumber() {
         return waybillNumber;
-    }
-
-    public void setBookingStatus(String bookingStatus) {
-        this.bookingStatus = bookingStatus;
-    }
-
-    public String getBookingStatus() {
-        return bookingStatus;
-    }
-
-    public void setLatestAcceptanceTime(Date latestAcceptanceTime) {
-        this.latestAcceptanceTime = latestAcceptanceTime;
-    }
-
-    public Date getLatestAcceptanceTime() {
-        return latestAcceptanceTime;
-    }
-
-    public void setRequestMatchInd(Boolean requestMatchInd) {
-        this.requestMatchInd = requestMatchInd;
-    }
-
-    public Boolean getRequestMatchInd() {
-        return requestMatchInd;
-    }
-
-    public void setShipmentSecurityStatus(String shipmentSecurityStatus) {
-        this.shipmentSecurityStatus = shipmentSecurityStatus;
-    }
-
-    public String getShipmentSecurityStatus() {
-        return shipmentSecurityStatus;
-    }
-
-    public void setTimeOfAvailability(Date timeOfAvailability) {
-        this.timeOfAvailability = timeOfAvailability;
-    }
-
-    public Date getTimeOfAvailability() {
-        return timeOfAvailability;
-    }
-
-    public void setTotalTransitTime(String totalTransitTime) {
-        this.totalTransitTime = totalTransitTime;
-    }
-
-    public String getTotalTransitTime() {
-        return totalTransitTime;
     }
 
 }

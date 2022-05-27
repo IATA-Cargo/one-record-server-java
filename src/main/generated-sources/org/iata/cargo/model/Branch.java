@@ -7,7 +7,6 @@ import java.util.Set;
 import cz.cvut.kbss.jopa.model.annotations.Id;
 import cz.cvut.kbss.jopa.model.annotations.OWLAnnotationProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
-import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
@@ -68,24 +67,6 @@ public class Branch
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_otherIdentifier)
     protected Set<OtherIdentifier> otherIdentifier;
-    /**
-     * Company branch name
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_branchName)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
-    })
-    protected String branchName;
-    /**
-     * IATA CASS cargo agent 4 digit branch number / location identifier
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_iataCargoAgentLocationIdentifier)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#integer", max = 1)
-    })
-    protected Integer iataCargoAgentLocationIdentifier;
 
     public void setId(String id) {
         this.id = id;
@@ -162,22 +143,6 @@ public class Branch
 
     public Set<OtherIdentifier> getOtherIdentifier() {
         return otherIdentifier;
-    }
-
-    public void setBranchName(String branchName) {
-        this.branchName = branchName;
-    }
-
-    public String getBranchName() {
-        return branchName;
-    }
-
-    public void setIataCargoAgentLocationIdentifier(Integer iataCargoAgentLocationIdentifier) {
-        this.iataCargoAgentLocationIdentifier = iataCargoAgentLocationIdentifier;
-    }
-
-    public Integer getIataCargoAgentLocationIdentifier() {
-        return iataCargoAgentLocationIdentifier;
     }
 
 }

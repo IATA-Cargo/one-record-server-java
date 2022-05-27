@@ -38,8 +38,8 @@ public class ItemDg
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_netWeightMeasure)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
     })
     protected Value netWeightMeasure;
     /**

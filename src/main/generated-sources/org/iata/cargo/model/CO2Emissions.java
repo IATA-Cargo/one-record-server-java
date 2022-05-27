@@ -44,7 +44,7 @@ public class CO2Emissions
      * Name of the CO2 calculation method
      * 
      */
-    @OWLDataProperty(iri = Vocabulary.s_p_methodName_A)
+    @OWLDataProperty(iri = Vocabulary.s_p_methodName)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
@@ -53,7 +53,7 @@ public class CO2Emissions
      * Version used for the calculation
      * 
      */
-    @OWLDataProperty(iri = Vocabulary.s_p_methodVersion_A)
+    @OWLDataProperty(iri = Vocabulary.s_p_methodVersion)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })

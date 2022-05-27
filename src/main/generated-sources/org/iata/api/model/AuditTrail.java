@@ -59,8 +59,8 @@ public class AuditTrail
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_loInitialSnapshot)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
     protected Memento loInitialSnapshot;
     /**
@@ -69,8 +69,8 @@ public class AuditTrail
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_logisticsObjectRef)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
     protected LogisticsObjectRef logisticsObjectRef;
     /**
@@ -79,8 +79,8 @@ public class AuditTrail
      */
     @OWLDataProperty(iri = Vocabulary.s_p_latestRevision)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", min = 1, max = -1)
     })
     protected Integer latestRevision;
 

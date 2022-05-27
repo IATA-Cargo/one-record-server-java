@@ -128,5 +128,4 @@ public class LogisticsObject
         return properties1;
     }
 
-
 }

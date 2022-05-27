@@ -2,11 +2,11 @@ package org.iata.service.impl;
 
 import org.iata.api.model.CompanyInformation;
 import org.iata.cargo.model.*;
-import org.iata.cargo.model.Company;
 import org.iata.repository.CompaniesRepository;
 import org.iata.service.CompaniesService;
 import org.iata.util.Utils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -15,7 +15,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+
 @Service
+
 public class CompaniesServiceImpl implements CompaniesService {
 
   private final CompaniesRepository companiesRepository;
@@ -81,7 +83,7 @@ public class CompaniesServiceImpl implements CompaniesService {
       branch.setContactPersons(new HashSet<>(persons));
     }
 
-    company.setBranch(branch);
+//    company.setBranch(branch);
     companyInformation.setCompany(company);
 
     companiesRepository.save(companyInformation);

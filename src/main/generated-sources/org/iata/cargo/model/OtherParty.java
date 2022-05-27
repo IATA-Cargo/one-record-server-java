@@ -7,7 +7,6 @@ import java.util.Set;
 import cz.cvut.kbss.jopa.model.annotations.Id;
 import cz.cvut.kbss.jopa.model.annotations.OWLAnnotationProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
-import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
 import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
@@ -47,25 +46,6 @@ public class OtherParty
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
     protected Company companyDetails;
-    /**
-     * Specifies the code of an additional party if required. Standard codes from UN/EDIFACT 3035 Party function code qualifier can be used.
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_partyTypeCode)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
-    })
-    protected String partyTypeCode;
-    /**
-     * Role of other party - e.g. Notify party, Nominated agent, Customs broker, Manufacturer, Importer, Payer, Payee, ShipTo, ShipFrom, BillTo, BillFrom, RemitTo, RemitFrom 
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_roleName)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
-    })
-    protected String roleName;
 
     public void setId(String id) {
         this.id = id;
@@ -118,22 +98,6 @@ public class OtherParty
 
     public Company getCompanyDetails() {
         return companyDetails;
-    }
-
-    public void setPartyTypeCode(String partyTypeCode) {
-        this.partyTypeCode = partyTypeCode;
-    }
-
-    public String getPartyTypeCode() {
-        return partyTypeCode;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    public String getRoleName() {
-        return roleName;
     }
 
 }

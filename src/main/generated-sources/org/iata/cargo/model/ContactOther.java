@@ -7,9 +7,6 @@ import java.util.Set;
 import cz.cvut.kbss.jopa.model.annotations.Id;
 import cz.cvut.kbss.jopa.model.annotations.OWLAnnotationProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
-import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
-import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraint;
-import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
 import cz.cvut.kbss.jopa.model.annotations.Properties;
 import cz.cvut.kbss.jopa.model.annotations.Types;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
@@ -37,24 +34,6 @@ public class ContactOther
     protected Set<String> types;
     @Properties
     protected Map<String, Set<String>> properties;
-    /**
-     * Contact details e.g. Skype ID 
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_detail)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
-    })
-    protected String detail;
-    /**
-     * Contact type - e.g. Skype
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_otherType)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
-    })
-    protected String otherType;
 
     public void setId(String id) {
         this.id = id;
@@ -99,22 +78,6 @@ public class ContactOther
     @Override
     public String toString() {
         return ((((("ContactOther {"+ name)+"<")+ id)+">")+"}");
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
-
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setOtherType(String otherType) {
-        this.otherType = otherType;
-    }
-
-    public String getOtherType() {
-        return otherType;
     }
 
 }

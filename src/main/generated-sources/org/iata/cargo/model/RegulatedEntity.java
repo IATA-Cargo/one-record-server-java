@@ -48,7 +48,7 @@ public class RegulatedEntity
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1),
         @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
-    protected Branch entity;
+    protected CompanyBranch entity;
     /**
      * Regulated entity identifier (e.g. Regulated Agent Identifier) is mandatory
      * 
@@ -64,8 +64,8 @@ public class RegulatedEntity
      */
     @OWLDataProperty(iri = Vocabulary.s_p_expiryDate_A)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", min = 1, max = -1)
     })
     protected Date expiryDate;
     /**
@@ -123,11 +123,11 @@ public class RegulatedEntity
         return ((((("RegulatedEntity {"+ name)+"<")+ id)+">")+"}");
     }
 
-    public void setEntity(Branch entity) {
+    public void setEntity(CompanyBranch entity) {
         this.entity = entity;
     }
 
-    public Branch getEntity() {
+    public CompanyBranch getEntity() {
         return entity;
     }
 

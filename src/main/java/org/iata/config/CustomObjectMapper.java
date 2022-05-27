@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class CustomObjectMapper {
+class CustomObjectMapper {
 
   @Bean
   public ObjectMapper objectMapper() {
@@ -23,6 +23,7 @@ public class CustomObjectMapper {
 
     JsonLdModule jsonLdModule = new JsonLdModule();
     jsonLdModule.configure(ConfigParam.SCAN_PACKAGE, "org.iata");
+    //jsonLdModule.configure(ConfigParam.ASSUME_TARGET_TYPE,"true");
     mapper.registerModule(jsonLdModule);
 
     mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);

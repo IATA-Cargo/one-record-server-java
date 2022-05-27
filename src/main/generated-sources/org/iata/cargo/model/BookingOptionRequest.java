@@ -129,7 +129,7 @@ public class BookingOptionRequest
      * Indicate the security state of the shipment, screened or not
      * 
      */
-    @OWLDataProperty(iri = Vocabulary.s_p_shipmentSecurityStatus_A_A)
+    @OWLDataProperty(iri = Vocabulary.s_p_shipmentSecurityStatus_A)
     @ParticipationConstraints({
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })

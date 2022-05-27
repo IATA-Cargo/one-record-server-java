@@ -1,0 +1,10 @@
+{
+   "@context": {
+      "iata": "https://onerecord.iata.org/"
+   },
+   "@type": "iata:OtherParty",
+   "iata:otherParty:companyDetails" : {
+      "@id": "iata:Company/thisObjectId",
+      "@type": "iata:Company"
+   }
+}

@@ -2,7 +2,6 @@
 package org.iata.cargo.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Set;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
@@ -136,28 +135,6 @@ public class TransportSegment
     @OWLObjectProperty(iri = Vocabulary.s_p_transportedUlds)
     protected Set<ULD> transportedUlds;
     /**
-     * Arrival date and time. Actual or planned depends on the movementType property
-     * 
-     * Included in MovementTimes in v1.1
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_arrivalDate_A)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
-    })
-    protected Date arrivalDate;
-    /**
-     * Departure date and time. Actual or planned depends on the movementType property
-     * 
-     * Included in MovementTimes in v1.1
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_departureDate_A)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#dateTime", max = 1)
-    })
-    protected Date departureDate;
-    /**
      * e.g. Kerosene, Diesel, SAF, Electricity [renewable], Electricity [non-renewable]
      * 
      */
@@ -186,15 +163,6 @@ public class TransportSegment
     })
     protected String modeQualifier;
     /**
-     * Refers to the type of movement: Actual or planned
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_movementType)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral", max = 1)
-    })
-    protected String movementType;
-    /**
      * Seal identifier
      * 
      */
@@ -203,15 +171,6 @@ public class TransportSegment
         @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
     protected String seal;
-    /**
-     * Identification of the segment level in the movement of the pieces: contractual, flight leg, truck movement, etc.
-     * 
-     */
-    @OWLDataProperty(iri = Vocabulary.s_p_segmentLevel)
-    @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral", max = 1)
-    })
-    protected String segmentLevel;
     /**
      * Airline flight number, or rail /  truck / maritime line id
      * 
@@ -334,22 +293,6 @@ public class TransportSegment
         return transportedUlds;
     }
 
-    public void setArrivalDate(Date arrivalDate) {
-        this.arrivalDate = arrivalDate;
-    }
-
-    public Date getArrivalDate() {
-        return arrivalDate;
-    }
-
-    public void setDepartureDate(Date departureDate) {
-        this.departureDate = departureDate;
-    }
-
-    public Date getDepartureDate() {
-        return departureDate;
-    }
-
     public void setFuelType(String fuelType) {
         this.fuelType = fuelType;
     }
@@ -374,28 +317,12 @@ public class TransportSegment
         return modeQualifier;
     }
 
-    public void setMovementType(String movementType) {
-        this.movementType = movementType;
-    }
-
-    public String getMovementType() {
-        return movementType;
-    }
-
     public void setSeal(String seal) {
         this.seal = seal;
     }
 
     public String getSeal() {
         return seal;
-    }
-
-    public void setSegmentLevel(String segmentLevel) {
-        this.segmentLevel = segmentLevel;
-    }
-
-    public String getSegmentLevel() {
-        return segmentLevel;
     }
 
     public void setTransportIdentifier(String transportIdentifier) {

@@ -16,8 +16,6 @@ public class Vocabulary {
     public final static IRI c_Thing = IRI.create(s_c_Thing);
     public final static String s_c_Branch = "https://onerecord.iata.org/Branch";
     public final static IRI c_Branch = IRI.create(s_c_Branch);
-    public final static String s_c_Company = "https://onerecord.iata.org/Company";
-    public final static IRI c_Company = IRI.create(s_c_Company);
     public final static String s_c_LogisticsObject = "https://onerecord.iata.org/LogisticsObject";
     public final static IRI c_LogisticsObject = IRI.create(s_c_LogisticsObject);
     /**
@@ -34,8 +32,8 @@ public class Vocabulary {
      */
     public final static String s_c_ChangeRequest = "https://onerecord.iata.org/api/ChangeRequest";
     public final static IRI c_ChangeRequest = IRI.create(s_c_ChangeRequest);
-    public final static String s_c_Company_A = "https://onerecord.iata.org/api/Company";
-    public final static IRI c_Company_A = IRI.create(s_c_Company_A);
+    public final static String s_c_Company = "https://onerecord.iata.org/api/Company";
+    public final static IRI c_Company = IRI.create(s_c_Company);
     /**
      * Company information in the Internet of Logistics
      * 

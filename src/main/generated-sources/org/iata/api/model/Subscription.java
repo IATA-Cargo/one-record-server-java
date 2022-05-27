@@ -50,17 +50,17 @@ public class Subscription
      */
     @OWLDataProperty(iri = Vocabulary.s_p_cacheFor)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
-    protected Integer cacheFor;
+    protected String cacheFor;
     /**
      * Callback URL of the Client Subscription API where the subscriber receives Logistics Objects
      * 
      */
     @OWLDataProperty(iri = Vocabulary.s_p_callbackUrl)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
     protected String callbackUrl;
     /**
@@ -75,8 +75,8 @@ public class Subscription
      */
     @OWLDataProperty(iri = Vocabulary.s_p_myCompanyIdentifier)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
     protected String myCompanyIdentifier;
     /**
@@ -112,8 +112,8 @@ public class Subscription
      */
     @OWLDataProperty(iri = Vocabulary.s_p_subscribedTo)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
     protected String subscribedTo;
     /**
@@ -122,8 +122,8 @@ public class Subscription
      */
     @OWLDataProperty(iri = Vocabulary.s_p_topic_A)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
     protected String topic;
 
@@ -180,11 +180,11 @@ public class Subscription
         return errors;
     }
 
-    public void setCacheFor(Integer cacheFor) {
+    public void setCacheFor(String cacheFor) {
         this.cacheFor = cacheFor;
     }
 
-    public Integer getCacheFor() {
+    public String getCacheFor() {
         return cacheFor;
     }
 

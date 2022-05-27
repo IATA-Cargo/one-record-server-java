@@ -67,10 +67,16 @@ public class Piece
     })
     protected Value grossWeight;
     /**
+     * Links to Handling instructions / service requests of the piece
+     * 
+     */
+    @OWLObjectProperty(iri = Vocabulary.s_p_handlingInstructions)
+    protected Set<HandlingInstructions> handlingInstructions;
+    /**
      * Other piece identification ( e.g. Shipping Marks, Seal)
      * 
      */
-    @OWLObjectProperty(iri = Vocabulary.s_p_otherIdentifiers_A_A)
+    @OWLObjectProperty(iri = Vocabulary.s_p_otherIdentifiers_A_A_A)
     protected Set<OtherIdentifier> otherIdentifiers;
     /**
      * Other party company details - e.g. the party to be notified
@@ -183,8 +189,7 @@ public class Piece
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_volumetricWeight)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1)
     })
     protected VolumetricWeight volumetricWeight;
     /**
@@ -214,8 +219,8 @@ public class Piece
      */
     @OWLDataProperty(iri = Vocabulary.s_p_goodsDescription)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1),
-        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1),
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", min = 1, max = -1)
     })
     protected String goodsDescription;
     /**
@@ -352,6 +357,14 @@ public class Piece
 
     public Value getGrossWeight() {
         return grossWeight;
+    }
+
+    public void setHandlingInstructions(Set<HandlingInstructions> handlingInstructions) {
+        this.handlingInstructions = handlingInstructions;
+    }
+
+    public Set<HandlingInstructions> getHandlingInstructions() {
+        return handlingInstructions;
     }
 
     public void setOtherIdentifiers(Set<OtherIdentifier> otherIdentifiers) {

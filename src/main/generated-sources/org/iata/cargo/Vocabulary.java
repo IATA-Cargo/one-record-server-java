@@ -191,6 +191,12 @@ public class Vocabulary {
     public final static String s_c_Geolocation = "https://onerecord.iata.org/Geolocation";
     public final static IRI c_Geolocation = IRI.create(s_c_Geolocation);
     /**
+     * Used to provide handling instructions such as Special service request (SSR), Special handling codes (SPH) or Other service information (OSI)
+     * 
+     */
+    public final static String s_c_HandlingInstructions = "https://onerecord.iata.org/HandlingInstructions";
+    public final static IRI c_HandlingInstructions = IRI.create(s_c_HandlingInstructions);
+    /**
      * Insurance details
      * 
      */
@@ -891,6 +897,12 @@ public class Vocabulary {
     public final static String s_p_elevation = "https://onerecord.iata.org/Geolocation#elevation";
     public final static IRI p_elevation = IRI.create(s_p_elevation);
     /**
+     * Refers to the person that requests the handling/service
+     * 
+     */
+    public final static String s_p_requestedBy = "https://onerecord.iata.org/HandlingInstructions#requestedBy";
+    public final static IRI p_requestedBy = IRI.create(s_p_requestedBy);
+    /**
      * Party covering the insurance 
      * 
      */
@@ -1053,6 +1065,12 @@ public class Vocabulary {
     public final static String s_p_piece_A = "https://onerecord.iata.org/PackagingType#piece";
     public final static IRI p_piece_A = IRI.create(s_p_piece_A);
     /**
+     * Reference to other identifiers for parties. In the context of the AWB, otherIdentifier object can be used with types "PrimaryID" (internal ID), "Additional ID" (Standard ID) or "AccountID" (Account numbers).
+     * 
+     */
+    public final static String s_p_otherIdentifiers_A_A = "https://onerecord.iata.org/Party#otherIdentifiers";
+    public final static IRI p_otherIdentifiers_A_A = IRI.create(s_p_otherIdentifiers_A_A);
+    /**
      * Reference to the Company
      * 
      */
@@ -1113,11 +1131,17 @@ public class Vocabulary {
     public final static String s_p_grossWeight = "https://onerecord.iata.org/Piece#grossWeight";
     public final static IRI p_grossWeight = IRI.create(s_p_grossWeight);
     /**
+     * Links to Handling instructions / service requests of the piece
+     * 
+     */
+    public final static String s_p_handlingInstructions = "https://onerecord.iata.org/Piece#handlingInstructions";
+    public final static IRI p_handlingInstructions = IRI.create(s_p_handlingInstructions);
+    /**
      * Other piece identification ( e.g. Shipping Marks, Seal)
      * 
      */
-    public final static String s_p_otherIdentifiers_A_A = "https://onerecord.iata.org/Piece#otherIdentifiers";
-    public final static IRI p_otherIdentifiers_A_A = IRI.create(s_p_otherIdentifiers_A_A);
+    public final static String s_p_otherIdentifiers_A_A_A = "https://onerecord.iata.org/Piece#otherIdentifiers";
+    public final static IRI p_otherIdentifiers_A_A_A = IRI.create(s_p_otherIdentifiers_A_A_A);
     /**
      * Other party company details - e.g. the party to be notified
      * 
@@ -1410,8 +1434,8 @@ public class Vocabulary {
      * Details of contained piece(s)
      * 
      */
-    public final static String s_p_containedPiece = "https://onerecord.iata.org/Shipment#containedPiece";
-    public final static IRI p_containedPiece = IRI.create(s_p_containedPiece);
+    public final static String s_p_containedPieces_A = "https://onerecord.iata.org/Shipment#containedPieces";
+    public final static IRI p_containedPieces_A = IRI.create(s_p_containedPieces_A);
     /**
      * Name and UN/LOCODE code of the point or port of departure, shipment or destination, as required under the applicable delivery term
      * 
@@ -1556,6 +1580,12 @@ public class Vocabulary {
      */
     public final static String s_p_fuelAmountMeasured = "https://onerecord.iata.org/TransportMovement#fuelAmountMeasured";
     public final static IRI p_fuelAmountMeasured = IRI.create(s_p_fuelAmountMeasured);
+    /**
+     * Reference to all Movement Times such as Departure, Arrival, etc.
+     * 
+     */
+    public final static String s_p_movementTimes = "https://onerecord.iata.org/TransportMovement#movementTimes";
+    public final static IRI p_movementTimes = IRI.create(s_p_movementTimes);
     /**
      * Actual payload for the transport
      * 
@@ -1709,47 +1739,11 @@ public class Vocabulary {
     public final static String s_p_street = "https://onerecord.iata.org/Address#street";
     public final static IRI p_street = IRI.create(s_p_street);
     /**
-     * Status of the Booking with regards to the step in the Quote and Book process: Quoted, Booked
+     * Status of the Booking with regards to the step in the Sales and Booking process: Quoted, Booked (to be confirmed)
      * 
      */
-    public final static String s_p_bookingStatus = "https://onerecord.iata.org/Booking#bookingStatus";
+    public final static String s_p_bookingStatus = "https://onerecord.iata.org/BookingOption#bookingStatus";
     public final static IRI p_bookingStatus = IRI.create(s_p_bookingStatus);
-    /**
-     * Latest Acceptance time as per CargoIQ definition
-     * 
-     */
-    public final static String s_p_latestAcceptanceTime = "https://onerecord.iata.org/Booking#latestAcceptanceTime";
-    public final static IRI p_latestAcceptanceTime = IRI.create(s_p_latestAcceptanceTime);
-    /**
-     * Indicates if the offer is a perfect match to the quote request (boolean)
-     * 
-     */
-    public final static String s_p_requestMatchInd = "https://onerecord.iata.org/Booking#requestMatchInd";
-    public final static IRI p_requestMatchInd = IRI.create(s_p_requestMatchInd);
-    /**
-     * Indicate the secruty state of the shipment, screened or not
-     * 
-     */
-    public final static String s_p_shipmentSecurityStatus = "https://onerecord.iata.org/Booking#shipmentSecurityStatus";
-    public final static IRI p_shipmentSecurityStatus = IRI.create(s_p_shipmentSecurityStatus);
-    /**
-     * Time of availability of the shipment as per CargoIQ definition
-     * 
-     */
-    public final static String s_p_timeOfAvailability = "https://onerecord.iata.org/Booking#timeOfAvailability";
-    public final static IRI p_timeOfAvailability = IRI.create(s_p_timeOfAvailability);
-    /**
-     * Total transit time as per CargoIQ definition
-     * 
-     */
-    public final static String s_p_totalTransitTime = "https://onerecord.iata.org/Booking#totalTransitTime";
-    public final static IRI p_totalTransitTime = IRI.create(s_p_totalTransitTime);
-    /**
-     * Status of the Booking with regards to the step in the Quote and Book process: Quoted, Booked (to be confirmed)
-     * 
-     */
-    public final static String s_p_bookingStatus_A = "https://onerecord.iata.org/BookingOption#bookingStatus";
-    public final static IRI p_bookingStatus_A = IRI.create(s_p_bookingStatus_A);
     /**
      * Starting datetime of availability of the booking option
      * 
@@ -1766,14 +1760,14 @@ public class Vocabulary {
      * Indicates if the offer is a perfect match to the quote request (boolean)
      * 
      */
-    public final static String s_p_requestMatchInd_A = "https://onerecord.iata.org/BookingOption#requestMatchInd";
-    public final static IRI p_requestMatchInd_A = IRI.create(s_p_requestMatchInd_A);
+    public final static String s_p_requestMatchInd = "https://onerecord.iata.org/BookingOption#requestMatchInd";
+    public final static IRI p_requestMatchInd = IRI.create(s_p_requestMatchInd);
     /**
      * Indicate the secruty state of the shipment, screened or not
      * 
      */
-    public final static String s_p_shipmentSecurityStatus_A = "https://onerecord.iata.org/BookingOption#shipmentSecurityStatus";
-    public final static IRI p_shipmentSecurityStatus_A = IRI.create(s_p_shipmentSecurityStatus_A);
+    public final static String s_p_shipmentSecurityStatus = "https://onerecord.iata.org/BookingOption#shipmentSecurityStatus";
+    public final static IRI p_shipmentSecurityStatus = IRI.create(s_p_shipmentSecurityStatus);
     /**
      * Reference to the Allotment as per the contracts between forwarders and carriers
      * 
@@ -1802,8 +1796,8 @@ public class Vocabulary {
      * Indicate the security state of the shipment, screened or not
      * 
      */
-    public final static String s_p_shipmentSecurityStatus_A_A = "https://onerecord.iata.org/BookingOptionRequest#shipmentSecurityStatus";
-    public final static IRI p_shipmentSecurityStatus_A_A = IRI.create(s_p_shipmentSecurityStatus_A_A);
+    public final static String s_p_shipmentSecurityStatus_A = "https://onerecord.iata.org/BookingOptionRequest#shipmentSecurityStatus";
+    public final static IRI p_shipmentSecurityStatus_A = IRI.create(s_p_shipmentSecurityStatus_A);
     /**
      * When part of the Request it refers to the preferred Transport ID from the customer. When part of the BookingOption (offer or actual booking) it refers to the expected Transport ID or flight
      * 
@@ -1820,56 +1814,32 @@ public class Vocabulary {
      * Latest Acceptance time as per CargoIQ definition (requested, proposed or actual)
      * 
      */
-    public final static String s_p_latestAcceptanceTime_A = "https://onerecord.iata.org/BookingTimes#latestAcceptanceTime";
-    public final static IRI p_latestAcceptanceTime_A = IRI.create(s_p_latestAcceptanceTime_A);
+    public final static String s_p_latestAcceptanceTime = "https://onerecord.iata.org/BookingTimes#latestAcceptanceTime";
+    public final static IRI p_latestAcceptanceTime = IRI.create(s_p_latestAcceptanceTime);
     /**
      * Time of availability of the shipment as per CargoIQ definition
      * 
      */
-    public final static String s_p_timeOfAvailability_A = "https://onerecord.iata.org/BookingTimes#timeOfAvailability";
-    public final static IRI p_timeOfAvailability_A = IRI.create(s_p_timeOfAvailability_A);
+    public final static String s_p_timeOfAvailability = "https://onerecord.iata.org/BookingTimes#timeOfAvailability";
+    public final static IRI p_timeOfAvailability = IRI.create(s_p_timeOfAvailability);
     /**
      * Total transit time as per CargoIQ definition, expressed as a duration
      * 
      */
-    public final static String s_p_totalTransitTime_A = "https://onerecord.iata.org/BookingTimes#totalTransitTime";
-    public final static IRI p_totalTransitTime_A = IRI.create(s_p_totalTransitTime_A);
-    /**
-     * Company branch name
-     * 
-     */
-    public final static String s_p_branchName = "https://onerecord.iata.org/Branch#branchName";
-    public final static IRI p_branchName = IRI.create(s_p_branchName);
-    /**
-     * IATA CASS cargo agent 4 digit branch number / location identifier
-     * 
-     */
-    public final static String s_p_iataCargoAgentLocationIdentifier = "https://onerecord.iata.org/Branch#iataCargoAgentLocationIdentifier";
-    public final static IRI p_iataCargoAgentLocationIdentifier = IRI.create(s_p_iataCargoAgentLocationIdentifier);
+    public final static String s_p_totalTransitTime = "https://onerecord.iata.org/BookingTimes#totalTransitTime";
+    public final static IRI p_totalTransitTime = IRI.create(s_p_totalTransitTime);
     /**
      * Name of the CO2 calculation method
      * 
      */
-    public final static String s_p_methodName = "https://onerecord.iata.org/CO2CalcMethod#methodName";
+    public final static String s_p_methodName = "https://onerecord.iata.org/CO2Emissions#methodName";
     public final static IRI p_methodName = IRI.create(s_p_methodName);
-    /**
-     * Version of the CO2 calculation method
-     * 
-     */
-    public final static String s_p_methodVersion = "https://onerecord.iata.org/CO2CalcMethod#methodVersion";
-    public final static IRI p_methodVersion = IRI.create(s_p_methodVersion);
-    /**
-     * Name of the CO2 calculation method
-     * 
-     */
-    public final static String s_p_methodName_A = "https://onerecord.iata.org/CO2Emissions#methodName";
-    public final static IRI p_methodName_A = IRI.create(s_p_methodName_A);
     /**
      * Version used for the calculation
      * 
      */
-    public final static String s_p_methodVersion_A = "https://onerecord.iata.org/CO2Emissions#methodVersion";
-    public final static IRI p_methodVersion_A = IRI.create(s_p_methodVersion_A);
+    public final static String s_p_methodVersion = "https://onerecord.iata.org/CO2Emissions#methodVersion";
+    public final static IRI p_methodVersion = IRI.create(s_p_methodVersion);
     /**
      * IATA two-character airline code
      * 
@@ -1925,18 +1895,6 @@ public class Vocabulary {
     public final static String s_p_companyIdentifier = "https://onerecord.iata.org/CommonObjects#companyIdentifier";
     public final static IRI p_companyIdentifier = IRI.create(s_p_companyIdentifier);
     /**
-     * IATA two-character airline code 
-     * 
-     */
-    public final static String s_p_airlineCode_A = "https://onerecord.iata.org/Company#airlineCode";
-    public final static IRI p_airlineCode_A = IRI.create(s_p_airlineCode_A);
-    /**
-     * IATA three-numeric airline prefix number 
-     * 
-     */
-    public final static String s_p_airlinePrefix_A = "https://onerecord.iata.org/Company#airlinePrefix";
-    public final static IRI p_airlinePrefix_A = IRI.create(s_p_airlinePrefix_A);
-    /**
      * Name of company or organization
      * 
      */
@@ -1952,14 +1910,14 @@ public class Vocabulary {
      * Company branch name
      * 
      */
-    public final static String s_p_branchName_A = "https://onerecord.iata.org/CompanyBranch#branchName";
-    public final static IRI p_branchName_A = IRI.create(s_p_branchName_A);
+    public final static String s_p_branchName = "https://onerecord.iata.org/CompanyBranch#branchName";
+    public final static IRI p_branchName = IRI.create(s_p_branchName);
     /**
      * IATA CASS cargo agent 4 digit branch number / location identifier
      * 
      */
-    public final static String s_p_iataCargoAgentLocationIdentifier_A = "https://onerecord.iata.org/CompanyBranch#iataCargoAgentLocationIdentifier";
-    public final static IRI p_iataCargoAgentLocationIdentifier_A = IRI.create(s_p_iataCargoAgentLocationIdentifier_A);
+    public final static String s_p_iataCargoAgentLocationIdentifier = "https://onerecord.iata.org/CompanyBranch#iataCargoAgentLocationIdentifier";
+    public final static IRI p_iataCargoAgentLocationIdentifier = IRI.create(s_p_iataCargoAgentLocationIdentifier);
     /**
      * Type of the contact details, e.g. Phone number, Mail address
      * 
@@ -1973,30 +1931,6 @@ public class Vocabulary {
     public final static String s_p_contactValue = "https://onerecord.iata.org/Contact#contactValue";
     public final static IRI p_contactValue = IRI.create(s_p_contactValue);
     /**
-     * E-mail address
-     * 
-     */
-    public final static String s_p_emailAddress = "https://onerecord.iata.org/Contact#emailAddress";
-    public final static IRI p_emailAddress = IRI.create(s_p_emailAddress);
-    /**
-     * Phone number
-     * 
-     */
-    public final static String s_p_phoneNumber = "https://onerecord.iata.org/Contact#phoneNumber";
-    public final static IRI p_phoneNumber = IRI.create(s_p_phoneNumber);
-    /**
-     * Contact details e.g. Skype ID 
-     * 
-     */
-    public final static String s_p_detail = "https://onerecord.iata.org/ContactOther#detail";
-    public final static IRI p_detail = IRI.create(s_p_detail);
-    /**
-     * Contact type - e.g. Skype
-     * 
-     */
-    public final static String s_p_otherType = "https://onerecord.iata.org/ContactOther#otherType";
-    public final static IRI p_otherType = IRI.create(s_p_otherType);
-    /**
      * Country ISO code. Refer ISO 3166-2
      * 
      */
@@ -2009,31 +1943,35 @@ public class Vocabulary {
     public final static String s_p_countryName = "https://onerecord.iata.org/Country#countryName";
     public final static IRI p_countryName = IRI.create(s_p_countryName);
     /**
-     * Customs content code. Refer CXML Code List 1.100, e.g. IST - Security Textual StatementNumber, M - Movement Reference Number
+     * Customs, Security and Regulatory Control Information Identifier. Coded indicator qualifying Customs related information: Item Number "I", Exemption Legend "L", System Downtime Reference "S", Unique Consignment Reference Number "U", Movement Reference Number "M" .
+     * Refers to Code List 1.100
+     * Condition: At least one of the three elements (Country Code, Information Identifier or Customs, Security and Regulatory Control Information Identifier) must be completed
      * 
      */
     public final static String s_p_customsInfoContentCode = "https://onerecord.iata.org/CustomsInfo#customsInfoContentCode";
     public final static IRI p_customsInfoContentCode = IRI.create(s_p_customsInfoContentCode);
     /**
      * Customs country code. Refer ISO 3166-2
+     * Condition:  At least one of the three elements (Country Code, Information Identifier or Customs, Security and Regulatory Control Information Identifier) must be completed
      * 
      */
     public final static String s_p_customsInfoCountryCode = "https://onerecord.iata.org/CustomsInfo#customsInfoCountryCode";
     public final static IRI p_customsInfoCountryCode = IRI.create(s_p_customsInfoCountryCode);
     /**
-     * Free text for customs remarks
+     * Free text for customs remarks, not used in OCI Composition Rules Table
      * 
      */
     public final static String s_p_customsInfoNote = "https://onerecord.iata.org/CustomsInfo#customsInfoNote";
     public final static IRI p_customsInfoNote = IRI.create(s_p_customsInfoNote);
     /**
-     * Customs subject code. Refer CXML Code List 1.19, e.g. IMP for import, EXP for export, AGT for Agent, ISS for The Regulated Agent Issuing the Security Status for rdf:type Consignment etc.   At least one of the three elements (Country Code, Information Identifier or Customs, Security and Regulatory Control Information Identifier) must be completed
+     * Information Identifier. Code identifying a piece of information/entity e.g. "IMP" for import, "EXP" for export, "AGT" for Agent, "ISS" for The Regulated Agent Issuing the Security Status for a Consignment etc. 
+     * Condition: At least one of the three elements (Country Code, Information Identifier or Customs, Security and Regulatory Control Information Identifier) must be completed
      * 
      */
     public final static String s_p_customsInfoSubjectCode = "https://onerecord.iata.org/CustomsInfo#customsInfoSubjectCode";
     public final static IRI p_customsInfoSubjectCode = IRI.create(s_p_customsInfoSubjectCode);
     /**
-     * Information for customs submission
+     * Supplementary Customs, Security and Regulatory Control Information
      * 
      */
     public final static String s_p_customsInformation = "https://onerecord.iata.org/CustomsInfo#customsInformation";
@@ -2273,6 +2211,25 @@ public class Vocabulary {
     public final static String s_p_longitude = "https://onerecord.iata.org/Geolocation#longitude";
     public final static IRI p_longitude = IRI.create(s_p_longitude);
     /**
+     * Free text description of the handling instructions
+     * 
+     */
+    public final static String s_p_serviceDescription = "https://onerecord.iata.org/HandlingInstructions#serviceDescription";
+    public final static IRI p_serviceDescription = IRI.create(s_p_serviceDescription);
+    /**
+     * Refers to the type of handling information provided: Special Service Request (SSR), Special Handling Codes (SPH) or Other Service Information (OSI)
+     * 
+     */
+    public final static String s_p_serviceType = "https://onerecord.iata.org/HandlingInstructions#serviceType";
+    public final static IRI p_serviceType = IRI.create(s_p_serviceType);
+    /**
+     * Service Type code linked top the Service Type.
+     * Refers to Code List 1.14 or 1.16 if service type is Special Handling.
+     * 
+     */
+    public final static String s_p_serviceTypeCode = "https://onerecord.iata.org/HandlingInstructions#serviceTypeCode";
+    public final static IRI p_serviceTypeCode = IRI.create(s_p_serviceTypeCode);
+    /**
      * When no value is declared for Insurance this field should be completed with the value TRUE otherwise FALSE
      * 
      */
@@ -2488,18 +2445,6 @@ public class Vocabulary {
      */
     public final static String s_p_otherIdentifierType = "https://onerecord.iata.org/OtherIdentifier#otherIdentifierType";
     public final static IRI p_otherIdentifierType = IRI.create(s_p_otherIdentifierType);
-    /**
-     * Specifies the code of an additional party if required. Standard codes from UN/EDIFACT 3035 Party function code qualifier can be used.
-     * 
-     */
-    public final static String s_p_partyTypeCode = "https://onerecord.iata.org/OtherParty#partyTypeCode";
-    public final static IRI p_partyTypeCode = IRI.create(s_p_partyTypeCode);
-    /**
-     * Role of other party - e.g. Notify party, Nominated agent, Customs broker, Manufacturer, Importer, Payer, Payee, ShipTo, ShipFrom, BillTo, BillFrom, RemitTo, RemitFrom 
-     * 
-     */
-    public final static String s_p_roleName = "https://onerecord.iata.org/OtherParty#roleName";
-    public final static IRI p_roleName = IRI.create(s_p_roleName);
     /**
      * Free Text. Describes the package type.
      * 
@@ -2927,7 +2872,7 @@ public class Vocabulary {
     public final static String s_p_unitBasis = "https://onerecord.iata.org/Ranges#unitBasis";
     public final static IRI p_unitBasis = IRI.create(s_p_unitBasis);
     /**
-     * Billig charge identifiers to be used for CASS. Refer to CargoXML Code List 1.33
+     * Billing charge identifiers to be used for CASS. Refer to CargoXML Code List 1.33
      * 
      */
     public final static String s_p_billingChargeIdentifier = "https://onerecord.iata.org/Ratings#billingChargeIdentifier";
@@ -2951,11 +2896,17 @@ public class Vocabulary {
     public final static String s_p_chargePaymentType = "https://onerecord.iata.org/Ratings#chargePaymentType";
     public final static IRI p_chargePaymentType = IRI.create(s_p_chargePaymentType);
     /**
-     * Type of charge e.g. Freight, Surcharges, etc.
+     * Type of charge that should match the code expressed in either chargeCode, otherChargeCode or billingChargeIndentifier data properties.
      * 
      */
     public final static String s_p_chargeType = "https://onerecord.iata.org/Ratings#chargeType";
     public final static IRI p_chargeType = IRI.create(s_p_chargeType);
+    /**
+     * Entitlement code to define if charges are Due carrier (C) or Due agent (A). Refer to CXML Code List 1.3
+     * 
+     */
+    public final static String s_p_entitlement = "https://onerecord.iata.org/Ratings#entitlement";
+    public final static IRI p_entitlement = IRI.create(s_p_entitlement);
     /**
      * Refer to CargoXML Code List 1.2 for Other Charges
      * 
@@ -2974,6 +2925,18 @@ public class Vocabulary {
      */
     public final static String s_p_priceSpecificationRef = "https://onerecord.iata.org/Ratings#priceSpecificationRef";
     public final static IRI p_priceSpecificationRef = IRI.create(s_p_priceSpecificationRef);
+    /**
+     * Used if there is an applicable quantity to the rate (Usually a Time or a Number)
+     * 
+     */
+    public final static String s_p_quantity_A = "https://onerecord.iata.org/Ratings#quantity";
+    public final static IRI p_quantity_A = IRI.create(s_p_quantity_A);
+    /**
+     * Used to identify if the Ratings are Face, Published or Actual ratings. Expected values are F, A, C.
+     * 
+     */
+    public final static String s_p_ratingsType = "https://onerecord.iata.org/Ratings#ratingsType";
+    public final static IRI p_ratingsType = IRI.create(s_p_ratingsType);
     /**
      * IATA 3-letter code of the rate combination point
      * 
@@ -2998,24 +2961,6 @@ public class Vocabulary {
      */
     public final static String s_p_regulatedEntityCategory = "https://onerecord.iata.org/RegulatedEntity#regulatedEntityCategory";
     public final static IRI p_regulatedEntityCategory = IRI.create(s_p_regulatedEntityCategory);
-    /**
-     * Reference to the Allotment as per the contracts between forwarders and carriers
-     * 
-     */
-    public final static String s_p_allotment_A = "https://onerecord.iata.org/Request#allotment";
-    public final static IRI p_allotment_A = IRI.create(s_p_allotment_A);
-    /**
-     * Identification of the request type: Quote or Booking
-     * 
-     */
-    public final static String s_p_requestType_A = "https://onerecord.iata.org/Request#requestType";
-    public final static IRI p_requestType_A = IRI.create(s_p_requestType_A);
-    /**
-     * Indicate the security state of the shipment, screened or not
-     * 
-     */
-    public final static String s_p_shipmentSecurityStatus_A_A_A = "https://onerecord.iata.org/Request#shipmentSecurityStatus";
-    public final static IRI p_shipmentSecurityStatus_A_A_A = IRI.create(s_p_shipmentSecurityStatus_A_A_A);
     /**
      * Aircraft possibility code
      * 
@@ -3056,20 +3001,20 @@ public class Vocabulary {
      * Latest Acceptance time as per CargoIQ definition (requested, proposed or actual)
      * 
      */
-    public final static String s_p_latestAcceptanceTime_A_A = "https://onerecord.iata.org/Schedule#latestAcceptanceTime";
-    public final static IRI p_latestAcceptanceTime_A_A = IRI.create(s_p_latestAcceptanceTime_A_A);
+    public final static String s_p_latestAcceptanceTime_A = "https://onerecord.iata.org/Schedule#latestAcceptanceTime";
+    public final static IRI p_latestAcceptanceTime_A = IRI.create(s_p_latestAcceptanceTime_A);
     /**
      * Time of availability of the shipment as per CargoIQ definition
      * 
      */
-    public final static String s_p_timeOfAvailability_A_A = "https://onerecord.iata.org/Schedule#timeOfAvailability";
-    public final static IRI p_timeOfAvailability_A_A = IRI.create(s_p_timeOfAvailability_A_A);
+    public final static String s_p_timeOfAvailability_A = "https://onerecord.iata.org/Schedule#timeOfAvailability";
+    public final static IRI p_timeOfAvailability_A = IRI.create(s_p_timeOfAvailability_A);
     /**
      * Total transit time as per CargoIQ definition
      * 
      */
-    public final static String s_p_totalTransitTime_A_A = "https://onerecord.iata.org/Schedule#totalTransitTime";
-    public final static IRI p_totalTransitTime_A_A = IRI.create(s_p_totalTransitTime_A_A);
+    public final static String s_p_totalTransitTime_A = "https://onerecord.iata.org/Schedule#totalTransitTime";
+    public final static IRI p_totalTransitTime_A = IRI.create(s_p_totalTransitTime_A);
     /**
      * Arrival date and time of the leg
      * 
@@ -3270,22 +3215,6 @@ public class Vocabulary {
     public final static String s_p_vehicleType = "https://onerecord.iata.org/TransportMeans#vehicleType";
     public final static IRI p_vehicleType = IRI.create(s_p_vehicleType);
     /**
-     * Arrival date and time. Actual or planned depends on the movementType property
-     * 
-     * Included in MovementTimes in v1.1
-     * 
-     */
-    public final static String s_p_arrivalDate_A = "https://onerecord.iata.org/TransportMovement#arrivalDate";
-    public final static IRI p_arrivalDate_A = IRI.create(s_p_arrivalDate_A);
-    /**
-     * Departure date and time. Actual or planned depends on the movementType property
-     * 
-     * Included in MovementTimes in v1.1
-     * 
-     */
-    public final static String s_p_departureDate_A = "https://onerecord.iata.org/TransportMovement#departureDate";
-    public final static IRI p_departureDate_A = IRI.create(s_p_departureDate_A);
-    /**
      * e.g. Kerosene, Diesel, SAF, Electricity [renewable], Electricity [non-renewable]
      * 
      */
@@ -3305,23 +3234,11 @@ public class Vocabulary {
     public final static String s_p_modeQualifier = "https://onerecord.iata.org/TransportMovement#modeQualifier";
     public final static IRI p_modeQualifier = IRI.create(s_p_modeQualifier);
     /**
-     * Refers to the type of movement: Actual or planned
-     * 
-     */
-    public final static String s_p_movementType = "https://onerecord.iata.org/TransportMovement#movementType";
-    public final static IRI p_movementType = IRI.create(s_p_movementType);
-    /**
      * Seal identifier
      * 
      */
     public final static String s_p_seal = "https://onerecord.iata.org/TransportMovement#seal";
     public final static IRI p_seal = IRI.create(s_p_seal);
-    /**
-     * Identification of the segment level in the movement of the pieces: contractual, flight leg, truck movement, etc.
-     * 
-     */
-    public final static String s_p_segmentLevel = "https://onerecord.iata.org/TransportMovement#segmentLevel";
-    public final static IRI p_segmentLevel = IRI.create(s_p_segmentLevel);
     /**
      * Airline flight number, or rail /  truck / maritime line id
      * 
@@ -3461,6 +3378,13 @@ public class Vocabulary {
     public final static String s_p_consignorDeclarationSignature = "https://onerecord.iata.org/Waybill#consignorDeclarationSignature";
     public final static IRI p_consignorDeclarationSignature = IRI.create(s_p_consignorDeclarationSignature);
     /**
+     * Code indicating the origin of goods for Customs purposes (e.g. For goods in free circulation in the EU) 
+     * List to be provided by local authorities
+     * 
+     */
+    public final static String s_p_customsOriginCode = "https://onerecord.iata.org/Waybill#customsOriginCode";
+    public final static IRI p_customsOriginCode = IRI.create(s_p_customsOriginCode);
+    /**
      * Charges levied at destination accruing to the last carrier, in destination currency
      * 
      */
@@ -3485,7 +3409,7 @@ public class Vocabulary {
     public final static String s_p_optionalShippingInfo = "https://onerecord.iata.org/Waybill#optionalShippingInfo";
     public final static IRI p_optionalShippingInfo = IRI.create(s_p_optionalShippingInfo);
     /**
-     * Optional shipping reference number if any
+     * waybill:optionalShippingRefNo
      * 
      */
     public final static String s_p_optionalShippingRefNo = "https://onerecord.iata.org/Waybill#optionalShippingRefNo";

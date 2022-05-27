@@ -150,7 +150,7 @@
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
         <cz.cvut.kbss.jopa.version>0.17.2</cz.cvut.kbss.jopa.version>
-        <cz.cvut.kbss.jb4jsonld.version>0.8.4</cz.cvut.kbss.jb4jsonld.version>
+        <cz.cvut.kbss.jb4jsonld.version>0.8.9</cz.cvut.kbss.jb4jsonld.version>
     </properties>
 
     <profiles>

@@ -4,7 +4,7 @@ This repository contains the code and instructions that will help you deploy you
 # Configuration 
 Before deploying the server, you will need to update the `application.properties` file with:
 1. the credentials for accessing your MongoDB database. You can find the instructions on how to setup a MongoDB database below.  
-`    spring.data.mongodb.uri:mongodb+srv://<username>:<password>@<databaseURI>/<databaseName>?retryWrites=true&w=majority
+`    spring.data.mongodb.uri=mongodb://<username>:<password>@<databaseURI>/<databaseName>?retryWrites=true&w=majority
 `  
 
 There are two `application.properties` files to edit:
@@ -17,15 +17,36 @@ There are two `application.properties` files to edit:
 For testing the application locally, follow the next steps:
 1. Install `Java = 8` and `Maven`. 
 2. Install the Maven dependencies by running `mvn -Djdk.tls.client.protocols=TLSv1.2 clean install`. 
-3. (Optional) Download the latest ONE Record Turtle ontologies from Github + the latest Web Access Control from W3C by running `mvn -Djdk.tls.client.protocols=TLSv1.2 exec:java`.
+3. (Optional) If the error below occurs ([Stackoverflow explanation](https://stackoverflow.com/questions/67833372/getting-blocked-mirror-for-repositories-maven-error-even-after-adding-mirrors)) it is because Maven recently only allows to get dependencies via `https`.
+```
+[ERROR] Failed to execute goal on project one-record-server-java: 
+Could not resolve dependencies for project org.iata:one-record-server-java:jar:1.0-SNAPSHOT: 
+Failed to collect dependencies at cz.cvut.kbss.jopa:ontodriver-owlapi:jar:0.15.0 -> cz.cvut.kbss:owl2query-engine:jar:0.6.0: 
+Failed to read artifact descriptor for cz.cvut.kbss:owl2query-engine:jar:0.6.0: 
+Could not transfer artifact cz.cvut.kbss:owl2query-engine:pom:0.6.0 from/to maven-default-http-blocker (http://0.0.0.0/): transfer failed for http://0.0.0.0/cz/cvut/kbss/owl2query-engine/0.6.0/owl2query-engine-0.6.0.pom: 
+Connect to 0.0.0.0:80 [/0.0.0.0] failed: Connection refused -> [Help 1]
+```
+To solve the error just comment out the lines below in `[MAVEN_DIR]/conf/settings.xml`
+```
+<!--
+<mirror>
+  <id>maven-default-http-blocker</id>
+  <mirrorOf>external:http:*</mirrorOf>
+  <name>Pseudo repository to mirror external repositories initially using HTTP.</name>
+  <url>http://0.0.0.0/</url>
+  <blocked>false</blocked>
+</mirror>
+-->
+```
+4. (Optional) Download the latest ONE Record Turtle ontologies from Github + the latest Web Access Control from W3C by running `mvn -Djdk.tls.client.protocols=TLSv1.2 exec:java`.
 As the latest models are already generated and committed in this repository according to the latest ontologies, kindly skip steps 4, 5 and 6.
-4. (SKIP) Generate ONE Record API related models by running `mvn package -Dbuild=api`
-5. (SKIP) Generate ONE Record cargo related data model by running `mvn package -Dbuild=cargo`. Optionally remove directory `src/main/generated-sources/org/iata/cargo` prior generating.
-6. (SKIP) Generate W3C Web Access Control ACL (Access Control List) related models by running `mvn package -Dbuild=acl`
-7. MongoDB has updated their server, so in order to have it work properly, one needs to add an extra VM argument. The solution is actually change the TLS Version to 1.2 in JVM params.
+5. (SKIP) Generate ONE Record API related models by running `mvn package -Dbuild=api`
+6. (SKIP) Generate ONE Record cargo related data model by running `mvn package -Dbuild=cargo`. Optionally remove directory `src/main/generated-sources/org/iata/cargo` prior generating.
+7. (SKIP) Generate W3C Web Access Control ACL (Access Control List) related models by running `mvn package -Dbuild=acl`
+8. MongoDB has updated their server, so in order to have it work properly, one needs to add an extra VM argument. The solution is actually change the TLS Version to 1.2 in JVM params.
 `-Djdk.tls.client.protocols=TLSv1.2`
-8. Run the server from OneRecordApplication or from the command line via `mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Djdk.tls.client.protocols=TLSv1.2"`. Your application should be available at [http://localhost:8080](http://localhost:8080).
-9. The server can also be started by running the executable jar created in the `/target` folder after the `mvn clean install` command, via:
+9. Run the server from OneRecordApplication or from the command line via `mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Djdk.tls.client.protocols=TLSv1.2"`. Your application should be available at [http://localhost:8080](http://localhost:8080).
+10. The server can also be started by running the executable jar created in the `/target` folder after the `mvn clean install` command, via:
 `   java -jar -Djdk.tls.client.protocols=TLSv1.2 one-record-server-java-1.0-SNAPSHOT.jar`
    
 ## Swagger API Documentation

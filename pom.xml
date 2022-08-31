@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.9.RELEASE</version>
+        <version>${spring-boot.version}</version>
     </parent>
 
     <organization>
@@ -141,12 +141,12 @@
     </dependencies>
 
     <properties>
-        <spring-boot.version>2.3.9.RELEASE</spring-boot.version>
+        <spring-boot.version>[2.5.12,)</spring-boot.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <auto-value.version>1.7.4</auto-value.version>
-        <jackson.version>2.11.2</jackson.version>
+        <jackson.version>[2.12.6.1,)</jackson.version>
         <junit.version>4.13.2</junit.version>
-        <mongodb.version>3.12.7</mongodb.version>
+        <mongodb.version>[3.12.8,)</mongodb.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
         <cz.cvut.kbss.jopa.version>0.17.2</cz.cvut.kbss.jopa.version>
@@ -187,7 +187,7 @@
                             <package>org.iata.cargo</package>
                             <output-directory>${project.basedir}/src/main/generated-sources</output-directory>
                             <ontology-iri>https://onerecord.iata.org/cargo</ontology-iri>
-                            <mapping-file>${project.basedir}/mapping</mapping-file>
+                            <mapping-file>${project.basedir}/src/main/resources/ontologies/mapping</mapping-file>
                             <!--                    <whole-ontology-as-ics>true</whole-ontology-as-ics>-->
                             <!--                    <vocabulary-only>false</vocabulary-only>-->
                             <with-owlapi>true</with-owlapi>
@@ -274,7 +274,7 @@
                             <package>org.iata.api</package>
                             <output-directory>${project.basedir}/src/main/generated-sources</output-directory>
                             <ontology-iri>https://onerecord.iata.org/api</ontology-iri>
-                            <mapping-file>${project.basedir}/mapping_api</mapping-file>
+                            <mapping-file>${project.basedir}/src/main/resources/ontologies/mapping_api</mapping-file>
                             <!--                    <whole-ontology-as-ics>true</whole-ontology-as-ics>-->
                             <!--                    <vocabulary-only>false</vocabulary-only>-->
                             <with-owlapi>true</with-owlapi>
@@ -362,7 +362,7 @@
                             <package>org.wc.acl</package>
                             <output-directory>${project.basedir}/src/main/generated-sources</output-directory>
                             <ontology-iri>http://www.w3.org/ns/auth/acl#</ontology-iri>
-                            <mapping-file>${project.basedir}/mapping_acl</mapping-file>
+                            <mapping-file>${project.basedir}/src/main/resources/ontologies/mapping_acl</mapping-file>
                             <!--                    <whole-ontology-as-ics>true</whole-ontology-as-ics>-->
                             <!--                    <vocabulary-only>false</vocabulary-only>-->
                             <with-owlapi>true</with-owlapi>

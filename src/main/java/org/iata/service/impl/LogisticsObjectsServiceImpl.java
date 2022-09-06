@@ -8,6 +8,7 @@ import org.iata.api.model.PatchRequest;
 import org.iata.cargo.model.Event;
 import org.iata.cargo.model.LogisticsObject;
 import org.iata.exception.PatchRequestOperationPathNotFoundException;
+import org.iata.exception.UnprocessablePatchRequestException;
 import org.iata.exception.UnsupportedPatchRequestOperationException;
 import org.iata.exception.UnsupportedPatchRequestOperationObjectException;
 import org.iata.repository.LogisticsObjectsRepository;
@@ -69,6 +70,9 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
     public void updateLogisticsObject(PatchRequest patchRequest) {
         LogisticsObject logisticsObject = logisticsObjectsRepository.findById(patchRequest.getLogisticsObjectRef().getLogisticsObjectId()).orElse(null);
         if (logisticsObject != null) {
+            if (logisticsObject.getRevision() != Integer.parseInt(patchRequest.getRevision())) {
+                throw new UnprocessablePatchRequestException();
+            }
             applyOperationsToLogisticsObject(patchRequest.getOperations(), logisticsObject);
             logisticsObjectsRepository.save(logisticsObject);
         }

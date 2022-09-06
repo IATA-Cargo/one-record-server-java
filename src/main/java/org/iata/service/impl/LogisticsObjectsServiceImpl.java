@@ -21,7 +21,13 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.lang.reflect.Field;
 import java.time.Instant;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Service
@@ -51,18 +57,16 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
 
 
     public Field getClassFieldByOWLObjectProperty(Class<?> cls, String iri) {
-        AtomicReference<Field> field = new AtomicReference<Field>();
-        Arrays.stream(cls.getDeclaredFields()).forEach(df -> {
-            Arrays.stream(df.getDeclaredAnnotations()).forEach(da -> {
-                if (
-                        (da.annotationType() == OWLObjectProperty.class && ((OWLObjectProperty) da).iri().equals(iri)) ||
-                                (da.annotationType() == OWLDataProperty.class && ((OWLDataProperty) da).iri().equals(iri))
+        AtomicReference<Field> field = new AtomicReference<>();
+        Arrays.stream(cls.getDeclaredFields()).forEach(df -> Arrays.stream(df.getDeclaredAnnotations()).forEach(da -> {
+            if (
+                    (da.annotationType() == OWLObjectProperty.class && ((OWLObjectProperty) da).iri().equals(iri)) ||
+                            (da.annotationType() == OWLDataProperty.class && ((OWLDataProperty) da).iri().equals(iri))
 
-                ) {
-                    field.set(df);
-                }
-            });
-        });
+            ) {
+                field.set(df);
+            }
+        }));
         return field.get();
     }
 
@@ -87,7 +91,7 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
                 switch (operation.getOp()) {
                     case "del":
                         if (logisticsObjectPropertyAccessor.getPropertyValue(affectedField.getName()) == null || (affectedField.getType() == Set.class &&
-                                ((Set) logisticsObjectPropertyAccessor.getPropertyValue(affectedField.getName())).isEmpty())) {
+                                ((Set<?>) Objects.requireNonNull(logisticsObjectPropertyAccessor.getPropertyValue(affectedField.getName()))).isEmpty())) {
                             // You cannot delete something that does not exist
                             throw new PatchRequestOperationPathNotFoundException();
                         }
@@ -96,13 +100,14 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
                     case "add":
                         Object newValue = operation.getO().getObject();
                         if (affectedField.getType() == Set.class && newValue != null) {
-                            HashSet fieldValues = (HashSet) logisticsObjectPropertyAccessor.getPropertyValue(affectedField.getName());
+                            @SuppressWarnings(value = "unchecked")
+                            HashSet<Object> fieldValues = (HashSet<Object>) logisticsObjectPropertyAccessor.getPropertyValue(affectedField.getName());
                             if (fieldValues == null) {
                                 fieldValues = new HashSet<>();
                             }
                             fieldValues.add(newValue);
                             logisticsObjectPropertyAccessor.setPropertyValue(affectedField.getName(), fieldValues);
-                        } else if (affectedField.getType() != null && newValue.getClass() == String.class) {
+                        } else if (newValue != null && newValue.getClass() == String.class) {
                             //check if value is null, because this is not an implementation of the replace operation
                             if (logisticsObjectPropertyAccessor.getPropertyValue(affectedField.getName()) != null) {
                                 throw new PatchRequestOperationPathNotFoundException();

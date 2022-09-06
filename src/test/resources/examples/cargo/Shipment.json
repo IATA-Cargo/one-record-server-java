@@ -3,10 +3,14 @@
       "iata": "https://onerecord.iata.org/"
    },
    "@type": "iata:Shipment",
-   "iata:shipment:containedPieces" : {
+   "iata:shipment:containedPieces" : [{
       "@id": "iata:Piece/thisObjectId",
       "@type": "iata:Piece"
-   },
+   },{
+      "@id": "iata:Piece/thisObjectId2",
+      "@type": "iata:Piece"
+   }
+   ],
    "iata:shipment:deliveryLocation" : {
       "@id": "iata:Location/thisObjectId",
       "@type": "iata:Location"

@@ -1,8 +1,9 @@
 package org.iata.resource;
 
 import cz.cvut.kbss.jsonld.JsonLd;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.iata.api.model.CompanyInformation;
 import org.iata.api.model.Subscription;
 import org.iata.model.enums.TopicEnum;
@@ -15,21 +16,17 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
 import javax.inject.Inject;
-import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
 import java.util.Locale;
 
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/", produces = JsonLd.MEDIA_TYPE)
-@Api(value = "Companies Resource REST Endpoint")
+@Tag(name = "Companies Resource REST Endpoint")
 public class CompaniesResource {
 
   private static final Logger LOG = LoggerFactory.getLogger(CompaniesResource.class);
@@ -44,7 +41,7 @@ public class CompaniesResource {
   }
   @RequestMapping(method = POST, value = "/companies", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.CREATED)
-  @ApiOperation(value = "INTERNAL Creates a company")
+  @Operation(summary = "INTERNAL Creates a company")
   public ResponseEntity<Void> addCompany(@RequestBody CompanyInformation companyInformation) {
     final String companyId = companyInformation.getCompanyId();
     final String companyIdentifierForIoL = RestUtils.createCompanyIdentifierFromCurrentUri("/{companyId}", companyId);
@@ -54,14 +51,14 @@ public class CompaniesResource {
   }
 
   @RequestMapping(method = GET, value = "/companies", produces = JsonLd.MEDIA_TYPE)
-  @ApiOperation(value = "Retrieves all the companies")
-  @ApiIgnore
+  @Operation(summary = "Retrieves all the companies")
+
   public ResponseEntity<List<CompanyInformation>> getCompanies(@RequestParam(value = "locale", required = false) Locale locale) {
     return new ResponseEntity<>(companiesService.getCompanies(), HttpStatus.OK);
   }
 
   @RequestMapping(method = GET, value = "/companies/{companyId}", produces = JsonLd.MEDIA_TYPE)
-  @ApiOperation(value = "Retrieves a company for a given companyId. If topic is sent, the endpoint returns the subscription information for that topic, information" +
+  @Operation(summary = "Retrieves a company for a given companyId. If topic is sent, the endpoint returns the subscription information for that topic, information" +
       "that is usually sent back to publishers.")
   public ResponseEntity<Object> getCompany(@PathVariable("companyId") String companyId,
                                            @RequestParam(value = "topic", required = false) TopicEnum topic,
@@ -76,8 +73,8 @@ public class CompaniesResource {
 
   @RequestMapping(method = DELETE, value = "/companies/{companyId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  @ApiOperation(value = "INTERNAL Deletes a company for a given companyId")
-  @ApiIgnore
+  @Operation(summary = "INTERNAL Deletes a company for a given companyId")
+  @Hidden
   public ResponseEntity<Void> deleteCompany(@PathVariable("companyId") String companyId) {
     final String id = RestUtils.getCurrentUri();
     companiesService.deleteById(id);
@@ -85,7 +82,7 @@ public class CompaniesResource {
   }
 
   @RequestMapping(method = POST, value = "/companies/{companyId}/subscribers", consumes = JsonLd.MEDIA_TYPE)
-  @ApiOperation(value = "INTERNAL In a pub/sub scenario, when the current server is the publisher, it creates subscription information for a company.")
+  @Operation(summary = "INTERNAL In a pub/sub scenario, when the current server is the publisher, it creates subscription information for a company.")
   public ResponseEntity<Subscription> addSubscriptionInformation(@PathVariable("companyId") String companyId, @RequestBody Subscription subscription) {
     if (subscription.getTopic() == null) {
       subscription.setId(subscription.getMyCompanyIdentifier());
@@ -98,7 +95,7 @@ public class CompaniesResource {
   }
 
   @RequestMapping(method = GET, value = "/companies/{companyId}/subscribers", produces = JsonLd.MEDIA_TYPE)
-  @ApiOperation(value = "INTERNAL Get all the subscribers that are subscriber to this company.")
+  @Operation(summary = "INTERNAL Get all the subscribers that are subscriber to this company.")
   public ResponseEntity<List<Subscription>> getAllSubscribers(@PathVariable("companyId") String companyId, @RequestParam(value = "locale", required = false) Locale locale) {
     final String id = RestUtils.getCurrentUri().replace("/subscribers", "");
     return new ResponseEntity<>(subscriptionsService.getSubscribers(id), HttpStatus.OK);

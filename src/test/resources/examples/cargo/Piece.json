@@ -108,23 +108,5 @@
    "iata:piece:slac" : "integer",
    "iata:piece:stackable" : "boolean",
    "iata:piece:turnable" : "boolean",
-   "iata:piece:upid" : "string"{
-      "@id": "iata:Company/thisObjectId",
-      "@type": "iata:Company"
-   }{
-      "@id": "iata:SecurityDeclaration/thisObjectId",
-      "@type": "iata:SecurityDeclaration"
-   }{
-      "@id": "iata:ServiceRequest/thisObjectId",
-      "@type": "iata:ServiceRequest"
-   }{
-      "@id": "iata:Company/thisObjectId",
-      "@type": "iata:Company"
-   }{
-      "@id": "iata:SpecialHandling/thisObjectId",
-      "@type": "iata:SpecialHandling"
-   }{
-      "@id": "iata:TransportSegment/thisObjectId",
-      "@type": "iata:TransportSegment"
-   }
+   "iata:piece:upid" : "string"
 }

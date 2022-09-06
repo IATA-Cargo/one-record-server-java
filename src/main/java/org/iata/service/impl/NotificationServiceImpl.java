@@ -1,5 +1,6 @@
 package org.iata.service.impl;
 
+import cz.cvut.kbss.jsonld.JsonLd;
 import org.iata.api.model.Notification;
 import org.iata.repository.NotificationsRepository;
 import org.iata.service.NotificationService;
@@ -44,7 +45,7 @@ public class NotificationServiceImpl implements NotificationService {
       url = new URL(notification.getLogisticsObject().getId());
       connection = (HttpURLConnection) url.openConnection();
       connection.setRequestMethod("GET");
-      connection.setRequestProperty("Content-Type", "application/ld+json");
+      connection.setRequestProperty("Content-Type", JsonLd.MEDIA_TYPE);
       connection.setUseCaches(true);
 
       // Get Response

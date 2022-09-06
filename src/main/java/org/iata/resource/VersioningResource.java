@@ -1,8 +1,8 @@
 package org.iata.resource;
 
 import cz.cvut.kbss.jsonld.JsonLd;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.iata.api.model.Memento;
 import org.iata.api.model.Timemap;
 import org.iata.service.VersioningService;
@@ -29,7 +29,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RequestMapping(value = "/companies", produces = JsonLd.MEDIA_TYPE)
 @Validated
-@Api(value = "ONE Record Server")
+@Tag(name = "Versioning Resource REST Endpoint")
 public class VersioningResource {
 
   private static final Logger LOG = LoggerFactory.getLogger(VersioningResource.class);
@@ -43,7 +43,7 @@ public class VersioningResource {
 
   @RequestMapping(method = POST, value = "/{companyId}/los/{loId}/mementos", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.CREATED)
-  @ApiOperation(value = "INTERNAL Creates a snapshot (memento) of the data")
+  @Operation(summary = "INTERNAL Creates a snapshot (memento) of the data")
   public ResponseEntity<Void> addMemento(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @RequestBody Memento memento) {
     final String loUri = getCurrentUri().replace("/mementos", "");
     final String mementoId = versioningService.addMemento(getCurrentUri(), loUri, memento);
@@ -53,7 +53,7 @@ public class VersioningResource {
   }
 
   @RequestMapping(method = GET, value = "/{companyId}/los/{loId}/mementos/{mementoId}", produces = JsonLd.MEDIA_TYPE)
-  @ApiOperation(value = "Retrieves a memento for a given mementoId")
+  @Operation(summary = "Retrieves a memento for a given mementoId")
   public ResponseEntity<Memento> getMemento(@PathVariable("companyId") String companyId,
                                             @PathVariable("loId") String loId,
                                             @PathVariable("mementoId") String mementoId,
@@ -62,7 +62,7 @@ public class VersioningResource {
   }
 
   @RequestMapping(method = GET, value = "/{companyId}/los/{loId}/timemap", produces = JsonLd.MEDIA_TYPE)
-  @ApiOperation(value = "Retrieves the TimeMap of a given logistics object")
+  @Operation(summary = "Retrieves the TimeMap of a given logistics object")
   public ResponseEntity<Timemap> getTimemap(@PathVariable("companyId") String companyId,
                                             @PathVariable("loId") String loId,
                                             @RequestParam(value = "locale", required = false) Locale locale) {
@@ -70,7 +70,7 @@ public class VersioningResource {
   }
 
   @RequestMapping(method = GET, value = "/{companyId}/los/{loId}/timegate", produces = JsonLd.MEDIA_TYPE)
-  @ApiOperation(value = "Retrieves the memento for a logistics object closest to a given date time")
+  @Operation(summary = "Retrieves the memento for a logistics object closest to a given date time")
   public ResponseEntity<Void> getTimegate(@PathVariable("companyId") String companyId,
                                           @PathVariable("loId") String loId,
                                           @RequestHeader("Accept-Datetime") String dateTime,

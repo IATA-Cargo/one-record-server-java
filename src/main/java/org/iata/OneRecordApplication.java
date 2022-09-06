@@ -24,7 +24,7 @@ import java.util.logging.LogManager;
 })
 public class OneRecordApplication extends SpringBootServletInitializer {
 
-  private static final Logger LOG = LoggerFactory.getLogger(OneRecordApplication.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(OneRecordApplication.class);
 
   public static void main(String[] args) {
     LogManager.getLogManager().reset();
@@ -52,7 +52,7 @@ public class OneRecordApplication extends SpringBootServletInitializer {
 
       restTemplate.setRequestFactory(requestFactory);
     } catch (Exception exception) {
-      LOG.error("Exception occurred while creating restTemplate " + exception);
+      LOGGER.error("Exception occurred while creating restTemplate " + exception);
       exception.printStackTrace();
     }
 

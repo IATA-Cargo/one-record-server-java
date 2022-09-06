@@ -1,6 +1,6 @@
 package org.iata.resource;
 
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
@@ -37,7 +37,7 @@ public class OneRecordClientResource {
   }
 
   @RequestMapping(value = "/server-data", method = RequestMethod.GET)
-  @ApiOperation(value = "Retrieves data from another ONE Record Server")
+  @Operation(summary = "Retrieves data from another ONE Record Server")
   public String getServerData() {
     LOG.info("Got inside server-data method");
     try {

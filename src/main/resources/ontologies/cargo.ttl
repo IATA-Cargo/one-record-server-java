@@ -1,0 +1,496 @@
+@prefix : <https://onerecord.iata.org/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix uld: <https://onerecord.iata.org/ULD#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix item: <https://onerecord.iata.org/Item#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix event: <https://onerecord.iata.org/Event#> .
+@prefix party: <https://onerecord.iata.org/Party#> .
+@prefix piece: <https://onerecord.iata.org/Piece#> .
+@prefix price: <https://onerecord.iata.org/Price#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix value: <https://onerecord.iata.org/Value#> .
+@prefix branch: <https://onerecord.iata.org/Branch#> .
+@prefix itemDg: <https://onerecord.iata.org/ItemDg#> .
+@prefix person: <https://onerecord.iata.org/Person#> .
+@prefix ranges: <https://onerecord.iata.org/Ranges#> .
+@prefix sensor: <https://onerecord.iata.org/Sensor#> .
+@prefix address: <https://onerecord.iata.org/Address#> .
+@prefix booking: <https://onerecord.iata.org/Booking#> .
+@prefix carrier: <https://onerecord.iata.org/Carrier#> .
+@prefix company: <https://onerecord.iata.org/Company#> .
+@prefix contact: <https://onerecord.iata.org/Contact#> .
+@prefix country: <https://onerecord.iata.org/Country#> .
+@prefix pieceDg: <https://onerecord.iata.org/PieceDg#> .
+@prefix pieceLa: <https://onerecord.iata.org/PieceLiveAnimals#> .
+@prefix product: <https://onerecord.iata.org/Product#> .
+@prefix ratings: <https://onerecord.iata.org/Ratings#> .
+@prefix request: <https://onerecord.iata.org/Request#> .
+@prefix routing: <https://onerecord.iata.org/Routing#> .
+@prefix waybill: <https://onerecord.iata.org/Waybill#> .
+@prefix eventUld: <https://onerecord.iata.org/EventUld#> .
+@prefix location: <https://onerecord.iata.org/Location#> .
+@prefix partyawb: <https://onerecord.iata.org/PartyAWB#> .
+@prefix schedule: <https://onerecord.iata.org/Schedule#> .
+@prefix shipment: <https://onerecord.iata.org/Shipment#> .
+@prefix insurance: <https://onerecord.iata.org/Insurance#> .
+@prefix iotDevice: <https://onerecord.iata.org/IotDevice#> .
+@prefix productDg: <https://onerecord.iata.org/ProductDg#> .
+@prefix dimensions: <https://onerecord.iata.org/Dimensions#> .
+@prefix otherParty: <https://onerecord.iata.org/OtherParty#> .
+@prefix customsInfo: <https://onerecord.iata.org/CustomsInfo#> .
+@prefix geolocation: <https://onerecord.iata.org/Geolocation#> .
+@prefix sensorOther: <https://onerecord.iata.org/SensorOther#> .
+@prefix bookingtimes: <https://onerecord.iata.org/BookingTimes#> .
+@prefix co2Emissions: <https://onerecord.iata.org/CO2Emissions#> .
+@prefix contactOther: <https://onerecord.iata.org/ContactOther#> .
+@prefix measurements: <https://onerecord.iata.org/Measurements#> .
+@prefix sensorGeoloc: <https://onerecord.iata.org/SensorGeoloc#> .
+@prefix bookingOption: <https://onerecord.iata.org/BookingOption#> .
+@prefix co2CalcMethod: <https://onerecord.iata.org/CO2CalcMethod#> .
+@prefix commonobjects: <https://onerecord.iata.org/CommonObjects#> .
+@prefix companybranch: <https://onerecord.iata.org/CompanyBranch#> .
+@prefix dgDeclaration: <https://onerecord.iata.org/DgDeclaration#> .
+@prefix movementTimes: <https://onerecord.iata.org/MovementTimes#> .
+@prefix packagingType: <https://onerecord.iata.org/PackagingType#> .
+@prefix scheduledLegs: <https://onerecord.iata.org/ScheduledLegs#> .
+@prefix bookingSegment: <https://onerecord.iata.org/BookingSegment#> .
+@prefix carrierProduct: <https://onerecord.iata.org/CarrierProduct#> .
+@prefix embeddedobject: <https://onerecord.iata.org/EmbeddedObjects#> .
+@prefix serviceRequest: <https://onerecord.iata.org/ServiceRequest#> .
+@prefix transportMeans: <https://onerecord.iata.org/TransportMeans#> .
+@prefix characteristics: <https://onerecord.iata.org/Characteristics#> .
+@prefix logisticsObject: <https://onerecord.iata.org/LogisticsObject#> .
+@prefix otherIdentifier: <https://onerecord.iata.org/OtherIdentifier#> .
+@prefix regulatedEntity: <https://onerecord.iata.org/RegulatedEntity#> .
+@prefix specialHandling: <https://onerecord.iata.org/SpecialHandling#> .
+@prefix epermitSignature: <https://onerecord.iata.org/EpermitSignature#> .
+@prefix transportSegment: <https://onerecord.iata.org/TransportSegment#> .
+@prefix volumetricWeight: <https://onerecord.iata.org/VolumetricWeight#> .
+@prefix externalReference: <https://onerecord.iata.org/ExternalReference#> .
+@prefix measurementsOther: <https://onerecord.iata.org/MeasurementsOther#> .
+@prefix transportMovement: <https://onerecord.iata.org/TransportMovement#> .
+@prefix epermitConsignment: <https://onerecord.iata.org/EpermitConsignment#> .
+@prefix liveAnimalsEpermit: <https://onerecord.iata.org/LiveAnimalsEpermit#> .
+@prefix measurementsGeoloc: <https://onerecord.iata.org/MeasurementsGeoloc#> .
+@prefix securityDeclaration: <https://onerecord.iata.org/SecurityDeclaration#> .
+@prefix bookingOptionRequest: <https://onerecord.iata.org/BookingOptionRequest#> .
+@prefix dgProductRadioactive: <https://onerecord.iata.org/DgProductRadioactive#> .
+@prefix dgRadioactiveIsotope: <https://onerecord.iata.org/DgRadioactiveIsotope#> .
+@prefix handlinginstructions: <https://onerecord.iata.org/HandlingInstructions#> .
+@base <https://onerecord.iata.org/> .
+
+<https://onerecord.iata.org/> rdf:type owl:Ontology ;
+                               dc:description "The IATA ONE Record vocabulary, described using W3C RDF Schema and the Web Ontology Language."@en ;
+                               dc:title "IATA ONE Record Ontology"@en ;
+                               terms:abstract "The ontology of the IATA ONE Record standard is the core data model underlying the Linked Data solution drafted by the ONE Record standard: https://github.com/IATA-Cargo/ONE-Record. ONE Record is a standard for data sharing and creates a single record view of the shipment. This standard defines a common data model for the data that is shared via standardized and secured web API."@en ;
+                               terms:modified "22-10-2021" ;
+                               terms:title "IATA ONE Record Ontology"@en ;
+                               rdfs:comment """Version 1.0 refers to the version that has been endorsed by the COTB in November 2020
+
+Version 1.01 includes some bugfixes to allow for the generation of JSON-LD schema, including:
+- Removal of Piece:dgDeclaration property to avoid java error as it is moved to PieceDg:dgDeclaration
+- Change of comment on price:carrierChargeCode to avoid non-unicode characters \"...\"
+
+Version 1.1 includes improvements and bugfixes, details can be found on GitHub
+
+Version 1.11 includes bugfixes, including:
+- Change of cardinality for CompanyBranch#otherIdentifiers and CompanyBranch#contactPersons (removed max = 1)
+
+Version 1.2.0 (beta for Version 2.0.0 to come)
+- Change of ratings:chargePaymentType values from (S,P) to (C,P) as it was a mistake
+- Added data properties on BookingTimes
+- Removed Piece#product max cardinality
+- Added Waybill#originCurrency adn Waybill#customsOriginCode
+- Added Piece#nvdForCarriage and Piece#nvdForCustoms
+- Added Insurance#nvdIndicator
+- Added Waybill#consignorDeclarationSignature / carrierDeclarationPlace / carrierDeclarationDate / carrierDeclarationSignature
+- Improved Ratings objects for Billing&Settlement purposes with new properties
+- Added CommonObjects class and EmbeddedObject class
+- Addded ScheduledLegs object and Routing#scheduledLegs
+- Renames shipment#containedPiece to shipment#containedPieces
+- Removed & sign within comments
+
+Version 1.2.1 (beta for Version 2.0.0 to come)
+- Added Ratings#entitlement and Ratings#quantity
+
+Version 2.0.0
+- Official release to validate Version 1.2.0 and 1.2.1 changes
+- ServiceRequest and SpecialHandling objects are replaced with HandlingInstructions object
+- Added Party#otherIdentifiers
+- Removed piece#volumetricWeight minCardinality
+- Removed shipment#waybillNumber
+- Moved waybill#customsOriginCode from LogisticsObject class to Waybill class"""@en ;
+                               rdfs:isDefinedBy "https://www.iata.org/one-record/"^^xsd:anyURI ;
+                               rdfs:label "IATA ONE Record Ontology"@en ;
+                               owl:versionInfo "2.0.0"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/abstract
+terms:abstract rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/modified
+terms:modified rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/title
+terms:title rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#maxCardinality
+owl:maxCardinality rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#minCardinality
+owl:minCardinality rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2001/XMLSchema#duration
+xsd:duration rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2002/07/owl#thing
+owl:thing rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://onerecord.iata.org/Address#country
+address:country rdf:type owl:ObjectProperty ;
+                rdfs:domain :Address ;
+                rdfs:range :Country ;
+                rdfs:comment "Country details"@en ;
+                rdfs:label "address:country"@en .
+
+
+###  https://onerecord.iata.org/Booking#carrier
+booking:carrier rdf:type owl:ObjectProperty ;
+                rdfs:domain :Booking ;
+                rdfs:range :Company ;
+                rdfs:comment "Carrier details"@en ;
+                rdfs:label "booking:carrier"@en ;
+                owl:deprecated "true"@en .
+
+
+###  https://onerecord.iata.org/Booking#carrierProductInfo
+booking:carrierProductInfo rdf:type owl:ObjectProperty ;
+                           rdfs:domain :Booking ;
+                           rdfs:range :CarrierProduct ;
+                           rdfs:comment "Reference to the Carrier products included in the offer"@en ;
+                           rdfs:label "booking:carrierProductInfo"@en ;
+                           owl:deprecated "true"@en .
+
+
+###  https://onerecord.iata.org/Booking#consignee
+booking:consignee rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Booking ;
+                  rdfs:range :Company ;
+                  rdfs:comment "Consignee details"@en ;
+                  rdfs:label "booking:consignee"@en ;
+                  owl:deprecated "true"@en .
+
+
+###  https://onerecord.iata.org/Booking#freightForwarder
+booking:freightForwarder rdf:type owl:ObjectProperty ;
+                         rdfs:domain :Booking ;
+                         rdfs:range :Company ;
+                         rdfs:comment "Freight Forwarder details"@en ;
+                         rdfs:label "booking:freightForwarder"@en ;
+                         owl:deprecated "true"@en .
+
+
+###  https://onerecord.iata.org/Booking#notifyParty
+booking:notifyParty rdf:type owl:ObjectProperty ;
+                    rdfs:domain :Booking ;
+                    rdfs:range :Company ;
+                    rdfs:comment "Other parties to be notified of the booking evolution"@en ;
+                    rdfs:label "booking:notifyParty"@en ;
+                    owl:deprecated "true"@en .
+
+
+###  https://onerecord.iata.org/Booking#price
+booking:price rdf:type owl:ObjectProperty ;
+              rdfs:domain :Booking ;
+              rdfs:range :Price ;
+              rdfs:comment "Price of the Booking (if different from the offer)"@en ;
+              rdfs:label "booking:price"@en ;
+              owl:deprecated "true"@en .
+
+
+###  https://onerecord.iata.org/Booking#requestRef
+booking:requestRef rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Booking ;
+                   rdfs:range :Request ;
+                   rdfs:comment "Reference to the Request"@en ;
+                   rdfs:label "booking:requestRef"@en ;
+                   owl:deprecated "true"@en .
+
+
+###  https://onerecord.iata.org/Booking#routing
+booking:routing rdf:type owl:ObjectProperty ;
+                rdfs:domain :Booking ;
+                rdfs:range :Routing ;
+                rdfs:comment "Routing details of the offer, to be compared with routing preferences of the quote request"@en ;
+                rdfs:label "booking:routing"@en ;
+                owl:deprecated "true"@en .
+
+
+###  https://onerecord.iata.org/Booking#shipmentDetails
+booking:shipmentDetails rdf:type owl:ObjectProperty ;
+                        rdfs:domain :Booking ;
+                        rdfs:range :Shipment ;
+                        rdfs:comment "Details of the shipement that is to be shipped"@en ;
+                        rdfs:label "booking:shipmentDetails"@en ;
+                        owl:deprecated "true"@en .
+
+
+###  https://onerecord.iata.org/Booking#shipper
+booking:shipper rdf:type owl:ObjectProperty ;
+                rdfs:domain :Booking ;
+                rdfs:range :Company ;
+                rdfs:comment "Shipper information"@en ;
+                rdfs:label "booking:shipper"@en ;
+                owl:deprecated "true"@en .
+
+
+###  https://onerecord.iata.org/Booking#transportMovement
+booking:transportMovement rdf:type owl:ObjectProperty ;
+                          rdfs:domain :Booking ;
+                          rdfs:range :TransportSegment ;
+                          rdfs:comment "Transport segment linked to the offer, including the Departure and Arrival locations"@en ;
+                          rdfs:label "booking:transportMovement"@en ;
+                          owl:deprecated "true"@en .
+
+
+###  https://onerecord.iata.org/Booking#waybillNumber
+booking:waybillNumber rdf:type owl:ObjectProperty ;
+                      rdfs:domain :Booking ;
+                      rdfs:range :Waybill ;
+                      rdfs:comment "House or Master Waybill unique identifier"@en ;
+                      rdfs:label "booking:waybillNumber"@en ;
+                      owl:deprecated "true"@en .
+
+
+###  https://onerecord.iata.org/BookingOption#bookingSegment
+bookingOption:bookingSegment rdf:type owl:ObjectProperty ;
+                             rdfs:domain :BookingOption ;
+                             rdfs:range :BookingSegment ;
+                             rdfs:comment "Booking Segment of the Booking Option"@en ;
+                             rdfs:label "bookingOption:bookingSegment"@en .
+
+
+###  https://onerecord.iata.org/BookingOption#bookingTimes
+bookingOption:bookingTimes rdf:type owl:ObjectProperty ;
+                           rdfs:domain :BookingOption ;
+                           rdfs:range :BookingTimes ;
+                           rdfs:comment "booking times details of the Booking Option (proposed or actual)"@en ;
+                           rdfs:label "bookingOption:bookingTimes"@en .
+
+
+###  https://onerecord.iata.org/BookingOption#carrier
+bookingOption:carrier rdf:type owl:ObjectProperty ;
+                      rdfs:domain :BookingOption ;
+                      rdfs:range :Company ;
+                      rdfs:comment "Carrier details"@en ;
+                      rdfs:label "bookingOption:carrier"@en .
+
+
+###  https://onerecord.iata.org/BookingOption#carrierProductInfo
+bookingOption:carrierProductInfo rdf:type owl:ObjectProperty ;
+                                 rdfs:domain :BookingOption ;
+                                 rdfs:range :CarrierProduct ;
+                                 rdfs:comment "Reference to the Carrier products included in the offer"@en ;
+                                 rdfs:label "bookingOption:carrierProductInfo"@en .
+
+
+###  https://onerecord.iata.org/BookingOption#consignee
+bookingOption:consignee rdf:type owl:ObjectProperty ;
+                        rdfs:domain :BookingOption ;
+                        rdfs:range :Company ;
+                        rdfs:comment "Consignee details"@en ;
+                        rdfs:label "bookingOption:consignee"@en ;
+                        owl:deprecated "true"@en .
+
+
+###  https://onerecord.iata.org/BookingOption#freightForwarder
+bookingOption:freightForwarder rdf:type owl:ObjectProperty ;
+                               rdfs:domain :BookingOption ;
+                               rdfs:range :Company ;
+                               rdfs:comment "Freight forwarder details"@en ;
+                               rdfs:label "bookingOption:freightForwarder"@en ;
+                               owl:deprecated "true"@en .
+
+
+###  https://onerecord.iata.org/BookingOption#notifyParty
+bookingOption:notifyParty rdf:type owl:ObjectProperty ;
+                          rdfs:domain :BookingOption ;
+                          rdfs:range :Company ;
+                          rdfs:comment "Other parties to be notified of the booking evolution"@en ;
+                          rdfs:label "bookingOption:notifyParty"@en ;
+                          owl:deprecated "true"@en .
+
+
+###  https://onerecord.iata.org/BookingOption#parties
+bookingOption:parties rdf:type owl:ObjectProperty ;
+                      rdfs:domain :BookingOption ;
+                      rdfs:range :Party ;
+                      rdfs:comment "Parties involved in the Booking Option (e.g. shipper, forwarder, ...)"@en ;
+                      rdfs:label "bookingOption:parties"@en .
+
+
+###  https://onerecord.iata.org/BookingOption#price
+bookingOption:price rdf:type owl:ObjectProperty ;
+                    rdfs:domain :BookingOption ;
+                    rdfs:range :Price ;
+                    rdfs:comment "Price of the Booking (if different from the offer)"@en ;
+                    rdfs:label "bookingOption:price"@en .
+
+
+###  https://onerecord.iata.org/BookingOption#requestRef
+bookingOption:requestRef rdf:type owl:ObjectProperty ;
+                         rdfs:domain :BookingOption ;
+                         rdfs:range :BookingOptionRequest ;
+                         rdfs:comment "Reference to the Booking option request"@en ;
+                         rdfs:label "bookingOption:requestRef"@en .
+
+
+###  https://onerecord.iata.org/BookingOption#routing
+bookingOption:routing rdf:type owl:ObjectProperty ;
+                      rdfs:domain :BookingOption ;
+                      rdfs:range :Routing ;
+                      rdfs:comment "Routing details of the offer, to be compared with routing preferences of the quote request"@en ;
+                      rdfs:label "bookingOption:routing"@en .
+
+
+###  https://onerecord.iata.org/BookingOption#schedule
+bookingOption:schedule rdf:type owl:ObjectProperty ;
+                       rdfs:domain :BookingOption ;
+                       rdfs:range :Schedule ;
+                       rdfs:comment "Schedule details of the Booking Option (proposed or actual)"@en ;
+                       rdfs:label "bookingOption:schedule"@en ;
+                       owl:deprecated "true"^^xsd:boolean .
+
+
+###  https://onerecord.iata.org/BookingOption#shipmentDetails
+bookingOption:shipmentDetails rdf:type owl:ObjectProperty ;
+                              rdfs:domain :BookingOption ;
+                              rdfs:range :Shipment ;
+                              rdfs:comment "Details of the shipement that is to be shipped"@en ;
+                              rdfs:label "bookingOption:shipmentDetails"@en .
+
+
+###  https://onerecord.iata.org/BookingOption#shipper
+bookingOption:shipper rdf:type owl:ObjectProperty ;
+                      rdfs:domain :BookingOption ;
+                      rdfs:range :Company ;
+                      rdfs:comment "Shipper details"@en ;
+                      rdfs:label "bookingOption:shipper"@en ;
+                      owl:deprecated "true"@en .
+
+
+###  https://onerecord.iata.org/BookingOption#transportMovement
+bookingOption:transportMovement rdf:type owl:ObjectProperty ;
+                                rdfs:domain :BookingOption ;
+                                rdfs:range :TransportSegment ;
+                                rdfs:comment "Transport segment linked to the offer, including the Departure and Arrival locations"@en ;
+                                rdfs:label "bookingOption:transportMovement"@en .
+
+
+###  https://onerecord.iata.org/BookingOption#waybillNumber
+bookingOption:waybillNumber rdf:type owl:ObjectProperty ;
+                            rdfs:domain :BookingOption ;
+                            rdfs:range :Waybill ;
+                            rdfs:comment "House or Master Waybill unique identifier"@en ;
+                            rdfs:label "bookingOption:waybillNumber"@en .
+
+
+###  https://onerecord.iata.org/BookingOptionRequest#bookingSegment
+bookingOptionRequest:bookingSegment rdf:type owl:ObjectProperty ;
+                                    rdfs:domain :BookingOptionRequest ;
+                                    rdfs:range :BookingSegment ;
+                                    rdfs:comment "The Booking Segment linked to the Booking Optio Request"@en ;
+                                    rdfs:label "bookingOptionRequest:bookingSegment"@en .
+
+
+###  https://onerecord.iata.org/BookingOptionRequest#parties
+bookingOptionRequest:parties rdf:type owl:ObjectProperty ;
+                             rdfs:domain :BookingOptionRequest ;
+                             rdfs:range :Party ;
+                             rdfs:comment "Parties involved if known"@en ;
+                             rdfs:label "bookingOptionRequest:parties"@en .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource bookingOptionRequest:parties ;
+   owl:annotatedProperty rdfs:range ;
+   owl:annotatedTarget :Party ;
+   rdfs:comment "change of object type in v1.1"
+ ] .
+
+
+###  https://onerecord.iata.org/BookingOptionRequest#ratingsPreference
+bookingOptionRequest:ratingsPreference rdf:type owl:ObjectProperty ;
+                                       rdfs:domain :BookingOptionRequest ;
+                                       rdfs:range :Ratings ;
+                                       rdfs:comment "Ratings preferences of the request"@en ;
+                                       rdfs:label "bookingOptionRequest:ratingsPreference"@en .
+
+
+###  https://onerecord.iata.org/BookingOptionRequest#routingPreferences
+bookingOptionRequest:routingPreferences rdf:type owl:ObjectProperty ;
+                                        rdfs:domain :BookingOptionRequest ;
+                                        rdfs:range :Routing ;
+                                        rdfs:comment "Routing details that are part of the request, these details will be used to determine if the offer is a perfect match"@en ;
+                                        rdfs:label "bookingOptionRequest:routingPreferences"@en .
+
+
+###  https://onerecord.iata.org/BookingOptionRequest#schedulePreferences
+bookingOptionRequest:schedulePreferences rdf:type owl:ObjectProperty ;
+                                         rdfs:domain :BookingOptionRequest ;
+                                         rdfs:range :Schedule ;
+                                         rdfs:comment "Schedule preferences of the request"@en ;
+                                         rdfs:label "bookingOptionRequest:schedulePreferences"@en ;
+                                         owl:deprecated "true"@en .
+
+
+###  https://onerecord.iata.org/BookingOptionRequest#shipmentDetails
+bookingOptionRequest:shipmentDetails rdf:type owl:ObjectProperty ;
+                                     rdfs:domain :BookingOptionRequest ;
+                                     rdfs:range :Shipment ;
+                                     rdfs:comment "Details of the shipement that is to be shipped"@en ;
+                                     rdfs:label "bookingOptionRequest:shipmentDetails"@en .
+
+
+###  https://onerecord.iata.org/BookingOptionRequest#timePreferences
+bookingOptionRequest:timePreferences rdf:type owl:ObjectProperty ;
+                                     rdfs:domain :BookingOptionRequest ;
+                                     rdfs:range :BookingTimes ;
+                                     rdfs:comment "Schedule preferences of the request"@en ;
+                                     rdfs:label "bookingOptionRequest:timePreferences"@en .
+
+
+###  https://onerecord.iata.org/B

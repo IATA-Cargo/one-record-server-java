@@ -1,19 +1,19 @@
 package org.iata.service.impl;
 
 import org.iata.api.model.CompanyInformation;
-import org.iata.cargo.model.*;
+import org.iata.cargo.model.Company;
+import org.iata.cargo.model.CompanyBranch;
+import org.iata.cargo.model.Contact;
+import org.iata.cargo.model.Location;
+import org.iata.cargo.model.OtherIdentifier;
+import org.iata.cargo.model.Person;
 import org.iata.repository.CompaniesRepository;
 import org.iata.service.CompaniesService;
 import org.iata.util.Utils;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 
 @Service

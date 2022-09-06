@@ -1,8 +1,9 @@
 package org.iata.resource;
 
 import cz.cvut.kbss.jsonld.JsonLd;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.iata.api.model.AuditTrail;
 import org.iata.api.model.PatchRequest;
 import org.iata.cargo.model.Event;
@@ -22,7 +23,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
+
 
 import javax.inject.Inject;
 import java.time.LocalDate;
@@ -38,7 +39,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value = "/companies", produces = JsonLd.MEDIA_TYPE)
 @Validated
-@Api(value = "ONE Record Server")
+@Tag(name = "Logistics Objects Resource REST Endpoint")
 public class LogisticsObjectsResource {
 
   private static final Logger LOG = LoggerFactory.getLogger(LogisticsObjectsResource.class);
@@ -59,7 +60,7 @@ public class LogisticsObjectsResource {
 
   @RequestMapping(method = POST, value = "/{companyId}/los", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.CREATED)
-  @ApiOperation(value = "Creates a logistics object")
+  @Operation(summary = "Creates a logistics object")
   public ResponseEntity<Void> addLogisticsObject(@PathVariable("companyId") String companyId, @RequestBody LogisticsObject logisticsObject) {
     LogisticsObject lo = logisticsObjectsHandler.handleAddLogisticsObject(logisticsObject, getCurrentUri());
     final HttpHeaders headers = new HttpHeaders();
@@ -68,8 +69,8 @@ public class LogisticsObjectsResource {
   }
 
   @RequestMapping(method = GET, value = "/{companyId}/los", produces = JsonLd.MEDIA_TYPE)
-  @ApiOperation(value = "INTERNAL Retrieves all the logistics objects for a given company")
-  @ApiIgnore
+  @Operation(summary = "INTERNAL Retrieves all the logistics objects for a given company")
+
   public ResponseEntity<List<LogisticsObject>> getLogisticsObjects(@PathVariable("companyId") String companyId,
                                                                    @RequestParam(value = "locale", required = false) Locale locale) {
     final String id = getCurrentUri().replace("/los", "");
@@ -77,7 +78,7 @@ public class LogisticsObjectsResource {
   }
 
   @RequestMapping(method = GET, value = "/{companyId}/los/{loId}", produces = JsonLd.MEDIA_TYPE)
-  @ApiOperation(value = "Retrieves a logistics object")
+  @Operation(summary = "Retrieves a logistics object")
   public ResponseEntity<LogisticsObject> getLogisticsObject(@PathVariable("companyId") String companyId,
                                                             @PathVariable("loId") String loId,
                                                             @RequestParam(value = "locale", required = false) Locale locale) {
@@ -96,14 +97,14 @@ public class LogisticsObjectsResource {
 
   @RequestMapping(method = PATCH, value = "/{companyId}/los/{loId}", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  @ApiOperation(value = "Updates a logistics object - NOT WORKING CORRECTLY YET")
+  @Operation(summary = "Updates a logistics object")
   public ResponseEntity<Void> updateLogisticsObject(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @RequestBody PatchRequest patchRequest) {
     logisticsObjectsHandler.handleUpdateLogisticsObject(patchRequest);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 
   @RequestMapping(method = GET, value = "/{companyId}/los/{loId}/audit-trail", produces = JsonLd.MEDIA_TYPE)
-  @ApiOperation(value = "Retrieves the audit trail (history) of a given logistics object")
+  @Operation(summary = "Retrieves the audit trail (history) of a given logistics object")
   public ResponseEntity<AuditTrail> getAuditTrail(@PathVariable("companyId") String companyId,
                                                   @PathVariable("loId") String loId,
                                                   @RequestParam(value = "updatedFrom", required = false)
@@ -116,7 +117,7 @@ public class LogisticsObjectsResource {
 
   @RequestMapping(method = POST, value = "/{companyId}/los/{loId}/events", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.CREATED)
-  @ApiOperation(value = "Creates events for a given logistics object")
+  @Operation(summary = "Creates events for a given logistics object")
   public ResponseEntity<Void> addEvents(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @RequestBody Event event) {
     final String loUri = getCurrentUri().replace("/events", "");
     logisticsObjectsService.addEvent(event, loUri);
@@ -124,7 +125,7 @@ public class LogisticsObjectsResource {
   }
 
   @RequestMapping(method = GET, value = "/{companyId}/los/{loId}/events", produces = JsonLd.MEDIA_TYPE)
-  @ApiOperation(value = "Retrieves the events of a given logistics object")
+  @Operation(summary = "Retrieves the events of a given logistics object")
   public ResponseEntity<List<Event>> getEvents(@PathVariable("companyId") String companyId,
                                                @PathVariable("loId") String loId,
                                                @RequestParam(value = "locale", required = false) Locale locale) {
@@ -134,15 +135,15 @@ public class LogisticsObjectsResource {
 
   @RequestMapping(method = POST, value = "/{companyId}/los/{loId}/acl", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.CREATED)
-  @ApiOperation(value = "INTERNAL Creates Access Control List item for a given logistics object")
-  @ApiIgnore
+  @Operation(summary = "INTERNAL Creates Access Control List item for a given logistics object")
+  @Hidden
   public ResponseEntity<Void> addACL(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @RequestBody AccessControlList acl) {
     accessControlListService.addAccessControlList(acl);
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
   @RequestMapping(method = GET, value = "/{companyId}/los/{loId}/acl", produces = JsonLd.MEDIA_TYPE)
-  @ApiOperation(value = "Retrieves the Access Control List of a given logistics object")
+  @Operation(summary = "Retrieves the Access Control List of a given logistics object")
   public ResponseEntity<List<AccessControlList>> getACL(@PathVariable("companyId") String companyId,
                                                         @PathVariable("loId") String loId,
                                                         @RequestParam(value = "locale", required = false) Locale locale) {

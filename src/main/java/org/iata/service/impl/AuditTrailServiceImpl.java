@@ -3,6 +3,7 @@ package org.iata.service.impl;
 import org.iata.api.model.AuditTrail;
 import org.iata.api.model.ChangeRequest;
 import org.iata.api.model.PatchRequest;
+import org.iata.cargo.model.LogisticsObject;
 import org.iata.exception.LogisticsObjectNotFoundException;
 import org.iata.repository.AuditTrailRepository;
 import org.iata.service.AuditTrailsService;

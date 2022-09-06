@@ -1,10 +1,6 @@
 package org.iata.service.impl;
 
-import org.iata.api.model.Memento;
-import org.iata.api.model.MementoEntry;
-import org.iata.api.model.MementoList;
-import org.iata.api.model.Mementos;
-import org.iata.api.model.Timemap;
+import org.iata.api.model.*;
 import org.iata.repository.MementoRepository;
 import org.iata.repository.TimemapRepository;
 import org.iata.service.VersioningService;

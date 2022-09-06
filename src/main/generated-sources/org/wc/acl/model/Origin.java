@@ -9,7 +9,7 @@ import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jopa.model.annotations.Properties;
 import cz.cvut.kbss.jopa.model.annotations.Types;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.wc.acl.Vocabulary;
 
 import java.io.Serializable;
@@ -33,7 +33,7 @@ public class Origin
 {
 
     @Id(generated = true)
-    @ApiModelProperty(readOnly = true)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     protected String id;
     @JsonIgnore
     @OWLAnnotationProperty(iri = RDFS.LABEL)
@@ -43,7 +43,7 @@ public class Origin
     protected String description;
     @Types
     @JsonProperty("@type")
-    @ApiModelProperty(allowableValues = Vocabulary.s_c_Origin)
+    @Schema(allowableValues = Vocabulary.s_c_Origin)
     protected Set<String> types;
     @Properties
     @JsonIgnore

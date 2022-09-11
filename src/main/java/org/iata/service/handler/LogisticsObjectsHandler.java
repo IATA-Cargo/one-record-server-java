@@ -7,9 +7,11 @@ import org.iata.api.model.PatchRequest;
 import org.iata.api.model.Timemap;
 import org.iata.cargo.model.LogisticsObject;
 import org.iata.model.AccessControlList;
+import org.iata.model.enums.EventType;
 import org.iata.service.AccessControlListService;
 import org.iata.service.AuditTrailsService;
 import org.iata.service.LogisticsObjectsService;
+import org.iata.service.SubscriptionsService;
 import org.iata.service.VersioningService;
 import org.iata.util.Utils;
 import org.springframework.stereotype.Service;
@@ -28,15 +30,19 @@ public class LogisticsObjectsHandler {
   private final AccessControlListService accessControlListService;
   private final VersioningService versioningService;
 
+  private final SubscriptionsService subscriptionsService;
+
   @Inject
   public LogisticsObjectsHandler(LogisticsObjectsService logisticsObjectsService,
                                  AuditTrailsService auditTrailsService,
                                  AccessControlListService accessControlListService,
-                                 VersioningService versioningService) {
+                                 VersioningService versioningService,
+                                 SubscriptionsService subscriptionsService) {
     this.logisticsObjectsService = logisticsObjectsService;
     this.auditTrailsService = auditTrailsService;
     this.accessControlListService = accessControlListService;
     this.versioningService = versioningService;
+    this.subscriptionsService = subscriptionsService;
   }
 
   public LogisticsObject handleAddLogisticsObject(LogisticsObject logisticsObject, String companyIdentifier) {
@@ -96,6 +102,7 @@ public class LogisticsObjectsHandler {
   public void handleUpdateLogisticsObject(PatchRequest patchRequest) {
     logisticsObjectsService.updateLogisticsObject(patchRequest);
     auditTrailsService.updateAuditTrail(patchRequest);
+    subscriptionsService.notifySubscribers(EventType.OBJECT_UPDATED, patchRequest.getLogisticsObjectRef().getLogisticsObjectType(), patchRequest.getLogisticsObjectRef().getLogisticsObjectId());
   }
 
 }

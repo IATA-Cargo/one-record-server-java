@@ -15,6 +15,7 @@ import cz.cvut.kbss.jopa.model.annotations.Properties;
 import cz.cvut.kbss.jopa.model.annotations.Types;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
 import org.iata.api.Vocabulary;
+import org.iata.cargo.model.LogisticsObject;
 
 
 /**

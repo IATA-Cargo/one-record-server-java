@@ -82,15 +82,15 @@ public class LogisticsObjectsResource {
   public ResponseEntity<LogisticsObject> getLogisticsObject(@PathVariable("companyId") String companyId,
                                                             @PathVariable("loId") String loId,
                                                             @RequestParam(value = "locale", required = false) Locale locale) {
-    // Add ACL and Timemap location to Link headers
-    final HttpHeaders headers = RestUtils.createLinkHeaderFromCurrentURi("/acl", "acl", Collections.emptyList());
-    final HttpHeaders headersMementos = RestUtils.createLinkHeaderFromCurrentURi("/timemap", "timemap", Collections.emptyList());
-    headers.addAll(headersMementos);
     LogisticsObject logisticsObject = logisticsObjectsService.findById(getCurrentUri());
 
     if (logisticsObject == null) {
       throw new LogisticsObjectNotFoundException();
     }
+    // Add ACL and Timemap location to Link headers
+    final HttpHeaders headers = RestUtils.createLinkHeaderFromCurrentURi("/acl", "acl", Collections.emptyList());
+    final HttpHeaders headersMementos = RestUtils.createLinkHeaderFromCurrentURi("/timemap", "timemap", Collections.emptyList());
+    headers.addAll(headersMementos);
 
     return new ResponseEntity<>(logisticsObject, headers, HttpStatus.OK);
   }

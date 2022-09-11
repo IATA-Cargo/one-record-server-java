@@ -4,7 +4,11 @@ import org.iata.api.model.Subscription;
 import org.iata.model.enums.EventType;
 import org.iata.model.enums.Topic;
 import org.iata.repository.SubscriptionsRepository;
+import org.iata.resource.NotificationResource;
+import org.iata.service.NotificationService;
 import org.iata.service.SubscriptionsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +24,15 @@ public class SubscriptionsServiceImpl implements SubscriptionsService {
   private final SubscriptionsRepository subscriptionsRepository;
   private final Environment env;
 
+  private final NotificationService notificationService;
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(SubscriptionsServiceImpl.class);
+
   @Inject
-  public SubscriptionsServiceImpl(SubscriptionsRepository subscriptionsRepository, Environment env) {
+  public SubscriptionsServiceImpl(SubscriptionsRepository subscriptionsRepository, Environment env, NotificationService notificationService) {
     this.subscriptionsRepository = subscriptionsRepository;
     this.env = env;
+    this.notificationService = notificationService;
   }
 
   @Override
@@ -32,7 +41,7 @@ public class SubscriptionsServiceImpl implements SubscriptionsService {
   }
 
   @Override
-  public Subscription getSubscription(String companyUrl, String companyId, TopicEnum topic) {
+  public Subscription getSubscription(String companyUrl, String companyId, Topic topic) {
     Subscription subscription = new Subscription();
     subscription.setId(companyUrl + "/subscription");
     subscription.setCallbackUrl(companyUrl + "/callback?topic=" + topic);
@@ -49,6 +58,24 @@ public class SubscriptionsServiceImpl implements SubscriptionsService {
   @Override
   public List<Subscription> getSubscribers(String companyId) {
     return subscriptionsRepository.findByMyCompanyIdentifier(companyId);
+  }
+
+  /**
+   * Search for subscribers and send notifiations to subscribers
+   * @param eventType
+   * @param logisticsObjectType
+   * @param logisticsObjectId
+   */
+  @Override
+  public void notifySubscribers(EventType eventType, String logisticsObjectType, String logisticsObjectId) {
+    List<Subscription> subscriptions = subscriptionsRepository.findByTopic(logisticsObjectType);
+    LOGGER.info("Found {} subscribers to notify", subscriptions.size());
+    if (subscriptions != null && !subscriptions.isEmpty()) {
+        subscriptions.parallelStream().forEach(subscription -> {
+          notificationService.sendNotification(subscription.getCallbackUrl(), eventType, logisticsObjectType, logisticsObjectId);
+        });
+    }
+
   }
 
 }

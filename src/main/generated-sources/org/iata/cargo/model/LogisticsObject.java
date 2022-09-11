@@ -62,8 +62,9 @@ public class LogisticsObject
     })
     protected String companyIdentifier;
 
-    public void setId(String id) {
+    public org.iata.cargo.model.LogisticsObject setId(String id) {
         this.id = id;
+        return this;
     }
 
     public String getId() {

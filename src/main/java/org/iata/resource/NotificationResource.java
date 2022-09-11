@@ -4,7 +4,7 @@ import cz.cvut.kbss.jsonld.JsonLd;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
 import org.iata.api.model.Notification;
-import org.iata.model.enums.TopicEnum;
+import org.iata.model.enums.Topic;
 import org.iata.service.NotificationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Tag(name = "Notification Resource REST Endpoint")
 public class NotificationResource {
 
-  private static final Logger LOG = LoggerFactory.getLogger(NotificationResource.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(NotificationResource.class);
 
   private final NotificationService notificationService;
 
@@ -38,7 +38,8 @@ public class NotificationResource {
   @Operation(summary = "Callback URL for receiving notifications from publishers")
   public ResponseEntity<Void> callbackUrl(@PathVariable("companyId") String companyId,
                                           @RequestBody Notification notification,
-                                          @RequestParam(value = "topic", required = false) TopicEnum topic) {
+                                          @RequestParam(value = "topic", required = false) Topic topic) {
+    LOGGER.info("Received Notification for LogisticsObject {}", notification.getLogisticsObject().getId());
     notificationService.handleNotification(notification);
     return new ResponseEntity<>(HttpStatus.OK);
   }

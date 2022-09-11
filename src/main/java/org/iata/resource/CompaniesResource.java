@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.iata.api.model.CompanyInformation;
 import org.iata.api.model.Subscription;
-import org.iata.model.enums.TopicEnum;
+import org.iata.model.enums.Topic;
 import org.iata.service.CompaniesService;
 import org.iata.service.SubscriptionsService;
 import org.iata.util.RestUtils;
@@ -61,7 +61,7 @@ public class CompaniesResource {
   @Operation(summary = "Retrieves a company for a given companyId. If topic is sent, the endpoint returns the subscription information for that topic, information" +
       "that is usually sent back to publishers.")
   public ResponseEntity<Object> getCompany(@PathVariable("companyId") String companyId,
-                                           @RequestParam(value = "topic", required = false) TopicEnum topic,
+                                           @RequestParam(value = "topic", required = false) Topic topic,
                                            @RequestParam(value = "locale", required = false) Locale locale) {
     final String id = RestUtils.getCurrentUri();
     if (topic == null) {

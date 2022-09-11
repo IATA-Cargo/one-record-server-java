@@ -1,7 +1,8 @@
 package org.iata.service.impl;
 
 import org.iata.api.model.Subscription;
-import org.iata.model.enums.TopicEnum;
+import org.iata.model.enums.EventType;
+import org.iata.model.enums.Topic;
 import org.iata.repository.SubscriptionsRepository;
 import org.iata.service.SubscriptionsService;
 import org.springframework.core.env.Environment;

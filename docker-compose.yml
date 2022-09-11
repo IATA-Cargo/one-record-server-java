@@ -10,7 +10,7 @@ services:
     links:
       - mongodb
   mongodb:
-    image: mongo:5.0.11
+    image: mongo:5.0.12
     restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root

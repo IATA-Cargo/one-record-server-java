@@ -1,0 +1,49 @@
+version: '3.1'
+services:
+  one-record-server-shipper:
+    build: .
+    environment:
+      - spring.data.mongodb.uri=mongodb://shipper_user:shipper_password@mongodb/shipper_db
+      - spring.data.mongodb.database=shipper_db
+    ports:
+      - "8060:8080"
+    links:
+      - mongodb
+  one-record-server-forwarder:
+    build: .
+    environment:
+      - spring.data.mongodb.uri=mongodb://forwarder_user:forwarder_password@mongodb/forwarder_db
+      - spring.data.mongodb.database=forwarder_db
+    ports:
+      - "8070:8080"
+    links:
+      - mongodb
+  one-record-server-carrier:
+    build: .
+    environment:
+      - spring.data.mongodb.uri=mongodb://carrier_user:carrier_password@mongodb/carrier_db
+      - spring.data.mongodb.database=carrier_db
+    ports:
+      - "8080:8080"
+    links:
+      - mongodb
+  one-record-server-gha:
+    build: .
+    environment:
+      - spring.data.mongodb.uri=mongodb://gha_user:gha_password@mongodb/gha_db
+      - spring.data.mongodb.database=gha_db
+    ports:
+      - "8090:8080"
+    links:
+      - mongodb
+  mongodb:
+    image: mongo:5.0.12
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_INITDB_DATABASE=rootdb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./docker/docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro

@@ -9,7 +9,7 @@ import org.iata.service.NotificationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -28,7 +28,7 @@ public class NotificationServiceImpl implements NotificationService {
     private final NotificationsRepository notificationsRepository;
 
     @Autowired
-    private Jackson2ObjectMapperBuilder mapperBuilder;
+    private ObjectMapper jacksonObjectMapper;
 
     @Inject
     public NotificationServiceImpl(NotificationsRepository notificationsRepository) {
@@ -60,10 +60,11 @@ public class NotificationServiceImpl implements NotificationService {
             url = new URL(callbackUrl);
             con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", JsonLd.MEDIA_TYPE);
             con.setRequestProperty("Accept", JsonLd.MEDIA_TYPE);
             con.setDoOutput(true);
             con.setUseCaches(true);
-            String jsonInputString = mapperBuilder.build().writeValueAsString(notification);
+            String jsonInputString = jacksonObjectMapper.writeValueAsString(notification);
             try (OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes("utf-8");
                 os.write(input, 0, input.length);
@@ -76,6 +77,7 @@ public class NotificationServiceImpl implements NotificationService {
                     response.append(responseLine.trim());
                 }
             }
+            LOG.info("Sent {} notification to {}", eventType.getEventType(), callbackUrl);
         } catch (Exception e) {
             e.printStackTrace();
             LOG.error("Error occurred while sending notification to {}: {}", callbackUrl, e.getMessage());
@@ -84,7 +86,6 @@ public class NotificationServiceImpl implements NotificationService {
                 con.disconnect();
             }
         }
-        LOG.info("Sent {} notification to {}", eventType.getEventType(), callbackUrl);
     }
 
     private String retrieveLogisticsObjectContentFromPublisher(Notification notification) {

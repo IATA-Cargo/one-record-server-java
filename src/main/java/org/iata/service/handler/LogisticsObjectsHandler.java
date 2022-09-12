@@ -65,7 +65,7 @@ public class LogisticsObjectsHandler {
 
         // Notify Subscribers
         Annotation logisticsObjectClassAnnotation = Arrays.stream(logisticsObject.getClass().getDeclaredAnnotations()).filter(a -> a.annotationType() == OWLClass.class).findAny().orElse(null);
-        if (logisticsObjectClassAnnotation != null && logisticsObjectClassAnnotation.getClass() == OWLClass.class) {
+        if (logisticsObjectClassAnnotation != null && logisticsObjectClassAnnotation.annotationType() == OWLClass.class) {
             subscriptionsService.notifySubscribers(EventType.OBJECT_CREATED, ((OWLClass) logisticsObjectClassAnnotation).iri(), logisticsObject.getId());
         } else {
             LOGGER.error("Could not identify IRI of LogisticsObject {}", logisticsObject.getId());

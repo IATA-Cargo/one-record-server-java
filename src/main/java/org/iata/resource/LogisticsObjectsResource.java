@@ -62,6 +62,7 @@ public class LogisticsObjectsResource {
   @ResponseStatus(HttpStatus.CREATED)
   @Operation(summary = "Creates a logistics object")
   public ResponseEntity<Void> addLogisticsObject(@PathVariable("companyId") String companyId, @RequestBody LogisticsObject logisticsObject) {
+    LOG.info("Post Request for LogisticsObject of type {}", logisticsObject.getClass().getSimpleName());
     LogisticsObject lo = logisticsObjectsHandler.handleAddLogisticsObject(logisticsObject, getCurrentUri());
     final HttpHeaders headers = new HttpHeaders();
     headers.set(HttpHeaders.LOCATION, lo.getId());
@@ -82,6 +83,7 @@ public class LogisticsObjectsResource {
   public ResponseEntity<LogisticsObject> getLogisticsObject(@PathVariable("companyId") String companyId,
                                                             @PathVariable("loId") String loId,
                                                             @RequestParam(value = "locale", required = false) Locale locale) {
+    LOG.info("GET request for {}", getCurrentUri());
     LogisticsObject logisticsObject = logisticsObjectsService.findById(getCurrentUri());
 
     if (logisticsObject == null) {

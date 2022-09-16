@@ -1,0 +1,1809 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /companies:
+    get:
+      tags:
+        - Companies Resource REST Endpoint
+      summary: Retrieves all the companies
+      operationId: getCompanies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CompanyInformation'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - Companies Resource REST Endpoint
+      summary: INTERNAL Creates a company
+      operationId: addCompany
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/CompanyInformation'
+        required: true
+      responses:
+        '201':
+          description: Created
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /companies/{companyId}/subscribers:
+    get:
+      tags:
+        - Companies Resource REST Endpoint
+      summary: INTERNAL Get all the subscribers that are subscriber to this company.
+      operationId: getAllSubscribers
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subscription'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - Companies Resource REST Endpoint
+      summary: INTERNAL In a pub/sub scenario, when the current server is the publisher, it creates subscription information for a company.
+      operationId: addSubscriptionInformation
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /companies/{companyId}/los:
+    get:
+      tags:
+        - Logistics Objects Resource REST Endpoint
+      summary: INTERNAL Retrieves all the logistics objects for a given company
+      operationId: getLogisticsObjects
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LogisticsObject'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - Logistics Objects Resource REST Endpoint
+      summary: Creates a logistics object
+      operationId: addLogisticsObject
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/LogisticsObject'
+        required: true
+      responses:
+        '201':
+          description: Created
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /companies/{companyId}/los/{loId}/mementos:
+    post:
+      tags:
+        - Versioning Resource REST Endpoint
+      summary: INTERNAL Creates a snapshot (memento) of the data
+      operationId: addMemento
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: loId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Memento'
+        required: true
+      responses:
+        '201':
+          description: Created
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /companies/{companyId}/los/{loId}/events:
+    get:
+      tags:
+        - Logistics Objects Resource REST Endpoint
+      summary: Retrieves the events of a given logistics object
+      operationId: getEvents
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: loId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - Logistics Objects Resource REST Endpoint
+      summary: Creates events for a given logistics object
+      operationId: addEvents
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: loId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Event'
+        required: true
+      responses:
+        '201':
+          description: Created
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /companies/{companyId}/delegation:
+    post:
+      tags:
+        - Delegation Resource REST Endpoint
+      summary: Request delegation of access to third party to a logistics object
+      operationId: delegate
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/DelegationRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /companies/{companyId}/callback:
+    post:
+      tags:
+        - Notification Resource REST Endpoint
+      summary: Callback URL for receiving notifications from publishers
+      operationId: callbackUrl
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: topic
+          in: query
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Notification'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /companies/{companyId}/los/{loId}:
+    get:
+      tags:
+        - Logistics Objects Resource REST Endpoint
+      summary: Retrieves a logistics object
+      operationId: getLogisticsObject
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: loId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/LogisticsObject'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      tags:
+        - Logistics Objects Resource REST Endpoint
+      summary: Updates a logistics object
+      operationId: updateLogisticsObject
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: loId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/PatchRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /companies/{companyId}:
+    get:
+      tags:
+        - Companies Resource REST Endpoint
+      summary: Retrieves a company for a given companyId. If topic is sent, the endpoint returns the subscription information for that topic, informationthat is usually sent back to publishers.
+      operationId: getCompany
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: topic
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/ld+json:
+              schema:
+                type: object
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /companies/{companyId}/los/{loId}/timemap:
+    get:
+      tags:
+        - Versioning Resource REST Endpoint
+      summary: Retrieves the TimeMap of a given logistics object
+      operationId: getTimemap
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: loId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Timemap'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /companies/{companyId}/los/{loId}/timegate:
+    get:
+      tags:
+        - Versioning Resource REST Endpoint
+      summary: Retrieves the memento for a logistics object closest to a given date time
+      operationId: getTimegate
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: loId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Accept-Datetime
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /companies/{companyId}/los/{loId}/mementos/{mementoId}:
+    get:
+      tags:
+        - Versioning Resource REST Endpoint
+      summary: Retrieves a memento for a given mementoId
+      operationId: getMemento
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: loId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: mementoId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Memento'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /companies/{companyId}/los/{loId}/audit-trail:
+    get:
+      tags:
+        - Logistics Objects Resource REST Endpoint
+      summary: Retrieves the audit trail (history) of a given logistics object
+      operationId: getAuditTrail
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: loId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: updatedFrom
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: updatedTo
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: OK
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/AuditTrail'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /companies/{companyId}/los/{loId}/acl:
+    get:
+      tags:
+        - Logistics Objects Resource REST Endpoint
+      summary: Retrieves the Access Control List of a given logistics object
+      operationId: getACL
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: loId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessControlList'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /client/server-data:
+    get:
+      tags:
+        - one-record-client-resource
+      summary: Retrieves data from another ONE Record Server
+      operationId: getServerData
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Details:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        attribute:
+          type: string
+        code:
+          type: string
+        message:
+          type: string
+        resource:
+          type: string
+    Error:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        details:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Details'
+        title:
+          type: string
+    Address:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        country:
+          $ref: '#/components/schemas/Country'
+        addressCode:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        cityCode:
+          type: string
+        cityName:
+          type: string
+        poBox:
+          type: string
+        postalCode:
+          type: string
+        regionCode:
+          type: string
+        regionName:
+          type: string
+        street:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        branch:
+          $ref: '#/components/schemas/CompanyBranch'
+        companyName:
+          type: string
+        iataCargoAgentCode:
+          type: string
+    CompanyBranch:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        company:
+          $ref: '#/components/schemas/Company'
+        contactPersons:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Person'
+        location:
+          $ref: '#/components/schemas/Location'
+        otherIdentifiers:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/OtherIdentifier'
+        branchName:
+          type: string
+        iataCargoAgentLocationIdentifier:
+          type: string
+    CompanyInformation:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        company:
+          $ref: '#/components/schemas/Company'
+        errors:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        companyId:
+          type: string
+        serverEndpoint:
+          type: string
+        supportedContentTypes:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        supportedLogisticsObjects:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+    Contact:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        other:
+          $ref: '#/components/schemas/ContactOther'
+        contactType:
+          type: string
+        contactValue:
+          type: string
+    ContactOther:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+    Country:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        countryCode:
+          type: string
+        countryName:
+          type: string
+    ExternalReference:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        documentOriginator:
+          $ref: '#/components/schemas/Company'
+        location:
+          $ref: '#/components/schemas/Location'
+        documentChecksum:
+          type: string
+        documentId:
+          type: string
+        documentLink:
+          type: string
+        documentName:
+          type: string
+        documentType:
+          type: string
+        documentVersion:
+          type: string
+        expiryDate:
+          type: string
+          format: date-time
+        validFrom:
+          type: string
+          format: date-time
+    Geolocation:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        elevation:
+          $ref: '#/components/schemas/Value'
+        geolocationUnit:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+    Location:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        geolocation:
+          $ref: '#/components/schemas/Geolocation'
+        code:
+          type: string
+        locationName:
+          type: string
+        locationType:
+          type: string
+    OtherIdentifier:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        identifier:
+          type: string
+        otherIdentifierType:
+          type: string
+    Person:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        associatedBranch:
+          $ref: '#/components/schemas/CompanyBranch'
+        contact:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+        documents:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalReference'
+        contactType:
+          type: string
+        department:
+          type: string
+        employeeId:
+          type: string
+        firstName:
+          type: string
+        jobTitle:
+          type: string
+        lastName:
+          type: string
+        middleName:
+          type: string
+        salutation:
+          type: string
+    Value:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        unit:
+          type: string
+        value:
+          type: number
+          format: double
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        errors:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        cacheFor:
+          type: string
+        callbackUrl:
+          type: string
+        contentTypes:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        myCompanyIdentifier:
+          type: string
+        secret:
+          type: string
+        sendLogisticsObjectBody:
+          type: boolean
+        subscribeToStatusUpdates:
+          type: boolean
+        subscribedTo:
+          type: string
+        topic:
+          type: string
+    Event:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        linkedObject:
+          $ref: '#/components/schemas/LogisticsObject'
+        location:
+          $ref: '#/components/schemas/Location'
+        performedBy:
+          $ref: '#/components/schemas/Company'
+        performedByPerson:
+          $ref: '#/components/schemas/Person'
+        dateTime:
+          type: string
+          format: date-time
+        eventCode:
+          type: string
+        eventName:
+          type: string
+        eventTypeIndicator:
+          type: string
+    IotDevice:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        companyIdentifier:
+          type: string
+        revision:
+          type: integer
+          format: int32
+        deviceManufacturer:
+          $ref: '#/components/schemas/Company'
+        sensors:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Sensor'
+        associatedObject:
+          type: string
+        deviceDescription:
+          type: string
+        deviceModel:
+          type: string
+        deviceName:
+          type: string
+        deviceSerialNumber:
+          type: string
+    LogisticsObject:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        events:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        iotDevices:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/IotDevice'
+        companyIdentifier:
+          type: string
+        revision:
+          type: integer
+          format: int32
+    Sensor:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        companyIdentifier:
+          type: string
+        revision:
+          type: integer
+          format: int32
+        iotDevice:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/IotDevice'
+        sensorDescription:
+          type: string
+        sensorName:
+          type: string
+        sensorSerialNumber:
+          type: string
+        sensorType:
+          type: string
+    Memento:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        data:
+          $ref: '#/components/schemas/LogisticsObject'
+        created:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+        label:
+          type: string
+        original:
+          type: string
+    DelegationRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        targetLogisticsObjects:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/LogisticsObjectRef'
+        action:
+          type: string
+        operations:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        targetCompanies:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+    LogisticsObjectRef:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        logisticsObjectId:
+          type: string
+        logisticsObjectType:
+          type: string
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        logisticsObject:
+          $ref: '#/components/schemas/LogisticsObject'
+        eventType:
+          type: string
+        topic:
+          type: string
+    Operation:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        o:
+          $ref: '#/components/schemas/OperationObject'
+        op:
+          type: string
+        p:
+          type: string
+    OperationObject:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        datatype:
+          type: string
+        value:
+          type: string
+        object:
+          type: object
+    PatchRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        logisticsObjectRef:
+          $ref: '#/components/schemas/LogisticsObjectRef'
+        operations:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Operation'
+        description1:
+          type: string
+        requestorCompanyIdentifier:
+          type: string
+        revision:
+          type: string
+    MementoEntry:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        memento:
+          $ref: '#/components/schemas/Memento'
+        datetime:
+          type: string
+          format: date-time
+        label:
+          type: string
+    MementoList:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        mementoEntry:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/MementoEntry'
+    Mementos:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        list:
+          $ref: '#/components/schemas/MementoList'
+        firstMemento:
+          type: string
+        lastMemento:
+          type: string
+    Timemap:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        mementos:
+          $ref: '#/components/schemas/Mementos'
+        original:
+          type: string
+        timegate:
+          type: string
+    AuditTrail:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        changeRequests:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ChangeRequest'
+        errors:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        loInitialSnapshot:
+          $ref: '#/components/schemas/Memento'
+        logisticsObjectRef:
+          $ref: '#/components/schemas/LogisticsObjectRef'
+        latestRevision:
+          type: integer
+          format: int32
+    Branch:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        id1:
+          type: string
+        name1:
+          type: string
+        description1:
+          type: string
+        types1:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties1:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+    ChangeRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        types:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        patchRequest:
+          $ref: '#/components/schemas/PatchRequest'
+        requestingParty:
+          $ref: '#/components/schemas/Branch'
+        companyId:
+          type: string
+        status:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+    Access:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        '@type':
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+              - http://www.w3.org/ns/auth/acl#Access
+          enum:
+            - http://www.w3.org/ns/auth/acl#Access
+    AccessControlList:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        '@type':
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+              - https://onerecord.iata.org/AccessControlList
+          enum:
+            - https://onerecord.iata.org/AccessControlList
+        http://www.w3.org/ns/auth/acl#accessTo:
+          type: string
+        https://onerecord.iata.org/AccessControlList#authorizations:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Authorization'
+    Agent:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        '@type':
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+              - http://xmlns.com/foaf/0.1/Agent
+          enum:
+            - http://xmlns.com/foaf/0.1/Agent
+    Authorization:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        '@type':
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+              - http://www.w3.org/ns/auth/acl#Authorization
+          enum:
+            - http://www.w3.org/ns/auth/acl#Authorization
+        http://www.w3.org/ns/auth/acl#agent:
+          $ref: '#/components/schemas/Agent'
+        http://www.w3.org/ns/auth/acl#accessTo:
+          $ref: '#/components/schemas/Access'
+        http://www.w3.org/ns/auth/acl#agentGroup:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        http://www.w3.org/ns/auth/acl#mode:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+    Group:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        '@type':
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+              - http://www.w3.org/2006/vcard/ns#Group
+          enum:
+            - http://www.w3.org/2006/vcard/ns#Group

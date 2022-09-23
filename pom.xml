@@ -161,6 +161,10 @@
     </dependencies>
 
     <properties>
+        <java.version>18</java.version>
+        <maven.compiler.release>18</maven.compiler.release>
+        <maven.compiler.source>18</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <auto-value.version>1.7.4</auto-value.version>
         <jackson.version>2.13.3</jackson.version>
@@ -476,16 +480,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
-                <configuration>
-                    <release>18</release>
-                    <source>18</source>
-                    <target>18</target>  <!--or <release>10</release>-->
-                </configuration>
             </plugin>
         </plugins>
         <resources>

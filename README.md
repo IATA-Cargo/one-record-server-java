@@ -1,3 +1,5 @@
+>  🚧 This is fork of the [IATA ONE Record Java Sandbox](https://github.com/IATA-Cargo/one-record-server-java) 🚧  
+
 # Welcome to ONE Record Java Sandbox
 
 This repository contains the code and instructions that will help you deploy your first ONE Record Server. Please follow
@@ -57,7 +59,7 @@ docker compose down --rmi all
 
 For testing the application locally, follow the next steps:
 
-1. Install `Java = 11` and `Apache Maven`.
+1. Install `Java = 18` and `Apache Maven`.
 2. Install the Maven dependencies by running `mvn clean install`.
 3. (Optional) Download the latest ONE Record Turtle ontologies from Github + the latest Web Access Control from W3C by
    running `mvn exec:java`.

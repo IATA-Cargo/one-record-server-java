@@ -1,9 +1,5 @@
 ### build image
-FROM openjdk:11-slim as builder
-
-# install maven
-RUN apt-get update
-RUN apt-get install -y maven
+FROM maven:3.8.6-amazoncorretto-18 as builder
 
 # create app folder for sources
 RUN mkdir -p /build
@@ -19,7 +15,7 @@ COPY . .
 RUN mvn package -DskipTests
 
 # run layer
-FROM openjdk:11-jre-slim as runtime
+FROM amazoncorretto:18.0.2-alpine3.15 as runtime
 
 ## set app home folder
 ENV APP_HOME /app

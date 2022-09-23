@@ -1,11 +1,11 @@
 /**
  * Copyright (C) 2019 Czech Technical University in Prague
- *
+ * <p>
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any
  * later version.
- *
+ * <p>
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
@@ -18,6 +18,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RestUtils {
 
@@ -34,7 +37,7 @@ public class RestUtils {
     public static HttpHeaders createLinkHeaderFromCurrentURi(String path, String relType, Object... uriVariableValues) {
         assert path != null;
         final URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path(path).buildAndExpand(
-            uriVariableValues).toUri();
+                uriVariableValues).toUri();
         final HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.LINK, location.toASCIIString() + " ;rel=\"" + relType + "\"");
         return headers;
@@ -44,8 +47,20 @@ public class RestUtils {
         assert path != null;
 
         final URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path(path).buildAndExpand(
-            uriVariableValues).toUri();
+                uriVariableValues).toUri();
         return location.toASCIIString();
+    }
+
+    public static String getCompanyIdentifierFromUri(String uri) {
+        final String regex = "(https?):\\/\\/[-a-zA-Z0-9+.]+(?::\\d+)?\\/companies\\/[-a-zA-Z0-9]+\\.*";
+
+        final Pattern pattern = Pattern.compile(regex);
+        final Matcher matcher = pattern.matcher(uri);
+
+        if (matcher.find()) {
+            return matcher.group(0);
+        }
+        return null;
     }
 
     public static String getCurrentUri() {
@@ -53,5 +68,6 @@ public class RestUtils {
         URI uri = builder.build().toUri();
         return uri.toASCIIString();
     }
+
 
 }

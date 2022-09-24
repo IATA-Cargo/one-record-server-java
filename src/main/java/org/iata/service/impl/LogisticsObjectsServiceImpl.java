@@ -148,8 +148,8 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
     @Override
     public void addEvent(Event event, String loUri) {
         LogisticsObject logisticsObject = logisticsObjectsRepository.findById(loUri).orElse(null);
-        event.setId(loUri + "/Event_" + Utils.getRandomNumberString());
         if (logisticsObject != null) {
+            event.setId(loUri + "/Event_" + Utils.getRandomNumberString());
             Set<Event> events = Optional.ofNullable(logisticsObject.getEvents()).orElse(new HashSet<>());
             events.add(event);
             logisticsObject.setEvents(events);

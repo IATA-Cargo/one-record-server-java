@@ -10,6 +10,7 @@ import org.iata.cargo.model.Event;
 import org.iata.cargo.model.LogisticsObject;
 import org.iata.exception.LogisticsObjectNotFoundException;
 import org.iata.model.AccessControlList;
+import org.iata.model.enums.LogisticsObjectType;
 import org.iata.service.AccessControlListService;
 import org.iata.service.AuditTrailsService;
 import org.iata.service.LogisticsObjectsService;
@@ -67,8 +68,8 @@ public class LogisticsObjectsResource {
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Creates a logistics object")
     public ResponseEntity<Void> addLogisticsObject(@PathVariable("companyId") String companyId, @RequestBody LogisticsObject logisticsObject) {
-        LOG.info("Post Request for LogisticsObject of type {}", logisticsObject.getClass().getSimpleName());
-        LogisticsObject lo = logisticsObjectsHandler.handleAddLogisticsObject(logisticsObject, getCurrentUri());
+        LOG.info("POST Request for LogisticsObject of type {}", logisticsObject.getClass().getSimpleName());
+        LogisticsObject lo = logisticsObjectsHandler.handleAddLogisticsObject(logisticsObject, getCurrentUri().replace("/los", ""));
         final HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.LOCATION, lo.getId());
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
@@ -79,9 +80,15 @@ public class LogisticsObjectsResource {
     @Operation(summary = "INTERNAL Retrieves all the logistics objects for a given company")
 
     public ResponseEntity<List<LogisticsObject>> getLogisticsObjects(@PathVariable("companyId") String companyId,
-                                                                     @RequestParam(value = "locale", required = false) Locale locale) {
-        final String id = getCurrentUri().replace("/los", "");
-        return new ResponseEntity<>(logisticsObjectsService.findByCompanyIdentifier(id), HttpStatus.OK);
+                                                                     @RequestParam(value = "locale", required = false) Locale locale,
+                                                                     @RequestParam(value = "type", required = false) LogisticsObjectType logisticsObjectType) {
+        LOG.info("GET Request for {}", getCurrentUri());
+        final String companyIdentifier = getCurrentUri().replace("/los", "");
+        if (logisticsObjectType != null) {
+            LOG.info("Request all LogisticsObjects of company {} and of type {}", companyIdentifier, logisticsObjectType.getLogisticsObjectType());
+            return new ResponseEntity<>(logisticsObjectsService.findByCompanyIdentifierAndLogisticsObjectType(companyIdentifier, logisticsObjectType.getLogisticsObjectType()), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(logisticsObjectsService.findByCompanyIdentifier(companyIdentifier), HttpStatus.OK);
     }
 
 
@@ -129,6 +136,7 @@ public class LogisticsObjectsResource {
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Creates events for a given logistics object")
     public ResponseEntity<Void> addEvents(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @RequestBody Event event) {
+        LOG.info("Received {} Event for {}", event.getEventTypeIndicator(), event.getLinkedObject().getId());
         final String loUri = getCurrentUri().replace("/events", "");
         logisticsObjectsService.addEvent(event, loUri);
         return new ResponseEntity<>(HttpStatus.CREATED);

@@ -49,9 +49,12 @@ public class LogisticsObjectsHandler {
     }
 
     public LogisticsObject handleAddLogisticsObject(LogisticsObject logisticsObject, String companyIdentifier) {
-        logisticsObject.setCompanyIdentifier(logisticsObject.getCompanyIdentifier());
-        String loid = companyIdentifier + "/" + logisticsObject.getClass().getSimpleName() + "_" + Utils.getRandomNumberString();
-        logisticsObject.setId(loid);
+        logisticsObject.setCompanyIdentifier(companyIdentifier);
+        String loid = logisticsObject.getId();
+        if (loid == null || !Utils.isValidURL(loid) || !loid.startsWith(companyIdentifier)) {
+            loid = companyIdentifier + "/" + logisticsObject.getClass().getSimpleName() + "_" + Utils.getRandomNumberString();
+            logisticsObject.setId(loid);
+        }
         logisticsObjectsService.addLogisticsObject((logisticsObject));
 
         // Save create object in the audit trail

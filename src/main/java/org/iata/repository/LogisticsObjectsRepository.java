@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface LogisticsObjectsRepository extends MongoRepository<LogisticsObject, String> {
   List<LogisticsObject> findByCompanyIdentifier(String companyIdentifier);
+  List<LogisticsObject> findByCompanyIdentifierAndTypes(String companyIdentifier, String logisticsObjectType);
 }

@@ -13,6 +13,7 @@ public interface LogisticsObjectsService {
   LogisticsObject findById(String id);
 
   List<LogisticsObject> findByCompanyIdentifier(String companyId);
+  List<LogisticsObject> findByCompanyIdentifierAndLogisticsObjectType(String companyId, String logisticsObjectType);
 
   void updateLogisticsObject(PatchRequest patchRequest);
 

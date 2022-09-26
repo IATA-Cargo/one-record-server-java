@@ -55,6 +55,11 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
         return logisticsObjectsRepository.findByCompanyIdentifier(companyId);
     }
 
+    @Override
+    public List<LogisticsObject> findByCompanyIdentifierAndLogisticsObjectType(String companyId, String logisticsObjectType) {
+        return logisticsObjectsRepository.findByCompanyIdentifierAndTypes(companyId, logisticsObjectType);
+    }
+
 
     public Field getClassFieldByOWLObjectProperty(Class<?> cls, String iri) {
         AtomicReference<Field> field = new AtomicReference<>();

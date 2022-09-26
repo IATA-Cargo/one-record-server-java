@@ -5,7 +5,7 @@ import org.iata.cargo.Vocabulary;
 /**
  * Enum containing all the existing types of Logistics Objects
  */
-public enum Topic {
+public enum LogisticsObjectType {
 
   WAYBILL (Vocabulary.s_c_Waybill),
   SHIPMENT (Vocabulary.s_c_Shipment),
@@ -20,11 +20,11 @@ public enum Topic {
 
   private final String className;
 
-  Topic(String className) {
+  LogisticsObjectType(String className) {
     this.className = className;
   }
 
-  public String getTopic() {
+  public String getLogisticsObjectType() {
     return this.className;
   }
 

@@ -2,7 +2,6 @@ package org.iata.util;
 
 import org.junit.jupiter.api.Test;
 
-import static com.mongodb.internal.connection.tlschannel.util.Util.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UtilsTest {

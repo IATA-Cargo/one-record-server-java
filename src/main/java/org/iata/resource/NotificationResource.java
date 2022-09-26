@@ -4,7 +4,7 @@ import cz.cvut.kbss.jsonld.JsonLd;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
 import org.iata.api.model.Notification;
-import org.iata.model.enums.Topic;
+import org.iata.model.enums.LogisticsObjectType;
 import org.iata.service.NotificationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +38,7 @@ public class NotificationResource {
   @Operation(summary = "Callback URL for receiving notifications from publishers")
   public ResponseEntity<Void> callbackUrl(@PathVariable("companyId") String companyId,
                                           @RequestBody Notification notification,
-                                          @RequestParam(value = "topic", required = false) Topic topic) {
+                                          @RequestParam(value = "topic", required = false) LogisticsObjectType topic) {
     LOGGER.info("Received Notification for LogisticsObject {}", notification.getLogisticsObject().getId());
     notificationService.handleNotification(notification);
     return new ResponseEntity<>(HttpStatus.OK);

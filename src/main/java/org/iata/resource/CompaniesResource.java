@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.iata.api.model.CompanyInformation;
 import org.iata.api.model.Subscription;
-import org.iata.model.enums.Topic;
+import org.iata.model.enums.LogisticsObjectType;
 import org.iata.service.CompaniesService;
 import org.iata.service.SubscriptionsService;
 import org.iata.util.RestUtils;
@@ -29,76 +29,77 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @Tag(name = "Companies Resource REST Endpoint")
 public class CompaniesResource {
 
-  private static final Logger LOG = LoggerFactory.getLogger(CompaniesResource.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CompaniesResource.class);
 
-  private final CompaniesService companiesService;
-  private final SubscriptionsService subscriptionsService;
+    private final CompaniesService companiesService;
+    private final SubscriptionsService subscriptionsService;
 
-  @Inject
-  public CompaniesResource(CompaniesService companiesService, SubscriptionsService subscriptionsService) {
-    this.companiesService = companiesService;
-    this.subscriptionsService = subscriptionsService;
-  }
-  @RequestMapping(method = POST, value = "/companies", consumes = JsonLd.MEDIA_TYPE)
-  @ResponseStatus(HttpStatus.CREATED)
-  @Operation(summary = "INTERNAL Creates a company")
-  public ResponseEntity<Void> addCompany(@RequestBody CompanyInformation companyInformation) {
-    final String companyId = companyInformation.getCompanyId();
-    final String companyIdentifierForIoL = RestUtils.createCompanyIdentifierFromCurrentUri("/{companyId}", companyId);
-    companiesService.addCompany(companyInformation, companyIdentifierForIoL, companyId);
-    final HttpHeaders headers = RestUtils.createLocationHeaderFromCurrentUri("/{companyId}", companyId);
-    return new ResponseEntity<>(headers, HttpStatus.CREATED);
-  }
-
-  @RequestMapping(method = GET, value = "/companies", produces = JsonLd.MEDIA_TYPE)
-  @Operation(summary = "Retrieves all the companies")
-
-  public ResponseEntity<List<CompanyInformation>> getCompanies(@RequestParam(value = "locale", required = false) Locale locale) {
-    return new ResponseEntity<>(companiesService.getCompanies(), HttpStatus.OK);
-  }
-
-  @RequestMapping(method = GET, value = "/companies/{companyId}", produces = JsonLd.MEDIA_TYPE)
-  @Operation(summary = "Retrieves a company for a given companyId. If topic is sent, the endpoint returns the subscription information for that topic, information" +
-      "that is usually sent back to publishers.")
-  public ResponseEntity<Object> getCompany(@PathVariable("companyId") String companyId,
-                                           @RequestParam(value = "topic", required = false) Topic topic,
-                                           @RequestParam(value = "locale", required = false) Locale locale) {
-    final String id = RestUtils.getCurrentUri();
-    if (topic == null) {
-      return ResponseEntity.ok(companiesService.findById(id));
-    } else {
-      return ResponseEntity.ok(subscriptionsService.getSubscription(id, companyId, topic));
+    @Inject
+    public CompaniesResource(CompaniesService companiesService, SubscriptionsService subscriptionsService) {
+        this.companiesService = companiesService;
+        this.subscriptionsService = subscriptionsService;
     }
-  }
 
-  @RequestMapping(method = DELETE, value = "/companies/{companyId}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  @Operation(summary = "INTERNAL Deletes a company for a given companyId")
-  @Hidden
-  public ResponseEntity<Void> deleteCompany(@PathVariable("companyId") String companyId) {
-    final String id = RestUtils.getCurrentUri();
-    companiesService.deleteById(id);
-    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-  }
-
-  @RequestMapping(method = POST, value = "/companies/{companyId}/subscribers", consumes = JsonLd.MEDIA_TYPE)
-  @Operation(summary = "INTERNAL In a pub/sub scenario, when the current server is the publisher, it creates subscription information for a company.")
-  public ResponseEntity<Subscription> addSubscriptionInformation(@PathVariable("companyId") String companyId, @RequestBody Subscription subscription) {
-    if (subscription.getTopic() == null) {
-      subscription.setId(subscription.getMyCompanyIdentifier());
-    } else {
-      subscription.setId(subscription.getMyCompanyIdentifier() + "?topic=" + subscription.getTopic());
+    @RequestMapping(method = POST, value = "/companies", consumes = JsonLd.MEDIA_TYPE)
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "INTERNAL Creates a company")
+    public ResponseEntity<Void> addCompany(@RequestBody CompanyInformation companyInformation) {
+        final String companyId = companyInformation.getCompanyId();
+        final String companyIdentifierForIoL = RestUtils.createCompanyIdentifierFromCurrentUri("/{companyId}", companyId);
+        companiesService.addCompany(companyInformation, companyIdentifierForIoL, companyId);
+        final HttpHeaders headers = RestUtils.createLocationHeaderFromCurrentUri("/{companyId}", companyId);
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
-    subscriptionsService.addSubscription(subscription);
 
-    return new ResponseEntity<>(HttpStatus.CREATED);
-  }
+    @RequestMapping(method = GET, value = "/companies", produces = JsonLd.MEDIA_TYPE)
+    @Operation(summary = "Retrieves all the companies")
 
-  @RequestMapping(method = GET, value = "/companies/{companyId}/subscribers", produces = JsonLd.MEDIA_TYPE)
-  @Operation(summary = "INTERNAL Get all the subscribers that are subscriber to this company.")
-  public ResponseEntity<List<Subscription>> getAllSubscribers(@PathVariable("companyId") String companyId, @RequestParam(value = "locale", required = false) Locale locale) {
-    final String id = RestUtils.getCurrentUri().replace("/subscribers", "");
-    return new ResponseEntity<>(subscriptionsService.getSubscribers(id), HttpStatus.OK);
-  }
+    public ResponseEntity<List<CompanyInformation>> getCompanies(@RequestParam(value = "locale", required = false) Locale locale) {
+        return new ResponseEntity<>(companiesService.getCompanies(), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = GET, value = "/companies/{companyId}", produces = JsonLd.MEDIA_TYPE)
+    @Operation(summary = "Retrieves a company for a given companyId. If topic is sent, the endpoint returns the subscription information for that topic, information" +
+            "that is usually sent back to publishers.")
+    public ResponseEntity<Object> getCompany(@PathVariable("companyId") String companyId,
+                                             @RequestParam(value = "topic", required = false) LogisticsObjectType topic,
+                                             @RequestParam(value = "locale", required = false) Locale locale) {
+        final String id = RestUtils.getCurrentUri();
+        if (topic == null) {
+            return ResponseEntity.ok(companiesService.findById(id));
+        } else {
+            return ResponseEntity.ok(subscriptionsService.getSubscription(id, companyId, topic));
+        }
+    }
+
+    @RequestMapping(method = DELETE, value = "/companies/{companyId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "INTERNAL Deletes a company for a given companyId")
+    @Hidden
+    public ResponseEntity<Void> deleteCompany(@PathVariable("companyId") String companyId) {
+        final String id = RestUtils.getCurrentUri();
+        companiesService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(method = POST, value = "/companies/{companyId}/subscribers", consumes = JsonLd.MEDIA_TYPE)
+    @Operation(summary = "INTERNAL In a pub/sub scenario, when the current server is the publisher, it creates subscription information for a company.")
+    public ResponseEntity<Subscription> addSubscriptionInformation(@PathVariable("companyId") String companyId, @RequestBody Subscription subscription) {
+        if (subscription.getTopic() == null) {
+            subscription.setId(subscription.getMyCompanyIdentifier());
+        } else {
+            subscription.setId(subscription.getMyCompanyIdentifier() + "?topic=" + subscription.getTopic());
+        }
+        subscriptionsService.addSubscription(subscription);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @RequestMapping(method = GET, value = "/companies/{companyId}/subscribers", produces = JsonLd.MEDIA_TYPE)
+    @Operation(summary = "INTERNAL Get all the subscribers that are subscriber to this company.")
+    public ResponseEntity<List<Subscription>> getAllSubscribers(@PathVariable("companyId") String companyId, @RequestParam(value = "locale", required = false) Locale locale) {
+        final String id = RestUtils.getCurrentUri().replace("/subscribers", "");
+        return new ResponseEntity<>(subscriptionsService.getSubscribers(id), HttpStatus.OK);
+    }
 
 }

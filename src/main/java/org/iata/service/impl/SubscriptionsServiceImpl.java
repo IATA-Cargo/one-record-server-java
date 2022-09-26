@@ -2,9 +2,8 @@ package org.iata.service.impl;
 
 import org.iata.api.model.Subscription;
 import org.iata.model.enums.EventType;
-import org.iata.model.enums.Topic;
+import org.iata.model.enums.LogisticsObjectType;
 import org.iata.repository.SubscriptionsRepository;
-import org.iata.resource.NotificationResource;
 import org.iata.service.NotificationService;
 import org.iata.service.SubscriptionsService;
 import org.slf4j.Logger;
@@ -41,16 +40,16 @@ public class SubscriptionsServiceImpl implements SubscriptionsService {
   }
 
   @Override
-  public Subscription getSubscription(String companyUrl, String companyId, Topic topic) {
+  public Subscription getSubscription(String companyUrl, String companyId, LogisticsObjectType logisticsObjectType) {
     Subscription subscription = new Subscription();
     subscription.setId(companyUrl + "/subscription");
-    subscription.setCallbackUrl(companyUrl + "/callback?topic=" + topic);
+    subscription.setCallbackUrl(companyUrl + "/callback?topic=" + logisticsObjectType);
     subscription.setSendLogisticsObjectBody(Boolean.valueOf(env.getProperty("subscription.sendLogisticsObjectBody")));
     subscription.setSubscribeToStatusUpdates(Boolean.valueOf(env.getProperty("subscription.subscribeToStatusUpdates")));
     subscription.setSecret(env.getProperty("subscription.secret"));
     subscription.setCacheFor(Objects.requireNonNull(env.getProperty("subscription.cacheFor")));
     subscription.setContentTypes(new HashSet<>(Collections.singleton(Objects.requireNonNull(env.getProperty("subscription.contentType")))));
-    subscription.setTopic(topic.getTopic());
+    subscription.setTopic(logisticsObjectType.getLogisticsObjectType());
     subscription.setMyCompanyIdentifier(companyUrl);
     return subscription;
   }

@@ -12,10 +12,10 @@ import java.util.UUID;
 
 public class Utils {
 
-    @Value("${server.alternative_authorities}")
-    static String[] alternativeServerAuthorities = {"localhost:8080", "one-record-server:8080"};
-    @Value("${server.authority}")
-    static String serverAuthority = "localhost:8080";
+    @Value("${server.alternative_authorities}:localhost:8080")
+    static String[] alternativeServerAuthorities;
+    @Value("${server.authority:localhost:8080}")
+    static String serverAuthority;
 
     public static int increment(int index, int value) {
         return index + value;

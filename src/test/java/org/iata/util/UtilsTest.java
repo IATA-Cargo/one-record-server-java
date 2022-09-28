@@ -2,7 +2,12 @@ package org.iata.util;
 
 import org.junit.jupiter.api.Test;
 
+import static org.iata.util.Utils.containsServerAuthority;
+import static org.iata.util.Utils.replaceAuthority;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 class UtilsTest {
 
@@ -50,6 +55,7 @@ class UtilsTest {
     void testToKebabpCaseWithTrailingDash() {
         assertEquals("http://localhost:8080/companies/forwarder/locations/fra-acceptance-gate-2", Utils.toKebabCase("http://localhost:8080/companies/forwarder/locations/fra-acceptance-gate-2-"));
     }
+
     @Test
     void testToKebabpCaseWithTrailingSpace() {
         assertEquals("http://localhost:8080/companies/forwarder/locations/fra-acceptance-gate-2", Utils.toKebabCase("http://localhost:8080/companies/forwarder/locations/fra-acceptance-gate-2 "));
@@ -68,6 +74,26 @@ class UtilsTest {
     @Test
     void testRandomNumberLengthTwo() {
         assertEquals(2, Utils.getRandomNumberString(2).length());
+    }
+
+    @Test
+    void testContainsServerHostnameLocalhost() {
+        String loid = "http://localhost:8080/companies/forwarder/locations/fra-acceptance-gate-2-";
+        assertTrue(containsServerAuthority(loid));
+    }
+
+    @Test
+    void testContainsServerHostnameWrongHostname() {
+        String loid2 = "http://example/companies/forwarder/locations/fra-acceptance-gate-2-";
+        assertFalse(containsServerAuthority(loid2));
+    }
+
+    @Test
+    void testreplaceAuthorityWithServerAuthority() {
+        assertEquals("http://test/companies/forwarder/locations/fra-acceptance-gate-2-", replaceAuthority("http://example/companies/forwarder/locations/fra-acceptance-gate-2-", "test"));
+        assertEquals("http://test:8080/companies/forwarder/locations/fra-acceptance-gate-2-", replaceAuthority("http://example/companies/forwarder/locations/fra-acceptance-gate-2-", "test:8080"));
+        assertEquals("http://test:8080/companies/forwarder/locations/fra-acceptance-gate-2-", replaceAuthority("http://example:8080/companies/forwarder/locations/fra-acceptance-gate-2-", "test:8080"));
+        assertEquals("http://example/companies/forwarder/locations/fra-acceptance-gate-2-", replaceAuthority("http://example:8080/companies/forwarder/locations/fra-acceptance-gate-2-", "example"));
     }
 
 

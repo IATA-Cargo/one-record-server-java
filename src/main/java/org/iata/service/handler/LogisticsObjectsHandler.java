@@ -13,11 +13,13 @@ import org.iata.service.*;
 import org.iata.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.wc.acl.model.Authorization;
 
 import javax.inject.Inject;
 import java.lang.annotation.Annotation;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -51,10 +53,12 @@ public class LogisticsObjectsHandler {
     public LogisticsObject handleAddLogisticsObject(LogisticsObject logisticsObject, String companyIdentifier) {
         logisticsObject.setCompanyIdentifier(companyIdentifier);
         String loid = logisticsObject.getId();
-        if (loid == null || !Utils.isValidURL(loid) || !loid.startsWith(companyIdentifier)) {
-            loid = companyIdentifier + "/" + logisticsObject.getClass().getSimpleName() + "_" + Utils.getRandomNumberString();
-            logisticsObject.setId(loid);
+        if (loid != null && Utils.isValidURL(loid) && Utils.containsServerAuthority(loid)) {
+            //do nothing
+        } else {
+            loid = companyIdentifier + "/" + logisticsObject.getClass().getSimpleName().toLowerCase() + "-" + Utils.getRandomNumberString();
         }
+        logisticsObject.setId(Utils.replaceAuthorityWithServerAuthority(Utils.toKebabCase(loid)));
         logisticsObjectsService.addLogisticsObject((logisticsObject));
 
         // Save create object in the audit trail
@@ -106,6 +110,7 @@ public class LogisticsObjectsHandler {
     }
 
     private void createTimemapForLo(String loid) {
+        loid = Utils.replaceAuthorityWithServerAuthority(Utils.toKebabCase(loid));
         Timemap timemap = new Timemap();
         timemap.setId(loid + "/timemap");
         timemap.setOriginal(loid);

@@ -68,7 +68,7 @@ public class LogisticsObjectsResource {
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Creates a logistics object")
     public ResponseEntity<Void> addLogisticsObject(@PathVariable("companyId") String companyId, @RequestBody LogisticsObject logisticsObject) {
-        LOG.info("POST Request for LogisticsObject of type {}", logisticsObject.getClass().getSimpleName());
+        LOG.info("POST Request for LogisticsObject of type {} -- {}", logisticsObject.getClass().getSimpleName(), getCurrentUri());
         LogisticsObject lo = logisticsObjectsHandler.handleAddLogisticsObject(logisticsObject, getCurrentUri().replace("/los", ""));
         final HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.LOCATION, lo.getId());

@@ -38,8 +38,9 @@ public class LocationsServiceImpl implements LocationsService {
 
             String locationUri = companyIdentifier + "/locations/" + locationId;
 
-            location.setId(Utils.toKebabCase(locationUri));
+            location.setId(locationUri);
         }
+        location.setId(Utils.replaceAuthorityWithServerAuthority(Utils.toKebabCase(location.getId())));
         locationRepository.save(location);
     }
 

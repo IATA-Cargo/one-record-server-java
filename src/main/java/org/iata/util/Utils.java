@@ -1,6 +1,5 @@
 package org.iata.util;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.MalformedURLException;
@@ -10,12 +9,11 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 
+import static org.iata.config.OneRecordServerProperties.SERVER_ALTERNATIVE_AUTHORITIES;
+import static org.iata.config.OneRecordServerProperties.SERVER_AUTHORITY;
+
 public class Utils {
 
-    @Value("${server.alternative_authorities}:localhost:8080")
-    static String[] alternativeServerAuthorities;
-    @Value("${server.authority:localhost:8080}")
-    static String serverAuthority;
 
     public static int increment(int index, int value) {
         return index + value;
@@ -80,7 +78,7 @@ public class Utils {
             try {
                 URL u = new URL(loid);
                 String authority = u.getAuthority();
-                return Set.of(alternativeServerAuthorities).contains(authority);
+                return Set.of(SERVER_ALTERNATIVE_AUTHORITIES).contains(authority);
             } catch (MalformedURLException e) {
                 return false;
             }
@@ -89,6 +87,9 @@ public class Utils {
     }
 
     public static String replaceAuthority(String initialUri, String newAuthority) {
+        if (newAuthority == null || newAuthority.length() < 1) {
+            return initialUri;
+        }
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(initialUri);
         if (newAuthority != null && newAuthority.length() > 0 && newAuthority.split(":").length == 2) { // e.g. host:port
             return builder.host(newAuthority.split(":")[0]).port(newAuthority.split(":")[1]).toUriString();
@@ -99,6 +100,6 @@ public class Utils {
     }
 
     public static String replaceAuthorityWithServerAuthority(String initialUri) {
-        return replaceAuthority(initialUri, serverAuthority);
+        return replaceAuthority(initialUri, SERVER_AUTHORITY);
     }
 }

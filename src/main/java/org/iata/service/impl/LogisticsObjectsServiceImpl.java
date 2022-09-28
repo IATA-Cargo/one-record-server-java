@@ -54,6 +54,11 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
     public List<LogisticsObject> findByCompanyIdentifier(String companyId) {
         return logisticsObjectsRepository.findByCompanyIdentifier(companyId);
     }
+    @Override
+    public List<LogisticsObject> findByIdStartsWith(String id) {
+        return logisticsObjectsRepository.findByIdStartsWith(id);
+    }
+
 
     @Override
     public List<LogisticsObject> findByCompanyIdentifierAndLogisticsObjectType(String companyId, String logisticsObjectType) {

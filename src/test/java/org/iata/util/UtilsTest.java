@@ -1,14 +1,18 @@
 package org.iata.util;
 
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.iata.util.Utils.containsServerAuthority;
-import static org.iata.util.Utils.replaceAuthority;
+import static org.iata.util.Utils.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 class UtilsTest {
 
     @Test
@@ -89,11 +93,17 @@ class UtilsTest {
     }
 
     @Test
-    void testreplaceAuthorityWithServerAuthority() {
+    void testReplaceAuthority() {
         assertEquals("http://test/companies/forwarder/locations/fra-acceptance-gate-2-", replaceAuthority("http://example/companies/forwarder/locations/fra-acceptance-gate-2-", "test"));
         assertEquals("http://test:8080/companies/forwarder/locations/fra-acceptance-gate-2-", replaceAuthority("http://example/companies/forwarder/locations/fra-acceptance-gate-2-", "test:8080"));
         assertEquals("http://test:8080/companies/forwarder/locations/fra-acceptance-gate-2-", replaceAuthority("http://example:8080/companies/forwarder/locations/fra-acceptance-gate-2-", "test:8080"));
         assertEquals("http://example/companies/forwarder/locations/fra-acceptance-gate-2-", replaceAuthority("http://example:8080/companies/forwarder/locations/fra-acceptance-gate-2-", "example"));
+    }
+
+    @Test
+    void testReplaceAuthorityWithServerAuthority() {
+        assertEquals("http://localhost:8080/companies/forwarder/locations/fra-acceptance-gate-2-", replaceAuthorityWithServerAuthority("http://example/companies/forwarder/locations/fra-acceptance-gate-2-"));
+
     }
 
 

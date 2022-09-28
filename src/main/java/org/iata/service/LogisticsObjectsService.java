@@ -15,6 +15,8 @@ public interface LogisticsObjectsService {
   List<LogisticsObject> findByCompanyIdentifier(String companyId);
   List<LogisticsObject> findByCompanyIdentifierAndLogisticsObjectType(String companyId, String logisticsObjectType);
 
+  List<LogisticsObject> findByIdStartsWith(String id);
+
   void updateLogisticsObject(PatchRequest patchRequest);
 
   void addEvent(Event event, String loUri);

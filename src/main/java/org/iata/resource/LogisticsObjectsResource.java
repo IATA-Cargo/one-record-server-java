@@ -16,6 +16,7 @@ import org.iata.service.AuditTrailsService;
 import org.iata.service.LogisticsObjectsService;
 import org.iata.service.handler.LogisticsObjectsHandler;
 import org.iata.util.RestUtils;
+import org.iata.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -72,6 +73,7 @@ public class LogisticsObjectsResource {
         LogisticsObject lo = logisticsObjectsHandler.handleAddLogisticsObject(logisticsObject, getCurrentUri().replace("/los", ""));
         final HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.LOCATION, lo.getId());
+        LOG.info("New LogisticsObject created {}", lo.getId());
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
@@ -83,12 +85,13 @@ public class LogisticsObjectsResource {
                                                                      @RequestParam(value = "locale", required = false) Locale locale,
                                                                      @RequestParam(value = "type", required = false) LogisticsObjectType logisticsObjectType) {
         LOG.info("GET Request for {}", getCurrentUri());
-        final String companyIdentifier = getCurrentUri().replace("/los", "");
+        final String companyIdentifier = Utils.replaceAuthorityWithServerAuthority(getCurrentUri().replace("/los", ""));
+        LOG.info("Search: {}", companyIdentifier);
         if (logisticsObjectType != null) {
             LOG.info("Request all LogisticsObjects of company {} and of type {}", companyIdentifier, logisticsObjectType.getLogisticsObjectType());
-            return new ResponseEntity<>(logisticsObjectsService.findByCompanyIdentifierAndLogisticsObjectType(companyIdentifier, logisticsObjectType.getLogisticsObjectType()), HttpStatus.OK);
+            //TODO: filter by LogisticsObjectType
         }
-        return new ResponseEntity<>(logisticsObjectsService.findByCompanyIdentifier(companyIdentifier), HttpStatus.OK);
+        return new ResponseEntity<>(logisticsObjectsService.findByIdStartsWith(companyIdentifier), HttpStatus.OK);
     }
 
 
@@ -98,7 +101,9 @@ public class LogisticsObjectsResource {
                                                               @PathVariable("loId") String loId,
                                                               @RequestParam(value = "locale", required = false) Locale locale) {
         LOG.info("GET request for {}", getCurrentUri());
-        LogisticsObject logisticsObject = logisticsObjectsService.findById(getCurrentUri());
+        final String loURI = Utils.replaceAuthorityWithServerAuthority(getCurrentUri());
+        LOG.info("Search for id={}", loURI);
+        LogisticsObject logisticsObject = logisticsObjectsService.findById(loURI);
 
         if (logisticsObject == null) {
             throw new LogisticsObjectNotFoundException();

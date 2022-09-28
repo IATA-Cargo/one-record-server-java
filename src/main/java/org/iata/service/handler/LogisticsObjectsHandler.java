@@ -51,7 +51,9 @@ public class LogisticsObjectsHandler {
     }
 
     public LogisticsObject handleAddLogisticsObject(LogisticsObject logisticsObject, String companyIdentifier) {
-        logisticsObject.setCompanyIdentifier(companyIdentifier);
+        if (logisticsObject.getCompanyIdentifier() == null || !Utils.isValidURL(logisticsObject.getCompanyIdentifier())) {
+            logisticsObject.setCompanyIdentifier(Utils.replaceAuthorityWithServerAuthority(Utils.toKebabCase(companyIdentifier)));
+        }
         String loid = logisticsObject.getId();
         if (loid != null && Utils.isValidURL(loid) && Utils.containsServerAuthority(loid)) {
             //do nothing

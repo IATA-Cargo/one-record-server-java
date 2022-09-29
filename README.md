@@ -86,5 +86,5 @@ By default, the security layer supporting mutual TLS is disabled in this sandbox
 
 # IATA ONE Record
 You can find further information about ONE Record specifications on the [main Github repository](https://github.com/IATA-Cargo/ONE-Record), 
-on the [ONE Record Developer Poral](http://www.onerecordcargo.org/index.html) and on the [IATA dedicated webpage](https://www.iata.org/en/programs/cargo/e/one-record/).
+on the [ONE Record Developer Portal](https://onerecord.iata.org/) and on the [IATA dedicated webpage](https://www.iata.org/en/programs/cargo/e/one-record/).
 

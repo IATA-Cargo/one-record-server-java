@@ -9,7 +9,7 @@ public class StringToEnumConverter implements Converter<String, LogisticsObjectT
     @Override
     public LogisticsObjectType convert(String source) {
         try {
-            return Stream.of(LogisticsObjectType.values()).filter(targetEnum -> targetEnum.getLogisticsObjectType().equals(source)).findFirst().orElse(null);
+            return Stream.of(LogisticsObjectType.values()).filter(targetEnum -> targetEnum.getLogisticsObjectTypeIRI().equals(source)).findFirst().orElse(null);
         } catch(Exception e) {
             return null; // or SortEnum.asc
         }

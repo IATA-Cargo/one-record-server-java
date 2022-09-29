@@ -2,13 +2,16 @@ package org.iata.repository;
 
 import org.iata.cargo.model.LogisticsObject;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 import java.util.List;
 
 public interface LogisticsObjectsRepository extends MongoRepository<LogisticsObject, String> {
     List<LogisticsObject> findByCompanyIdentifier(String companyIdentifier);
 
-    List<LogisticsObject> findByCompanyIdentifierAndTypes(String companyIdentifier, String logisticsObjectType);
+    @Query(value = "{'$and': [ {_id: { $regex: /^?0.*/}}, {_class: '?1' } ]}")
+    List<LogisticsObject> findByIdStartsWithAndClassName(String companyIdentifier, String className);
 
+    @Query(value = "{_id: { $regex: /^?0.*/} })")
     List<LogisticsObject> findByIdStartsWith(String id);
 }

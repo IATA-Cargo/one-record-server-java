@@ -103,7 +103,13 @@ class UtilsTest {
     @Test
     void testReplaceAuthorityWithServerAuthority() {
         assertEquals("http://localhost:8080/companies/forwarder/locations/fra-acceptance-gate-2-", replaceAuthorityWithServerAuthority("http://example/companies/forwarder/locations/fra-acceptance-gate-2-"));
+    }
 
+    @Test
+    void testGetCanonicalNameByLogisticsObjectIRI() {
+        assertEquals("org.iata.cargo.model.Piece",getCanonicalNameByLogisticsObjectIRI("https://onerecord.iata.org/Piece"));
+        assertEquals("org.iata.cargo.model.Shipment",getCanonicalNameByLogisticsObjectIRI("https://onerecord.iata.org/Shipment"));
+        assertEquals("org.iata.cargo.model.ULD",getCanonicalNameByLogisticsObjectIRI("https://onerecord.iata.org/ULD"));
     }
 
 

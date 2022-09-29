@@ -49,7 +49,7 @@ public class SubscriptionsServiceImpl implements SubscriptionsService {
     subscription.setSecret(env.getProperty("subscription.secret"));
     subscription.setCacheFor(Objects.requireNonNull(env.getProperty("subscription.cacheFor")));
     subscription.setContentTypes(new HashSet<>(Collections.singleton(Objects.requireNonNull(env.getProperty("subscription.contentType")))));
-    subscription.setTopic(logisticsObjectType.getLogisticsObjectType());
+    subscription.setTopic(logisticsObjectType.getLogisticsObjectTypeIRI());
     subscription.setMyCompanyIdentifier(companyUrl);
     return subscription;
   }

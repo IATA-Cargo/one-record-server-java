@@ -13,7 +13,7 @@ public interface LogisticsObjectsService {
   LogisticsObject findById(String id);
 
   List<LogisticsObject> findByCompanyIdentifier(String companyId);
-  List<LogisticsObject> findByCompanyIdentifierAndLogisticsObjectType(String companyId, String logisticsObjectType);
+  List<LogisticsObject> findByIdStartsWithAndClassName(String companyId, String className);
 
   List<LogisticsObject> findByIdStartsWith(String id);
 

@@ -1,13 +1,15 @@
 package org.iata.util;
 
+import cz.cvut.kbss.jopa.model.annotations.OWLClass;
+import org.iata.cargo.model.LogisticsObject;
+import org.reflections.Reflections;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.lang.annotation.Annotation;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 import static org.iata.config.OneRecordServerProperties.SERVER_ALTERNATIVE_AUTHORITIES;
 import static org.iata.config.OneRecordServerProperties.SERVER_AUTHORITY;
@@ -101,5 +103,17 @@ public class Utils {
 
     public static String replaceAuthorityWithServerAuthority(String initialUri) {
         return replaceAuthority(initialUri, SERVER_AUTHORITY);
+    }
+
+    public static String getCanonicalNameByLogisticsObjectIRI(String iri) {
+        Reflections reflections = new Reflections("org.iata.cargo.model");
+        Set<Class<? extends LogisticsObject>> classes = reflections.getSubTypesOf(LogisticsObject.class);
+        for (Class c : classes) {
+            Annotation logisticsObjectClassAnnotation = Arrays.stream(c.getDeclaredAnnotations()).filter(a -> a.annotationType() == OWLClass.class).findAny().orElse(null);
+            if (logisticsObjectClassAnnotation != null && logisticsObjectClassAnnotation.annotationType() == OWLClass.class && ((OWLClass) logisticsObjectClassAnnotation).iri().equals(iri)) {
+                return c.getCanonicalName();
+            }
+        }
+        return null;
     }
 }

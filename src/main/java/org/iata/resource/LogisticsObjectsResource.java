@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -86,12 +87,16 @@ public class LogisticsObjectsResource {
                                                                      @RequestParam(value = "type", required = false) LogisticsObjectType logisticsObjectType) {
         LOG.info("GET Request for {}", getCurrentUri());
         final String companyIdentifier = Utils.replaceAuthorityWithServerAuthority(getCurrentUri().replace("/los", ""));
-        LOG.info("Search: {}", companyIdentifier);
+        List<LogisticsObject> logisticsObjects;
         if (logisticsObjectType != null) {
-            LOG.info("Request all LogisticsObjects of company {} and of type {}", companyIdentifier, logisticsObjectType.getLogisticsObjectType());
-            //TODO: filter by LogisticsObjectType
+            LOG.info("Request all LogisticsObjects of company={} and of IRI={}", companyIdentifier, logisticsObjectType.getLogisticsObjectTypeIRI());
+            logisticsObjects = logisticsObjectsService.findByIdStartsWithAndClassName(companyIdentifier, Utils.getCanonicalNameByLogisticsObjectIRI(logisticsObjectType.getLogisticsObjectTypeIRI()));
+        } else {
+            LOG.info("Search LogisticsObjects where id={}}", companyIdentifier);
+            logisticsObjects = logisticsObjectsService.findByIdStartsWith(companyIdentifier);
         }
-        return new ResponseEntity<>(logisticsObjectsService.findByIdStartsWith(companyIdentifier), HttpStatus.OK);
+        LOG.info("Found {} LogisticsObject for {}", logisticsObjects.size(), companyIdentifier);
+        return new ResponseEntity<>(logisticsObjects, HttpStatus.OK);
     }
 
 

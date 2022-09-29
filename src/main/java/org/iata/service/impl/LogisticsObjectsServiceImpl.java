@@ -61,8 +61,8 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
 
 
     @Override
-    public List<LogisticsObject> findByCompanyIdentifierAndLogisticsObjectType(String companyId, String logisticsObjectType) {
-        return logisticsObjectsRepository.findByCompanyIdentifierAndTypes(companyId, logisticsObjectType);
+    public List<LogisticsObject> findByIdStartsWithAndClassName(String companyId, String className) {
+        return logisticsObjectsRepository.findByIdStartsWithAndClassName(companyId, className);
     }
 
 

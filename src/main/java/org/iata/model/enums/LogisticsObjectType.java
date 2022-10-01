@@ -16,7 +16,12 @@ public enum LogisticsObjectType {
     PRODUCT(Vocabulary.s_c_Product),
     CHARACTERISTICS(Vocabulary.s_c_Characteristics),
     CARRIER_PRODUCT(Vocabulary.s_c_CarrierProduct),
-    PIECE(Vocabulary.s_c_Piece);
+    PIECE(Vocabulary.s_c_Piece),
+    SENSOR(Vocabulary.s_c_Sensor),
+    IOTDEVICE(Vocabulary.s_c_IotDevice),
+    TRANSPORTMOVEMENT(Vocabulary.s_c_TransportMovement),
+    TRANSPORTMEANS(Vocabulary.s_c_TransportMeans)
+    ;
 
     private final String iri;
 

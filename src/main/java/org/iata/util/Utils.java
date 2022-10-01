@@ -3,6 +3,7 @@ package org.iata.util;
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import org.iata.cargo.model.LogisticsObject;
 import org.reflections.Reflections;
+import org.reflections.util.ConfigurationBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.lang.annotation.Annotation;
@@ -106,7 +107,7 @@ public class Utils {
     }
 
     public static String getCanonicalNameByLogisticsObjectIRI(String iri) {
-        Reflections reflections = new Reflections("org.iata.cargo.model");
+        Reflections reflections = new Reflections(new ConfigurationBuilder().forPackages("org.iata.cargo.model"));
         Set<Class<? extends LogisticsObject>> classes = reflections.getSubTypesOf(LogisticsObject.class);
         for (Class c : classes) {
             Annotation logisticsObjectClassAnnotation = Arrays.stream(c.getDeclaredAnnotations()).filter(a -> a.annotationType() == OWLClass.class).findAny().orElse(null);

@@ -15,7 +15,7 @@ COPY . .
 RUN mvn package -DskipTests
 
 # run layer
-FROM amazoncorretto:18.0.2-alpine3.15 as runtime
+FROM amazoncorretto:18.0.2-alpine3.16 as runtime
 
 ## set app home folder
 ENV APP_HOME /app

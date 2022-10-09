@@ -58,7 +58,7 @@ public class LogisticsObjectsHandler {
         if (loid != null && Utils.isValidURL(loid) && Utils.containsServerAuthority(loid)) {
             //do nothing
         } else {
-            loid = companyIdentifier + "/" + logisticsObject.getClass().getSimpleName().toLowerCase() + "-" + Utils.getRandomNumberString();
+            loid = companyIdentifier + "/los/" + logisticsObject.getClass().getSimpleName().toLowerCase() + "-" + Utils.getRandomNumberString();
         }
         logisticsObject.setId(Utils.replaceAuthorityWithServerAuthority(Utils.toKebabCase(loid)));
         logisticsObjectsService.addLogisticsObject((logisticsObject));

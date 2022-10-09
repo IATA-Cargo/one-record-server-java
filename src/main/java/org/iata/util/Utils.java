@@ -1,12 +1,21 @@
 package org.iata.util;
 
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
+import cz.cvut.kbss.jsonld.JsonLd;
+import org.iata.api.model.Notification;
 import org.iata.cargo.model.LogisticsObject;
+import org.iata.resource.LogisticsObjectsResource;
 import org.reflections.Reflections;
 import org.reflections.util.ConfigurationBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.annotation.Annotation;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -17,6 +26,7 @@ import static org.iata.config.OneRecordServerProperties.SERVER_AUTHORITY;
 
 public class Utils {
 
+    private static final Logger LOG = LoggerFactory.getLogger(Utils.class);
 
     public static int increment(int index, int value) {
         return index + value;
@@ -116,5 +126,41 @@ public class Utils {
             }
         }
         return null;
+    }
+
+    public static String retrieveContentFromURL(String remote_url) {
+        URL url;
+        HttpURLConnection connection = null;
+        try {
+            url = new URL(remote_url);
+            LOG.error("GET: " + url.toString());
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.addRequestProperty("User-Agent", "one-record-server-java"); // add this line to your code
+            connection.setRequestProperty("Accept", "*/*");
+            connection.setRequestProperty("Content-Type", JsonLd.MEDIA_TYPE);
+
+            // Get Response
+            connection.connect();
+
+            InputStream is = connection.getInputStream();
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = rd.readLine()) != null) {
+                response.append(line);
+                response.append('\r');
+            }
+            rd.close();
+            return response.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOG.error("Error occurred while retrieving logistics object from publisher " + e.getMessage());
+            return null;
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
     }
 }

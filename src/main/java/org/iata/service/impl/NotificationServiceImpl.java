@@ -6,6 +6,7 @@ import org.iata.cargo.model.LogisticsObject;
 import org.iata.model.enums.EventType;
 import org.iata.repository.NotificationsRepository;
 import org.iata.service.NotificationService;
+import org.iata.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +37,13 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void handleNotification(Notification notification) {
+    public void handleNotification(Notification notification, String companyIdentifier) {
         LOG.info("Saving notification...");
-        notification.setId(notification.getLogisticsObject().getId());
+        notification.setId(companyIdentifier + "/notifications/notification-" + Utils.generateUuid());
         notificationsRepository.save(notification);
 
-        LOG.info("Retrieve content of the logistics object from publisher...");
-        String response = retrieveLogisticsObjectContentFromPublisher(notification);
+        LOG.info("Retrieve content of the logistics object from publisher..." + notification.getLogisticsObject().getId());
+        String response = Utils.retrieveContentFromURL(notification.getLogisticsObject().getId());
         LOG.info("Content of the logistics object: " + response);
     }
 
@@ -88,36 +89,5 @@ public class NotificationServiceImpl implements NotificationService {
         }
     }
 
-    private String retrieveLogisticsObjectContentFromPublisher(Notification notification) {
-        URL url;
-        HttpURLConnection connection = null;
-        try {
-            url = new URL(notification.getLogisticsObject().getId());
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("Content-Type", JsonLd.MEDIA_TYPE);
-            connection.setUseCaches(true);
-
-            // Get Response
-            InputStream is = connection.getInputStream();
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-            StringBuilder response = new StringBuilder();
-            String line;
-            while ((line = rd.readLine()) != null) {
-                response.append(line);
-                response.append('\r');
-            }
-            rd.close();
-            return response.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            LOG.error("Error occurred while retrieving logistics object from publisher " + e.getMessage());
-            return null;
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-        }
-    }
 
 }

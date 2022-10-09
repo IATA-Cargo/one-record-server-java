@@ -1,5 +1,8 @@
 package org.iata.util;
 
+import org.iata.api.model.Notification;
+import org.iata.cargo.model.LogisticsObject;
+import org.iata.service.NotificationService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -107,9 +110,21 @@ class UtilsTest {
 
     @Test
     void testGetCanonicalNameByLogisticsObjectIRI() {
-        assertEquals("org.iata.cargo.model.Piece",getCanonicalNameByLogisticsObjectIRI("https://onerecord.iata.org/Piece"));
-        assertEquals("org.iata.cargo.model.Shipment",getCanonicalNameByLogisticsObjectIRI("https://onerecord.iata.org/Shipment"));
-        assertEquals("org.iata.cargo.model.ULD",getCanonicalNameByLogisticsObjectIRI("https://onerecord.iata.org/ULD"));
+        assertEquals("org.iata.cargo.model.Piece", getCanonicalNameByLogisticsObjectIRI("https://onerecord.iata.org/Piece"));
+        assertEquals("org.iata.cargo.model.Shipment", getCanonicalNameByLogisticsObjectIRI("https://onerecord.iata.org/Shipment"));
+        assertEquals("org.iata.cargo.model.ULD", getCanonicalNameByLogisticsObjectIRI("https://onerecord.iata.org/ULD"));
+    }
+
+    @Test
+    void testRetrieveContentFromURL() {
+        LogisticsObject logisticsObject = new LogisticsObject();
+        logisticsObject.setId("http://localhost:8080/companies");
+        Notification notification = new Notification();
+        notification.setLogisticsObject(logisticsObject);
+        String content = Utils.retrieveContentFromURL(notification.getLogisticsObject().getId());
+        System.out.println(content);
+        assertTrue(content != null);
+        assertTrue(content.length() > 0);
     }
 
 

@@ -107,7 +107,7 @@ public class LogisticsObjectsResource {
                                                               @RequestParam(value = "locale", required = false) Locale locale) {
         LOG.info("GET request for {}", getCurrentUri());
         final String loURI = Utils.replaceAuthorityWithServerAuthority(getCurrentUri());
-        LOG.info("Search for id={}", loURI);
+        LOG.info("Search for LogisticsObject with URI={}", loURI);
         LogisticsObject logisticsObject = logisticsObjectsService.findById(loURI);
 
         if (logisticsObject == null) {

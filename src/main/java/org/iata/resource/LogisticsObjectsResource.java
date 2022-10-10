@@ -125,6 +125,7 @@ public class LogisticsObjectsResource {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Updates a logistics object")
     public ResponseEntity<Void> updateLogisticsObject(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @RequestBody PatchRequest patchRequest) {
+        LOG.info("Received PatchRequest {}", getCurrentUri());
         logisticsObjectsHandler.handleUpdateLogisticsObject(patchRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

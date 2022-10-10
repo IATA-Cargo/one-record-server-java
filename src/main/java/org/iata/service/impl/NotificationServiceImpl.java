@@ -51,7 +51,9 @@ public class NotificationServiceImpl implements NotificationService {
     public void sendNotification(String callbackUrl, EventType eventType, String logisticsObjectType, String logisticsObjectId) {
         //prepare Notification object
         Notification notification = new Notification();
-        notification.setLogisticsObject(new LogisticsObject().setId(logisticsObjectId));
+        LogisticsObject lo = new LogisticsObject();
+        lo.setId(logisticsObjectId);
+        notification.setLogisticsObject(lo);
         notification.setEventType(eventType.getEventType());
         notification.setTopic(logisticsObjectType);
 

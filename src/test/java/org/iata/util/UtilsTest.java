@@ -115,17 +115,12 @@ class UtilsTest {
         assertEquals("org.iata.cargo.model.ULD", getCanonicalNameByLogisticsObjectIRI("https://onerecord.iata.org/ULD"));
     }
 
-    @Test
-    void testRetrieveContentFromURL() {
-        LogisticsObject logisticsObject = new LogisticsObject();
-        logisticsObject.setId("http://localhost:8080/companies");
-        Notification notification = new Notification();
-        notification.setLogisticsObject(logisticsObject);
-        String content = Utils.retrieveContentFromURL(notification.getLogisticsObject().getId());
-        System.out.println(content);
-        assertTrue(content != null);
-        assertTrue(content.length() > 0);
-    }
+//    @Test
+//    void testRetrieveContentFromURL() {
+//        String content = Utils.retrieveContentFromURL("http://localhost:8080/companies");
+//        assertTrue(content != null);
+//        assertTrue(content.length() > 0);
+//    }
 
 
 }

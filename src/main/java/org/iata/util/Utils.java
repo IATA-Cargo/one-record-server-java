@@ -136,8 +136,7 @@ public class Utils {
             LOG.error("GET: " + url.toString());
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.addRequestProperty("User-Agent", "one-record-server-java"); // add this line to your code
-            connection.setRequestProperty("Accept", "*/*");
+            connection.addRequestProperty("User-Agent", "one-record-server-java");
             connection.setRequestProperty("Content-Type", JsonLd.MEDIA_TYPE);
 
             // Get Response

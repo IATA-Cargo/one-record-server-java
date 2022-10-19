@@ -20,6 +20,22 @@
     <artifactId>one-record-server-java</artifactId>
     <version>1.1</version>
 
+    <properties>
+        <java.version>18</java.version>
+        <maven.compiler.release>18</maven.compiler.release>
+        <maven.compiler.source>18</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <jackson.version>2.14.0-rc1</jackson.version>
+        <junit.version>4.13.2</junit.version>
+        <springdoc.version>1.6.12</springdoc.version>
+        <cz.cvut.kbss.jopa.version>0.18.7</cz.cvut.kbss.jopa.version>
+        <cz.cvut.kbss.jb4jsonld.version>0.9.0</cz.cvut.kbss.jb4jsonld.version>
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
+        <reflections.version>0.10.2</reflections.version>
+    </properties>
+
     <dependencies>
         <!-- spring boot stuff -->
         <dependency>
@@ -141,20 +157,10 @@
         </dependency>
 
 
-
-
-
-
         <dependency>
             <groupId>cz.cvut.kbss.jsonld</groupId>
             <artifactId>jb4jsonld-jackson</artifactId>
             <version>${cz.cvut.kbss.jb4jsonld.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.java-json-tools</groupId>
-            <artifactId>json-patch</artifactId>
-            <version>${json-patch.version}</version>
         </dependency>
 
         <dependency>
@@ -171,24 +177,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <properties>
-        <java.version>18</java.version>
-        <maven.compiler.release>18</maven.compiler.release>
-        <maven.compiler.source>18</maven.compiler.source>
-        <maven.compiler.target>18</maven.compiler.target>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
-        <auto-value.version>1.7.5</auto-value.version>
-        <jackson.version>2.14.0-rc1</jackson.version>
-        <junit.version>4.13.2</junit.version>
-        <springdoc.version>1.6.11</springdoc.version>
-        <cz.cvut.kbss.jopa.version>0.18.7</cz.cvut.kbss.jopa.version>
-        <cz.cvut.kbss.jb4jsonld.version>0.9.0</cz.cvut.kbss.jb4jsonld.version>
-        <json-patch.version>1.13</json-patch.version>
-        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-        <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
-        <reflections.version>0.10.2</reflections.version>
-    </properties>
 
     <profiles>
         <profile>

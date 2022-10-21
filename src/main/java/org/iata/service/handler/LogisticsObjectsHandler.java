@@ -85,12 +85,12 @@ public class LogisticsObjectsHandler {
 
     private void saveAuditTrailForLo(LogisticsObject logisticsObject, String loid) {
         AuditTrail auditTrail = new AuditTrail();
-        String auditTrailId = loid + "/auditTrail";
+        String auditTrailId = loid + "/audit-trail";
         auditTrail.setId(auditTrailId);
         Memento initialLo = new Memento();
 
         // TODO fonctionality for creating snapshots/mementos
-        initialLo.setId(auditTrailId + "/loInitialSnapshot");
+        initialLo.setId(auditTrailId + "/lo-initial-snapshot");
         auditTrail.setLoInitialSnapshot(initialLo);
         LogisticsObjectRef logisticsObjectRef = new LogisticsObjectRef();
         logisticsObjectRef.setLogisticsObjectId(loid);

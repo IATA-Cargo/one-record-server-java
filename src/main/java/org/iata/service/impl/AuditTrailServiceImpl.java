@@ -3,7 +3,6 @@ package org.iata.service.impl;
 import org.iata.api.model.AuditTrail;
 import org.iata.api.model.ChangeRequest;
 import org.iata.api.model.PatchRequest;
-import org.iata.cargo.model.LogisticsObject;
 import org.iata.exception.LogisticsObjectNotFoundException;
 import org.iata.repository.AuditTrailRepository;
 import org.iata.service.AuditTrailsService;
@@ -52,6 +51,10 @@ public class AuditTrailServiceImpl implements AuditTrailsService {
     changeRequest.setPatchRequest(patchRequest);
     changeRequests.add(changeRequest);
     auditTrail.setChangeRequests(changeRequests);
+    if (auditTrail.getLatestRevision() == null) {
+      auditTrail.setLatestRevision(0);
+    }
+    auditTrail.setLatestRevision(auditTrail.getLatestRevision()+1);
     auditTrailRepository.save(auditTrail);
   }
 
@@ -69,5 +72,7 @@ public class AuditTrailServiceImpl implements AuditTrailsService {
 
     return auditTrail;
   }
+
+
 
 }

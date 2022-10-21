@@ -11,6 +11,7 @@ import org.iata.cargo.model.LogisticsObject;
 import org.iata.exception.LogisticsObjectNotFoundException;
 import org.iata.model.AccessControlList;
 import org.iata.model.enums.LogisticsObjectType;
+import org.iata.repository.AuditTrailRepository;
 import org.iata.service.AccessControlListService;
 import org.iata.service.AuditTrailsService;
 import org.iata.service.LogisticsObjectsService;
@@ -55,15 +56,18 @@ public class LogisticsObjectsResource {
     private final LogisticsObjectsHandler logisticsObjectsHandler;
     private final LogisticsObjectsService logisticsObjectsService;
     private final AuditTrailsService auditTrailsService;
+
+    private final AuditTrailRepository auditTrailRepository;
     private final AccessControlListService accessControlListService;
 
     @Inject
     public LogisticsObjectsResource(LogisticsObjectsHandler logisticsObjectsHandler, LogisticsObjectsService logisticsObjectsService,
-                                    AuditTrailsService auditTrailsService, AccessControlListService accessControlListService) {
+                                    AuditTrailsService auditTrailsService, AccessControlListService accessControlListService, AuditTrailRepository auditTrailRepository) {
         this.logisticsObjectsHandler = logisticsObjectsHandler;
         this.logisticsObjectsService = logisticsObjectsService;
         this.auditTrailsService = auditTrailsService;
         this.accessControlListService = accessControlListService;
+        this.auditTrailRepository = auditTrailRepository;
     }
 
     @RequestMapping(method = POST, value = "/{companyId}/los", consumes = JsonLd.MEDIA_TYPE)
@@ -81,7 +85,6 @@ public class LogisticsObjectsResource {
 
     @RequestMapping(method = GET, value = "/{companyId}/los", produces = JsonLd.MEDIA_TYPE)
     @Operation(summary = "INTERNAL Retrieves all the logistics objects for a given company")
-
     public ResponseEntity<List<LogisticsObject>> getLogisticsObjects(@PathVariable("companyId") String companyId,
                                                                      @RequestParam(value = "locale", required = false) Locale locale,
                                                                      @RequestParam(value = "type", required = false) LogisticsObjectType logisticsObjectType) {
@@ -117,6 +120,15 @@ public class LogisticsObjectsResource {
         final HttpHeaders headers = RestUtils.createLinkHeaderFromCurrentURi("/acl", "acl", Collections.emptyList());
         final HttpHeaders headersMementos = RestUtils.createLinkHeaderFromCurrentURi("/timemap", "timemap", Collections.emptyList());
         headers.addAll(headersMementos);
+        // add Latest-Revision Header
+        AuditTrail auditTrail = auditTrailRepository
+                .findByLogisticsObjectRef(logisticsObject.getId())
+                .stream().findFirst().orElse(null);
+        if (auditTrail == null || auditTrail.getLatestRevision() == null) {
+            headers.set("Latest-Revision", "0");
+        } else {
+            headers.set("Latest-Revision", String.valueOf(auditTrail.getLatestRevision()));
+        }
 
         return new ResponseEntity<>(logisticsObject, headers, HttpStatus.OK);
     }

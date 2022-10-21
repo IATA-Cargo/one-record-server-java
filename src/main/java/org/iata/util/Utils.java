@@ -2,8 +2,10 @@ package org.iata.util;
 
 import cz.cvut.kbss.jopa.model.annotations.OWLClass;
 import cz.cvut.kbss.jsonld.JsonLd;
+import org.iata.api.model.AuditTrail;
 import org.iata.api.model.Notification;
 import org.iata.cargo.model.LogisticsObject;
+import org.iata.exception.LogisticsObjectNotFoundException;
 import org.iata.resource.LogisticsObjectsResource;
 import org.reflections.Reflections;
 import org.reflections.util.ConfigurationBuilder;

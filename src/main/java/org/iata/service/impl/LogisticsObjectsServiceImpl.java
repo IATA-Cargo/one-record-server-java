@@ -3,6 +3,7 @@ package org.iata.service.impl;
 import com.google.common.collect.Lists;
 import cz.cvut.kbss.jopa.model.annotations.OWLDataProperty;
 import cz.cvut.kbss.jopa.model.annotations.OWLObjectProperty;
+import org.iata.api.model.AuditTrail;
 import org.iata.api.model.Operation;
 import org.iata.api.model.PatchRequest;
 import org.iata.cargo.model.Event;
@@ -11,7 +12,9 @@ import org.iata.exception.PatchRequestOperationPathNotFoundException;
 import org.iata.exception.UnprocessablePatchRequestException;
 import org.iata.exception.UnsupportedPatchRequestOperationException;
 import org.iata.exception.UnsupportedPatchRequestOperationObjectException;
+import org.iata.repository.AuditTrailRepository;
 import org.iata.repository.LogisticsObjectsRepository;
+import org.iata.service.AuditTrailsService;
 import org.iata.service.LogisticsObjectsService;
 import org.iata.util.Utils;
 import org.springframework.beans.PropertyAccessor;
@@ -35,9 +38,13 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
 
     private final LogisticsObjectsRepository logisticsObjectsRepository;
 
+    private final AuditTrailRepository auditTrailRepository;
+
+
     @Inject
-    public LogisticsObjectsServiceImpl(LogisticsObjectsRepository logisticsObjectsRepository) {
+    public LogisticsObjectsServiceImpl(LogisticsObjectsRepository logisticsObjectsRepository, AuditTrailRepository auditTrailRepository) {
         this.logisticsObjectsRepository = logisticsObjectsRepository;
+        this.auditTrailRepository = auditTrailRepository;
     }
 
     @Override
@@ -54,6 +61,7 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
     public List<LogisticsObject> findByCompanyIdentifier(String companyId) {
         return logisticsObjectsRepository.findByCompanyIdentifier(companyId);
     }
+
     @Override
     public List<LogisticsObject> findByIdStartsWith(String id) {
         return logisticsObjectsRepository.findByIdStartsWith(id);
@@ -84,16 +92,23 @@ public class LogisticsObjectsServiceImpl implements LogisticsObjectsService {
     public void updateLogisticsObject(PatchRequest patchRequest) {
         LogisticsObject logisticsObject = logisticsObjectsRepository.findById(patchRequest.getLogisticsObjectRef().getLogisticsObjectId()).orElse(null);
         if (logisticsObject != null) {
-            if (logisticsObject.getRevision() != Integer.parseInt(patchRequest.getRevision())) {
-                throw new UnprocessablePatchRequestException();
+            // get audittrail
+            AuditTrail auditTrail = auditTrailRepository
+                    .findByLogisticsObjectRef(logisticsObject.getId())
+                    .stream().findFirst().orElse(null);
+            if (auditTrail != null && auditTrail.getLatestRevision() != null) {
+                if (auditTrail.getLatestRevision() != Integer.parseInt(patchRequest.getRevision())) {
+                    throw new UnprocessablePatchRequestException();
+                }
+                applyOperationsToLogisticsObject(patchRequest.getOperations(), logisticsObject);
+                logisticsObjectsRepository.save(logisticsObject);
             }
-            applyOperationsToLogisticsObject(patchRequest.getOperations(), logisticsObject);
-            logisticsObjectsRepository.save(logisticsObject);
         }
     }
 
 
-    public LogisticsObject applyOperationsToLogisticsObject(Set<Operation> operations, LogisticsObject logisticsObject) {
+    public LogisticsObject applyOperationsToLogisticsObject(Set<Operation> operations, LogisticsObject
+            logisticsObject) {
         PropertyAccessor logisticsObjectPropertyAccessor = PropertyAccessorFactory.forBeanPropertyAccess(logisticsObject);
         operations.forEach(operation -> {
             Field affectedField = getClassFieldByOWLObjectProperty(logisticsObject.getClass(), operation.getP());

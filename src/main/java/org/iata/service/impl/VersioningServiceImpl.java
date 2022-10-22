@@ -1,10 +1,6 @@
 package org.iata.service.impl;
 
-import org.iata.api.model.Memento;
-import org.iata.api.model.MementoEntry;
-import org.iata.api.model.MementoList;
-import org.iata.api.model.Mementos;
-import org.iata.api.model.Timemap;
+import org.iata.api.model.*;
 import org.iata.repository.MementoRepository;
 import org.iata.repository.TimemapRepository;
 import org.iata.service.VersioningService;
@@ -38,8 +34,8 @@ public class VersioningServiceImpl implements VersioningService {
     final Date date = new Date();
     memento.setOriginal(loUri);
     memento.setCreated(date);
-    final String mementoId = currentUri + "/" + Utils.generateUuid();
-    memento.setId(mementoId);
+    String mementoId = currentUri + "/" + Utils.generateUuid();
+    memento.setId(Utils.replaceAuthorityWithServerAuthority(Utils.toKebabCase(mementoId)));
     mementoRepository.save(memento);
 
     // Add memento to the Timemap and set it as last memento
@@ -58,11 +54,11 @@ public class VersioningServiceImpl implements VersioningService {
     }
 
     MementoList mementoList = Optional.ofNullable(mementos.getList()).orElse(new MementoList());
-    mementoList.setId(mementoId + "/mementoList");
+    mementoList.setId(Utils.replaceAuthorityWithServerAuthority(Utils.toKebabCase(mementoId + "/memento-list")));
     MementoEntry mementoEntry = new MementoEntry();
-    mementoEntry.setId(mementoId + "/mementoList/mementoEntry_" + Utils.getRandomNumberString());
+    mementoEntry.setId(Utils.replaceAuthorityWithServerAuthority(Utils.toKebabCase(mementoId + "/mementoList/mementoEntry_" + Utils.getRandomNumberString())));
     Memento mem = new Memento();
-    mem.setId(mementoId);
+    mem.setId(Utils.replaceAuthorityWithServerAuthority(Utils.toKebabCase(mementoId)));
     mementoEntry.setMemento(mem);
     mementoEntry.setLabel(memento.getLabel());
     mementoEntry.setDatetime(memento.getCreated());

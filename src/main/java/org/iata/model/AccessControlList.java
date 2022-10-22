@@ -11,8 +11,7 @@ import cz.cvut.kbss.jopa.model.annotations.ParticipationConstraints;
 import cz.cvut.kbss.jopa.model.annotations.Properties;
 import cz.cvut.kbss.jopa.model.annotations.Types;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.iata.api.Vocabulary;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.wc.acl.model.Authorization;
@@ -23,11 +22,11 @@ import java.util.Set;
 
 @OWLClass(iri = "https://onerecord.iata.org/AccessControlList")
 @Document(collection = "accessControlLists")
-@ApiModel
+@Schema
 public class AccessControlList implements Serializable {
 
   @Id(generated = true)
-  @ApiModelProperty(readOnly = true)
+  @Schema(accessMode = Schema.AccessMode.READ_ONLY)
   protected String id;
   @JsonIgnore
   @OWLAnnotationProperty(iri = RDFS.LABEL)
@@ -37,7 +36,7 @@ public class AccessControlList implements Serializable {
   protected String description;
   @Types
   @JsonProperty("@type")
-  @ApiModelProperty(allowableValues = "https://onerecord.iata.org/AccessControlList")
+  @Schema(allowableValues = "https://onerecord.iata.org/AccessControlList")
   protected Set<String> types;
   @Properties
   @JsonIgnore

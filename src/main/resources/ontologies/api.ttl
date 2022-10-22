@@ -11,7 +11,7 @@
 @prefix delegationRequest: <https://onerecord.iata.org/api/DelegationRequest#> .
 @prefix details: <https://onerecord.iata.org/api/Details#> .
 @prefix error: <https://onerecord.iata.org/api/Error#> .
-@prefix logisticsObject: <https://onerecord.iata.org/LogisticsObject#> .
+@prefix logisticsObject: <https://onerecord.iata.org/cargo/LogisticsObject#> .
 @prefix logisticsObjectRef: <https://onerecord.iata.org/api/LogisticsObjectRef#> .
 @prefix memento: <https://onerecord.iata.org/api/Memento#> .
 @prefix mementoEntry: <https://onerecord.iata.org/api/MementoEntry#> .
@@ -662,7 +662,7 @@ timemap:timegate rdf:type owl:DatatypeProperty ;
                          ] ,
                          [ rdf:type owl:Restriction ;
                            owl:onProperty companyInformation:company ;
-                           owl:allValuesFrom <https://onerecord.iata.org/Company>
+                           owl:allValuesFrom <https://onerecord.iata.org/cargo/Company>
                          ] ,
                          [ rdf:type owl:Restriction ;
                            owl:onProperty companyInformation:company ;
@@ -719,7 +719,7 @@ timemap:timegate rdf:type owl:DatatypeProperty ;
                        ] ,
                        [ rdf:type owl:Restriction ;
                          owl:onProperty changeRequest:requestingParty;
-                         owl:allValuesFrom <https://onerecord.iata.org/Branch>
+                         owl:allValuesFrom <https://onerecord.iata.org/cargo/Branch>
                        ] ,
                        [ rdf:type owl:Restriction ;
                          owl:onProperty changeRequest:requestingParty;
@@ -958,7 +958,7 @@ timemap:timegate rdf:type owl:DatatypeProperty ;
                                                       ] ,
                                                       [ rdf:type owl:Restriction ;
                                                         owl:onProperty memento:data ;
-                                                        owl:allValuesFrom <https://onerecord.iata.org/LogisticsObject>
+                                                        owl:allValuesFrom <https://onerecord.iata.org/cargo/LogisticsObject>
                                                       ] ,
                                                       [ rdf:type owl:Restriction ;
                                                         owl:onProperty  memento:data ;
@@ -1331,3 +1331,4 @@ timemap:timegate rdf:type owl:DatatypeProperty ;
                                   ] ;
                   rdfs:comment "Timemap of a Logistics Object containing mementos and timegate URI"@en ;
                   rdfs:label "Timemap"@en .
+

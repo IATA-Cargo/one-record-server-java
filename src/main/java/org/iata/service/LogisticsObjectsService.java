@@ -13,6 +13,9 @@ public interface LogisticsObjectsService {
   LogisticsObject findById(String id);
 
   List<LogisticsObject> findByCompanyIdentifier(String companyId);
+  List<LogisticsObject> findByIdStartsWithAndClassName(String companyId, String className);
+
+  List<LogisticsObject> findByIdStartsWith(String id);
 
   void updateLogisticsObject(PatchRequest patchRequest);
 

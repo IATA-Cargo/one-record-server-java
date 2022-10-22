@@ -1,0 +1,20 @@
+version: '3.1'
+services:
+  one-record-server-api:
+    build: .
+    environment:
+      - spring.data.mongodb.uri=mongodb://root:root@mongodb/admin
+      - spring.data.mongodb.database=onerecord
+    ports:
+      - "8080:8080"
+    links:
+      - mongodb
+  mongodb:
+    image: mongo:5.0.12
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_INITDB_DATABASE=onerecord
+    ports:
+      - "27017:27017"

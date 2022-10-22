@@ -15,6 +15,7 @@ import cz.cvut.kbss.jopa.model.annotations.Properties;
 import cz.cvut.kbss.jopa.model.annotations.Types;
 import cz.cvut.kbss.jopa.vocabulary.RDFS;
 import org.iata.cargo.Vocabulary;
+import org.springframework.data.annotation.Version;
 
 
 /**
@@ -61,8 +62,9 @@ public class LogisticsObject
     })
     protected String companyIdentifier;
 
-    public void setId(String id) {
+    public org.iata.cargo.model.LogisticsObject setId(String id) {
         this.id = id;
+        return this;
     }
 
     public String getId() {
@@ -128,6 +130,25 @@ public class LogisticsObject
 
     public String getCompanyIdentifier() {
         return companyIdentifier;
+    }
+
+    /**
+     * The revision is added to the LogisticsObject in order to compare the revision provided in a Patch Request with the revision of the affected LogisticsObject
+     */
+    @OWLDataProperty(iri = "https://onerecord.iata.org/LogisticsObject#revision")
+    @ParticipationConstraints({
+            @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", max = 1),
+            @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#nonNegativeInteger", min = 1, max = -1)
+    })
+    @Version
+    protected Integer revision;
+
+    public Integer getRevision() {
+        return revision;
+    }
+
+    public void setRevision(Integer revision) {
+        this.revision = revision;
     }
 
 }

@@ -1,8 +1,8 @@
 package org.iata.resource;
 
 import cz.cvut.kbss.jsonld.JsonLd;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.iata.api.model.DelegationRequest;
 import org.iata.service.DelegationService;
 import org.slf4j.Logger;
@@ -21,7 +21,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RequestMapping(value = "/companies", produces = JsonLd.MEDIA_TYPE)
 @Validated
-@Api(value = "ONE Record Server")
+@Tag(name = "Delegation Resource REST Endpoint")
 public class DelegationResource {
 
   private static final Logger LOG = LoggerFactory.getLogger(DelegationResource.class);
@@ -35,7 +35,7 @@ public class DelegationResource {
 
   @RequestMapping(method = POST, value = "/{companyId}/delegation", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.OK)
-  @ApiOperation(value = "Request delegation of access to third party to a logistics object")
+  @Operation(summary = "Request delegation of access to third party to a logistics object")
   public ResponseEntity<Void> delegate(@PathVariable("companyId") String companyId, @RequestBody DelegationRequest delegationRequest) {
     delegationService.delegateAccess(delegationRequest);
     return new ResponseEntity<>(HttpStatus.OK);

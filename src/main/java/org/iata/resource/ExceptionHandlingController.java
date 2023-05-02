@@ -20,7 +20,7 @@ public class ExceptionHandlingController {
                                         final HttpServletRequest request) {
 
         Error error = new Error();
-        error.setTitle("Logistics Object not found");
+        //error.setHasTitle("Logistics Object not found");
 
         return error;
     }

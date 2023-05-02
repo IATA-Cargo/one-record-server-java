@@ -1,0 +1,5 @@
+# Structure:
+# IRI: URL endpoint to resource
+https://onerecord.iata.org/Waybill: https://localhost:8080/waybills
+https://onerecord.iata.org/Shipment: https://localhost:8080/shipments
+https://onerecord.iata.org/Piece: https://localhost:8080/pieces

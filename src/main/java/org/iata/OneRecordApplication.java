@@ -17,7 +17,6 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication(scanBasePackages = {
         "org.iata.config",
         "org.iata.repository",
-        "org.iata.service",
         "org.iata.resource"
 })
 public class OneRecordApplication extends SpringBootServletInitializer {

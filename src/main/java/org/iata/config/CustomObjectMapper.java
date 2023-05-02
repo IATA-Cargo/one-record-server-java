@@ -10,9 +10,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import cz.cvut.kbss.jsonld.ConfigParam;
 import cz.cvut.kbss.jsonld.jackson.JsonLdModule;
 import org.iata.api.model.OperationObject;
-import org.iata.deserialization.OperationObjectDeserializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 
 @Configuration
 class CustomObjectMapper {
@@ -25,8 +25,9 @@ class CustomObjectMapper {
 
         JsonLdModule jsonLdModule = new JsonLdModule();
         jsonLdModule.configure(ConfigParam.SCAN_PACKAGE, "org.iata");
+
         //jsonLdModule.configure(ConfigParam.ASSUME_TARGET_TYPE,"true");
-        jsonLdModule.registerDeserializer(OperationObject.class, new OperationObjectDeserializer());
+//        jsonLdModule.registerSerializer(OperationObject.class, new OperationObjectSerializer());
         mapper.registerModule(jsonLdModule);
 
 

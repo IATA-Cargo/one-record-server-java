@@ -1,6 +1,7 @@
 package org.iata.model.enums;
 
 import org.iata.cargo.Vocabulary;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Enum containing all the existing types of Notification Event types
@@ -9,6 +10,7 @@ public enum EventType {
 
     OBJECT_CREATED("OBJECT_CREATED"),
     OBJECT_UPDATED("OBJECT_UPDATED");
+
 
     private final String className;
 

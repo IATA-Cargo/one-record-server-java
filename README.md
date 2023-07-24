@@ -1,3 +1,18 @@
+# Please note
+This version of the sandbox is aligned with the API specification 1.2.0 and cargo ontology version 2.0.0
+
+A newer version will be approved shortly, i.e. API specification version 2.0.0 and cargo ontology version 3.0.0. These new versions are NOT compatible with this sandbox code.
+
+We recommend that for testing you use the new drafts: 
+**API specification 2.0.0** : https://github.com/IATA-Cargo/ONE-Record/tree/api_2.0.0-dev/working_draft/API 
+and the full API documentation: https://iata-cargo.github.io/ONE-Record/
+**Cargo ontology 3.0.0** : https://github.com/IATA-Cargo/ONE-Record/tree/master/working_draft/ontology
+
+If you want to deploy a ONE Record server, please refer to the open source NE:ONE server from the DTAC consortium. This is fully aligned with these API and cargo ontology versions.
+**NE:ONE** : https://git.openlogisticsfoundation.org/wg-digitalaircargo/ne-one
+
+---------------------------------------------------------------------------------
+
 # Welcome to ONE Record Java Sandbox
 This repository contains the code and instructions that will help you deploy your first ONE Record Server. Please follow the instructions in order to get the application running.
 

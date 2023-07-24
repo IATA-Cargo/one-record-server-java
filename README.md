@@ -4,7 +4,9 @@ This version of the sandbox is aligned with the API specification 1.2.0 and carg
 A newer version will be approved shortly, i.e. API specification version 2.0.0 and cargo ontology version 3.0.0. These new versions are NOT compatible with this sandbox code.
 
 We recommend that for testing you use the new drafts: 
+
 **API specification 2.0.0** : 
+
 API specifications: https://github.com/IATA-Cargo/ONE-Record/tree/api_2.0.0-dev/working_draft/API 
 
 full API documentation: https://iata-cargo.github.io/ONE-Record/

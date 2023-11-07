@@ -1,8 +1,5 @@
 package org.iata.model.enums;
 
-import org.iata.cargo.Vocabulary;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
  * Enum containing all the existing types of Notification Event types
  */

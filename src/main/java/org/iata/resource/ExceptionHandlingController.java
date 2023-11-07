@@ -1,7 +1,7 @@
 package org.iata.resource;
 
-import org.iata.exception.LogisticsObjectNotFoundException;
 import org.iata.api.model.Error;
+import org.iata.exception.LogisticsObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

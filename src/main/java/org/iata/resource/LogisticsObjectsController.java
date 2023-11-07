@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.iata.api.model.AccessPermission;
 import org.iata.api.model.AuditTrail;
 import org.iata.api.model.Change;
 import org.iata.api.model.Error;
@@ -120,7 +121,7 @@ public class LogisticsObjectsController {
         Piece logisticsObject = new Piece();
         logisticsObject.setId(logisticsObjectId);
 
-        logisticsObject.setCanBeColoaded(false);
+        logisticsObject.setCoload(false);
 
 
         if (logisticsObject == null) {
@@ -202,6 +203,30 @@ public class LogisticsObjectsController {
     ) {
         AuditTrail auditTrail = new AuditTrail();
         return new ResponseEntity<>(auditTrail, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{logisticsObjectId}/access-permissions", produces = JsonLd.MEDIA_TYPE)
+    @Operation(summary = "Retrieve access permissions for a specific logistics object")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "The request to retrieve the access permissions has been successful",
+                    headers = {@Header(name = "Type", required = true,
+                            description = "Type of the resource",
+                            schema = @Schema(type = "string", format = "uri")
+                    ), @Header(name = "Location", required = true,
+                            description = "Location of the AccessPermissions resource",
+                            schema = @Schema(type = "string", format = "uri")
+                    )}),
+            @ApiResponse(responseCode = "401", description = "Not authenticated",
+                    content = @Content(mediaType = JsonLd.MEDIA_TYPE, schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "403", description = "Not authorized",
+                    content = @Content(mediaType = JsonLd.MEDIA_TYPE, schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "404", description = "Logistics Object not found",
+                    content = @Content(mediaType = JsonLd.MEDIA_TYPE, schema = @Schema(implementation = Error.class))),
+            @ApiResponse(responseCode = "415", description = "Unsupported Content Type",
+                    content = @Content(mediaType = JsonLd.MEDIA_TYPE, schema = @Schema(implementation = Error.class)))
+    })
+    public ResponseEntity<AccessPermission> getAccessPermission(@PathVariable("logisticsObjectId") String logisticsObjectId) {
+        return new ResponseEntity<>(new AccessPermission(), HttpStatus.OK);
     }
 
 

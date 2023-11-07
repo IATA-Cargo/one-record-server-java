@@ -1,26 +1,10 @@
 package org.iata.api.model;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import cz.cvut.kbss.jopa.model.annotations.OWLClass;
-import org.iata.cargo.model.Piece;
-import org.iata.cargo.model.Value;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.reflections.Reflections;
-import org.reflections.util.ConfigurationBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.lang.annotation.Annotation;
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.Set;
-
-import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.CoreMatchers.containsString;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

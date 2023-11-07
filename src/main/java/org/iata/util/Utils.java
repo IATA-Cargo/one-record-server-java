@@ -17,7 +17,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
 
 import static org.iata.config.OneRecordServerProperties.SERVER_ALTERNATIVE_AUTHORITIES;
 import static org.iata.config.OneRecordServerProperties.SERVER_AUTHORITY;

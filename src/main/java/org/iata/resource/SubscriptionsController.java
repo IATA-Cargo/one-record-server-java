@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.iata.api.model.Subscription;
 import org.iata.api.model.SubscriptionRequest;
-import org.iata.cargo.model.LogisticsEvent;
 import org.iata.util.RestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +25,7 @@ public class SubscriptionsController {
     @GetMapping(value = "/subscriptions", produces = JsonLd.MEDIA_TYPE)
     @Operation(summary = "Get subscription information")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<Subscription>> getLogisticsEvents(
+    public ResponseEntity<List<Subscription>> getSubscription(
             @RequestParam(value = "topicType", required = true) String topicType,
             @RequestParam(value = "topic", required = true) String topic
     ) {
@@ -38,7 +37,7 @@ public class SubscriptionsController {
     @PostMapping(value = "/subscriptions", consumes = JsonLd.MEDIA_TYPE)
     @Operation(summary = "Request subscription")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> appendLogisticsEvent(
+    public ResponseEntity<Void> createSubscriptionRequest(
             @RequestBody Subscription subscription) {
         final String loUri = getCurrentUri().replace("/events", "");
 

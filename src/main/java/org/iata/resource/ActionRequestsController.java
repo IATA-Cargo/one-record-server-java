@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.iata.api.model.ActionRequest;
 import org.iata.api.model.Change;
 import org.iata.api.model.Error;
+import org.iata.api.model.SubscriptionRequest;
 import org.iata.util.RestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,7 @@ public class ActionRequestsController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ActionRequest> getActionRequest(@PathVariable("actionRequestId") String actionRequestId) {
         final String loUri = getCurrentUri().replace("/events", "");
-        ActionRequest actionRequest = new ActionRequest();
+        ActionRequest actionRequest = new SubscriptionRequest();
         return new ResponseEntity<>(actionRequest, HttpStatus.OK);
     }
 

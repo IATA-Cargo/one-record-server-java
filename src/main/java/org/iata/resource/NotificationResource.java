@@ -1,18 +1,14 @@
 package org.iata.resource;
 
 import cz.cvut.kbss.jsonld.JsonLd;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.iata.api.model.Notification;
-import org.iata.model.enums.LogisticsObjectType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.inject.Inject;
 
 import static org.iata.util.RestUtils.getCurrentUri;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;

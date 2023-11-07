@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface LogisticsObjectsRepository extends MongoRepository<LogisticsObject, String> {
 
-    @Query(value = "{_id: { $regex: /^?0.*/} })")
-    List<LogisticsObject> findByIdStartsWith(String id);
+//    @Query(value = "{_id: { $regex: /^?0.*/} })")
+//    List<LogisticsObject> findByIdStartsWith(String id);
 }
